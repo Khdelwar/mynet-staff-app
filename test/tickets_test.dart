@@ -144,6 +144,13 @@ void main() {
         withPhoto.comments.single.photos.single.absoluteUrl,
         endsWith('/storage/a.jpg'),
       );
+      final privatePhoto = TicketPhoto.fromJson({
+        'download_url': '/api/staff/v1/attachments/9',
+        'is_image': true,
+      });
+      expect(privatePhoto.authenticated, isTrue);
+      expect(privatePhoto.displayUrl, endsWith('/attachments/9'));
+      expect(privatePhoto.absoluteUrl, isNull);
       expect(detail.client?.onu?.sn, 'HWTC123');
     });
   });
@@ -156,6 +163,7 @@ void main() {
       DraftStore? drafts,
       Widget? home,
       NotePhotoAttempt? photoAttempt,
+      bool sessionFirst = false,
     }) async {
       SharedPreferences.setMockInitialValues({'locale': 'en'});
       final prefs = await SharedPreferences.getInstance();
@@ -173,6 +181,11 @@ void main() {
         ],
       );
       addTearDown(container.dispose);
+      if (sessionFirst) {
+        container.read(authProvider);
+        await tester.pump();
+        await tester.pump();
+      }
       await tester.pumpWidget(
         UncontrolledProviderScope(
           container: container,
@@ -282,6 +295,41 @@ void main() {
       expect(find.byKey(const ValueKey('note-photo-bytes')), findsOneWidget);
       final photo = erp.requests.lastWhere(
         (r) => r.uri.path.endsWith('/note.png'),
+      );
+      expect(photo.headers['Authorization'], 'Bearer tok');
+    });
+
+    testWidgets('a private download_url is loaded with the session token', (
+      tester,
+    ) async {
+      final png = base64Decode(
+        'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==',
+      );
+      final detail = _detail();
+      final ticket = detail['ticket']! as Map<String, Object?>;
+      final comments = ticket['comments']! as List;
+      final comment = comments.first as Map<String, Object?>;
+      comment['photos'] = [
+        {
+          'download_url': 'https://erp.test/api/staff/v1/attachments/9',
+          'is_image': true,
+        },
+      ];
+      final erp = FakeErp({
+        'GET /me': (_) => (200, {'user': _tech}),
+        'GET /tickets/41': (_) => (200, detail),
+        'GET /attachments/9': (o) => (200, png),
+      });
+      await pump(
+        tester,
+        erp,
+        home: const TicketDetailScreen(ticketId: 41),
+        sessionFirst: true,
+      );
+      await reveal(tester, find.byKey(const ValueKey('note-photo-bytes')));
+      expect(find.byKey(const ValueKey('note-photo-public')), findsNothing);
+      final photo = erp.requests.lastWhere(
+        (r) => r.uri.path.endsWith('/attachments/9'),
       );
       expect(photo.headers['Authorization'], 'Bearer tok');
     });

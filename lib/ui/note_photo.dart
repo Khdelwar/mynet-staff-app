@@ -32,9 +32,12 @@ final notePhotoAttemptProvider = Provider<NotePhotoAttempt>(
 );
 
 class NotePhoto extends ConsumerStatefulWidget {
-  const NotePhoto({super.key, required this.url});
+  const NotePhoto({super.key, required this.url, this.authenticated = false});
 
   final String url;
+
+  /// `download_url` is never public. Skip `Image.network` and send Bearer.
+  final bool authenticated;
 
   @override
   ConsumerState<NotePhoto> createState() => _NotePhotoState();
@@ -44,6 +47,12 @@ class _NotePhotoState extends ConsumerState<NotePhoto> {
   Uint8List? _bytes;
   var _authStarted = false;
   var _broken = false;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.authenticated) _failPublic();
+  }
 
   void _failPublic() {
     if (_authStarted) return;
@@ -70,6 +79,13 @@ class _NotePhotoState extends ConsumerState<NotePhoto> {
       return const Icon(Icons.broken_image, key: ValueKey('note-photo-broken'));
     }
     final bytes = _bytes;
+    if (widget.authenticated && bytes == null) {
+      return const SizedBox(
+        key: ValueKey('note-photo-loading'),
+        height: 160,
+        child: Center(child: CircularProgressIndicator()),
+      );
+    }
     if (bytes != null) {
       return Image.memory(
         bytes,

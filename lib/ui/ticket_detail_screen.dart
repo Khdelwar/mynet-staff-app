@@ -581,10 +581,13 @@ class _TicketDetailScreenState extends ConsumerState<TicketDetailScreen> {
             const SizedBox(height: 4),
             Text(comment.body),
             for (final photo in comment.photos)
-              if (photo.isImage && photo.absoluteUrl != null)
+              if (photo.isImage && photo.displayUrl != null)
                 Padding(
                   padding: const EdgeInsets.only(top: 8),
-                  child: NotePhoto(url: photo.absoluteUrl!),
+                  child: NotePhoto(
+                    url: photo.displayUrl!,
+                    authenticated: photo.authenticated,
+                  ),
                 ),
           ],
         ),
