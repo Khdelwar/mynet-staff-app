@@ -5,6 +5,7 @@ import '../api/models.dart';
 import '../api/staff_api.dart';
 import '../config.dart';
 import '../l10n/app_localizations.dart';
+import '../login_id.dart';
 import '../state/providers.dart';
 import 'common.dart';
 
@@ -198,9 +199,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       validator: (v) {
         final value = (v ?? '').trim();
         if (value.isEmpty) return l.fieldRequired;
-        if (!RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$').hasMatch(value)) {
-          return l.loginEmailInvalid;
-        }
+        if (!isStaffLoginId(value)) return l.loginIdentifierInvalid;
         return null;
       },
     ),
