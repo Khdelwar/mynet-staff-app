@@ -13,6 +13,7 @@ import '../nav/targets.dart';
 import '../state/field.dart';
 import '../state/providers.dart';
 import 'common.dart';
+import 'note_photo.dart';
 import 'ticket_labels.dart';
 
 class TicketDetailScreen extends ConsumerStatefulWidget {
@@ -580,14 +581,12 @@ class _TicketDetailScreenState extends ConsumerState<TicketDetailScreen> {
             const SizedBox(height: 4),
             Text(comment.body),
             for (final photo in comment.photos)
-              if (photo.isImage && photo.absoluteUrl != null)
+              if (photo.isImage && photo.displayUrl != null)
                 Padding(
                   padding: const EdgeInsets.only(top: 8),
-                  child: Image.network(
-                    photo.absoluteUrl!,
-                    height: 160,
-                    fit: BoxFit.cover,
-                    errorBuilder: (_, _, _) => const Icon(Icons.broken_image),
+                  child: NotePhoto(
+                    url: photo.displayUrl!,
+                    authenticated: photo.authenticated,
                   ),
                 ),
           ],

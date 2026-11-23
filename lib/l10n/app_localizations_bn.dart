@@ -48,7 +48,10 @@ class AppLocalizationsBn extends AppLocalizations {
   String get loginTitle => 'স্টাফ লগইন';
 
   @override
-  String get loginIdentifier => 'ইমেইল বা মোবাইল নম্বর';
+  String get loginIdentifier => 'ইমেইল';
+
+  @override
+  String get loginEmailInvalid => 'ERP-এর ইমেইল দিন।';
 
   @override
   String get loginPassword => 'পাসওয়ার্ড';
@@ -57,7 +60,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get loginButton => 'লগইন';
 
   @override
-  String get loginWrong => 'ইমেইল / মোবাইল বা পাসওয়ার্ড সঠিক নয়।';
+  String get loginWrong => 'ইমেইল বা পাসওয়ার্ড সঠিক নয়।';
 
   @override
   String get loginHelp =>

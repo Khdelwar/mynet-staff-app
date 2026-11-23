@@ -35,6 +35,15 @@ class FakeErp implements HttpClientAdapter {
     }
     final (status, body) =
         (routes[key] ?? (_) => (404, {'message': 'Not found'}))(options);
+    if (body is Uint8List) {
+      return ResponseBody.fromBytes(
+        body,
+        status,
+        headers: {
+          Headers.contentTypeHeader: ['image/png'],
+        },
+      );
+    }
     return ResponseBody.fromString(
       jsonEncode(body),
       status,
