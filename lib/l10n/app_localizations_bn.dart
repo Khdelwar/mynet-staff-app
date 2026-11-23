@@ -532,4 +532,27 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get pushFromNotification => 'নোটিফিকেশন থেকে খোলা হয়েছে।';
+
+  @override
+  String get devicesTitle => 'লগইন করা ফোন';
+
+  @override
+  String get devicesEmpty => 'কোনো ফোন লগইন নেই।';
+
+  @override
+  String get devicesUnnamed => 'ফোন';
+
+  @override
+  String get devicesThisPhone => 'এই ফোন';
+
+  @override
+  String get devicesSignOut => 'সাইন আউট';
+
+  @override
+  String get devicesSignOutThis =>
+      'এই ফোন থেকে সাইন আউট করবেন? আবার লগইন করতে হবে।';
+
+  @override
+  String get devicesSignOutOther =>
+      'ওই ফোন থেকে সাইন আউট করবেন? সেখানে স্টাফ নোটিফিকেশন বন্ধ হবে।';
 }

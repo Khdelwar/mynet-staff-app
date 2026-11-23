@@ -196,5 +196,12 @@
   "pushTicketUnassigned": "Nobody took this ticket. It is back with the office.",
   "pushOfferTitle": "Ticket offer",
   "pushOfferBody": "A nearby ticket was offered to you.",
-  "pushFromNotification": "Opened from a notification."
+  "pushFromNotification": "Opened from a notification.",
+  "devicesTitle": "Signed-in phones",
+  "devicesEmpty": "No phones are signed in.",
+  "devicesUnnamed": "Phone",
+  "devicesThisPhone": "This phone",
+  "devicesSignOut": "Sign out",
+  "devicesSignOutThis": "Sign this phone out? You will need to sign in again.",
+  "devicesSignOutOther": "Sign that phone out? It will stop receiving staff notifications."
 }
