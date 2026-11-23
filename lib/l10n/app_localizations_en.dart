@@ -551,7 +551,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pushFromNotification => 'Opened from a notification.';
 
   @override
-  String get devicesTitle => 'Signed-in phones';
+  String get devicesTitle => 'My phones';
 
   @override
   String get devicesEmpty => 'No phones are signed in.';

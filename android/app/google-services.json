@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "364779871835",
+    "project_id": "mynet-7e283",
+    "storage_bucket": "mynet-7e283.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:364779871835:android:85351d9e887837ea28e97e",
+        "android_client_info": {
+          "package_name": "net.mynet.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4B5WkQOf8eOhZiUTPzYnTxNKtyj_LGh0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:364779871835:android:51ea0c4aab5ec38128e97e",
+        "android_client_info": {
+          "package_name": "net.mynet.staff"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4B5WkQOf8eOhZiUTPzYnTxNKtyj_LGh0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

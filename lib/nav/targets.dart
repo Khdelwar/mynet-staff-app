@@ -7,4 +7,6 @@ class NavTargets {
   static Widget Function(int ticketId)? ticket;
 
   static Widget Function(int? offerId, int? ticketId)? offers;
+
+  static Widget Function(int conversationId)? chat;
 }

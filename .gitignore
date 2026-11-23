@@ -52,8 +52,6 @@ android/app/key.properties
 android/key.properties
 *.jks
 *.keystore
-google-services.json
-GoogleService-Info.plist
 android/local.properties
 
 # Gradle output
