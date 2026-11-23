@@ -48,7 +48,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loginTitle => 'Staff sign-in';
 
   @override
-  String get loginIdentifier => 'Email or mobile number';
+  String get loginIdentifier => 'Email';
+
+  @override
+  String get loginEmailInvalid => 'Enter the email address from the ERP.';
 
   @override
   String get loginPassword => 'Password';
@@ -57,7 +60,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loginButton => 'Sign in';
 
   @override
-  String get loginWrong => 'Email / mobile or password is incorrect.';
+  String get loginWrong => 'Email or password is incorrect.';
 
   @override
   String get loginHelp =>

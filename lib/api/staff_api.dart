@@ -121,29 +121,36 @@ class StaffApi {
   // --- Auth -------------------------------------------------------------
 
   Future<LoginOutcome> login(
-    String identifier,
+    String email,
     String password, {
-    String? device,
+    required String deviceId,
+    String? deviceName,
+    String? appVersion,
   }) async {
     final res = await _send(
       'POST',
       '/auth/login',
       auth: false,
       body: {
-        'identifier': identifier.trim(),
+        'identifier': email.trim(),
         'password': password,
-        'device': ?device,
+        'device_id': deviceId,
+        'device_name': ?deviceName,
+        'app_version': ?appVersion,
       },
     );
     return _outcome(res as Response<dynamic>, '/auth/login');
   }
 
-  Future<LoginOutcome> verifyTwoFactor(String challenge, String code) async {
+  Future<LoginOutcome> verifyTwoFactor(
+    String challengeToken,
+    String code,
+  ) async {
     final res = await _send(
       'POST',
       '/auth/two-factor',
       auth: false,
-      body: {'challenge': challenge, 'code': code.trim()},
+      body: {'challenge_token': challengeToken, 'code': code.trim()},
     );
     return _outcome(res as Response<dynamic>, '/auth/two-factor');
   }
@@ -151,7 +158,10 @@ class StaffApi {
   LoginOutcome _outcome(Response<dynamic> res, String path) {
     final root = asMap(res.data);
     if (res.statusCode == 202 || root['code'] == 'two_factor_required') {
-      final challenge = pickString(root, const ['challenge']);
+      final challenge = pickString(root, const [
+        'challenge_token',
+        'challenge',
+      ]);
       if (challenge == null) throw ApiException(200, '', path: path);
       return TwoFactorNeeded(
         challenge: challenge,
