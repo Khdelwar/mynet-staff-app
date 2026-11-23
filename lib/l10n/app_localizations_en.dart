@@ -55,13 +55,16 @@ class AppLocalizationsEn extends AppLocalizations {
       'Enter the ERP email, or a mobile like 01711000001.';
 
   @override
+  String get loginEmailInvalid => 'Enter the email address from the ERP.';
+
+  @override
   String get loginPassword => 'Password';
 
   @override
   String get loginButton => 'Sign in';
 
   @override
-  String get loginWrong => 'Email / mobile or password is incorrect.';
+  String get loginWrong => 'Email or password is incorrect.';
 
   @override
   String get loginHelp =>

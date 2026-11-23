@@ -55,7 +55,7 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    await tester.enterText(find.byKey(const ValueKey('identifier')), 'hello');
+    await tester.enterText(find.byKey(const ValueKey('email')), 'hello');
     await tester.enterText(find.byKey(const ValueKey('password')), 'pw');
     await tester.tap(find.byKey(const ValueKey('submit')));
     await tester.pump();
@@ -66,7 +66,7 @@ void main() {
     expect(erp.calls, isEmpty);
 
     await tester.enterText(
-      find.byKey(const ValueKey('identifier')),
+      find.byKey(const ValueKey('email')),
       '01711-000001',
     );
     await tester.tap(find.byKey(const ValueKey('submit')));
