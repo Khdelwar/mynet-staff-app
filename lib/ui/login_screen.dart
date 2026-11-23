@@ -89,6 +89,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     final theme = Theme.of(context);
     final configured = ref.watch(configuredProvider);
     final ended = ref.watch(authProvider.select((a) => a.ended));
+    final endMessage = ref.watch(authProvider.select((a) => a.endMessage));
     final step = _twoFactor;
 
     return Scaffold(
@@ -147,7 +148,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     if (!configured)
                       MessageBanner(l.notConfigured, tone: BannerTone.error),
                     if (ended && step == null && _error == null)
-                      MessageBanner(l.sessionEnded, tone: BannerTone.warning),
+                      MessageBanner(
+                        endMessage ?? l.sessionEnded,
+                        tone: BannerTone.warning,
+                      ),
                     if (step == null) ..._credentials(l, configured),
                     if (step != null) ..._codeStep(l, step),
                     if (_error != null)

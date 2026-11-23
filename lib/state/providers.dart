@@ -26,8 +26,9 @@ final configuredProvider = Provider<bool>((ref) => AppConfig.isConfigured);
 
 final apiProvider = Provider<StaffApi>((ref) {
   return StaffApi(
-    onUnauthorized: (rejected, _) =>
-        ref.read(authProvider.notifier).sessionExpired(rejectedToken: rejected),
+    onUnauthorized: (rejected, code, message) => ref
+        .read(authProvider.notifier)
+        .sessionExpired(rejectedToken: rejected, code: code, message: message),
   );
 });
 
@@ -66,6 +67,7 @@ class AuthState {
     this.user,
     this.session = 0,
     this.ended = false,
+    this.endMessage,
   });
 
   /// False until the stored token has been read at startup.
@@ -82,8 +84,18 @@ class AuthState {
   /// changed, token expired): the login screen says so.
   final bool ended;
 
+  /// Server text for a 401 that ends the session. Not cached.
+  final String? endMessage;
+
   bool get signedIn => token != null;
 }
+
+const _sessionEndCodes = {
+  'unauthenticated',
+  'inactive',
+  'no_access',
+  'reseller_inactive',
+};
 
 class AuthController extends Notifier<AuthState> {
   @override
@@ -124,7 +136,7 @@ class AuthController extends Notifier<AuthState> {
       email,
       password,
       deviceId: await ensureDeviceId(_store),
-      deviceName: deviceName(),
+      deviceName: await deviceName(),
       appVersion: staffAppVersion,
     );
     if (outcome is SignedIn) await _start(outcome);
@@ -202,17 +214,28 @@ class AuthController extends Notifier<AuthState> {
     await _clear(ended: false);
   }
 
-  /// ERP answered 401 for [rejectedToken].
-  Future<void> sessionExpired({required String rejectedToken}) async {
+  /// ERP answered 401 for [rejectedToken]. The cached profile is dropped.
+  Future<void> sessionExpired({
+    required String rejectedToken,
+    String? code,
+    String? message,
+  }) async {
     if (state.token != rejectedToken) return; // an older request
-    await _clear(ended: true);
+    final text = message?.trim() ?? '';
+    final show = text.isNotEmpty && _sessionEndCodes.contains(code);
+    await _clear(ended: true, message: show ? text : null);
   }
 
-  Future<void> _clear({required bool ended}) async {
+  Future<void> _clear({required bool ended, String? message}) async {
     _api.token = null;
     await _store.delete(sessionTokenKey);
     await _store.delete(cachedUserKey);
-    state = AuthState(ready: true, session: state.session + 1, ended: ended);
+    state = AuthState(
+      ready: true,
+      session: state.session + 1,
+      ended: ended,
+      endMessage: message,
+    );
   }
 }
 
