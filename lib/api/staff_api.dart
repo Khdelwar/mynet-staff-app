@@ -1,18 +1,34 @@
 import 'package:dio/dio.dart';
 
 import '../config.dart';
+import 'duty.dart';
 import 'json.dart';
 import 'models.dart';
 
 /// A failed ERP call. [status] is 0 when the server was not reached.
 class ApiException implements Exception {
-  const ApiException(this.status, this.message, {this.path = '', this.code});
+  const ApiException(
+    this.status,
+    this.message, {
+    this.path = '',
+    this.code,
+    this.errors = const {},
+  });
   final int status;
   final String message;
   final String path;
 
   /// ERP's machine code (`failed`, `inactive`, `not_allowed`, `throttled`).
   final String? code;
+
+  /// Laravel validation messages, keyed by field (`duty`, …).
+  final Map<String, List<String>> errors;
+
+  String? field(String name) {
+    final messages = errors[name];
+    if (messages == null || messages.isEmpty) return null;
+    return messages.first;
+  }
 
   bool get isNetwork => status == 0;
 
@@ -51,6 +67,7 @@ class StaffApi {
     String method,
     String path, {
     Object? body,
+    Map<String, dynamic>? query,
     bool auth = true,
   }) async {
     final sent = auth ? token : null;
@@ -58,6 +75,7 @@ class StaffApi {
       final res = await _dio.request<dynamic>(
         path,
         data: body,
+        queryParameters: query,
         options: Options(
           method: method,
           headers: {if (sent != null) 'Authorization': 'Bearer $sent'},
@@ -74,8 +92,28 @@ class StaffApi {
         pickString(record, const ['message', 'error']) ?? '',
         path: path,
         code: code,
+        errors: _fieldErrors(record['errors']),
       );
     }
+  }
+
+  Map<String, List<String>> _fieldErrors(Object? raw) {
+    if (raw is! Map) return const {};
+    final out = <String, List<String>>{};
+    for (final entry in raw.entries) {
+      final value = entry.value;
+      if (value is List) {
+        final messages = [
+          for (final item in value)
+            if (item != null && item.toString().trim().isNotEmpty)
+              item.toString().trim(),
+        ];
+        if (messages.isNotEmpty) out[entry.key.toString()] = messages;
+      } else if (value != null && value.toString().trim().isNotEmpty) {
+        out[entry.key.toString()] = [value.toString().trim()];
+      }
+    }
+    return out;
   }
 
   // --- Auth -------------------------------------------------------------
@@ -130,4 +168,54 @@ class StaffApi {
   }
 
   Future<void> logout() async => _send('POST', '/auth/logout');
+
+  // --- Duty (STF-04) ----------------------------------------------------
+
+  Future<DutySnapshot> duty() async {
+    final res = await _send('GET', '/duty') as Response<dynamic>;
+    return DutySnapshot.fromJson(res.data);
+  }
+
+  Future<DutySnapshot> startDuty({double? latitude, double? longitude}) async {
+    final res = await _send(
+      'POST',
+      '/duty/start',
+      body: {'latitude': ?latitude, 'longitude': ?longitude},
+    ) as Response<dynamic>;
+    return DutySnapshot.fromJson(res.data);
+  }
+
+  Future<DutySnapshot> endDuty() async {
+    final res = await _send('POST', '/duty/end') as Response<dynamic>;
+    return DutySnapshot.fromJson(res.data);
+  }
+
+  Future<LocationResult> sendLocations(List<LocationPoint> points) async {
+    final res = await _send(
+      'POST',
+      '/locations',
+      body: {
+        'points': [for (final point in points) point.toJson()],
+      },
+    ) as Response<dynamic>;
+    return LocationResult.fromJson(res.data);
+  }
+
+  /// True when one of this person's open tickets is `on_the_way`.
+  /// A 403 means they cannot see tickets; location then uses the moving
+  /// or still interval only.
+  Future<bool> anyTicketOnTheWay() async {
+    try {
+      final res = await _send(
+        'GET',
+        '/tickets',
+        query: {'scope': 'mine', 'status': 'active', 'per_page': 30},
+      ) as Response<dynamic>;
+      return asList(asMap(res.data)['tickets'])
+          .any((row) => asMap(row)['status'] == 'on_the_way');
+    } on ApiException catch (e) {
+      if (e.status == 403) return false;
+      rethrow;
+    }
+  }
 }

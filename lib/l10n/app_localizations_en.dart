@@ -176,4 +176,49 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sessionEnded => 'You were signed out. Sign in again.';
+
+  @override
+  String get featureDuty => 'Duty';
+
+  @override
+  String get dutyStatus => 'Duty';
+
+  @override
+  String get dutyOn => 'On duty';
+
+  @override
+  String get dutyOff => 'Off duty';
+
+  @override
+  String get dutyStart => 'Start duty';
+
+  @override
+  String get dutyEnd => 'End duty';
+
+  @override
+  String get dutyHours => 'Duty hours';
+
+  @override
+  String get dutyTimezone => 'Time zone';
+
+  @override
+  String get dutyDistance => 'Distance today';
+
+  @override
+  String dutyMeters(int meters) {
+    return '$meters m';
+  }
+
+  @override
+  String get dutyOutsideHours => 'Duty can only start during duty hours.';
+
+  @override
+  String get dutyStopped => 'Duty ended. Location has stopped.';
+
+  @override
+  String get dutyNotificationTitle => 'MyNet: location on';
+
+  @override
+  String get dutyNotificationBody =>
+      'Location is shared only while you are on duty.';
 }

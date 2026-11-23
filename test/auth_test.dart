@@ -175,6 +175,7 @@ void main() {
       expect(featuresFor(user).map((f) => f.permission), [
         'tickets.view',
         'clients.view',
+        'staff_app.use',
       ]);
       expect(
         featuresFor(StaffUser.fromJson({'id': 1, 'is_super_admin': true})),

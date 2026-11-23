@@ -52,5 +52,24 @@
   "lockTitle": "MyNet Staff লক করা",
   "lockReason": "MyNet Staff আনলক করুন",
   "unlock": "আনলক",
-  "sessionEnded": "আপনাকে লগআউট করা হয়েছে। আবার লগইন করুন।"
+  "sessionEnded": "আপনাকে লগআউট করা হয়েছে। আবার লগইন করুন।",
+  "featureDuty": "ডিউটি",
+  "dutyStatus": "ডিউটি",
+  "dutyOn": "ডিউটিতে",
+  "dutyOff": "ডিউটি বন্ধ",
+  "dutyStart": "ডিউটি শুরু",
+  "dutyEnd": "ডিউটি শেষ",
+  "dutyHours": "ডিউটির সময়",
+  "dutyTimezone": "সময় অঞ্চল",
+  "dutyDistance": "আজকের দূরত্ব",
+  "dutyMeters": "{meters} মি",
+  "@dutyMeters": {
+    "placeholders": {
+      "meters": { "type": "int" }
+    }
+  },
+  "dutyOutsideHours": "ডিউটি শুধু ডিউটির সময়ের মধ্যে শুরু করা যায়।",
+  "dutyStopped": "ডিউটি শেষ। লোকেশন বন্ধ হয়েছে।",
+  "dutyNotificationTitle": "MyNet: location on",
+  "dutyNotificationBody": "লোকেশন শুধু ডিউটিতে থাকাকালীন যায়।"
 }

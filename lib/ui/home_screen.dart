@@ -5,30 +5,78 @@ import '../api/models.dart';
 import '../l10n/app_localizations.dart';
 import '../state/providers.dart';
 import 'common.dart';
+import 'duty_screen.dart';
 
 /// One app feature and the ERP permission that opens it (same as the web).
 class Feature {
-  const Feature(this.permission, this.icon, this.label);
+  const Feature(
+    this.permission,
+    this.icon,
+    this.label, {
+    this.screen,
+    this.also = const [],
+    this.open,
+  });
+
   final String permission;
+  final String? screen;
+  final List<String> also;
   final IconData icon;
   final String Function(AppLocalizations) label;
+  final WidgetBuilder? open;
+
+  /// Drawn when `/me` grants the permission. When the ERP also sent a
+  /// `screens` list, the feature's screen has to be on it.
+  bool allowed(StaffUser user) {
+    final byPermission = user.can(permission) || also.any(user.can);
+    if (user.screens.isNotEmpty && screen != null) {
+      return user.screens.contains(screen) && byPermission;
+    }
+    return byPermission;
+  }
 }
 
-/// Planned in mynet-erp ROADMAP Phase 14 (STF-02 … STF-05).
+/// Planned in mynet-erp ROADMAP Phase 14. Duty is STF-04.
 final features = <Feature>[
   Feature(
     'collection.collect',
     Icons.payments_outlined,
     (l) => l.featureCollection,
+    screen: 'collection',
   ),
-  Feature('tickets.view', Icons.build_outlined, (l) => l.featureTickets),
-  Feature('clients.view', Icons.people_outline, (l) => l.featureClients),
-  Feature('hr.self', Icons.event_available_outlined, (l) => l.featureHr),
+  Feature(
+    'tickets.view',
+    Icons.build_outlined,
+    (l) => l.featureTickets,
+    screen: 'tickets',
+    also: const ['tickets.manage'],
+  ),
+  Feature(
+    'clients.view',
+    Icons.people_outline,
+    (l) => l.featureClients,
+    screen: 'clients',
+  ),
+  Feature(
+    'hr.self',
+    Icons.event_available_outlined,
+    (l) => l.featureHr,
+    screen: 'hr',
+  ),
+  Feature(
+    'staff_app.use',
+    Icons.my_location_outlined,
+    (l) => l.featureDuty,
+    screen: 'duty',
+    open: _openDuty,
+  ),
 ];
+
+Widget _openDuty(BuildContext context) => const DutyScreen();
 
 List<Feature> featuresFor(StaffUser user) => [
   for (final f in features)
-    if (user.can(f.permission)) f,
+    if (f.allowed(user)) f,
 ];
 
 class HomeScreen extends ConsumerWidget {
@@ -84,8 +132,12 @@ class HomeScreen extends ConsumerWidget {
                   child: ListTile(
                     leading: Icon(f.icon, color: theme.colorScheme.primary),
                     title: Text(f.label(l)),
-                    subtitle: Text(l.comingSoon),
-                    enabled: false,
+                    subtitle: f.open == null ? Text(l.comingSoon) : null,
+                    enabled: f.open != null,
+                    onTap: f.open == null
+                        ? null
+                        : () => Navigator.of(context)
+                              .push(MaterialPageRoute<void>(builder: f.open!)),
                   ),
                 ),
           ],

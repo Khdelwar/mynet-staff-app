@@ -175,4 +175,49 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get sessionEnded => 'আপনাকে লগআউট করা হয়েছে। আবার লগইন করুন।';
+
+  @override
+  String get featureDuty => 'ডিউটি';
+
+  @override
+  String get dutyStatus => 'ডিউটি';
+
+  @override
+  String get dutyOn => 'ডিউটিতে';
+
+  @override
+  String get dutyOff => 'ডিউটি বন্ধ';
+
+  @override
+  String get dutyStart => 'ডিউটি শুরু';
+
+  @override
+  String get dutyEnd => 'ডিউটি শেষ';
+
+  @override
+  String get dutyHours => 'ডিউটির সময়';
+
+  @override
+  String get dutyTimezone => 'সময় অঞ্চল';
+
+  @override
+  String get dutyDistance => 'আজকের দূরত্ব';
+
+  @override
+  String dutyMeters(int meters) {
+    return '$meters মি';
+  }
+
+  @override
+  String get dutyOutsideHours =>
+      'ডিউটি শুধু ডিউটির সময়ের মধ্যে শুরু করা যায়।';
+
+  @override
+  String get dutyStopped => 'ডিউটি শেষ। লোকেশন বন্ধ হয়েছে।';
+
+  @override
+  String get dutyNotificationTitle => 'MyNet: location on';
+
+  @override
+  String get dutyNotificationBody => 'লোকেশন শুধু ডিউটিতে থাকাকালীন যায়।';
 }
