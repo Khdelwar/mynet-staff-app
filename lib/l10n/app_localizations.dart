@@ -1075,6 +1075,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Opened from a notification.'**
   String get pushFromNotification;
+
+  /// No description provided for @devicesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Signed-in phones'**
+  String get devicesTitle;
+
+  /// No description provided for @devicesEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No phones are signed in.'**
+  String get devicesEmpty;
+
+  /// No description provided for @devicesUnnamed.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get devicesUnnamed;
+
+  /// No description provided for @devicesThisPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'This phone'**
+  String get devicesThisPhone;
+
+  /// No description provided for @devicesSignOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out'**
+  String get devicesSignOut;
+
+  /// No description provided for @devicesSignOutThis.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign this phone out? You will need to sign in again.'**
+  String get devicesSignOutThis;
+
+  /// No description provided for @devicesSignOutOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign that phone out? It will stop receiving staff notifications.'**
+  String get devicesSignOutOther;
 }
 
 class _AppLocalizationsDelegate

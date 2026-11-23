@@ -5,6 +5,7 @@ import 'package:local_auth/local_auth.dart';
 import '../l10n/app_localizations.dart';
 import '../state/providers.dart';
 import 'common.dart';
+import 'devices_screen.dart';
 import 'lock_gate.dart';
 
 class AccountScreen extends ConsumerWidget {
@@ -90,6 +91,16 @@ class AccountScreen extends ConsumerWidget {
                 onChanged: (v) => _toggleLock(context, ref, v),
               ),
             ],
+          ),
+        ),
+        const SizedBox(height: 12),
+        ListTile(
+          key: const ValueKey('devices'),
+          leading: const Icon(Icons.phonelink_outlined),
+          title: Text(l.devicesTitle),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => Navigator.of(context).push(
+            MaterialPageRoute<void>(builder: (_) => const DevicesScreen()),
           ),
         ),
         const SizedBox(height: 12),

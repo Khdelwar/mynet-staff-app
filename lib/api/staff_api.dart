@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:dio/dio.dart';
 
 import '../config.dart';
+import 'devices.dart';
 import 'duty.dart';
 import 'json.dart';
 import 'models.dart';
@@ -182,6 +183,19 @@ class StaffApi {
   }
 
   Future<void> logout() async => _send('POST', '/auth/logout');
+
+  Future<List<StaffDevice>> devices() async {
+    final res = await _send('GET', '/devices') as Response<dynamic>;
+    return [
+      for (final row in listFrom(res.data, const ['devices']))
+        StaffDevice.fromJson(row),
+    ];
+  }
+
+  /// Signs one of this user's phones out. Does not clear the local session.
+  Future<void> revokeDevice(int id) async {
+    await _send('DELETE', '/devices/$id');
+  }
 
   // --- Push (STF-02) ----------------------------------------------------
 

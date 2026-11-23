@@ -191,5 +191,12 @@
   "pushTicketUnassigned": "কেউ এই টিকেট নেয়নি। এটি অফিসের কাছে ফিরে গেছে।",
   "pushOfferTitle": "টিকেট অফার",
   "pushOfferBody": "কাছের একটি টিকেট আপনাকে দেওয়া হয়েছে।",
-  "pushFromNotification": "নোটিফিকেশন থেকে খোলা হয়েছে।"
+  "pushFromNotification": "নোটিফিকেশন থেকে খোলা হয়েছে।",
+  "devicesTitle": "লগইন করা ফোন",
+  "devicesEmpty": "কোনো ফোন লগইন নেই।",
+  "devicesUnnamed": "ফোন",
+  "devicesThisPhone": "এই ফোন",
+  "devicesSignOut": "সাইন আউট",
+  "devicesSignOutThis": "এই ফোন থেকে সাইন আউট করবেন? আবার লগইন করতে হবে।",
+  "devicesSignOutOther": "ওই ফোন থেকে সাইন আউট করবেন? সেখানে স্টাফ নোটিফিকেশন বন্ধ হবে।"
 }

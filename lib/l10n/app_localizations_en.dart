@@ -540,4 +540,27 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pushFromNotification => 'Opened from a notification.';
+
+  @override
+  String get devicesTitle => 'Signed-in phones';
+
+  @override
+  String get devicesEmpty => 'No phones are signed in.';
+
+  @override
+  String get devicesUnnamed => 'Phone';
+
+  @override
+  String get devicesThisPhone => 'This phone';
+
+  @override
+  String get devicesSignOut => 'Sign out';
+
+  @override
+  String get devicesSignOutThis =>
+      'Sign this phone out? You will need to sign in again.';
+
+  @override
+  String get devicesSignOutOther =>
+      'Sign that phone out? It will stop receiving staff notifications.';
 }
