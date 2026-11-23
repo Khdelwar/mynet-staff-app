@@ -7,7 +7,6 @@ import '../nav/targets.dart';
 import '../push/message.dart';
 import '../state/providers.dart';
 import 'account_screen.dart';
-import 'chat_screen.dart';
 import 'home_screen.dart';
 import 'push_pages.dart';
 
@@ -77,7 +76,9 @@ class _AppShellState extends ConsumerState<AppShell>
           NavTargets.offers?.call(message.offerId, message.ticketId) ??
           PushOfferPage(offerId: message.offerId, ticketId: message.ticketId);
     } else if (message.opensChat) {
-      page = ChatThreadScreen(conversationId: message.conversationId!);
+      final opened = NavTargets.chat?.call(message.conversationId!);
+      if (opened == null) return;
+      page = opened;
     } else {
       return;
     }

@@ -150,11 +150,24 @@ class HomeScreen extends ConsumerWidget {
     final l = AppLocalizations.of(context);
     final theme = Theme.of(context);
     final user = ref.watch(authProvider.select((a) => a.user));
-    NavTargets.ticket = (id) => TicketDetailScreen(ticketId: id);
+    final canTickets =
+        user != null &&
+        features.any((f) => f.screen == 'tickets' && f.allowed(user));
     final canOffers =
         user != null &&
         features.any((f) => f.screen == 'offers' && f.allowed(user));
-    NavTargets.offers = canOffers ? (_, _) => const OffersScreen() : null;
+    final canChat =
+        user != null &&
+        features.any((f) => f.screen == 'support_chat' && f.allowed(user));
+    NavTargets.ticket = canTickets
+        ? (id) => TicketDetailScreen(ticketId: id)
+        : null;
+    NavTargets.offers = canOffers
+        ? (offerId, _) => OffersScreen(offerId: offerId)
+        : null;
+    NavTargets.chat = canChat
+        ? (id) => ChatThreadScreen(conversationId: id)
+        : null;
 
     return RefreshIndicator(
       onRefresh: () =>

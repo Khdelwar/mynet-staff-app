@@ -19,13 +19,13 @@ in mynet-erp `docs/STAFF_APP_API.md`.
 | Login | Email or mobile (`identifier`), password, install `device_id`, phone model, app version. 2FA sends `challenge_token` and `challenge` | `POST /auth/login`, `POST /auth/two-factor` |
 | Home | Company name in the app bar. Roles, permissions, screens and staff come from `user` | `GET /me` |
 | Tickets | Own tickets (or everyone's, when the ERP allows it), status, notes with photos, house GPS, live dBm | `GET /tickets`, `POST /tickets/{id}/status`, `POST /tickets/{id}/comments`, `POST /clients/{id}/location`, `POST /clients/{id}/dbm` |
-| Account | Email, mobile, language, app lock, sign out | `POST /auth/logout` |
+| Account | Email, mobile, language, app lock, My phones, sign out | `GET /devices`, `DELETE /devices/{id}`, `POST /auth/logout` |
 | Duty | Start and end duty. While it is on, the phone sends location at the ERP's interval and shows "MyNet: location on" | `GET /duty`, `POST /duty/start`, `POST /duty/end`, `POST /locations` |
 | Job offers | Accept or reject a ticket offered to this technician (`tickets.update`) | `GET /offers`, `POST /offers/{id}/accept`, `POST /offers/{id}/reject` |
 | Assign | Nearest technicians, assign, or start an offer (`tickets.assign`) | `GET /tickets/{id}/suggestions`, `POST /tickets/{id}/assign`, `POST /tickets/{id}/offer` |
-| Push | This phone's notification token; tapping opens the ticket or the offer | `POST /push/register`, `POST /push/unregister` |
+| Push | After sign-in, and when Firebase refreshes the token, this phone is registered. Sign-out unregisters, then logs out. A tap opens the ticket (`ticket_assigned`, `ticket_helper`, `ticket_unassigned`), the offer (`ticket_offer`), or the chat (`support_chat`) | `POST /push/register`, `POST /push/unregister` |
 
-Put the staff app's `google-services.json` (Android) and `GoogleService-Info.plist` (iPhone) from the customer app's Firebase project next to the other platform files. They stay out of git. Without them the app still runs and push stays off.
+`android/app/google-services.json` and `ios/Runner/GoogleService-Info.plist` are in git for app id `net.mynet.staff` (Firebase project `mynet-7e283`). The Android file also lists the customer app package. Push stays off if Firebase refuses the token.
 
 Home draws only the screens `GET /me` lists for this login.
 

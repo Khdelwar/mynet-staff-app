@@ -1097,7 +1097,7 @@ abstract class AppLocalizations {
   /// No description provided for @devicesTitle.
   ///
   /// In en, this message translates to:
-  /// **'Signed-in phones'**
+  /// **'My phones'**
   String get devicesTitle;
 
   /// No description provided for @devicesEmpty.

@@ -550,7 +550,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get pushFromNotification => 'নোটিফিকেশন থেকে খোলা হয়েছে।';
 
   @override
-  String get devicesTitle => 'লগইন করা ফোন';
+  String get devicesTitle => 'আমার ফোন';
 
   @override
   String get devicesEmpty => 'কোনো ফোন লগইন নেই।';

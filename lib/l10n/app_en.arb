@@ -202,7 +202,7 @@
   "pushOfferTitle": "Ticket offer",
   "pushOfferBody": "A nearby ticket was offered to you.",
   "pushFromNotification": "Opened from a notification.",
-  "devicesTitle": "Signed-in phones",
+  "devicesTitle": "My phones",
   "devicesEmpty": "No phones are signed in.",
   "devicesUnnamed": "Phone",
   "devicesThisPhone": "This phone",

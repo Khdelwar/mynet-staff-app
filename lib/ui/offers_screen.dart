@@ -9,7 +9,10 @@ import '../state/providers.dart';
 import 'common.dart';
 
 class OffersScreen extends ConsumerStatefulWidget {
-  const OffersScreen({super.key});
+  const OffersScreen({super.key, this.offerId});
+
+  /// The offer a push named. The list still comes from the ERP.
+  final int? offerId;
 
   @override
   ConsumerState<OffersScreen> createState() => _OffersScreenState();
@@ -24,7 +27,7 @@ class _OffersScreenState extends ConsumerState<OffersScreen> {
   @override
   void initState() {
     super.initState();
-    NavTargets.offers = (_, _) => const OffersScreen();
+    NavTargets.offers = (offerId, _) => OffersScreen(offerId: offerId);
     _load();
   }
 

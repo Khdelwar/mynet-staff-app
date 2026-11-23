@@ -267,7 +267,19 @@ void main() {
         tester,
         push,
         FakeErp({
-          'GET /me': (_) => (200, {'user': _user}),
+          'GET /me': (_) => (
+            200,
+            {
+              'user': {
+                ..._user,
+                'permissions': [
+                  'staff_app.use',
+                  'tickets.view',
+                  'support_chat.manage',
+                ],
+              },
+            },
+          ),
           'GET /chats/4': (_) => (
             200,
             {
@@ -358,7 +370,18 @@ void main() {
             },
           },
         ),
-        'GET /offers': (_) => (200, {'offers': []}),
+        'GET /offers': (_) => (
+          200,
+          {
+            'offers': [
+              {
+                'id': 5,
+                'seconds_left': 30,
+                'ticket': {'id': 41, 'subject': 'No internet'},
+              },
+            ],
+          },
+        ),
       });
       await pump(tester, push, erp);
       push.emit(
@@ -371,7 +394,7 @@ void main() {
       );
       await tester.pumpAndSettle();
       expect(find.text('Job offers'), findsOneWidget);
-      expect(find.text('No offers waiting.'), findsOneWidget);
+      expect(find.byKey(const ValueKey('offer-5')), findsOneWidget);
       expect(find.byKey(const ValueKey('push-offer-5')), findsNothing);
       expect(erp.calls, contains('GET /offers'));
     });
