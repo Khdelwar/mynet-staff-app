@@ -88,6 +88,16 @@ void main() {
       expect(message.tapped, isTrue);
     });
 
+    test('an unassigned ticket still opens that ticket', () {
+      final message = parsePush({
+        'type': 'ticket_unassigned',
+        'ticket_id': '41',
+      });
+      expect(message!.opensTicket, isTrue);
+      expect(message.ticketId, 41);
+      expect(message.opensOffer, isFalse);
+    });
+
     test('an offer tap carries the offer id', () {
       final message = parsePush({
         'type': 'ticket_offer',
@@ -235,6 +245,29 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.byKey(const ValueKey('ticket-detail')), findsOneWidget);
       expect(find.text('Helper'), findsOneWidget);
+    });
+
+    testWidgets('an unassigned tap opens that ticket', (tester) async {
+      final push = FakePush();
+      await pump(
+        tester,
+        push,
+        FakeErp({
+          'GET /me': (_) => (200, {'user': _user}),
+          'GET /tickets/41': (_) => (200, _ticket(41)),
+        }),
+      );
+      push.emit(
+        const PushMessage(
+          type: 'ticket_unassigned',
+          ticketId: 41,
+          title: 'Ticket #41 unassigned',
+          tapped: true,
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.byKey(const ValueKey('ticket-detail')), findsOneWidget);
+      expect(find.text('No internet'), findsOneWidget);
     });
 
     testWidgets('a foreground offer waits for a tap', (tester) async {
