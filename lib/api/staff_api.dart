@@ -3,16 +3,31 @@ import 'package:dio/dio.dart';
 import '../config.dart';
 import 'json.dart';
 import 'models.dart';
+import 'offers.dart';
 
 /// A failed ERP call. [status] is 0 when the server was not reached.
 class ApiException implements Exception {
-  const ApiException(this.status, this.message, {this.path = '', this.code});
+  const ApiException(
+    this.status,
+    this.message, {
+    this.path = '',
+    this.code,
+    this.errors = const {},
+  });
   final int status;
   final String message;
   final String path;
 
   /// ERP's machine code (`failed`, `inactive`, `not_allowed`, `throttled`).
   final String? code;
+
+  final Map<String, List<String>> errors;
+
+  String? field(String name) {
+    final messages = errors[name];
+    if (messages == null || messages.isEmpty) return null;
+    return messages.first;
+  }
 
   bool get isNetwork => status == 0;
 
@@ -51,6 +66,7 @@ class StaffApi {
     String method,
     String path, {
     Object? body,
+    Map<String, dynamic>? query,
     bool auth = true,
   }) async {
     final sent = auth ? token : null;
@@ -58,6 +74,7 @@ class StaffApi {
       final res = await _dio.request<dynamic>(
         path,
         data: body,
+        queryParameters: query,
         options: Options(
           method: method,
           headers: {if (sent != null) 'Authorization': 'Bearer $sent'},
@@ -74,6 +91,7 @@ class StaffApi {
         pickString(record, const ['message', 'error']) ?? '',
         path: path,
         code: code,
+        errors: _fieldErrors(record['errors']),
       );
     }
   }
@@ -130,4 +148,77 @@ class StaffApi {
   }
 
   Future<void> logout() async => _send('POST', '/auth/logout');
+
+  // --- Nearest technician (STF-05) --------------------------------------
+
+  Future<List<JobOffer>> offers() async {
+    final res = await _send('GET', '/offers') as Response<dynamic>;
+    return [
+      for (final row in asList(asMap(res.data)['offers']))
+        JobOffer.fromJson(row),
+    ];
+  }
+
+  Future<OfferTicket> acceptOffer(int id) async {
+    final res = await _send('POST', '/offers/$id/accept') as Response<dynamic>;
+    return OfferTicket.fromJson(asMap(res.data)['ticket']);
+  }
+
+  Future<void> rejectOffer(int id) async {
+    await _send('POST', '/offers/$id/reject');
+  }
+
+  Future<List<TechnicianSuggestion>> suggestions(int ticketId) async {
+    final res = await _send(
+      'GET',
+      '/tickets/$ticketId/suggestions',
+    ) as Response<dynamic>;
+    return [
+      for (final row in asList(asMap(res.data)['suggestions']))
+        TechnicianSuggestion.fromJson(row),
+    ];
+  }
+
+  Future<void> assignTicket(int ticketId, int userId) async {
+    await _send('POST', '/tickets/$ticketId/assign', body: {'user_id': userId});
+  }
+
+  Future<OfferResult> offerTicket(int ticketId) async {
+    final res =
+        await _send('POST', '/tickets/$ticketId/offer') as Response<dynamic>;
+    return OfferResult.fromJson(res.data);
+  }
+
+  /// Active tickets for someone who may assign. Technicians are limited to
+  /// their own by the ERP; the office asks for `scope=all`.
+  Future<List<OfferTicket>> assignableTickets() async {
+    final res = await _send(
+      'GET',
+      '/tickets',
+      query: {'scope': 'all', 'status': 'active', 'per_page': 30},
+    ) as Response<dynamic>;
+    return [
+      for (final row in asList(asMap(res.data)['tickets']))
+        OfferTicket.fromJson(row),
+    ];
+  }
+}
+
+Map<String, List<String>> _fieldErrors(Object? raw) {
+  if (raw is! Map) return const {};
+  final out = <String, List<String>>{};
+  for (final entry in raw.entries) {
+    final value = entry.value;
+    if (value is List) {
+      final messages = [
+        for (final item in value)
+          if (item != null && item.toString().trim().isNotEmpty)
+            item.toString().trim(),
+      ];
+      if (messages.isNotEmpty) out[entry.key.toString()] = messages;
+    } else if (value != null && value.toString().trim().isNotEmpty) {
+      out[entry.key.toString()] = [value.toString().trim()];
+    }
+  }
+  return out;
 }

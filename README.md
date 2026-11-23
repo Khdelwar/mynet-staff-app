@@ -17,6 +17,8 @@ Flutter app (Android + iPhone) for MyNet ISP staff. All data comes from
 | Login | Email / mobile + password, then 2FA code if on | `POST /auth/login`, `POST /auth/two-factor` |
 | Home | Name, staff code, roles, the work this login may do | `GET /me` |
 | Account | Email, mobile, language, app lock, sign out | `POST /auth/logout` |
+| Job offers | Accept or reject a ticket offered to this technician (`tickets.update`) | `GET /offers`, `POST /offers/{id}/accept`, `POST /offers/{id}/reject` |
+| Assign | Nearest technicians, assign, or start an offer (`tickets.assign`) | `GET /tickets/{id}/suggestions`, `POST /tickets/{id}/assign`, `POST /tickets/{id}/offer` |
 
 Collection, tickets, clients, HR and push come next (mynet-erp ROADMAP Phase 14).
 
