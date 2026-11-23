@@ -5,6 +5,7 @@ import '../api/models.dart';
 import '../api/staff_api.dart';
 import '../config.dart';
 import '../l10n/app_localizations.dart';
+import '../login_id.dart';
 import '../state/providers.dart';
 import 'common.dart';
 
@@ -193,7 +194,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         labelText: l.loginIdentifier,
         prefixIcon: const Icon(Icons.person_outline),
       ),
-      validator: (v) => (v ?? '').trim().isEmpty ? l.fieldRequired : null,
+      validator: (v) {
+        final value = (v ?? '').trim();
+        if (value.isEmpty) return l.fieldRequired;
+        if (!isStaffLoginId(value)) return l.loginIdentifierInvalid;
+        return null;
+      },
     ),
     const SizedBox(height: 14),
     TextFormField(

@@ -13,6 +13,7 @@
   "fieldRequired": "Required",
   "loginTitle": "Staff sign-in",
   "loginIdentifier": "Email or mobile number",
+  "loginIdentifierInvalid": "Enter the ERP email, or a mobile like 01711000001.",
   "loginPassword": "Password",
   "loginButton": "Sign in",
   "loginWrong": "Email / mobile or password is incorrect.",

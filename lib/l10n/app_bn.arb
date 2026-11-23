@@ -13,6 +13,7 @@
   "fieldRequired": "দরকার",
   "loginTitle": "স্টাফ লগইন",
   "loginIdentifier": "ইমেইল বা মোবাইল নম্বর",
+  "loginIdentifierInvalid": "ERP ইমেইল দিন, অথবা 01711000001-এর মতো মোবাইল।",
   "loginPassword": "পাসওয়ার্ড",
   "loginButton": "লগইন",
   "loginWrong": "ইমেইল / মোবাইল বা পাসওয়ার্ড সঠিক নয়।",

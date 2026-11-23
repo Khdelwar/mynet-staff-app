@@ -51,6 +51,10 @@ class AppLocalizationsBn extends AppLocalizations {
   String get loginIdentifier => 'ইমেইল বা মোবাইল নম্বর';
 
   @override
+  String get loginIdentifierInvalid =>
+      'ERP ইমেইল দিন, অথবা 01711000001-এর মতো মোবাইল।';
+
+  @override
   String get loginPassword => 'পাসওয়ার্ড';
 
   @override
