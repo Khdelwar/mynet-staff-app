@@ -106,15 +106,30 @@ class TicketPerson {
 }
 
 class TicketPhoto {
-  const TicketPhoto({this.url, this.name, this.isImage = false});
+  const TicketPhoto({
+    this.url,
+    this.downloadUrl,
+    this.name,
+    this.isImage = false,
+  });
 
   final String? url;
+  final String? downloadUrl;
   final String? name;
   final bool isImage;
 
-  /// Storage URLs from the ERP are often host-relative (`/storage/...`).
-  String? get absoluteUrl {
-    final value = url;
+  /// Public disk URL. Often host-relative (`/storage/...`).
+  String? get absoluteUrl => _absolute(url);
+
+  /// Always present for a private file: `GET /attachments/{id}` with Bearer.
+  String? get absoluteDownloadUrl => _absolute(downloadUrl);
+
+  /// Private files use [downloadUrl]. A public `url` is the fallback.
+  String? get displayUrl => absoluteDownloadUrl ?? absoluteUrl;
+
+  bool get authenticated => absoluteDownloadUrl != null;
+
+  static String? _absolute(String? value) {
     if (value == null || value.isEmpty) return null;
     if (value.startsWith('http://') || value.startsWith('https://')) {
       return value;
@@ -128,6 +143,7 @@ class TicketPhoto {
     final m = asMap(raw);
     return TicketPhoto(
       url: pickString(m, const ['url']),
+      downloadUrl: pickString(m, const ['download_url']),
       name: pickString(m, const ['name']),
       isImage: m['is_image'] == true,
     );

@@ -88,6 +88,16 @@ void main() {
       expect(message.tapped, isTrue);
     });
 
+    test('an unassigned ticket still opens that ticket', () {
+      final message = parsePush({
+        'type': 'ticket_unassigned',
+        'ticket_id': '41',
+      });
+      expect(message!.opensTicket, isTrue);
+      expect(message.ticketId, 41);
+      expect(message.opensOffer, isFalse);
+    });
+
     test('an offer tap carries the offer id', () {
       final message = parsePush({
         'type': 'ticket_offer',
@@ -280,6 +290,29 @@ void main() {
       expect(find.text('No internet'), findsOneWidget);
     });
 
+    testWidgets('an unassigned tap opens that ticket', (tester) async {
+      final push = FakePush();
+      await pump(
+        tester,
+        push,
+        FakeErp({
+          'GET /me': (_) => (200, {'user': _user}),
+          'GET /tickets/41': (_) => (200, _ticket(41)),
+        }),
+      );
+      push.emit(
+        const PushMessage(
+          type: 'ticket_unassigned',
+          ticketId: 41,
+          title: 'Ticket #41 unassigned',
+          tapped: true,
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.byKey(const ValueKey('ticket-detail')), findsOneWidget);
+      expect(find.text('No internet'), findsOneWidget);
+    });
+
     testWidgets('a foreground offer waits for a tap', (tester) async {
       final push = FakePush();
       await pump(
@@ -305,6 +338,38 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.byKey(const ValueKey('push-offer-5')), findsOneWidget);
       expect(find.text('A nearby ticket was offered to you.'), findsOneWidget);
+    });
+
+    testWidgets('an offer tap opens the offers list when it is allowed', (
+      tester,
+    ) async {
+      final push = FakePush();
+      final erp = FakeErp({
+        'GET /me': (_) => (
+          200,
+          {
+            'user': {
+              ..._user,
+              'permissions': ['staff_app.use', 'tickets.update'],
+            },
+          },
+        ),
+        'GET /offers': (_) => (200, {'offers': []}),
+      });
+      await pump(tester, push, erp);
+      push.emit(
+        const PushMessage(
+          type: 'ticket_offer',
+          offerId: 5,
+          ticketId: 41,
+          tapped: true,
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('Job offers'), findsOneWidget);
+      expect(find.text('No offers waiting.'), findsOneWidget);
+      expect(find.byKey(const ValueKey('push-offer-5')), findsNothing);
+      expect(erp.calls, contains('GET /offers'));
     });
 
     testWidgets('a cold-start tap still opens the ticket', (tester) async {
