@@ -222,6 +222,93 @@ class AppLocalizationsBn extends AppLocalizations {
   String get dutyNotificationBody => 'লোকেশন শুধু ডিউটিতে থাকাকালীন যায়।';
 
   @override
+  String get featureOffers => 'কাজের অফার';
+
+  @override
+  String get featureAssign => 'টেকনিশিয়ান দিন';
+
+  @override
+  String get offersEmpty => 'কোনো অফার নেই।';
+
+  @override
+  String get offerAccept => 'নেব';
+
+  @override
+  String get offerReject => 'না';
+
+  @override
+  String offerSeconds(int seconds) {
+    return 'আর $seconds সেকেন্ড';
+  }
+
+  @override
+  String offerDistance(int meters) {
+    return '$meters মিটার দূরে';
+  }
+
+  @override
+  String offerTicket(int id) {
+    return 'টিকেট #$id';
+  }
+
+  @override
+  String offerAccepted(int id) {
+    return 'আপনি টিকেট #$id নিয়েছেন।';
+  }
+
+  @override
+  String get assignNoTickets => 'দেওয়ার মতো খোলা টিকেট নেই।';
+
+  @override
+  String get assignTicketId => 'টিকেট নম্বর';
+
+  @override
+  String get assignLookup => 'কাছের জন দেখুন';
+
+  @override
+  String assignForTicket(int id) {
+    return 'টিকেট #$id-এর কাছের জন';
+  }
+
+  @override
+  String get assignNobody => 'ডিউটিতে কাছে কেউ নেই।';
+
+  @override
+  String assignScore(String score) {
+    return 'নম্বর $score';
+  }
+
+  @override
+  String assignEta(int minutes) {
+    return '$minutes মিনিট';
+  }
+
+  @override
+  String get assignBusy => 'ব্যস্ত';
+
+  @override
+  String get assignSameArea => 'একই এলাকা';
+
+  @override
+  String get assignButton => 'দিন';
+
+  @override
+  String assignDone(String name) {
+    return '$name-কে দেওয়া হয়েছে।';
+  }
+
+  @override
+  String get assignOffer => 'কাছের জনকে অফার';
+
+  @override
+  String offerStarted(String name) {
+    return '$name-কে অফার করা হয়েছে।';
+  }
+
+  @override
+  String get offerNobody => 'আর কাউকে অফার করার নেই। অফিসকে জানানো হয়েছে।';
+
+  @override
   String get ticketsSearch => 'নাম, আইডি বা ফোন';
 
   @override

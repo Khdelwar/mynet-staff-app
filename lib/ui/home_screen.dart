@@ -5,8 +5,10 @@ import '../api/models.dart';
 import '../l10n/app_localizations.dart';
 import '../nav/targets.dart';
 import '../state/providers.dart';
+import 'assign_screen.dart';
 import 'common.dart';
 import 'duty_screen.dart';
+import 'offers_screen.dart';
 import 'ticket_detail_screen.dart';
 import 'tickets_screen.dart';
 
@@ -39,7 +41,7 @@ class Feature {
   }
 }
 
-/// Planned in mynet-erp ROADMAP Phase 14. Tickets is STF-03, duty is STF-04.
+/// Planned in mynet-erp ROADMAP Phase 14. Tickets, duty, and offers.
 final features = <Feature>[
   Feature(
     'collection.collect',
@@ -74,9 +76,28 @@ final features = <Feature>[
     screen: 'duty',
     open: _openDuty,
   ),
+  Feature(
+    'tickets.update',
+    Icons.notifications_active_outlined,
+    (l) => l.featureOffers,
+    screen: 'offers',
+    also: const ['tickets.manage'],
+    open: _openOffers,
+  ),
+  Feature(
+    'tickets.assign',
+    Icons.person_pin_outlined,
+    (l) => l.featureAssign,
+    also: const ['tickets.manage'],
+    open: _openAssign,
+  ),
 ];
 
 Widget _openDuty(BuildContext context) => const DutyScreen();
+
+Widget _openOffers(BuildContext context) => const OffersScreen();
+
+Widget _openAssign(BuildContext context) => const AssignScreen();
 
 Widget _openTickets(BuildContext context) => const TicketListScreen();
 
