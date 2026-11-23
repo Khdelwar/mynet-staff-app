@@ -87,9 +87,9 @@ void main() {
       expect(c.read(authProvider).user?.staff?.code, 'S-9');
       expect(store.values[sessionTokenKey], 'tok');
       final loginBody = erp.requests.first.data as Map;
-      expect(loginBody['email'], 'tech@example.com');
+      expect(loginBody['identifier'], 'tech@example.com');
       expect(loginBody['device_id'], store.values[deviceIdKey]);
-      expect(loginBody.containsKey('identifier'), isFalse);
+      expect(loginBody.containsKey('email'), isFalse);
       expect(loginBody['app_version'], staffAppVersion);
 
       await c.read(authProvider.notifier).refreshProfile();

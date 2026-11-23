@@ -14,7 +14,7 @@ Flutter app (Android + iPhone) for MyNet ISP staff. All data comes from
 
 | Screen | What it does | ERP endpoints |
 | --- | --- | --- |
-| Login | Email + password, then 2FA code if on. Sends a stable `device_id` | `POST /auth/login`, `POST /auth/two-factor` |
+| Login | Email + password, then 2FA code if on. Body field is `identifier`; sends a stable `device_id` | `POST /auth/login`, `POST /auth/two-factor` |
 | Home | Name, staff code, roles, the work this login may do | `GET /me` |
 | Tickets | Own tickets (or everyone's, when the ERP allows it), status, notes with photos, house GPS, live dBm | `GET /tickets`, `POST /tickets/{id}/status`, `POST /tickets/{id}/comments`, `POST /clients/{id}/location`, `POST /clients/{id}/dbm` |
 | Account | Email, mobile, language, app lock, sign out | `POST /auth/logout` |

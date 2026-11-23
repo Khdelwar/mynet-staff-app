@@ -132,7 +132,7 @@ class StaffApi {
       '/auth/login',
       auth: false,
       body: {
-        'email': email.trim(),
+        'identifier': email.trim(),
         'password': password,
         'device_id': deviceId,
         'device_name': ?deviceName,
