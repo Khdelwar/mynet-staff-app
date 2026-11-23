@@ -16,9 +16,10 @@ Flutter app (Android + iPhone) for MyNet ISP staff. All data comes from
 | --- | --- | --- |
 | Login | Email / mobile + password, then 2FA code if on | `POST /auth/login`, `POST /auth/two-factor` |
 | Home | Name, staff code, roles, the work this login may do | `GET /me` |
+| Tickets | Own tickets (or everyone's, when the ERP allows it), status, notes with photos, house GPS, live dBm | `GET /tickets`, `POST /tickets/{id}/status`, `POST /tickets/{id}/comments`, `POST /clients/{id}/location`, `POST /clients/{id}/dbm` |
 | Account | Email, mobile, language, app lock, sign out | `POST /auth/logout` |
 
-Collection, tickets, clients, HR and push come next (mynet-erp ROADMAP Phase 14).
+Collection, clients, HR and push come next (mynet-erp ROADMAP Phase 14).
 
 ## Security
 

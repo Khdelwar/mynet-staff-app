@@ -415,6 +415,384 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You were signed out. Sign in again.'**
   String get sessionEnded;
+
+  /// No description provided for @ticketsSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Name, ID or phone'**
+  String get ticketsSearch;
+
+  /// No description provided for @ticketsActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get ticketsActive;
+
+  /// No description provided for @ticketsDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Finished'**
+  String get ticketsDone;
+
+  /// No description provided for @ticketsAny.
+  ///
+  /// In en, this message translates to:
+  /// **'Any status'**
+  String get ticketsAny;
+
+  /// No description provided for @ticketsMine.
+  ///
+  /// In en, this message translates to:
+  /// **'My tickets'**
+  String get ticketsMine;
+
+  /// No description provided for @ticketsAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Everyone\'s tickets'**
+  String get ticketsAll;
+
+  /// No description provided for @ticketsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No tickets here.'**
+  String get ticketsEmpty;
+
+  /// No description provided for @loadMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get loadMore;
+
+  /// No description provided for @overdue.
+  ///
+  /// In en, this message translates to:
+  /// **'Over SLA'**
+  String get overdue;
+
+  /// No description provided for @ticketStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get ticketStatus;
+
+  /// No description provided for @statusOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get statusOpen;
+
+  /// No description provided for @statusAssigned.
+  ///
+  /// In en, this message translates to:
+  /// **'Assigned'**
+  String get statusAssigned;
+
+  /// No description provided for @statusScheduled.
+  ///
+  /// In en, this message translates to:
+  /// **'Scheduled'**
+  String get statusScheduled;
+
+  /// No description provided for @statusOnTheWay.
+  ///
+  /// In en, this message translates to:
+  /// **'On the way'**
+  String get statusOnTheWay;
+
+  /// No description provided for @statusInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Working'**
+  String get statusInProgress;
+
+  /// No description provided for @statusResolved.
+  ///
+  /// In en, this message translates to:
+  /// **'Resolved'**
+  String get statusResolved;
+
+  /// No description provided for @statusReopened.
+  ///
+  /// In en, this message translates to:
+  /// **'Reopened'**
+  String get statusReopened;
+
+  /// No description provided for @statusClosed.
+  ///
+  /// In en, this message translates to:
+  /// **'Closed'**
+  String get statusClosed;
+
+  /// No description provided for @priorityLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Low'**
+  String get priorityLow;
+
+  /// No description provided for @priorityMedium.
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get priorityMedium;
+
+  /// No description provided for @priorityHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'High'**
+  String get priorityHigh;
+
+  /// No description provided for @priorityUrgent.
+  ///
+  /// In en, this message translates to:
+  /// **'Urgent'**
+  String get priorityUrgent;
+
+  /// No description provided for @pushPriority.
+  ///
+  /// In en, this message translates to:
+  /// **'Priority'**
+  String get pushPriority;
+
+  /// No description provided for @pushTicketTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Ticket #{id}'**
+  String pushTicketTitle(int id);
+
+  /// No description provided for @outcomeDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get outcomeDone;
+
+  /// No description provided for @outcomeNoIssue.
+  ///
+  /// In en, this message translates to:
+  /// **'No issue'**
+  String get outcomeNoIssue;
+
+  /// No description provided for @outcomeDuplicate.
+  ///
+  /// In en, this message translates to:
+  /// **'Duplicate'**
+  String get outcomeDuplicate;
+
+  /// No description provided for @outcomeCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get outcomeCancelled;
+
+  /// No description provided for @roleMain.
+  ///
+  /// In en, this message translates to:
+  /// **'Main'**
+  String get roleMain;
+
+  /// No description provided for @roleHelper.
+  ///
+  /// In en, this message translates to:
+  /// **'Helper'**
+  String get roleHelper;
+
+  /// No description provided for @ticketDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Details'**
+  String get ticketDescription;
+
+  /// No description provided for @ticketComments.
+  ///
+  /// In en, this message translates to:
+  /// **'Notes'**
+  String get ticketComments;
+
+  /// No description provided for @ticketNoComments.
+  ///
+  /// In en, this message translates to:
+  /// **'No notes yet.'**
+  String get ticketNoComments;
+
+  /// No description provided for @ticketNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Note'**
+  String get ticketNote;
+
+  /// No description provided for @ticketSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get ticketSend;
+
+  /// No description provided for @ticketNewConnectionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'A new connection closes only with the client\'s PPPoE ID in the note.'**
+  String get ticketNewConnectionHint;
+
+  /// No description provided for @ticketAwayTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Away from the house'**
+  String get ticketAwayTitle;
+
+  /// No description provided for @ticketAwayHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Why are you finishing from here? (at least 5 characters)'**
+  String get ticketAwayHint;
+
+  /// No description provided for @ticketFinishDistance.
+  ///
+  /// In en, this message translates to:
+  /// **'Distance from the house'**
+  String get ticketFinishDistance;
+
+  /// No description provided for @ticketMeters.
+  ///
+  /// In en, this message translates to:
+  /// **'{meters} m'**
+  String ticketMeters(int meters);
+
+  /// No description provided for @clientCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Client ID'**
+  String get clientCode;
+
+  /// No description provided for @clientAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get clientAddress;
+
+  /// No description provided for @clientPppoe.
+  ///
+  /// In en, this message translates to:
+  /// **'PPPoE'**
+  String get clientPppoe;
+
+  /// No description provided for @onuSn.
+  ///
+  /// In en, this message translates to:
+  /// **'ONU serial'**
+  String get onuSn;
+
+  /// No description provided for @onuMac.
+  ///
+  /// In en, this message translates to:
+  /// **'ONU MAC'**
+  String get onuMac;
+
+  /// No description provided for @onuPort.
+  ///
+  /// In en, this message translates to:
+  /// **'PON port'**
+  String get onuPort;
+
+  /// No description provided for @ticketCall.
+  ///
+  /// In en, this message translates to:
+  /// **'Call'**
+  String get ticketCall;
+
+  /// No description provided for @ticketMap.
+  ///
+  /// In en, this message translates to:
+  /// **'Map'**
+  String get ticketMap;
+
+  /// No description provided for @ticketLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Save house GPS'**
+  String get ticketLocation;
+
+  /// No description provided for @ticketSaveLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Save this spot as the client\'s house?'**
+  String get ticketSaveLocation;
+
+  /// No description provided for @ticketLocationSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'House location saved.'**
+  String get ticketLocationSaved;
+
+  /// No description provided for @ticketLocationDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Location is off. Turn it on and try again.'**
+  String get ticketLocationDenied;
+
+  /// No description provided for @ticketLocationMock.
+  ///
+  /// In en, this message translates to:
+  /// **'This looks like a fake GPS. Turn it off before saving the house.'**
+  String get ticketLocationMock;
+
+  /// No description provided for @ticketDbm.
+  ///
+  /// In en, this message translates to:
+  /// **'Check dBm'**
+  String get ticketDbm;
+
+  /// No description provided for @ticketDbmRx.
+  ///
+  /// In en, this message translates to:
+  /// **'RX dBm'**
+  String get ticketDbmRx;
+
+  /// No description provided for @ticketDbmTx.
+  ///
+  /// In en, this message translates to:
+  /// **'TX dBm'**
+  String get ticketDbmTx;
+
+  /// No description provided for @ticketDbmLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Level'**
+  String get ticketDbmLevel;
+
+  /// No description provided for @ticketTakePhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera'**
+  String get ticketTakePhoto;
+
+  /// No description provided for @ticketAddPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Gallery'**
+  String get ticketAddPhoto;
+
+  /// No description provided for @ticketPhotoCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} photo(s)'**
+  String ticketPhotoCount(int count);
+
+  /// No description provided for @ticketPhotoLimit.
+  ///
+  /// In en, this message translates to:
+  /// **'A note can have up to 5 photos.'**
+  String get ticketPhotoLimit;
+
+  /// No description provided for @ticketPhotoTooBig.
+  ///
+  /// In en, this message translates to:
+  /// **'That photo is larger than 5 MB.'**
+  String get ticketPhotoTooBig;
+
+  /// No description provided for @ticketCommentKept.
+  ///
+  /// In en, this message translates to:
+  /// **'No internet. The note stays on this phone and will be sent later.'**
+  String get ticketCommentKept;
 }
 
 class _AppLocalizationsDelegate

@@ -4,6 +4,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- App lock (fingerprint / face / screen lock). -->
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <!-- House GPS and the location sent when a ticket is finished. -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <application
         android:label="MyNet Staff"
         android:allowBackup="false"

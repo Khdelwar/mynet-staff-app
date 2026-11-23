@@ -4,6 +4,12 @@
 <dict>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Used to unlock the app when app lock is on.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Used to save the client's house location and to record where a ticket was finished.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Used to attach a photo to a ticket note.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Used to attach a photo to a ticket note.</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>

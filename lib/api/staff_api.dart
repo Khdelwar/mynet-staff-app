@@ -3,16 +3,32 @@ import 'package:dio/dio.dart';
 import '../config.dart';
 import 'json.dart';
 import 'models.dart';
+import 'tickets.dart';
 
 /// A failed ERP call. [status] is 0 when the server was not reached.
 class ApiException implements Exception {
-  const ApiException(this.status, this.message, {this.path = '', this.code});
+  const ApiException(
+    this.status,
+    this.message, {
+    this.path = '',
+    this.code,
+    this.errors = const {},
+  });
   final int status;
   final String message;
   final String path;
 
   /// ERP's machine code (`failed`, `inactive`, `not_allowed`, `throttled`).
   final String? code;
+
+  /// Laravel validation messages, keyed by field (`note`, `away_reason`, …).
+  final Map<String, List<String>> errors;
+
+  String? field(String name) {
+    final messages = errors[name];
+    if (messages == null || messages.isEmpty) return null;
+    return messages.first;
+  }
 
   bool get isNetwork => status == 0;
 
@@ -51,6 +67,7 @@ class StaffApi {
     String method,
     String path, {
     Object? body,
+    Map<String, dynamic>? query,
     bool auth = true,
   }) async {
     final sent = auth ? token : null;
@@ -58,6 +75,7 @@ class StaffApi {
       final res = await _dio.request<dynamic>(
         path,
         data: body,
+        queryParameters: query,
         options: Options(
           method: method,
           headers: {if (sent != null) 'Authorization': 'Bearer $sent'},
@@ -74,8 +92,28 @@ class StaffApi {
         pickString(record, const ['message', 'error']) ?? '',
         path: path,
         code: code,
+        errors: _fieldErrors(record['errors']),
       );
     }
+  }
+
+  Map<String, List<String>> _fieldErrors(Object? raw) {
+    if (raw is! Map) return const {};
+    final out = <String, List<String>>{};
+    for (final entry in raw.entries) {
+      final value = entry.value;
+      if (value is List) {
+        final messages = [
+          for (final item in value)
+            if (item != null && item.toString().trim().isNotEmpty)
+              item.toString().trim(),
+        ];
+        if (messages.isNotEmpty) out[entry.key.toString()] = messages;
+      } else if (value != null && value.toString().trim().isNotEmpty) {
+        out[entry.key.toString()] = [value.toString().trim()];
+      }
+    }
+    return out;
   }
 
   // --- Auth -------------------------------------------------------------
@@ -130,4 +168,116 @@ class StaffApi {
   }
 
   Future<void> logout() async => _send('POST', '/auth/logout');
+
+  // --- Tickets (STF-03) -------------------------------------------------
+
+  Future<TicketPage> tickets({
+    String scope = 'mine',
+    String status = 'active',
+    String? q,
+    int page = 1,
+  }) async {
+    final res = await _send(
+      'GET',
+      '/tickets',
+      query: {
+        'scope': scope,
+        'status': status,
+        'page': page,
+        'per_page': 30,
+        if (q != null && q.trim().isNotEmpty) 'q': q.trim(),
+      },
+    ) as Response<dynamic>;
+    return TicketPage.fromJson(res.data);
+  }
+
+  Future<TicketDetail> ticket(int id) async {
+    final res = await _send('GET', '/tickets/$id') as Response<dynamic>;
+    return TicketDetail.fromJson(res.data);
+  }
+
+  Future<TicketDetail> setTicketStatus(
+    int id, {
+    required String status,
+    String? note,
+    String? outcome,
+    double? latitude,
+    double? longitude,
+    String? awayReason,
+  }) async {
+    final res = await _send(
+      'POST',
+      '/tickets/$id/status',
+      body: {
+        'status': status,
+        if (note != null && note.trim().isNotEmpty) 'note': note.trim(),
+        if (outcome != null && outcome.isNotEmpty) 'outcome': outcome,
+        if (latitude != null && longitude != null) ...{
+          'latitude': latitude,
+          'longitude': longitude,
+        },
+        if (awayReason != null && awayReason.trim().isNotEmpty)
+          'away_reason': awayReason.trim(),
+      },
+    ) as Response<dynamic>;
+    return TicketDetail.fromJson(res.data);
+  }
+
+  /// [clientRef] is made on the phone. Sending the same note again returns
+  /// the saved comment instead of a second copy.
+  Future<TicketComment> addTicketComment(
+    int id, {
+    required String body,
+    required String clientRef,
+    List<String> photoPaths = const [],
+  }) async {
+    final form = FormData.fromMap({
+      'body': body,
+      'client_ref': clientRef,
+      if (photoPaths.isNotEmpty)
+        'photos': [
+          for (final path in photoPaths)
+            await MultipartFile.fromFile(path, filename: _fileName(path)),
+        ],
+    });
+    final res = await _send(
+      'POST',
+      '/tickets/$id/comments',
+      body: form,
+    ) as Response<dynamic>;
+    return TicketComment.fromJson(asMap(res.data)['comment']);
+  }
+
+  Future<GeoPoint> setClientLocation(
+    int id, {
+    required double latitude,
+    required double longitude,
+    double? accuracy,
+  }) async {
+    final res = await _send(
+      'POST',
+      '/clients/$id/location',
+      body: {
+        'latitude': latitude,
+        'longitude': longitude,
+        'accuracy': ?accuracy,
+      },
+    ) as Response<dynamic>;
+    final point = GeoPoint.fromJson(asMap(res.data)['location']);
+    if (point == null) {
+      throw ApiException(200, '', path: '/clients/$id/location');
+    }
+    return point;
+  }
+
+  Future<DbmReading> checkDbm(int id) async {
+    final res = await _send('POST', '/clients/$id/dbm') as Response<dynamic>;
+    return DbmReading.fromJson(res.data);
+  }
+}
+
+String _fileName(String path) {
+  final parts = path.split(RegExp(r'[/\\]'));
+  final name = parts.isEmpty ? '' : parts.last;
+  return name.isEmpty ? 'photo.jpg' : name;
 }
