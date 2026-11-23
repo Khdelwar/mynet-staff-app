@@ -6,7 +6,7 @@ Flutter app (Android + iPhone) for MyNet ISP staff. All data comes from
 
 - **App name:** MyNet Staff · **App id:** `net.mynet.staff` (Android and iOS)
 - **Languages:** Bangla (default) and English
-- **Sign-in:** the same email (or mobile) and password as the ERP website,
+- **Sign-in:** the same email and password as the ERP website,
   plus the 2FA code when the user has 2FA on. The user's role needs
   "Staff app" (`staff_app.use`) on the ERP Roles page.
 
@@ -14,7 +14,7 @@ Flutter app (Android + iPhone) for MyNet ISP staff. All data comes from
 
 | Screen | What it does | ERP endpoints |
 | --- | --- | --- |
-| Login | Email / mobile + password, then 2FA code if on | `POST /auth/login`, `POST /auth/two-factor` |
+| Login | Email + password, then 2FA code if on. Body field is `identifier`; sends a stable `device_id` | `POST /auth/login`, `POST /auth/two-factor` |
 | Home | Name, staff code, roles, the work this login may do | `GET /me` |
 | Tickets | Own tickets (or everyone's, when the ERP allows it), status, notes with photos, house GPS, live dBm | `GET /tickets`, `POST /tickets/{id}/status`, `POST /tickets/{id}/comments`, `POST /clients/{id}/location`, `POST /clients/{id}/dbm` |
 | Account | Email, mobile, language, app lock, sign out | `POST /auth/logout` |
@@ -25,7 +25,7 @@ Flutter app (Android + iPhone) for MyNet ISP staff. All data comes from
 
 Put the staff app's `google-services.json` (Android) and `GoogleService-Info.plist` (iPhone) from the customer app's Firebase project next to the other platform files. They stay out of git. Without them the app still runs and push stays off.
 
-Collection, clients and HR come next (mynet-erp ROADMAP Phase 14).
+Collection and HR come next (mynet-erp ROADMAP Phase 14). The Clients tile stays hidden until the ERP has a client list.
 
 ## Security
 

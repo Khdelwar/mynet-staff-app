@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:dio/dio.dart';
 
 import '../config.dart';
@@ -122,29 +124,36 @@ class StaffApi {
   // --- Auth -------------------------------------------------------------
 
   Future<LoginOutcome> login(
-    String identifier,
+    String email,
     String password, {
-    String? device,
+    required String deviceId,
+    String? deviceName,
+    String? appVersion,
   }) async {
     final res = await _send(
       'POST',
       '/auth/login',
       auth: false,
       body: {
-        'identifier': identifier.trim(),
+        'identifier': email.trim(),
         'password': password,
-        'device': ?device,
+        'device_id': deviceId,
+        'device_name': ?deviceName,
+        'app_version': ?appVersion,
       },
     );
     return _outcome(res as Response<dynamic>, '/auth/login');
   }
 
-  Future<LoginOutcome> verifyTwoFactor(String challenge, String code) async {
+  Future<LoginOutcome> verifyTwoFactor(
+    String challengeToken,
+    String code,
+  ) async {
     final res = await _send(
       'POST',
       '/auth/two-factor',
       auth: false,
-      body: {'challenge': challenge, 'code': code.trim()},
+      body: {'challenge_token': challengeToken, 'code': code.trim()},
     );
     return _outcome(res as Response<dynamic>, '/auth/two-factor');
   }
@@ -152,7 +161,10 @@ class StaffApi {
   LoginOutcome _outcome(Response<dynamic> res, String path) {
     final root = asMap(res.data);
     if (res.statusCode == 202 || root['code'] == 'two_factor_required') {
-      final challenge = pickString(root, const ['challenge']);
+      final challenge = pickString(root, const [
+        'challenge_token',
+        'challenge',
+      ]);
       if (challenge == null) throw ApiException(200, '', path: path);
       return TwoFactorNeeded(
         challenge: challenge,
@@ -400,6 +412,31 @@ class StaffApi {
       throw ApiException(200, '', path: '/clients/$id/location');
     }
     return point;
+  }
+
+  /// Loads a note photo when the public URL refuses an unauthenticated GET.
+  /// A 401 here is the file, not the session, so it does not sign the staff out.
+  Future<Uint8List> authorizedBytes(String url) async {
+    final sent = token;
+    try {
+      final res = await _dio.get<List<int>>(
+        url,
+        options: Options(
+          responseType: ResponseType.bytes,
+          headers: {
+            'Accept': '*/*',
+            if (sent != null) 'Authorization': 'Bearer $sent',
+          },
+        ),
+      );
+      final data = res.data;
+      if (data == null || data.isEmpty) {
+        throw ApiException(res.statusCode ?? 0, '', path: url);
+      }
+      return Uint8List.fromList(data);
+    } on DioException catch (e) {
+      throw ApiException(e.response?.statusCode ?? 0, '', path: url);
+    }
   }
 
   Future<DbmReading> checkDbm(int id) async {
