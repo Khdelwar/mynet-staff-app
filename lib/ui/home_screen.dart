@@ -42,6 +42,7 @@ class Feature {
 }
 
 /// Planned in mynet-erp ROADMAP Phase 14. Tickets, duty, and offers.
+/// Clients stay off this list until the ERP has a client-list API.
 final features = <Feature>[
   Feature(
     'collection.collect',
@@ -56,12 +57,6 @@ final features = <Feature>[
     screen: 'tickets',
     also: const ['tickets.manage'],
     open: _openTickets,
-  ),
-  Feature(
-    'clients.view',
-    Icons.people_outline,
-    (l) => l.featureClients,
-    screen: 'clients',
   ),
   Feature(
     'hr.self',

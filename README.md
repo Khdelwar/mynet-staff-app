@@ -25,7 +25,7 @@ Flutter app (Android + iPhone) for MyNet ISP staff. All data comes from
 
 Put the staff app's `google-services.json` (Android) and `GoogleService-Info.plist` (iPhone) from the customer app's Firebase project next to the other platform files. They stay out of git. Without them the app still runs and push stays off.
 
-Collection, clients and HR come next (mynet-erp ROADMAP Phase 14).
+Collection and HR come next (mynet-erp ROADMAP Phase 14). The Clients tile stays hidden until the ERP has a client list.
 
 ## Security
 

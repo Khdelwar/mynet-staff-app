@@ -186,7 +186,6 @@ void main() {
       final user = StaffUser.fromJson(_user);
       expect(featuresFor(user).map((f) => f.permission), [
         'tickets.view',
-        'clients.view',
         'staff_app.use',
       ]);
       expect(
