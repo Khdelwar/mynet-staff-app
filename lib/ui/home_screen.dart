@@ -43,6 +43,7 @@ class Feature {
 }
 
 /// Planned in mynet-erp ROADMAP Phase 14. Tickets, duty, and offers.
+/// The Clients tile opens the staff client list.
 final features = <Feature>[
   Feature(
     'collection.collect',
@@ -119,6 +120,10 @@ class HomeScreen extends ConsumerWidget {
     final theme = Theme.of(context);
     final user = ref.watch(authProvider.select((a) => a.user));
     NavTargets.ticket = (id) => TicketDetailScreen(ticketId: id);
+    final canOffers =
+        user != null &&
+        features.any((f) => f.screen == 'offers' && f.allowed(user));
+    NavTargets.offers = canOffers ? (_, _) => const OffersScreen() : null;
 
     return RefreshIndicator(
       onRefresh: () =>

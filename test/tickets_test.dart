@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,6 +14,7 @@ import 'package:mynet_staff/state/field.dart';
 import 'package:mynet_staff/state/providers.dart';
 import 'package:mynet_staff/state/stores.dart';
 import 'package:mynet_staff/ui/home_screen.dart';
+import 'package:mynet_staff/ui/note_photo.dart';
 import 'package:mynet_staff/ui/ticket_detail_screen.dart';
 import 'package:mynet_staff/ui/tickets_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -141,6 +144,13 @@ void main() {
         withPhoto.comments.single.photos.single.absoluteUrl,
         endsWith('/storage/a.jpg'),
       );
+      final privatePhoto = TicketPhoto.fromJson({
+        'download_url': '/api/staff/v1/attachments/9',
+        'is_image': true,
+      });
+      expect(privatePhoto.authenticated, isTrue);
+      expect(privatePhoto.displayUrl, endsWith('/attachments/9'));
+      expect(privatePhoto.absoluteUrl, isNull);
       expect(detail.client?.onu?.sn, 'HWTC123');
     });
   });
@@ -152,6 +162,8 @@ void main() {
       LocationReader? location,
       DraftStore? drafts,
       Widget? home,
+      NotePhotoAttempt? photoAttempt,
+      bool sessionFirst = false,
     }) async {
       SharedPreferences.setMockInitialValues({'locale': 'en'});
       final prefs = await SharedPreferences.getInstance();
@@ -164,9 +176,16 @@ void main() {
           if (location != null)
             locationReaderProvider.overrideWithValue(location),
           draftStoreProvider.overrideWithValue(drafts ?? MemoryDraftStore()),
+          if (photoAttempt != null)
+            notePhotoAttemptProvider.overrideWithValue(photoAttempt),
         ],
       );
       addTearDown(container.dispose);
+      if (sessionFirst) {
+        container.read(authProvider);
+        await tester.pump();
+        await tester.pump();
+      }
       await tester.pumpWidget(
         UncontrolledProviderScope(
           container: container,
@@ -214,6 +233,105 @@ void main() {
           .queryParameters;
       expect(query['scope'], 'mine');
       expect(query['status'], 'active');
+    });
+
+    test('a private photo is loaded with the session token', () async {
+      final png = base64Decode(
+        'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==',
+      );
+      final erp = FakeErp({
+        'GET /storage/note.png': (o) {
+          expect(o.headers['Authorization'], 'Bearer tok');
+          return (200, png);
+        },
+      });
+      final api = StaffApi(dio: erp.dio)..token = 'tok';
+      final bytes = await api.authorizedBytes(
+        'https://erp.test/storage/note.png',
+      );
+      expect(bytes, png);
+    });
+
+    testWidgets('a note photo falls back to the session token', (tester) async {
+      final png = base64Decode(
+        'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==',
+      );
+      final detail = _detail();
+      final ticket = detail['ticket']! as Map<String, Object?>;
+      final comments = ticket['comments']! as List;
+      final comment = comments.first as Map<String, Object?>;
+      comment['photos'] = [
+        {'url': 'https://erp.test/storage/note.png', 'is_image': true},
+      ];
+      final erp = FakeErp({
+        'GET /me': (_) => (200, {'user': _tech}),
+        'GET /tickets/41': (_) => (200, detail),
+        'GET /storage/note.png': (o) => (200, png),
+      });
+      final start = ValueNotifier(false);
+      addTearDown(start.dispose);
+      final container = await pump(
+        tester,
+        erp,
+        home: const TicketDetailScreen(ticketId: 41),
+        photoAttempt: (url, failed) {
+          return ValueListenableBuilder<bool>(
+            valueListenable: start,
+            builder: (_, go, _) {
+              if (go) {
+                WidgetsBinding.instance.addPostFrameCallback((_) => failed());
+              }
+              return const SizedBox(key: ValueKey('note-photo-public'));
+            },
+          );
+        },
+      );
+      container.read(authProvider);
+      await tester.pumpAndSettle();
+      expect(container.read(apiProvider).token, 'tok');
+      start.value = true;
+      await tester.pumpAndSettle();
+      await reveal(tester, find.byKey(const ValueKey('note-photo-bytes')));
+      expect(find.byKey(const ValueKey('note-photo-bytes')), findsOneWidget);
+      final photo = erp.requests.lastWhere(
+        (r) => r.uri.path.endsWith('/note.png'),
+      );
+      expect(photo.headers['Authorization'], 'Bearer tok');
+    });
+
+    testWidgets('a private download_url is loaded with the session token', (
+      tester,
+    ) async {
+      final png = base64Decode(
+        'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==',
+      );
+      final detail = _detail();
+      final ticket = detail['ticket']! as Map<String, Object?>;
+      final comments = ticket['comments']! as List;
+      final comment = comments.first as Map<String, Object?>;
+      comment['photos'] = [
+        {
+          'download_url': 'https://erp.test/api/staff/v1/attachments/9',
+          'is_image': true,
+        },
+      ];
+      final erp = FakeErp({
+        'GET /me': (_) => (200, {'user': _tech}),
+        'GET /tickets/41': (_) => (200, detail),
+        'GET /attachments/9': (o) => (200, png),
+      });
+      await pump(
+        tester,
+        erp,
+        home: const TicketDetailScreen(ticketId: 41),
+        sessionFirst: true,
+      );
+      await reveal(tester, find.byKey(const ValueKey('note-photo-bytes')));
+      expect(find.byKey(const ValueKey('note-photo-public')), findsNothing);
+      final photo = erp.requests.lastWhere(
+        (r) => r.uri.path.endsWith('/attachments/9'),
+      );
+      expect(photo.headers['Authorization'], 'Bearer tok');
     });
 
     testWidgets('status buttons follow can and next_statuses', (tester) async {
