@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:dio/dio.dart';
 
 import '../config.dart';
@@ -396,6 +398,31 @@ class StaffApi {
       throw ApiException(200, '', path: '/clients/$id/location');
     }
     return point;
+  }
+
+  /// Loads a note photo when the public URL refuses an unauthenticated GET.
+  /// A 401 here is the file, not the session, so it does not sign the staff out.
+  Future<Uint8List> authorizedBytes(String url) async {
+    final sent = token;
+    try {
+      final res = await _dio.get<List<int>>(
+        url,
+        options: Options(
+          responseType: ResponseType.bytes,
+          headers: {
+            'Accept': '*/*',
+            if (sent != null) 'Authorization': 'Bearer $sent',
+          },
+        ),
+      );
+      final data = res.data;
+      if (data == null || data.isEmpty) {
+        throw ApiException(res.statusCode ?? 0, '', path: url);
+      }
+      return Uint8List.fromList(data);
+    } on DioException catch (e) {
+      throw ApiException(e.response?.statusCode ?? 0, '', path: url);
+    }
   }
 
   Future<DbmReading> checkDbm(int id) async {
