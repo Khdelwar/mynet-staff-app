@@ -1063,6 +1063,150 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Opened from a notification.'**
   String get pushFromNotification;
+
+  /// No description provided for @clientsSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Name, ID, phone or PPPoE'**
+  String get clientsSearch;
+
+  /// No description provided for @clientsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No clients.'**
+  String get clientsEmpty;
+
+  /// No description provided for @clientsMore.
+  ///
+  /// In en, this message translates to:
+  /// **'More'**
+  String get clientsMore;
+
+  /// No description provided for @clientsCode.
+  ///
+  /// In en, this message translates to:
+  /// **'ID'**
+  String get clientsCode;
+
+  /// No description provided for @clientsAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get clientsAddress;
+
+  /// No description provided for @clientsStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get clientsStatus;
+
+  /// No description provided for @clientsPackage.
+  ///
+  /// In en, this message translates to:
+  /// **'Package'**
+  String get clientsPackage;
+
+  /// No description provided for @clientsPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Price'**
+  String get clientsPrice;
+
+  /// No description provided for @clientsExpiry.
+  ///
+  /// In en, this message translates to:
+  /// **'Expiry'**
+  String get clientsExpiry;
+
+  /// No description provided for @clientsDue.
+  ///
+  /// In en, this message translates to:
+  /// **'Due'**
+  String get clientsDue;
+
+  /// No description provided for @clientsAdvance.
+  ///
+  /// In en, this message translates to:
+  /// **'Advance'**
+  String get clientsAdvance;
+
+  /// No description provided for @clientsBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'Balance'**
+  String get clientsBalance;
+
+  /// No description provided for @clientsPppoe.
+  ///
+  /// In en, this message translates to:
+  /// **'PPPoE'**
+  String get clientsPppoe;
+
+  /// No description provided for @clientsNid.
+  ///
+  /// In en, this message translates to:
+  /// **'NID'**
+  String get clientsNid;
+
+  /// No description provided for @clientsPop.
+  ///
+  /// In en, this message translates to:
+  /// **'POP'**
+  String get clientsPop;
+
+  /// No description provided for @clientsRouter.
+  ///
+  /// In en, this message translates to:
+  /// **'Router'**
+  String get clientsRouter;
+
+  /// No description provided for @clientsOnu.
+  ///
+  /// In en, this message translates to:
+  /// **'ONU'**
+  String get clientsOnu;
+
+  /// No description provided for @clientsRx.
+  ///
+  /// In en, this message translates to:
+  /// **'Last RX dBm'**
+  String get clientsRx;
+
+  /// No description provided for @clientsConnection.
+  ///
+  /// In en, this message translates to:
+  /// **'Line status'**
+  String get clientsConnection;
+
+  /// No description provided for @clientsOnline.
+  ///
+  /// In en, this message translates to:
+  /// **'The line is online.'**
+  String get clientsOnline;
+
+  /// No description provided for @clientsOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'The line is offline.'**
+  String get clientsOffline;
+
+  /// No description provided for @clientsDisconnects.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} disconnects in 24 hours'**
+  String clientsDisconnects(int count);
+
+  /// No description provided for @clientsOpenTickets.
+  ///
+  /// In en, this message translates to:
+  /// **'Open tickets'**
+  String get clientsOpenTickets;
+
+  /// No description provided for @clientsPayments.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent payments'**
+  String get clientsPayments;
 }
 
 class _AppLocalizationsDelegate

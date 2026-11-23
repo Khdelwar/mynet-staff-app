@@ -6,6 +6,7 @@ import '../l10n/app_localizations.dart';
 import '../nav/targets.dart';
 import '../state/providers.dart';
 import 'assign_screen.dart';
+import 'clients_screen.dart';
 import 'common.dart';
 import 'duty_screen.dart';
 import 'offers_screen.dart';
@@ -62,6 +63,7 @@ final features = <Feature>[
     Icons.people_outline,
     (l) => l.featureClients,
     screen: 'clients',
+    open: _openClients,
   ),
   Feature(
     'hr.self',
@@ -100,6 +102,8 @@ Widget _openOffers(BuildContext context) => const OffersScreen();
 Widget _openAssign(BuildContext context) => const AssignScreen();
 
 Widget _openTickets(BuildContext context) => const TicketListScreen();
+
+Widget _openClients(BuildContext context) => const ClientListScreen();
 
 List<Feature> featuresFor(StaffUser user) => [
   for (final f in features)

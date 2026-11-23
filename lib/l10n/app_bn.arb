@@ -189,5 +189,34 @@
   "pushTicketUnassigned": "কেউ এই টিকেট নেয়নি। এটি অফিসের কাছে ফিরে গেছে।",
   "pushOfferTitle": "টিকেট অফার",
   "pushOfferBody": "কাছের একটি টিকেট আপনাকে দেওয়া হয়েছে।",
-  "pushFromNotification": "নোটিফিকেশন থেকে খোলা হয়েছে।"
+  "pushFromNotification": "নোটিফিকেশন থেকে খোলা হয়েছে।",
+  "clientsSearch": "নাম, আইডি, ফোন বা PPPoE",
+  "clientsEmpty": "কোনো ক্লায়েন্ট নেই।",
+  "clientsMore": "আরও",
+  "clientsCode": "আইডি",
+  "clientsAddress": "ঠিকানা",
+  "clientsStatus": "অবস্থা",
+  "clientsPackage": "প্যাকেজ",
+  "clientsPrice": "দাম",
+  "clientsExpiry": "মেয়াদ",
+  "clientsDue": "বকেয়া",
+  "clientsAdvance": "অগ্রিম",
+  "clientsBalance": "ব্যালেন্স",
+  "clientsPppoe": "PPPoE",
+  "clientsNid": "এনআইডি",
+  "clientsPop": "পপ",
+  "clientsRouter": "রাউটার",
+  "clientsOnu": "ONU",
+  "clientsRx": "শেষ RX dBm",
+  "clientsConnection": "লাইন স্ট্যাটাস",
+  "clientsOnline": "লাইন অনলাইন।",
+  "clientsOffline": "লাইন অফলাইন।",
+  "clientsDisconnects": "২৪ ঘণ্টায় {count} বার সংযোগ ছিঁড়েছে",
+  "@clientsDisconnects": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "clientsOpenTickets": "খোলা টিকেট",
+  "clientsPayments": "সাম্প্রতিক পেমেন্ট"
 }
