@@ -66,7 +66,12 @@ class StaffApi {
   final Dio _dio;
 
   /// Called when ERP rejects the session token (HTTP 401) on a signed-in call.
-  final void Function(String rejectedToken, String? code)? onUnauthorized;
+  final Future<void> Function(
+    String rejectedToken,
+    String? code,
+    String? message,
+  )?
+  onUnauthorized;
 
   /// Session token; set by the auth controller.
   String? token;
@@ -94,10 +99,13 @@ class StaffApi {
       final status = e.response?.statusCode ?? 0;
       final record = asMap(e.response?.data);
       final code = pickString(record, const ['code']);
-      if (status == 401 && sent != null) onUnauthorized?.call(sent, code);
+      final message = pickString(record, const ['message', 'error']);
+      if (status == 401 && sent != null) {
+        await onUnauthorized?.call(sent, code, message);
+      }
       throw ApiException(
         status,
-        pickString(record, const ['message', 'error']) ?? '',
+        message ?? '',
         path: path,
         code: code,
         errors: _fieldErrors(record['errors']),
@@ -156,7 +164,11 @@ class StaffApi {
       'POST',
       '/auth/two-factor',
       auth: false,
-      body: {'challenge_token': challengeToken, 'code': code.trim()},
+      body: {
+        'challenge_token': challengeToken,
+        'challenge': challengeToken,
+        'code': code.trim(),
+      },
     );
     return _outcome(res as Response<dynamic>, '/auth/two-factor');
   }

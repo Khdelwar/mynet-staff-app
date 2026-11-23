@@ -13,6 +13,7 @@ class StaffUser {
     this.screens = const {},
     this.isSuperAdmin = false,
     this.staff,
+    this.companyName,
   });
 
   final int id;
@@ -28,6 +29,9 @@ class StaffUser {
   final bool isSuperAdmin;
   final StaffProfile? staff;
 
+  /// `company.name` from `/me`. Shown in the app bar. Display only.
+  final String? companyName;
+
   bool can(String permission) =>
       isSuperAdmin || permissions.contains(permission);
 
@@ -35,18 +39,19 @@ class StaffUser {
     final root = asMap(raw);
     final nested = root['user'] is Map;
     final user = nested ? asMap(root['user']) : root;
-    final staff = user['staff'];
+    final staffRaw = user.containsKey('staff') ? user['staff'] : root['staff'];
     return StaffUser(
       id: toNum(user['id'])?.toInt() ?? 0,
       name: pickString(user, const ['name']) ?? '',
       email: pickString(user, const ['email']),
       phone: pickString(user, const ['phone']),
-      roles: _strings(root, user, 'roles', nested: nested),
-      permissions: _strings(root, user, 'permissions', nested: nested).toSet(),
-      screens: _strings(root, user, 'screens', nested: nested).toSet(),
+      roles: _strings(root, user, 'roles'),
+      permissions: _strings(root, user, 'permissions').toSet(),
+      screens: _strings(root, user, 'screens').toSet(),
       isSuperAdmin:
-          root['is_super_admin'] == true || user['is_super_admin'] == true,
-      staff: staff is Map ? StaffProfile.fromJson(staff) : null,
+          user['is_super_admin'] == true || root['is_super_admin'] == true,
+      staff: staffRaw is Map ? StaffProfile.fromJson(staffRaw) : null,
+      companyName: pickString(asMap(root['company']), const ['name']),
     );
   }
 
@@ -60,22 +65,14 @@ class StaffUser {
     'screens': screens.toList(),
     'is_super_admin': isSuperAdmin,
     'staff': staff?.toJson(),
+    if (companyName != null) 'company': {'name': companyName},
   };
 }
 
-/// `/me` puts roles, permissions and screens on the root. Older fixtures and
-/// the cached profile keep them on the user object.
-List<String> _strings(
-  Json root,
-  Json user,
-  String key, {
-  required bool nested,
-}) {
-  final top = asList(root[key]);
-  final inner = asList(user[key]);
-  final source = nested && top.isNotEmpty
-      ? top
-      : (top.isNotEmpty ? top : inner);
+/// Roles, permissions and screens live on `user`. The same lists are also
+/// at the top of `/me`; use those only when `user` does not carry the key.
+List<String> _strings(Json root, Json user, String key) {
+  final source = user.containsKey(key) ? asList(user[key]) : asList(root[key]);
   return [
     for (final item in source)
       if (item is String && item.isNotEmpty) item,

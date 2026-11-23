@@ -42,9 +42,13 @@ List<Override> _overrides(
   apiProvider.overrideWith(
     (ref) => StaffApi(
       dio: erp.dio,
-      onUnauthorized: (rejected, _) => ref
+      onUnauthorized: (rejected, code, message) => ref
           .read(authProvider.notifier)
-          .sessionExpired(rejectedToken: rejected),
+          .sessionExpired(
+            rejectedToken: rejected,
+            code: code,
+            message: message,
+          ),
     ),
   ),
 ];
@@ -88,7 +92,16 @@ void main() {
       expect(store.values[sessionTokenKey], 'tok');
       final loginBody = erp.requests.first.data as Map;
       expect(loginBody['identifier'], 'tech@example.com');
+      expect(
+        loginBody['device_id'],
+        matches(
+          RegExp(
+            r'^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$',
+          ),
+        ),
+      );
       expect(loginBody['device_id'], store.values[deviceIdKey]);
+      expect(loginBody['device_name'], isNotEmpty);
       expect(loginBody.containsKey('email'), isFalse);
       expect(loginBody['app_version'], staffAppVersion);
 
@@ -194,6 +207,29 @@ void main() {
         hasLength(features.length),
       );
     });
+
+    test('roles and screens are read from user, company from the root', () {
+      final user = StaffUser.fromJson({
+        'user': {
+          'id': 7,
+          'name': 'Rahim',
+          'roles': ['technician'],
+          'permissions': ['tickets.view'],
+          'screens': ['tickets'],
+          'staff': {'id': 3, 'code': 'S-9'},
+        },
+        'roles': ['manager'],
+        'permissions': ['clients.view'],
+        'screens': ['clients', 'duty'],
+        'company': {'name': 'MyNet'},
+      });
+      expect(user.roles, ['technician']);
+      expect(user.screens, {'tickets'});
+      expect(user.can('tickets.view'), isTrue);
+      expect(user.can('clients.view'), isFalse);
+      expect(user.staff?.code, 'S-9');
+      expect(user.companyName, 'MyNet');
+    });
   });
 
   group('screens', () {
@@ -218,9 +254,22 @@ void main() {
     ) async {
       final erp = FakeErp({
         'POST /auth/login': (o) => o.data['password'] == 'right'
-            ? (200, {'token': 'tok', 'user': _user})
+            ? (
+                200,
+                {
+                  'token': 'tok',
+                  'user': _user,
+                  'company': {'name': 'MyNet'},
+                },
+              )
             : (401, {'code': 'invalid', 'message': 'nope'}),
-        'GET /me': (_) => (200, {'user': _user}),
+        'GET /me': (_) => (
+          200,
+          {
+            'user': _user,
+            'company': {'name': 'MyNet'},
+          },
+        ),
       });
       await pumpApp(tester, erp, MemorySecretStore());
 
@@ -237,8 +286,14 @@ void main() {
       await tester.tap(find.byKey(const ValueKey('submit')));
       await tester.pumpAndSettle();
       expect(find.text('Hello, Rahim Uddin'), findsOne);
+      expect(find.text('MyNet'), findsOne);
       expect(find.text('Tickets'), findsOne);
       expect(find.text('Bill collection'), findsNothing);
+      final body = erp.requests.first.data as Map;
+      expect(body['identifier'], 'tech@example.com');
+      expect(body['device_id'], isNotEmpty);
+      expect(body['device_name'], isNotEmpty);
+      expect(body['app_version'], staffAppVersion);
     });
 
     testWidgets('2FA step asks for the code', (tester) async {
@@ -266,6 +321,32 @@ void main() {
       await tester.tap(find.byKey(const ValueKey('submit')));
       await tester.pumpAndSettle();
       expect(find.text('Hello, Rahim Uddin'), findsOne);
+      final two = erp.requests.lastWhere(
+        (r) => r.uri.path.endsWith('/two-factor'),
+      );
+      expect(two.data['challenge_token'], 'c');
+      expect(two.data['challenge'], 'c');
+      expect(two.data['code'], '123456');
+    });
+
+    testWidgets('401 inactive clears the token and shows the ERP message', (
+      tester,
+    ) async {
+      final store = MemorySecretStore()
+        ..values[sessionTokenKey] = 'tok'
+        ..values[cachedUserKey] = '{"id":7,"name":"Rahim"}';
+      final erp = FakeErp({
+        'GET /me': (_) => (
+          401,
+          {'code': 'inactive', 'message': 'This login is switched off.'},
+        ),
+      });
+      await pumpApp(tester, erp, store);
+      expect(find.text('This login is switched off.'), findsOne);
+      expect(find.text('স্টাফ লগইন'), findsNothing);
+      expect(find.text('Staff sign-in'), findsOne);
+      expect(store.values.containsKey(sessionTokenKey), isFalse);
+      expect(store.values.containsKey(cachedUserKey), isFalse);
     });
 
     testWidgets('Bangla is the default language', (tester) async {

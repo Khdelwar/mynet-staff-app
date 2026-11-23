@@ -145,9 +145,13 @@ void main() {
           apiProvider.overrideWith(
             (ref) => StaffApi(
               dio: erp.dio,
-              onUnauthorized: (rejected, _) => ref
+              onUnauthorized: (rejected, code, message) => ref
                   .read(authProvider.notifier)
-                  .sessionExpired(rejectedToken: rejected),
+                  .sessionExpired(
+                    rejectedToken: rejected,
+                    code: code,
+                    message: message,
+                  ),
             ),
           ),
         ],

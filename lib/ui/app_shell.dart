@@ -106,7 +106,9 @@ class _AppShellState extends ConsumerState<AppShell>
         connection != null &&
         connection.every((c) => c == ConnectivityResult.none);
 
+    final company = ref.watch(authProvider.select((a) => a.user?.companyName));
     return Scaffold(
+      appBar: AppBar(title: Text(company ?? l.appTitle)),
       body: SafeArea(
         child: Column(
           children: [
