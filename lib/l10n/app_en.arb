@@ -91,5 +91,26 @@
   "assignOffer": "Offer to the nearest",
   "offerStarted": "Offered to {name}.",
   "@offerStarted": {"placeholders": {"name": {"type": "String"}}},
-  "offerNobody": "Nobody left to offer. The office has been told."
+  "offerNobody": "Nobody left to offer. The office has been told.",
+  "pushNotice": "New notification",
+  "pushOpen": "Open",
+  "pushTicketTitle": "Ticket #{id}",
+  "@pushTicketTitle": {
+    "placeholders": {
+      "id": {
+        "type": "int"
+      }
+    }
+  },
+  "pushTicketAssigned": "This ticket was assigned to you.",
+  "pushTicketHelper": "You were added as a helper on this ticket.",
+  "pushTicketUnassigned": "Nobody took this ticket. It is back with the office.",
+  "pushOfferTitle": "Ticket offer",
+  "pushOfferBody": "A nearby ticket was offered to you.",
+  "pushFromNotification": "Opened from a notification.",
+  "pushPriority": "Priority",
+  "priorityLow": "Low",
+  "priorityMedium": "Medium",
+  "priorityHigh": "High",
+  "priorityUrgent": "Urgent"
 }

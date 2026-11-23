@@ -84,5 +84,26 @@
   "assignOffer": "কাছের জনকে অফার",
   "offerStarted": "{name}-কে অফার করা হয়েছে।",
   "@offerStarted": {"placeholders": {"name": {"type": "String"}}},
-  "offerNobody": "আর কাউকে অফার করার নেই। অফিসকে জানানো হয়েছে।"
+  "offerNobody": "আর কাউকে অফার করার নেই। অফিসকে জানানো হয়েছে।",
+  "pushNotice": "নতুন নোটিফিকেশন",
+  "pushOpen": "খুলুন",
+  "pushTicketTitle": "টিকেট #{id}",
+  "@pushTicketTitle": {
+    "placeholders": {
+      "id": {
+        "type": "int"
+      }
+    }
+  },
+  "pushTicketAssigned": "এই টিকেট আপনাকে দেওয়া হয়েছে।",
+  "pushTicketHelper": "আপনাকে এই টিকেটের সহকারী করা হয়েছে।",
+  "pushTicketUnassigned": "কেউ এই টিকেট নেয়নি। এটি অফিসের কাছে ফিরে গেছে।",
+  "pushOfferTitle": "টিকেট অফার",
+  "pushOfferBody": "কাছের একটি টিকেট আপনাকে দেওয়া হয়েছে।",
+  "pushFromNotification": "নোটিফিকেশন থেকে খোলা হয়েছে।",
+  "pushPriority": "অগ্রাধিকার",
+  "priorityLow": "কম",
+  "priorityMedium": "মাঝারি",
+  "priorityHigh": "বেশি",
+  "priorityUrgent": "জরুরি"
 }

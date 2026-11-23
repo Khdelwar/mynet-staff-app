@@ -263,4 +263,49 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get offerNobody => 'Nobody left to offer. The office has been told.';
+
+  @override
+  String get pushNotice => 'New notification';
+
+  @override
+  String get pushOpen => 'Open';
+
+  @override
+  String pushTicketTitle(int id) {
+    return 'Ticket #$id';
+  }
+
+  @override
+  String get pushTicketAssigned => 'This ticket was assigned to you.';
+
+  @override
+  String get pushTicketHelper => 'You were added as a helper on this ticket.';
+
+  @override
+  String get pushTicketUnassigned =>
+      'Nobody took this ticket. It is back with the office.';
+
+  @override
+  String get pushOfferTitle => 'Ticket offer';
+
+  @override
+  String get pushOfferBody => 'A nearby ticket was offered to you.';
+
+  @override
+  String get pushFromNotification => 'Opened from a notification.';
+
+  @override
+  String get pushPriority => 'Priority';
+
+  @override
+  String get priorityLow => 'Low';
+
+  @override
+  String get priorityMedium => 'Medium';
+
+  @override
+  String get priorityHigh => 'High';
+
+  @override
+  String get priorityUrgent => 'Urgent';
 }

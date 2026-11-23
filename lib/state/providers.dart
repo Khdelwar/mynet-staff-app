@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../api/models.dart';
 import '../api/staff_api.dart';
 import '../config.dart';
+import '../push/push.dart';
 import 'stores.dart';
 
 /// Overridden in `main()` with the loaded instance.
@@ -28,6 +29,32 @@ final apiProvider = Provider<StaffApi>((ref) {
         ref.read(authProvider.notifier).sessionExpired(rejectedToken: rejected),
   );
 });
+
+/// Overridden in tests. The real one no-ops until Firebase is configured.
+final pushServiceProvider = Provider<PushService>(
+  (ref) => FirebasePush.instance,
+);
+
+/// Latest notification. The shell turns a tap into a page.
+class PushInbox extends Notifier<PushMessage?> {
+  @override
+  PushMessage? build() {
+    final service = ref.watch(pushServiceProvider);
+    final sub = service.messages.listen((message) => state = message);
+    ref.onDispose(sub.cancel);
+    final pending = service.takePending();
+    if (pending != null) {
+      Future.microtask(() {
+        if (state == null) state = pending;
+      });
+    }
+    return null;
+  }
+}
+
+final pushInboxProvider = NotifierProvider<PushInbox, PushMessage?>(
+  PushInbox.new,
+);
 
 // --- Session ------------------------------------------------------------
 
@@ -87,6 +114,7 @@ class AuthController extends Notifier<AuthState> {
     } on ApiException {
       // Offline: keep the cached profile; a 401 already signed out.
     }
+    if (state.signedIn) unawaited(_bindPush());
   }
 
   /// Signs in, or returns [TwoFactorNeeded] for the code step.
@@ -120,6 +148,17 @@ class AuthController extends Notifier<AuthState> {
       user: signedIn.user,
       session: state.session + 1,
     );
+    unawaited(_bindPush());
+  }
+
+  /// Tells the ERP this phone's FCM token. Failures never block sign-in.
+  Future<void> _bindPush() async {
+    if (state.token == null) return;
+    try {
+      await ref.read(pushServiceProvider).register(_api);
+    } catch (_) {
+      // Push stays off.
+    }
   }
 
   Future<void> refreshProfile() async {
@@ -145,6 +184,13 @@ class AuthController extends Notifier<AuthState> {
   }
 
   Future<void> logout() async {
+    // Clear the FCM token while the session still exists, then sign out.
+    // Logout on the server also drops pushes if this call does not land.
+    try {
+      await ref.read(pushServiceProvider).unregister(_api);
+    } catch (_) {
+      // Signing out continues.
+    }
     try {
       await _api.logout();
     } catch (_) {

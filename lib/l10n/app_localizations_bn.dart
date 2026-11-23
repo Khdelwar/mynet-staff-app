@@ -262,4 +262,49 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get offerNobody => 'আর কাউকে অফার করার নেই। অফিসকে জানানো হয়েছে।';
+
+  @override
+  String get pushNotice => 'নতুন নোটিফিকেশন';
+
+  @override
+  String get pushOpen => 'খুলুন';
+
+  @override
+  String pushTicketTitle(int id) {
+    return 'টিকেট #$id';
+  }
+
+  @override
+  String get pushTicketAssigned => 'এই টিকেট আপনাকে দেওয়া হয়েছে।';
+
+  @override
+  String get pushTicketHelper => 'আপনাকে এই টিকেটের সহকারী করা হয়েছে।';
+
+  @override
+  String get pushTicketUnassigned =>
+      'কেউ এই টিকেট নেয়নি। এটি অফিসের কাছে ফিরে গেছে।';
+
+  @override
+  String get pushOfferTitle => 'টিকেট অফার';
+
+  @override
+  String get pushOfferBody => 'কাছের একটি টিকেট আপনাকে দেওয়া হয়েছে।';
+
+  @override
+  String get pushFromNotification => 'নোটিফিকেশন থেকে খোলা হয়েছে।';
+
+  @override
+  String get pushPriority => 'অগ্রাধিকার';
+
+  @override
+  String get priorityLow => 'কম';
+
+  @override
+  String get priorityMedium => 'মাঝারি';
+
+  @override
+  String get priorityHigh => 'বেশি';
+
+  @override
+  String get priorityUrgent => 'জরুরি';
 }
