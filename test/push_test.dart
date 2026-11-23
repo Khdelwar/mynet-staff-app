@@ -22,6 +22,25 @@ const _user = {
   'permissions': ['staff_app.use', 'tickets.view'],
 };
 
+Map<String, Object?> _ticket(int id, {String role = 'main'}) => {
+  'ticket': {
+    'id': id,
+    'subject': 'No internet',
+    'priority': 'urgent',
+    'status': 'assigned',
+    'role': role,
+    'client': {'id': 9, 'name': 'Karim'},
+    'comments': <Object?>[],
+    'can': {
+      'update_status': false,
+      'comment': false,
+      'set_location': false,
+      'check_dbm': false,
+    },
+    'next_statuses': <Object?>[],
+  },
+};
+
 class FakePush implements PushService {
   FakePush({this.token});
 
@@ -180,6 +199,7 @@ void main() {
         push,
         FakeErp({
           'GET /me': (_) => (200, {'user': _user}),
+          'GET /tickets/41': (_) => (200, _ticket(41)),
         }),
       );
 
@@ -194,8 +214,8 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      expect(find.byKey(const ValueKey('push-ticket')), findsOneWidget);
-      expect(find.text('Ticket #41 assigned.'), findsWidgets);
+      expect(find.byKey(const ValueKey('ticket-detail')), findsOneWidget);
+      expect(find.text('No internet'), findsOneWidget);
       expect(find.text('Urgent'), findsOneWidget);
     });
 
@@ -206,16 +226,15 @@ void main() {
         push,
         FakeErp({
           'GET /me': (_) => (200, {'user': _user}),
+          'GET /tickets/8': (_) => (200, _ticket(8, role: 'helper')),
         }),
       );
       push.emit(
         const PushMessage(type: 'ticket_helper', ticketId: 8, tapped: true),
       );
       await tester.pumpAndSettle();
-      expect(
-        find.text('You were added as a helper on this ticket.'),
-        findsOneWidget,
-      );
+      expect(find.byKey(const ValueKey('ticket-detail')), findsOneWidget);
+      expect(find.text('Helper'), findsOneWidget);
     });
 
     testWidgets('a foreground offer waits for a tap', (tester) async {
@@ -257,9 +276,10 @@ void main() {
         push,
         FakeErp({
           'GET /me': (_) => (200, {'user': _user}),
+          'GET /tickets/41': (_) => (200, _ticket(41)),
         }),
       );
-      expect(find.byKey(const ValueKey('push-ticket')), findsOneWidget);
+      expect(find.byKey(const ValueKey('ticket-detail')), findsOneWidget);
     });
   });
 }

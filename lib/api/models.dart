@@ -22,7 +22,8 @@ class StaffUser {
   final List<String> roles;
   final Set<String> permissions;
 
-  /// Screen keys from `/me`. Empty when the payload had no `screens` list.
+  /// Screen keys from `/me`. Empty when the payload had no `screens` list
+  /// (older cached profiles). A non-empty list is what the ERP says to draw.
   final Set<String> screens;
   final bool isSuperAdmin;
   final StaffProfile? staff;
@@ -62,6 +63,8 @@ class StaffUser {
   };
 }
 
+/// `/me` puts roles, permissions and screens on the root. Older fixtures and
+/// the cached profile keep them on the user object.
 List<String> _strings(
   Json root,
   Json user,

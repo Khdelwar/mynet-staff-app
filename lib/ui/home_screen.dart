@@ -3,10 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../api/models.dart';
 import '../l10n/app_localizations.dart';
+import '../nav/targets.dart';
 import '../state/providers.dart';
 import 'assign_screen.dart';
 import 'common.dart';
 import 'offers_screen.dart';
+import 'ticket_detail_screen.dart';
+import 'tickets_screen.dart';
 
 /// One app feature and the ERP permission that opens it (same as the web).
 class Feature {
@@ -26,6 +29,8 @@ class Feature {
   final String Function(AppLocalizations) label;
   final WidgetBuilder? open;
 
+  /// Drawn when `/me` grants the permission. When the ERP also sent a
+  /// `screens` list, the feature's screen has to be on it.
   bool allowed(StaffUser user) {
     final byPermission = user.can(permission) || also.any(user.can);
     if (user.screens.isNotEmpty && screen != null) {
@@ -35,7 +40,7 @@ class Feature {
   }
 }
 
-/// Planned in mynet-erp ROADMAP Phase 14. Offers and assign are STF-05.
+/// Planned in mynet-erp ROADMAP Phase 14. Tickets is STF-03, offers are STF-05.
 final features = <Feature>[
   Feature(
     'collection.collect',
@@ -49,6 +54,7 @@ final features = <Feature>[
     (l) => l.featureTickets,
     screen: 'tickets',
     also: const ['tickets.manage'],
+    open: _openTickets,
   ),
   Feature(
     'clients.view',
@@ -83,6 +89,8 @@ Widget _openOffers(BuildContext context) => const OffersScreen();
 
 Widget _openAssign(BuildContext context) => const AssignScreen();
 
+Widget _openTickets(BuildContext context) => const TicketListScreen();
+
 List<Feature> featuresFor(StaffUser user) => [
   for (final f in features)
     if (f.allowed(user)) f,
@@ -96,6 +104,7 @@ class HomeScreen extends ConsumerWidget {
     final l = AppLocalizations.of(context);
     final theme = Theme.of(context);
     final user = ref.watch(authProvider.select((a) => a.user));
+    NavTargets.ticket = (id) => TicketDetailScreen(ticketId: id);
 
     return RefreshIndicator(
       onRefresh: () =>
