@@ -562,4 +562,78 @@ class AppLocalizationsBn extends AppLocalizations {
   @override
   String get devicesSignOutOther =>
       'ওই ফোন থেকে সাইন আউট করবেন? সেখানে স্টাফ নোটিফিকেশন বন্ধ হবে।';
+
+  @override
+  String get clientsSearch => 'নাম, আইডি, ফোন বা PPPoE';
+
+  @override
+  String get clientsEmpty => 'কোনো ক্লায়েন্ট নেই।';
+
+  @override
+  String get clientsMore => 'আরও';
+
+  @override
+  String get clientsCode => 'আইডি';
+
+  @override
+  String get clientsAddress => 'ঠিকানা';
+
+  @override
+  String get clientsStatus => 'অবস্থা';
+
+  @override
+  String get clientsPackage => 'প্যাকেজ';
+
+  @override
+  String get clientsPrice => 'দাম';
+
+  @override
+  String get clientsExpiry => 'মেয়াদ';
+
+  @override
+  String get clientsDue => 'বকেয়া';
+
+  @override
+  String get clientsAdvance => 'অগ্রিম';
+
+  @override
+  String get clientsBalance => 'ব্যালেন্স';
+
+  @override
+  String get clientsPppoe => 'PPPoE';
+
+  @override
+  String get clientsNid => 'এনআইডি';
+
+  @override
+  String get clientsPop => 'পপ';
+
+  @override
+  String get clientsRouter => 'রাউটার';
+
+  @override
+  String get clientsOnu => 'ONU';
+
+  @override
+  String get clientsRx => 'শেষ RX dBm';
+
+  @override
+  String get clientsConnection => 'লাইন স্ট্যাটাস';
+
+  @override
+  String get clientsOnline => 'লাইন অনলাইন।';
+
+  @override
+  String get clientsOffline => 'লাইন অফলাইন।';
+
+  @override
+  String clientsDisconnects(int count) {
+    return '২৪ ঘণ্টায় $count বার সংযোগ ছিঁড়েছে';
+  }
+
+  @override
+  String get clientsOpenTickets => 'খোলা টিকেট';
+
+  @override
+  String get clientsPayments => 'সাম্প্রতিক পেমেন্ট';
 }

@@ -563,4 +563,78 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get devicesSignOutOther =>
       'Sign that phone out? It will stop receiving staff notifications.';
+
+  @override
+  String get clientsSearch => 'Name, ID, phone or PPPoE';
+
+  @override
+  String get clientsEmpty => 'No clients.';
+
+  @override
+  String get clientsMore => 'More';
+
+  @override
+  String get clientsCode => 'ID';
+
+  @override
+  String get clientsAddress => 'Address';
+
+  @override
+  String get clientsStatus => 'Status';
+
+  @override
+  String get clientsPackage => 'Package';
+
+  @override
+  String get clientsPrice => 'Price';
+
+  @override
+  String get clientsExpiry => 'Expiry';
+
+  @override
+  String get clientsDue => 'Due';
+
+  @override
+  String get clientsAdvance => 'Advance';
+
+  @override
+  String get clientsBalance => 'Balance';
+
+  @override
+  String get clientsPppoe => 'PPPoE';
+
+  @override
+  String get clientsNid => 'NID';
+
+  @override
+  String get clientsPop => 'POP';
+
+  @override
+  String get clientsRouter => 'Router';
+
+  @override
+  String get clientsOnu => 'ONU';
+
+  @override
+  String get clientsRx => 'Last RX dBm';
+
+  @override
+  String get clientsConnection => 'Line status';
+
+  @override
+  String get clientsOnline => 'The line is online.';
+
+  @override
+  String get clientsOffline => 'The line is offline.';
+
+  @override
+  String clientsDisconnects(int count) {
+    return '$count disconnects in 24 hours';
+  }
+
+  @override
+  String get clientsOpenTickets => 'Open tickets';
+
+  @override
+  String get clientsPayments => 'Recent payments';
 }

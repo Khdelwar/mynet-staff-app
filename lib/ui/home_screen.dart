@@ -6,6 +6,7 @@ import '../l10n/app_localizations.dart';
 import '../nav/targets.dart';
 import '../state/providers.dart';
 import 'assign_screen.dart';
+import 'clients_screen.dart';
 import 'common.dart';
 import 'duty_screen.dart';
 import 'offers_screen.dart';
@@ -42,7 +43,7 @@ class Feature {
 }
 
 /// Planned in mynet-erp ROADMAP Phase 14. Tickets, duty, and offers.
-/// Clients stay off this list until the ERP has a client-list API.
+/// The Clients tile opens the staff client list.
 final features = <Feature>[
   Feature(
     'collection.collect',
@@ -57,6 +58,13 @@ final features = <Feature>[
     screen: 'tickets',
     also: const ['tickets.manage'],
     open: _openTickets,
+  ),
+  Feature(
+    'clients.view',
+    Icons.people_outline,
+    (l) => l.featureClients,
+    screen: 'clients',
+    open: _openClients,
   ),
   Feature(
     'hr.self',
@@ -95,6 +103,8 @@ Widget _openOffers(BuildContext context) => const OffersScreen();
 Widget _openAssign(BuildContext context) => const AssignScreen();
 
 Widget _openTickets(BuildContext context) => const TicketListScreen();
+
+Widget _openClients(BuildContext context) => const ClientListScreen();
 
 List<Feature> featuresFor(StaffUser user) => [
   for (final f in features)

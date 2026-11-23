@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:dio/dio.dart';
 
 import '../config.dart';
+import 'clients.dart';
 import 'devices.dart';
 import 'duty.dart';
 import 'json.dart';
@@ -412,6 +413,31 @@ class StaffApi {
       throw ApiException(200, '', path: '/clients/$id/location');
     }
     return point;
+  }
+
+  Future<ClientPage> clients({String? q, String? status, int page = 1}) async {
+    final query = q?.trim() ?? '';
+    final res = await _send(
+      'GET',
+      '/clients',
+      query: {
+        if (query.length >= 2) 'q': query,
+        if (status != null && status.isNotEmpty) 'status': status,
+        'page': page,
+      },
+    ) as Response<dynamic>;
+    return ClientPage.fromJson(res.data);
+  }
+
+  Future<ClientDetail> client(int id) async {
+    final res = await _send('GET', '/clients/$id') as Response<dynamic>;
+    return ClientDetail.fromJson(res.data);
+  }
+
+  Future<ClientConnection> clientConnection(int id) async {
+    final res =
+        await _send('GET', '/clients/$id/connection') as Response<dynamic>;
+    return ClientConnection.fromJson(res.data);
   }
 
   /// Loads a note photo when the public URL refuses an unauthenticated GET.

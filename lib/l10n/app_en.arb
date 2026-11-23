@@ -205,5 +205,34 @@
   "devicesThisPhone": "This phone",
   "devicesSignOut": "Sign out",
   "devicesSignOutThis": "Sign this phone out? You will need to sign in again.",
-  "devicesSignOutOther": "Sign that phone out? It will stop receiving staff notifications."
+  "devicesSignOutOther": "Sign that phone out? It will stop receiving staff notifications.",
+  "clientsSearch": "Name, ID, phone or PPPoE",
+  "clientsEmpty": "No clients.",
+  "clientsMore": "More",
+  "clientsCode": "ID",
+  "clientsAddress": "Address",
+  "clientsStatus": "Status",
+  "clientsPackage": "Package",
+  "clientsPrice": "Price",
+  "clientsExpiry": "Expiry",
+  "clientsDue": "Due",
+  "clientsAdvance": "Advance",
+  "clientsBalance": "Balance",
+  "clientsPppoe": "PPPoE",
+  "clientsNid": "NID",
+  "clientsPop": "POP",
+  "clientsRouter": "Router",
+  "clientsOnu": "ONU",
+  "clientsRx": "Last RX dBm",
+  "clientsConnection": "Line status",
+  "clientsOnline": "The line is online.",
+  "clientsOffline": "The line is offline.",
+  "clientsDisconnects": "{count} disconnects in 24 hours",
+  "@clientsDisconnects": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "clientsOpenTickets": "Open tickets",
+  "clientsPayments": "Recent payments"
 }
