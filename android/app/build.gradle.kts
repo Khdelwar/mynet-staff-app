@@ -94,3 +94,9 @@ kotlin {
 flutter {
     source = "../.."
 }
+
+// Push: applied only when android/app/google-services.json is present
+// (kept out of git). Without it the app builds and push stays off.
+if (file("google-services.json").exists()) {
+    apply(plugin = "com.google.gms.google-services")
+}

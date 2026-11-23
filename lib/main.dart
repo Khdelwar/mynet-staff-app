@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'l10n/app_localizations.dart';
+import 'push/push.dart';
 import 'state/providers.dart';
 import 'ui/app_shell.dart';
 import 'ui/lock_gate.dart';
@@ -10,6 +11,7 @@ import 'ui/login_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await FirebasePush.instance.init();
   final prefs = await SharedPreferences.getInstance();
   runApp(
     ProviderScope(

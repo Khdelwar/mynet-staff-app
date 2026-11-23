@@ -17,8 +17,11 @@ Flutter app (Android + iPhone) for MyNet ISP staff. All data comes from
 | Login | Email / mobile + password, then 2FA code if on | `POST /auth/login`, `POST /auth/two-factor` |
 | Home | Name, staff code, roles, the work this login may do | `GET /me` |
 | Account | Email, mobile, language, app lock, sign out | `POST /auth/logout` |
+| Push | This phone's notification token; tapping opens the ticket or the offer | `POST /push/register`, `POST /push/unregister` |
 
-Collection, tickets, clients, HR and push come next (mynet-erp ROADMAP Phase 14).
+Put the staff app's `google-services.json` (Android) and `GoogleService-Info.plist` (iPhone) from the customer app's Firebase project next to the other platform files. They stay out of git. Without them the app still runs and push stays off.
+
+Collection, tickets, clients and HR come next (mynet-erp ROADMAP Phase 14).
 
 ## Security
 
