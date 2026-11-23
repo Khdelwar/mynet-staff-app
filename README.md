@@ -16,13 +16,14 @@ Flutter app (Android + iPhone) for MyNet ISP staff. All data comes from
 | --- | --- | --- |
 | Login | Email / mobile + password, then 2FA code if on | `POST /auth/login`, `POST /auth/two-factor` |
 | Home | Name, staff code, roles, the work this login may do | `GET /me` |
+| Tickets | Own tickets (or everyone's, when the ERP allows it), status, notes with photos, house GPS, live dBm | `GET /tickets`, `POST /tickets/{id}/status`, `POST /tickets/{id}/comments`, `POST /clients/{id}/location`, `POST /clients/{id}/dbm` |
 | Account | Email, mobile, language, app lock, sign out | `POST /auth/logout` |
 | Duty | Start and end duty. While it is on, the phone sends location at the ERP's interval and shows "MyNet: location on" | `GET /duty`, `POST /duty/start`, `POST /duty/end`, `POST /locations` |
 | Push | This phone's notification token; tapping opens the ticket or the offer | `POST /push/register`, `POST /push/unregister` |
 
 Put the staff app's `google-services.json` (Android) and `GoogleService-Info.plist` (iPhone) from the customer app's Firebase project next to the other platform files. They stay out of git. Without them the app still runs and push stays off.
 
-Collection, tickets, clients and HR come next (mynet-erp ROADMAP Phase 14).
+Collection, clients and HR come next (mynet-erp ROADMAP Phase 14).
 
 ## Security
 

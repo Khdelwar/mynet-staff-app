@@ -5,9 +5,13 @@
 	<key>NSFaceIDUsageDescription</key>
 	<string>Used to unlock the app when app lock is on.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Used to share your location while you are on duty.</string>
+	<string>Used to save the client's house location, to record where a ticket was finished, and to share your location while you are on duty.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Used to keep sharing your location while you are on duty and the app is in the background.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Used to attach a photo to a ticket note.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Used to attach a photo to a ticket note.</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>

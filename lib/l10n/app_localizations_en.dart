@@ -223,15 +223,210 @@ class AppLocalizationsEn extends AppLocalizations {
       'Location is shared only while you are on duty.';
 
   @override
-  String get pushNotice => 'New notification';
+  String get ticketsSearch => 'Name, ID or phone';
 
   @override
-  String get pushOpen => 'Open';
+  String get ticketsActive => 'Open';
+
+  @override
+  String get ticketsDone => 'Finished';
+
+  @override
+  String get ticketsAny => 'Any status';
+
+  @override
+  String get ticketsMine => 'My tickets';
+
+  @override
+  String get ticketsAll => 'Everyone\'s tickets';
+
+  @override
+  String get ticketsEmpty => 'No tickets here.';
+
+  @override
+  String get loadMore => 'Load more';
+
+  @override
+  String get overdue => 'Over SLA';
+
+  @override
+  String get ticketStatus => 'Status';
+
+  @override
+  String get statusOpen => 'Open';
+
+  @override
+  String get statusAssigned => 'Assigned';
+
+  @override
+  String get statusScheduled => 'Scheduled';
+
+  @override
+  String get statusOnTheWay => 'On the way';
+
+  @override
+  String get statusInProgress => 'Working';
+
+  @override
+  String get statusResolved => 'Resolved';
+
+  @override
+  String get statusReopened => 'Reopened';
+
+  @override
+  String get statusClosed => 'Closed';
+
+  @override
+  String get priorityLow => 'Low';
+
+  @override
+  String get priorityMedium => 'Medium';
+
+  @override
+  String get priorityHigh => 'High';
+
+  @override
+  String get priorityUrgent => 'Urgent';
+
+  @override
+  String get pushPriority => 'Priority';
 
   @override
   String pushTicketTitle(int id) {
     return 'Ticket #$id';
   }
+
+  @override
+  String get outcomeDone => 'Done';
+
+  @override
+  String get outcomeNoIssue => 'No issue';
+
+  @override
+  String get outcomeDuplicate => 'Duplicate';
+
+  @override
+  String get outcomeCancelled => 'Cancelled';
+
+  @override
+  String get roleMain => 'Main';
+
+  @override
+  String get roleHelper => 'Helper';
+
+  @override
+  String get ticketDescription => 'Details';
+
+  @override
+  String get ticketComments => 'Notes';
+
+  @override
+  String get ticketNoComments => 'No notes yet.';
+
+  @override
+  String get ticketNote => 'Note';
+
+  @override
+  String get ticketSend => 'Save';
+
+  @override
+  String get ticketNewConnectionHint =>
+      'A new connection closes only with the client\'s PPPoE ID in the note.';
+
+  @override
+  String get ticketAwayTitle => 'Away from the house';
+
+  @override
+  String get ticketAwayHint =>
+      'Why are you finishing from here? (at least 5 characters)';
+
+  @override
+  String get ticketFinishDistance => 'Distance from the house';
+
+  @override
+  String ticketMeters(int meters) {
+    return '$meters m';
+  }
+
+  @override
+  String get clientCode => 'Client ID';
+
+  @override
+  String get clientAddress => 'Address';
+
+  @override
+  String get clientPppoe => 'PPPoE';
+
+  @override
+  String get onuSn => 'ONU serial';
+
+  @override
+  String get onuMac => 'ONU MAC';
+
+  @override
+  String get onuPort => 'PON port';
+
+  @override
+  String get ticketCall => 'Call';
+
+  @override
+  String get ticketMap => 'Map';
+
+  @override
+  String get ticketLocation => 'Save house GPS';
+
+  @override
+  String get ticketSaveLocation => 'Save this spot as the client\'s house?';
+
+  @override
+  String get ticketLocationSaved => 'House location saved.';
+
+  @override
+  String get ticketLocationDenied =>
+      'Location is off. Turn it on and try again.';
+
+  @override
+  String get ticketLocationMock =>
+      'This looks like a fake GPS. Turn it off before saving the house.';
+
+  @override
+  String get ticketDbm => 'Check dBm';
+
+  @override
+  String get ticketDbmRx => 'RX dBm';
+
+  @override
+  String get ticketDbmTx => 'TX dBm';
+
+  @override
+  String get ticketDbmLevel => 'Level';
+
+  @override
+  String get ticketTakePhoto => 'Camera';
+
+  @override
+  String get ticketAddPhoto => 'Gallery';
+
+  @override
+  String ticketPhotoCount(int count) {
+    return '$count photo(s)';
+  }
+
+  @override
+  String get ticketPhotoLimit => 'A note can have up to 5 photos.';
+
+  @override
+  String get ticketPhotoTooBig => 'That photo is larger than 5 MB.';
+
+  @override
+  String get ticketCommentKept =>
+      'No internet. The note stays on this phone and will be sent later.';
+
+  @override
+  String get pushNotice => 'New notification';
+
+  @override
+  String get pushOpen => 'Open';
 
   @override
   String get pushTicketAssigned => 'This ticket was assigned to you.';
@@ -251,19 +446,4 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pushFromNotification => 'Opened from a notification.';
-
-  @override
-  String get pushPriority => 'Priority';
-
-  @override
-  String get priorityLow => 'Low';
-
-  @override
-  String get priorityMedium => 'Medium';
-
-  @override
-  String get priorityHigh => 'High';
-
-  @override
-  String get priorityUrgent => 'Urgent';
 }

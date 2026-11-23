@@ -222,15 +222,210 @@ class AppLocalizationsBn extends AppLocalizations {
   String get dutyNotificationBody => 'লোকেশন শুধু ডিউটিতে থাকাকালীন যায়।';
 
   @override
-  String get pushNotice => 'নতুন নোটিফিকেশন';
+  String get ticketsSearch => 'নাম, আইডি বা ফোন';
 
   @override
-  String get pushOpen => 'খুলুন';
+  String get ticketsActive => 'খোলা';
+
+  @override
+  String get ticketsDone => 'শেষ';
+
+  @override
+  String get ticketsAny => 'সব স্ট্যাটাস';
+
+  @override
+  String get ticketsMine => 'আমার টিকেট';
+
+  @override
+  String get ticketsAll => 'সবার টিকেট';
+
+  @override
+  String get ticketsEmpty => 'এখানে কোনো টিকেট নেই।';
+
+  @override
+  String get loadMore => 'আরও দেখুন';
+
+  @override
+  String get overdue => 'সময় পার';
+
+  @override
+  String get ticketStatus => 'স্ট্যাটাস';
+
+  @override
+  String get statusOpen => 'খোলা';
+
+  @override
+  String get statusAssigned => 'দেওয়া হয়েছে';
+
+  @override
+  String get statusScheduled => 'সময় ধার্য';
+
+  @override
+  String get statusOnTheWay => 'রাস্তায়';
+
+  @override
+  String get statusInProgress => 'কাজ চলছে';
+
+  @override
+  String get statusResolved => 'সমাধান';
+
+  @override
+  String get statusReopened => 'আবার খোলা';
+
+  @override
+  String get statusClosed => 'বন্ধ';
+
+  @override
+  String get priorityLow => 'কম';
+
+  @override
+  String get priorityMedium => 'মাঝারি';
+
+  @override
+  String get priorityHigh => 'বেশি';
+
+  @override
+  String get priorityUrgent => 'জরুরি';
+
+  @override
+  String get pushPriority => 'অগ্রাধিকার';
 
   @override
   String pushTicketTitle(int id) {
     return 'টিকেট #$id';
   }
+
+  @override
+  String get outcomeDone => 'হয়ে গেছে';
+
+  @override
+  String get outcomeNoIssue => 'সমস্যা ছিল না';
+
+  @override
+  String get outcomeDuplicate => 'ডুপ্লিকেট';
+
+  @override
+  String get outcomeCancelled => 'বাতিল';
+
+  @override
+  String get roleMain => 'মূল দায়িত্ব';
+
+  @override
+  String get roleHelper => 'সহকারী';
+
+  @override
+  String get ticketDescription => 'বিবরণ';
+
+  @override
+  String get ticketComments => 'নোট';
+
+  @override
+  String get ticketNoComments => 'এখনো কোনো নোট নেই।';
+
+  @override
+  String get ticketNote => 'নোট';
+
+  @override
+  String get ticketSend => 'সেভ';
+
+  @override
+  String get ticketNewConnectionHint =>
+      'নতুন লাইন বন্ধ করতে নোটে ক্লায়েন্টের PPPoE আইডি লাগবে।';
+
+  @override
+  String get ticketAwayTitle => 'বাসা থেকে দূরে';
+
+  @override
+  String get ticketAwayHint => 'এখান থেকে শেষ করছেন কেন? (কমপক্ষে ৫ অক্ষর)';
+
+  @override
+  String get ticketFinishDistance => 'বাসা থেকে দূরত্ব';
+
+  @override
+  String ticketMeters(int meters) {
+    return '$meters মি';
+  }
+
+  @override
+  String get clientCode => 'ক্লায়েন্ট আইডি';
+
+  @override
+  String get clientAddress => 'ঠিকানা';
+
+  @override
+  String get clientPppoe => 'PPPoE';
+
+  @override
+  String get onuSn => 'ONU সিরিয়াল';
+
+  @override
+  String get onuMac => 'ONU MAC';
+
+  @override
+  String get onuPort => 'PON পোর্ট';
+
+  @override
+  String get ticketCall => 'কল';
+
+  @override
+  String get ticketMap => 'ম্যাপ';
+
+  @override
+  String get ticketLocation => 'বাসার GPS সেভ';
+
+  @override
+  String get ticketSaveLocation =>
+      'এই জায়গাটা ক্লায়েন্টের বাসা হিসেবে সেভ করবেন?';
+
+  @override
+  String get ticketLocationSaved => 'বাসার লোকেশন সেভ হয়েছে।';
+
+  @override
+  String get ticketLocationDenied =>
+      'লোকেশন বন্ধ আছে। চালু করে আবার চেষ্টা করুন।';
+
+  @override
+  String get ticketLocationMock =>
+      'এটা নকল GPS মনে হচ্ছে। বাসা সেভ করার আগে বন্ধ করুন।';
+
+  @override
+  String get ticketDbm => 'dBm দেখুন';
+
+  @override
+  String get ticketDbmRx => 'RX dBm';
+
+  @override
+  String get ticketDbmTx => 'TX dBm';
+
+  @override
+  String get ticketDbmLevel => 'লেভেল';
+
+  @override
+  String get ticketTakePhoto => 'ক্যামেরা';
+
+  @override
+  String get ticketAddPhoto => 'গ্যালারি';
+
+  @override
+  String ticketPhotoCount(int count) {
+    return '$countটা ছবি';
+  }
+
+  @override
+  String get ticketPhotoLimit => 'একটা নোটে সর্বোচ্চ ৫টা ছবি।';
+
+  @override
+  String get ticketPhotoTooBig => 'ছবিটা ৫ MB-এর বেশি।';
+
+  @override
+  String get ticketCommentKept =>
+      'ইন্টারনেট নেই। নোটটা ফোনে থাকবে, পরে পাঠানো হবে।';
+
+  @override
+  String get pushNotice => 'নতুন নোটিফিকেশন';
+
+  @override
+  String get pushOpen => 'খুলুন';
 
   @override
   String get pushTicketAssigned => 'এই টিকেট আপনাকে দেওয়া হয়েছে।';
@@ -250,19 +445,4 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get pushFromNotification => 'নোটিফিকেশন থেকে খোলা হয়েছে।';
-
-  @override
-  String get pushPriority => 'অগ্রাধিকার';
-
-  @override
-  String get priorityLow => 'কম';
-
-  @override
-  String get priorityMedium => 'মাঝারি';
-
-  @override
-  String get priorityHigh => 'বেশি';
-
-  @override
-  String get priorityUrgent => 'জরুরি';
 }

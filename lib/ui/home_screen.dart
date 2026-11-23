@@ -3,9 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../api/models.dart';
 import '../l10n/app_localizations.dart';
+import '../nav/targets.dart';
 import '../state/providers.dart';
 import 'common.dart';
 import 'duty_screen.dart';
+import 'ticket_detail_screen.dart';
+import 'tickets_screen.dart';
 
 /// One app feature and the ERP permission that opens it (same as the web).
 class Feature {
@@ -36,7 +39,7 @@ class Feature {
   }
 }
 
-/// Planned in mynet-erp ROADMAP Phase 14. Duty is STF-04.
+/// Planned in mynet-erp ROADMAP Phase 14. Tickets is STF-03, duty is STF-04.
 final features = <Feature>[
   Feature(
     'collection.collect',
@@ -50,6 +53,7 @@ final features = <Feature>[
     (l) => l.featureTickets,
     screen: 'tickets',
     also: const ['tickets.manage'],
+    open: _openTickets,
   ),
   Feature(
     'clients.view',
@@ -74,6 +78,8 @@ final features = <Feature>[
 
 Widget _openDuty(BuildContext context) => const DutyScreen();
 
+Widget _openTickets(BuildContext context) => const TicketListScreen();
+
 List<Feature> featuresFor(StaffUser user) => [
   for (final f in features)
     if (f.allowed(user)) f,
@@ -87,6 +93,7 @@ class HomeScreen extends ConsumerWidget {
     final l = AppLocalizations.of(context);
     final theme = Theme.of(context);
     final user = ref.watch(authProvider.select((a) => a.user));
+    NavTargets.ticket = (id) => TicketDetailScreen(ticketId: id);
 
     return RefreshIndicator(
       onRefresh: () =>
