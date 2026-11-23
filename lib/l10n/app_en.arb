@@ -44,6 +44,7 @@
   "featureCollection": "Bill collection",
   "featureTickets": "Tickets",
   "featureClients": "Clients",
+  "featureChat": "Support chat",
   "featureHr": "Attendance, leave & advance",
   "comingSoon": "Coming in the next update",
   "noFeatures": "Your role has no app features yet. Use the ERP website.",
@@ -196,5 +197,14 @@
   "pushTicketUnassigned": "Nobody took this ticket. It is back with the office.",
   "pushOfferTitle": "Ticket offer",
   "pushOfferBody": "A nearby ticket was offered to you.",
-  "pushFromNotification": "Opened from a notification."
+  "pushFromNotification": "Opened from a notification.",
+  "chatsSearch": "Client name, ID or phone",
+  "chatsEmpty": "No conversations.",
+  "chatsUnread": "{count} new",
+  "@chatsUnread": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "chatsReply": "Reply"
 }

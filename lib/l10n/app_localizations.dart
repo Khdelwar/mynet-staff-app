@@ -320,6 +320,12 @@ abstract class AppLocalizations {
   /// **'Clients'**
   String get featureClients;
 
+  /// No description provided for @featureChat.
+  ///
+  /// In en, this message translates to:
+  /// **'Support chat'**
+  String get featureChat;
+
   /// No description provided for @featureHr.
   ///
   /// In en, this message translates to:
@@ -1063,6 +1069,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Opened from a notification.'**
   String get pushFromNotification;
+
+  /// No description provided for @chatsSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Client name, ID or phone'**
+  String get chatsSearch;
+
+  /// No description provided for @chatsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No conversations.'**
+  String get chatsEmpty;
+
+  /// No description provided for @chatsUnread.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} new'**
+  String chatsUnread(int count);
+
+  /// No description provided for @chatsReply.
+  ///
+  /// In en, this message translates to:
+  /// **'Reply'**
+  String get chatsReply;
 }
 
 class _AppLocalizationsDelegate

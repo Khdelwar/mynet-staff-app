@@ -37,6 +37,7 @@
   "featureCollection": "বিল কালেকশন",
   "featureTickets": "টিকেট",
   "featureClients": "ক্লায়েন্ট",
+  "featureChat": "সাপোর্ট চ্যাট",
   "featureHr": "হাজিরা, ছুটি ও অগ্রিম",
   "comingSoon": "পরের আপডেটে আসছে",
   "noFeatures": "আপনার রোলে এখনো অ্যাপের কোনো কাজ নেই। ERP ওয়েবসাইট ব্যবহার করুন।",
@@ -189,5 +190,14 @@
   "pushTicketUnassigned": "কেউ এই টিকেট নেয়নি। এটি অফিসের কাছে ফিরে গেছে।",
   "pushOfferTitle": "টিকেট অফার",
   "pushOfferBody": "কাছের একটি টিকেট আপনাকে দেওয়া হয়েছে।",
-  "pushFromNotification": "নোটিফিকেশন থেকে খোলা হয়েছে।"
+  "pushFromNotification": "নোটিফিকেশন থেকে খোলা হয়েছে।",
+  "chatsSearch": "ক্লায়েন্টের নাম, আইডি বা ফোন",
+  "chatsEmpty": "কোনো কথোপকথন নেই।",
+  "chatsUnread": "{count} নতুন",
+  "@chatsUnread": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "chatsReply": "উত্তর"
 }

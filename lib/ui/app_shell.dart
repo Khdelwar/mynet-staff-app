@@ -7,6 +7,7 @@ import '../nav/targets.dart';
 import '../push/message.dart';
 import '../state/providers.dart';
 import 'account_screen.dart';
+import 'chat_screen.dart';
 import 'home_screen.dart';
 import 'push_pages.dart';
 
@@ -44,7 +45,7 @@ class _AppShellState extends ConsumerState<AppShell>
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(text),
-          action: message.opensTicket || message.opensOffer
+          action: message.opensTicket || message.opensOffer || message.opensChat
               ? SnackBarAction(
                   label: l.pushOpen,
                   onPressed: () => _open(message),
@@ -75,6 +76,8 @@ class _AppShellState extends ConsumerState<AppShell>
       page =
           NavTargets.offers?.call(message.offerId, message.ticketId) ??
           PushOfferPage(offerId: message.offerId, ticketId: message.ticketId);
+    } else if (message.opensChat) {
+      page = ChatThreadScreen(conversationId: message.conversationId!);
     } else {
       return;
     }
