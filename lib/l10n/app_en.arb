@@ -46,6 +46,7 @@
   "featureCollection": "Bill collection",
   "featureTickets": "Tickets",
   "featureClients": "Clients",
+  "featureChat": "Support chat",
   "featureHr": "Attendance, leave & advance",
   "comingSoon": "Coming in the next update",
   "noFeatures": "Your role has no app features yet. Use the ERP website.",
@@ -234,5 +235,14 @@
     }
   },
   "clientsOpenTickets": "Open tickets",
-  "clientsPayments": "Recent payments"
+  "clientsPayments": "Recent payments",
+  "chatsSearch": "Client name, ID or phone",
+  "chatsEmpty": "No conversations.",
+  "chatsUnread": "{count} new",
+  "@chatsUnread": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "chatsReply": "Reply"
 }

@@ -134,6 +134,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get featureClients => 'Clients';
 
   @override
+  String get featureChat => 'Support chat';
+
+  @override
   String get featureHr => 'Attendance, leave & advance';
 
   @override
@@ -637,4 +640,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get clientsPayments => 'Recent payments';
+
+  @override
+  String get chatsSearch => 'Client name, ID or phone';
+
+  @override
+  String get chatsEmpty => 'No conversations.';
+
+  @override
+  String chatsUnread(int count) {
+    return '$count new';
+  }
+
+  @override
+  String get chatsReply => 'Reply';
 }

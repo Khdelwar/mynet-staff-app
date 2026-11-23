@@ -134,6 +134,9 @@ class AppLocalizationsBn extends AppLocalizations {
   String get featureClients => 'ক্লায়েন্ট';
 
   @override
+  String get featureChat => 'সাপোর্ট চ্যাট';
+
+  @override
   String get featureHr => 'হাজিরা, ছুটি ও অগ্রিম';
 
   @override
@@ -636,4 +639,18 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get clientsPayments => 'সাম্প্রতিক পেমেন্ট';
+
+  @override
+  String get chatsSearch => 'ক্লায়েন্টের নাম, আইডি বা ফোন';
+
+  @override
+  String get chatsEmpty => 'কোনো কথোপকথন নেই।';
+
+  @override
+  String chatsUnread(int count) {
+    return '$count নতুন';
+  }
+
+  @override
+  String get chatsReply => 'উত্তর';
 }

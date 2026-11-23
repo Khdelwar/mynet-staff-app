@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:dio/dio.dart';
 
 import '../config.dart';
+import 'chats.dart';
 import 'clients.dart';
 import 'devices.dart';
 import 'duty.dart';
@@ -438,6 +439,47 @@ class StaffApi {
     final res =
         await _send('GET', '/clients/$id/connection') as Response<dynamic>;
     return ClientConnection.fromJson(res.data);
+  }
+
+  Future<({List<ChatThread> threads, int unread})> chats({String? q}) async {
+    final query = q?.trim() ?? '';
+    final res = await _send(
+      'GET',
+      '/chats',
+      query: {if (query.isNotEmpty) 'q': query},
+    ) as Response<dynamic>;
+    final root = asMap(res.data);
+    return (
+      threads: [
+        for (final row in listFrom(root, const ['conversations']))
+          ChatThread.fromJson(row),
+      ],
+      unread: toNum(root['unread_conversations'])?.toInt() ?? 0,
+    );
+  }
+
+  Future<({String? clientName, List<ChatMessage> messages})> chat(
+    int id,
+  ) async {
+    final res = await _send('GET', '/chats/$id') as Response<dynamic>;
+    final root = asMap(res.data);
+    final conversation = asMap(root['conversation']);
+    return (
+      clientName: pickString(asMap(conversation['client']), const ['name']),
+      messages: [
+        for (final row in listFrom(root, const ['messages']))
+          ChatMessage.fromJson(row),
+      ],
+    );
+  }
+
+  Future<ChatMessage> sendChat(int id, String body) async {
+    final res = await _send(
+      'POST',
+      '/chats/$id/messages',
+      body: {'body': body.trim()},
+    ) as Response<dynamic>;
+    return ChatMessage.fromJson(asMap(res.data)['message']);
   }
 
   /// Loads a note photo when the public URL refuses an unauthenticated GET.

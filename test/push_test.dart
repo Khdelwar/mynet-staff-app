@@ -109,6 +109,16 @@ void main() {
       expect(message.opensTicket, isFalse);
     });
 
+    test('a support chat tap carries the conversation id', () {
+      final message = parsePush({
+        'type': 'support_chat',
+        'conversation_id': '4',
+      });
+      expect(message!.opensChat, isTrue);
+      expect(message.conversationId, 4);
+      expect(message.opensTicket, isFalse);
+    });
+
     test('a payload without a type is ignored', () {
       expect(parsePush({'ticket_id': '1'}), isNull);
     });
@@ -245,6 +255,39 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.byKey(const ValueKey('ticket-detail')), findsOneWidget);
       expect(find.text('Helper'), findsOneWidget);
+    });
+
+    testWidgets('a chat tap opens that conversation', (tester) async {
+      final push = FakePush();
+      await pump(
+        tester,
+        push,
+        FakeErp({
+          'GET /me': (_) => (200, {'user': _user}),
+          'GET /chats/4': (_) => (
+            200,
+            {
+              'conversation': {
+                'id': 4,
+                'client': {'id': 9, 'name': 'Karim'},
+              },
+              'messages': [
+                {'id': 1, 'sender': 'client', 'body': 'No internet'},
+              ],
+            },
+          ),
+        }),
+      );
+      push.emit(
+        const PushMessage(
+          type: 'support_chat',
+          conversationId: 4,
+          tapped: true,
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.byKey(const ValueKey('chat-thread')), findsOneWidget);
+      expect(find.text('No internet'), findsOneWidget);
     });
 
     testWidgets('an unassigned tap opens that ticket', (tester) async {

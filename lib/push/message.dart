@@ -7,6 +7,7 @@ class PushMessage {
     required this.type,
     this.ticketId,
     this.offerId,
+    this.conversationId,
     this.priority,
     this.title,
     this.body,
@@ -16,6 +17,7 @@ class PushMessage {
   final String type;
   final int? ticketId;
   final int? offerId;
+  final int? conversationId;
   final String? priority;
   final String? title;
   final String? body;
@@ -31,6 +33,8 @@ class PushMessage {
           type == 'ticket_unassigned');
 
   bool get opensOffer => type == 'ticket_offer';
+
+  bool get opensChat => type == 'support_chat' && conversationId != null;
 }
 
 /// Reads ERP `data`. Returns null when there is no `type`.
@@ -46,6 +50,7 @@ PushMessage? parsePush(
     type: type,
     ticketId: _asInt(data['ticket_id']),
     offerId: _asInt(data['offer_id']),
+    conversationId: _asInt(data['conversation_id']),
     priority: _text(data['priority']),
     title: _text(title),
     body: _text(body),

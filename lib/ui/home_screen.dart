@@ -6,6 +6,7 @@ import '../l10n/app_localizations.dart';
 import '../nav/targets.dart';
 import '../state/providers.dart';
 import 'assign_screen.dart';
+import 'chat_screen.dart';
 import 'clients_screen.dart';
 import 'common.dart';
 import 'duty_screen.dart';
@@ -67,6 +68,13 @@ final features = <Feature>[
     open: _openClients,
   ),
   Feature(
+    'support_chat.manage',
+    Icons.forum_outlined,
+    (l) => l.featureChat,
+    screen: 'support_chat',
+    open: _openChat,
+  ),
+  Feature(
     'hr.self',
     Icons.event_available_outlined,
     (l) => l.featureHr,
@@ -105,6 +113,8 @@ Widget _openAssign(BuildContext context) => const AssignScreen();
 Widget _openTickets(BuildContext context) => const TicketListScreen();
 
 Widget _openClients(BuildContext context) => const ClientListScreen();
+
+Widget _openChat(BuildContext context) => const ChatListScreen();
 
 List<Feature> featuresFor(StaffUser user) => [
   for (final f in features)
