@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import '../config.dart';
 import 'json.dart';
 import 'models.dart';
+import 'offers.dart';
 import 'tickets.dart';
 
 /// A failed ERP call. [status] is 0 when the server was not reached.
@@ -21,7 +22,7 @@ class ApiException implements Exception {
   /// ERP's machine code (`failed`, `inactive`, `not_allowed`, `throttled`).
   final String? code;
 
-  /// Laravel validation messages, keyed by field (`note`, `away_reason`, …).
+  /// Laravel validation messages, keyed by field (`note`, `away_reason`, `offer`, …).
   final Map<String, List<String>> errors;
 
   String? field(String name) {
@@ -179,6 +180,60 @@ class StaffApi {
   /// Stops pushes to this phone. The user stays signed in.
   Future<void> unregisterPush() async {
     await _send('POST', '/push/unregister');
+  }
+
+  // --- Nearest technician (STF-05) --------------------------------------
+
+  Future<List<JobOffer>> offers() async {
+    final res = await _send('GET', '/offers') as Response<dynamic>;
+    return [
+      for (final row in asList(asMap(res.data)['offers']))
+        JobOffer.fromJson(row),
+    ];
+  }
+
+  Future<OfferTicket> acceptOffer(int id) async {
+    final res = await _send('POST', '/offers/$id/accept') as Response<dynamic>;
+    return OfferTicket.fromJson(asMap(res.data)['ticket']);
+  }
+
+  Future<void> rejectOffer(int id) async {
+    await _send('POST', '/offers/$id/reject');
+  }
+
+  Future<List<TechnicianSuggestion>> suggestions(int ticketId) async {
+    final res = await _send(
+      'GET',
+      '/tickets/$ticketId/suggestions',
+    ) as Response<dynamic>;
+    return [
+      for (final row in asList(asMap(res.data)['suggestions']))
+        TechnicianSuggestion.fromJson(row),
+    ];
+  }
+
+  Future<void> assignTicket(int ticketId, int userId) async {
+    await _send('POST', '/tickets/$ticketId/assign', body: {'user_id': userId});
+  }
+
+  Future<OfferResult> offerTicket(int ticketId) async {
+    final res =
+        await _send('POST', '/tickets/$ticketId/offer') as Response<dynamic>;
+    return OfferResult.fromJson(res.data);
+  }
+
+  /// Active tickets for someone who may assign. Technicians are limited to
+  /// their own by the ERP; the office asks for `scope=all`.
+  Future<List<OfferTicket>> assignableTickets() async {
+    final res = await _send(
+      'GET',
+      '/tickets',
+      query: {'scope': 'all', 'status': 'active', 'per_page': 30},
+    ) as Response<dynamic>;
+    return [
+      for (final row in asList(asMap(res.data)['tickets']))
+        OfferTicket.fromJson(row),
+    ];
   }
 
   // --- Tickets (STF-03) -------------------------------------------------

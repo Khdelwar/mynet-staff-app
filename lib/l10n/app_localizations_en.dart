@@ -178,6 +178,93 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sessionEnded => 'You were signed out. Sign in again.';
 
   @override
+  String get featureOffers => 'Job offers';
+
+  @override
+  String get featureAssign => 'Assign a technician';
+
+  @override
+  String get offersEmpty => 'No offers waiting.';
+
+  @override
+  String get offerAccept => 'Accept';
+
+  @override
+  String get offerReject => 'No';
+
+  @override
+  String offerSeconds(int seconds) {
+    return '${seconds}s left';
+  }
+
+  @override
+  String offerDistance(int meters) {
+    return '$meters m away';
+  }
+
+  @override
+  String offerTicket(int id) {
+    return 'Ticket #$id';
+  }
+
+  @override
+  String offerAccepted(int id) {
+    return 'You took ticket #$id.';
+  }
+
+  @override
+  String get assignNoTickets => 'No open tickets to assign.';
+
+  @override
+  String get assignTicketId => 'Ticket number';
+
+  @override
+  String get assignLookup => 'Show nearest';
+
+  @override
+  String assignForTicket(int id) {
+    return 'Nearest for ticket #$id';
+  }
+
+  @override
+  String get assignNobody => 'Nobody on duty nearby.';
+
+  @override
+  String assignScore(String score) {
+    return 'Score $score';
+  }
+
+  @override
+  String assignEta(int minutes) {
+    return '$minutes min';
+  }
+
+  @override
+  String get assignBusy => 'Busy';
+
+  @override
+  String get assignSameArea => 'Same area';
+
+  @override
+  String get assignButton => 'Assign';
+
+  @override
+  String assignDone(String name) {
+    return 'Assigned to $name.';
+  }
+
+  @override
+  String get assignOffer => 'Offer to the nearest';
+
+  @override
+  String offerStarted(String name) {
+    return 'Offered to $name.';
+  }
+
+  @override
+  String get offerNobody => 'Nobody left to offer. The office has been told.';
+
+  @override
   String get ticketsSearch => 'Name, ID or phone';
 
   @override

@@ -416,6 +416,144 @@ abstract class AppLocalizations {
   /// **'You were signed out. Sign in again.'**
   String get sessionEnded;
 
+  /// No description provided for @featureOffers.
+  ///
+  /// In en, this message translates to:
+  /// **'Job offers'**
+  String get featureOffers;
+
+  /// No description provided for @featureAssign.
+  ///
+  /// In en, this message translates to:
+  /// **'Assign a technician'**
+  String get featureAssign;
+
+  /// No description provided for @offersEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No offers waiting.'**
+  String get offersEmpty;
+
+  /// No description provided for @offerAccept.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept'**
+  String get offerAccept;
+
+  /// No description provided for @offerReject.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get offerReject;
+
+  /// No description provided for @offerSeconds.
+  ///
+  /// In en, this message translates to:
+  /// **'{seconds}s left'**
+  String offerSeconds(int seconds);
+
+  /// No description provided for @offerDistance.
+  ///
+  /// In en, this message translates to:
+  /// **'{meters} m away'**
+  String offerDistance(int meters);
+
+  /// No description provided for @offerTicket.
+  ///
+  /// In en, this message translates to:
+  /// **'Ticket #{id}'**
+  String offerTicket(int id);
+
+  /// No description provided for @offerAccepted.
+  ///
+  /// In en, this message translates to:
+  /// **'You took ticket #{id}.'**
+  String offerAccepted(int id);
+
+  /// No description provided for @assignNoTickets.
+  ///
+  /// In en, this message translates to:
+  /// **'No open tickets to assign.'**
+  String get assignNoTickets;
+
+  /// No description provided for @assignTicketId.
+  ///
+  /// In en, this message translates to:
+  /// **'Ticket number'**
+  String get assignTicketId;
+
+  /// No description provided for @assignLookup.
+  ///
+  /// In en, this message translates to:
+  /// **'Show nearest'**
+  String get assignLookup;
+
+  /// No description provided for @assignForTicket.
+  ///
+  /// In en, this message translates to:
+  /// **'Nearest for ticket #{id}'**
+  String assignForTicket(int id);
+
+  /// No description provided for @assignNobody.
+  ///
+  /// In en, this message translates to:
+  /// **'Nobody on duty nearby.'**
+  String get assignNobody;
+
+  /// No description provided for @assignScore.
+  ///
+  /// In en, this message translates to:
+  /// **'Score {score}'**
+  String assignScore(String score);
+
+  /// No description provided for @assignEta.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes} min'**
+  String assignEta(int minutes);
+
+  /// No description provided for @assignBusy.
+  ///
+  /// In en, this message translates to:
+  /// **'Busy'**
+  String get assignBusy;
+
+  /// No description provided for @assignSameArea.
+  ///
+  /// In en, this message translates to:
+  /// **'Same area'**
+  String get assignSameArea;
+
+  /// No description provided for @assignButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Assign'**
+  String get assignButton;
+
+  /// No description provided for @assignDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Assigned to {name}.'**
+  String assignDone(String name);
+
+  /// No description provided for @assignOffer.
+  ///
+  /// In en, this message translates to:
+  /// **'Offer to the nearest'**
+  String get assignOffer;
+
+  /// No description provided for @offerStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Offered to {name}.'**
+  String offerStarted(String name);
+
+  /// No description provided for @offerNobody.
+  ///
+  /// In en, this message translates to:
+  /// **'Nobody left to offer. The office has been told.'**
+  String get offerNobody;
+
   /// No description provided for @ticketsSearch.
   ///
   /// In en, this message translates to:
