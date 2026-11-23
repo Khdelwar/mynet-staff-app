@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  flutter:
+    name: Analyze, test & build APK
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      # Same pin as mynet-app: Flutter 3.50 rejects Android Gradle Plugin 9.1.0.
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.47.9
+          cache: true
+      - run: flutter pub get
+      - run: flutter analyze
+      - run: flutter test
+      # Debug build proves the Android project compiles. Without the
+      # ERP_BASE_URL secret a placeholder is baked in and the APK cannot sign in.
+      - run: >
+          flutter build apk --debug
+          --dart-define=ERP_BASE_URL=${{ secrets.ERP_BASE_URL || 'https://erp.example.com' }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mynet-staff-debug-apk
+          path: build/app/outputs/flutter-apk/app-debug.apk
+
+  ios:
+    name: iPhone build (no signing)
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.47.9
+          cache: true
+      - run: flutter pub get
+      # Proves the iOS project compiles. Installing on an iPhone needs an
+      # Apple Developer account and signing (see README).
+      - run: >
+          flutter build ios --release --no-codesign
+          --dart-define=ERP_BASE_URL=${{ secrets.ERP_BASE_URL || 'https://erp.example.com' }}
