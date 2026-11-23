@@ -130,5 +130,13 @@
   },
   "ticketPhotoLimit": "একটা নোটে সর্বোচ্চ ৫টা ছবি।",
   "ticketPhotoTooBig": "ছবিটা ৫ MB-এর বেশি।",
-  "ticketCommentKept": "ইন্টারনেট নেই। নোটটা ফোনে থাকবে, পরে পাঠানো হবে।"
+  "ticketCommentKept": "ইন্টারনেট নেই। নোটটা ফোনে থাকবে, পরে পাঠানো হবে।",
+  "pushNotice": "নতুন নোটিফিকেশন",
+  "pushOpen": "খুলুন",
+  "pushTicketAssigned": "এই টিকেট আপনাকে দেওয়া হয়েছে।",
+  "pushTicketHelper": "আপনাকে এই টিকেটের সহকারী করা হয়েছে।",
+  "pushTicketUnassigned": "কেউ এই টিকেট নেয়নি। এটি অফিসের কাছে ফিরে গেছে।",
+  "pushOfferTitle": "টিকেট অফার",
+  "pushOfferBody": "কাছের একটি টিকেট আপনাকে দেওয়া হয়েছে।",
+  "pushFromNotification": "নোটিফিকেশন থেকে খোলা হয়েছে।"
 }

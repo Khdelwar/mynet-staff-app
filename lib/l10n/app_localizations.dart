@@ -793,6 +793,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No internet. The note stays on this phone and will be sent later.'**
   String get ticketCommentKept;
+
+  /// No description provided for @pushNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'New notification'**
+  String get pushNotice;
+
+  /// No description provided for @pushOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get pushOpen;
+
+  /// No description provided for @pushTicketAssigned.
+  ///
+  /// In en, this message translates to:
+  /// **'This ticket was assigned to you.'**
+  String get pushTicketAssigned;
+
+  /// No description provided for @pushTicketHelper.
+  ///
+  /// In en, this message translates to:
+  /// **'You were added as a helper on this ticket.'**
+  String get pushTicketHelper;
+
+  /// No description provided for @pushTicketUnassigned.
+  ///
+  /// In en, this message translates to:
+  /// **'Nobody took this ticket. It is back with the office.'**
+  String get pushTicketUnassigned;
+
+  /// No description provided for @pushOfferTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Ticket offer'**
+  String get pushOfferTitle;
+
+  /// No description provided for @pushOfferBody.
+  ///
+  /// In en, this message translates to:
+  /// **'A nearby ticket was offered to you.'**
+  String get pushOfferBody;
+
+  /// No description provided for @pushFromNotification.
+  ///
+  /// In en, this message translates to:
+  /// **'Opened from a notification.'**
+  String get pushFromNotification;
 }
 
 class _AppLocalizationsDelegate

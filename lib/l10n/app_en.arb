@@ -137,5 +137,13 @@
   },
   "ticketPhotoLimit": "A note can have up to 5 photos.",
   "ticketPhotoTooBig": "That photo is larger than 5 MB.",
-  "ticketCommentKept": "No internet. The note stays on this phone and will be sent later."
+  "ticketCommentKept": "No internet. The note stays on this phone and will be sent later.",
+  "pushNotice": "New notification",
+  "pushOpen": "Open",
+  "pushTicketAssigned": "This ticket was assigned to you.",
+  "pushTicketHelper": "You were added as a helper on this ticket.",
+  "pushTicketUnassigned": "Nobody took this ticket. It is back with the office.",
+  "pushOfferTitle": "Ticket offer",
+  "pushOfferBody": "A nearby ticket was offered to you.",
+  "pushFromNotification": "Opened from a notification."
 }

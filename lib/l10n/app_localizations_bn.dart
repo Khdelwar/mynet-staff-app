@@ -375,4 +375,29 @@ class AppLocalizationsBn extends AppLocalizations {
   @override
   String get ticketCommentKept =>
       'ইন্টারনেট নেই। নোটটা ফোনে থাকবে, পরে পাঠানো হবে।';
+
+  @override
+  String get pushNotice => 'নতুন নোটিফিকেশন';
+
+  @override
+  String get pushOpen => 'খুলুন';
+
+  @override
+  String get pushTicketAssigned => 'এই টিকেট আপনাকে দেওয়া হয়েছে।';
+
+  @override
+  String get pushTicketHelper => 'আপনাকে এই টিকেটের সহকারী করা হয়েছে।';
+
+  @override
+  String get pushTicketUnassigned =>
+      'কেউ এই টিকেট নেয়নি। এটি অফিসের কাছে ফিরে গেছে।';
+
+  @override
+  String get pushOfferTitle => 'টিকেট অফার';
+
+  @override
+  String get pushOfferBody => 'কাছের একটি টিকেট আপনাকে দেওয়া হয়েছে।';
+
+  @override
+  String get pushFromNotification => 'নোটিফিকেশন থেকে খোলা হয়েছে।';
 }
