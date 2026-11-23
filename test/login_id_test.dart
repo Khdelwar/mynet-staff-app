@@ -65,10 +65,7 @@ void main() {
     );
     expect(erp.calls, isEmpty);
 
-    await tester.enterText(
-      find.byKey(const ValueKey('email')),
-      '01711-000001',
-    );
+    await tester.enterText(find.byKey(const ValueKey('email')), '01711-000001');
     await tester.tap(find.byKey(const ValueKey('submit')));
     await tester.pumpAndSettle();
     expect(erp.calls, contains('POST /auth/login'));

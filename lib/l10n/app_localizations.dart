@@ -320,6 +320,18 @@ abstract class AppLocalizations {
   /// **'Bill collection'**
   String get featureCollection;
 
+  /// No description provided for @featureDueList.
+  ///
+  /// In en, this message translates to:
+  /// **'Due list'**
+  String get featureDueList;
+
+  /// No description provided for @featureApprovals.
+  ///
+  /// In en, this message translates to:
+  /// **'Approvals'**
+  String get featureApprovals;
+
   /// No description provided for @featureTickets.
   ///
   /// In en, this message translates to:
@@ -331,6 +343,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Clients'**
   String get featureClients;
+
+  /// No description provided for @featureChat.
+  ///
+  /// In en, this message translates to:
+  /// **'Support chat'**
+  String get featureChat;
 
   /// No description provided for @featureHr.
   ///
@@ -1117,6 +1135,318 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sign that phone out? It will stop receiving staff notifications.'**
   String get devicesSignOutOther;
+
+  /// No description provided for @clientsSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Name, ID, phone or PPPoE'**
+  String get clientsSearch;
+
+  /// No description provided for @clientsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No clients.'**
+  String get clientsEmpty;
+
+  /// No description provided for @clientsMore.
+  ///
+  /// In en, this message translates to:
+  /// **'More'**
+  String get clientsMore;
+
+  /// No description provided for @clientsCode.
+  ///
+  /// In en, this message translates to:
+  /// **'ID'**
+  String get clientsCode;
+
+  /// No description provided for @clientsAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get clientsAddress;
+
+  /// No description provided for @clientsStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get clientsStatus;
+
+  /// No description provided for @clientsPackage.
+  ///
+  /// In en, this message translates to:
+  /// **'Package'**
+  String get clientsPackage;
+
+  /// No description provided for @clientsPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Price'**
+  String get clientsPrice;
+
+  /// No description provided for @clientsExpiry.
+  ///
+  /// In en, this message translates to:
+  /// **'Expiry'**
+  String get clientsExpiry;
+
+  /// No description provided for @clientsDue.
+  ///
+  /// In en, this message translates to:
+  /// **'Due'**
+  String get clientsDue;
+
+  /// No description provided for @clientsAdvance.
+  ///
+  /// In en, this message translates to:
+  /// **'Advance'**
+  String get clientsAdvance;
+
+  /// No description provided for @clientsBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'Balance'**
+  String get clientsBalance;
+
+  /// No description provided for @clientsPppoe.
+  ///
+  /// In en, this message translates to:
+  /// **'PPPoE'**
+  String get clientsPppoe;
+
+  /// No description provided for @clientsNid.
+  ///
+  /// In en, this message translates to:
+  /// **'NID'**
+  String get clientsNid;
+
+  /// No description provided for @clientsPop.
+  ///
+  /// In en, this message translates to:
+  /// **'POP'**
+  String get clientsPop;
+
+  /// No description provided for @clientsRouter.
+  ///
+  /// In en, this message translates to:
+  /// **'Router'**
+  String get clientsRouter;
+
+  /// No description provided for @clientsOnu.
+  ///
+  /// In en, this message translates to:
+  /// **'ONU'**
+  String get clientsOnu;
+
+  /// No description provided for @clientsRx.
+  ///
+  /// In en, this message translates to:
+  /// **'Last RX dBm'**
+  String get clientsRx;
+
+  /// No description provided for @clientsConnection.
+  ///
+  /// In en, this message translates to:
+  /// **'Line status'**
+  String get clientsConnection;
+
+  /// No description provided for @clientsOnline.
+  ///
+  /// In en, this message translates to:
+  /// **'The line is online.'**
+  String get clientsOnline;
+
+  /// No description provided for @clientsOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'The line is offline.'**
+  String get clientsOffline;
+
+  /// No description provided for @clientsDisconnects.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} disconnects in 24 hours'**
+  String clientsDisconnects(int count);
+
+  /// No description provided for @clientsOpenTickets.
+  ///
+  /// In en, this message translates to:
+  /// **'Open tickets'**
+  String get clientsOpenTickets;
+
+  /// No description provided for @clientsPayments.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent payments'**
+  String get clientsPayments;
+
+  /// No description provided for @chatsSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Client name, ID or phone'**
+  String get chatsSearch;
+
+  /// No description provided for @chatsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No conversations.'**
+  String get chatsEmpty;
+
+  /// No description provided for @chatsUnread.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} new'**
+  String chatsUnread(int count);
+
+  /// No description provided for @chatsReply.
+  ///
+  /// In en, this message translates to:
+  /// **'Reply'**
+  String get chatsReply;
+
+  /// No description provided for @collectionToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Collected today'**
+  String get collectionToday;
+
+  /// No description provided for @collectionInHand.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash in hand'**
+  String get collectionInHand;
+
+  /// No description provided for @collectionNotHanded.
+  ///
+  /// In en, this message translates to:
+  /// **'Not handed over'**
+  String get collectionNotHanded;
+
+  /// No description provided for @collectionExpenseLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'Left for expenses'**
+  String get collectionExpenseLeft;
+
+  /// No description provided for @collectionHold.
+  ///
+  /// In en, this message translates to:
+  /// **'Hand over cash before taking more.'**
+  String get collectionHold;
+
+  /// No description provided for @collectionCash.
+  ///
+  /// In en, this message translates to:
+  /// **'Take cash'**
+  String get collectionCash;
+
+  /// No description provided for @collectionExpense.
+  ///
+  /// In en, this message translates to:
+  /// **'Expense'**
+  String get collectionExpense;
+
+  /// No description provided for @collectionHandover.
+  ///
+  /// In en, this message translates to:
+  /// **'Hand over'**
+  String get collectionHandover;
+
+  /// No description provided for @collectionCashOwner.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash owner'**
+  String get collectionCashOwner;
+
+  /// No description provided for @collectionDigitalOwner.
+  ///
+  /// In en, this message translates to:
+  /// **'Digital owner'**
+  String get collectionDigitalOwner;
+
+  /// No description provided for @collectionGateway.
+  ///
+  /// In en, this message translates to:
+  /// **'bKash / Nagad'**
+  String get collectionGateway;
+
+  /// No description provided for @collectionSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Name, ID, phone or PPPoE'**
+  String get collectionSearch;
+
+  /// No description provided for @collectionMore.
+  ///
+  /// In en, this message translates to:
+  /// **'More'**
+  String get collectionMore;
+
+  /// No description provided for @collectionAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount'**
+  String get collectionAmount;
+
+  /// No description provided for @collectionNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Note'**
+  String get collectionNote;
+
+  /// No description provided for @collectionTxn.
+  ///
+  /// In en, this message translates to:
+  /// **'TrxID'**
+  String get collectionTxn;
+
+  /// No description provided for @collectionSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get collectionSave;
+
+  /// No description provided for @collectionReceipt.
+  ///
+  /// In en, this message translates to:
+  /// **'Receipt'**
+  String get collectionReceipt;
+
+  /// No description provided for @collectionApproval.
+  ///
+  /// In en, this message translates to:
+  /// **'Approval'**
+  String get collectionApproval;
+
+  /// No description provided for @collectionPaidSms.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid SMS'**
+  String get collectionPaidSms;
+
+  /// No description provided for @collectionSmsLater.
+  ///
+  /// In en, this message translates to:
+  /// **'The client is told after the office approves.'**
+  String get collectionSmsLater;
+
+  /// No description provided for @dueEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Nobody is on the due list.'**
+  String get dueEmpty;
+
+  /// No description provided for @approvalsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing is waiting for you.'**
+  String get approvalsEmpty;
+
+  /// No description provided for @approvalsApprove.
+  ///
+  /// In en, this message translates to:
+  /// **'Approve'**
+  String get approvalsApprove;
 }
 
 class _AppLocalizationsDelegate

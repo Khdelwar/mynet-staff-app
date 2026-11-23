@@ -3,6 +3,9 @@ import 'dart:typed_data';
 import 'package:dio/dio.dart';
 
 import '../config.dart';
+import 'chats.dart';
+import 'clients.dart';
+import 'collection.dart';
 import 'devices.dart';
 import 'duty.dart';
 import 'json.dart';
@@ -412,6 +415,207 @@ class StaffApi {
       throw ApiException(200, '', path: '/clients/$id/location');
     }
     return point;
+  }
+
+  Future<ClientPage> clients({String? q, String? status, int page = 1}) async {
+    final query = q?.trim() ?? '';
+    final res = await _send(
+      'GET',
+      '/clients',
+      query: {
+        if (query.length >= 2) 'q': query,
+        if (status != null && status.isNotEmpty) 'status': status,
+        'page': page,
+      },
+    ) as Response<dynamic>;
+    return ClientPage.fromJson(res.data);
+  }
+
+  Future<ClientDetail> client(int id) async {
+    final res = await _send('GET', '/clients/$id') as Response<dynamic>;
+    return ClientDetail.fromJson(res.data);
+  }
+
+  Future<ClientConnection> clientConnection(int id) async {
+    final res =
+        await _send('GET', '/clients/$id/connection') as Response<dynamic>;
+    return ClientConnection.fromJson(res.data);
+  }
+
+  Future<({List<ChatThread> threads, int unread})> chats({String? q}) async {
+    final query = q?.trim() ?? '';
+    final res = await _send(
+      'GET',
+      '/chats',
+      query: {if (query.isNotEmpty) 'q': query},
+    ) as Response<dynamic>;
+    final root = asMap(res.data);
+    return (
+      threads: [
+        for (final row in listFrom(root, const ['conversations']))
+          ChatThread.fromJson(row),
+      ],
+      unread: toNum(root['unread_conversations'])?.toInt() ?? 0,
+    );
+  }
+
+  Future<({String? clientName, List<ChatMessage> messages})> chat(
+    int id,
+  ) async {
+    final res = await _send('GET', '/chats/$id') as Response<dynamic>;
+    final root = asMap(res.data);
+    final conversation = asMap(root['conversation']);
+    return (
+      clientName: pickString(asMap(conversation['client']), const ['name']),
+      messages: [
+        for (final row in listFrom(root, const ['messages']))
+          ChatMessage.fromJson(row),
+      ],
+    );
+  }
+
+  Future<ChatMessage> sendChat(int id, String body) async {
+    final res = await _send(
+      'POST',
+      '/chats/$id/messages',
+      body: {'body': body.trim()},
+    ) as Response<dynamic>;
+    return ChatMessage.fromJson(asMap(res.data)['message']);
+  }
+
+  Future<CollectionSummary> collectionSummary() async {
+    final res = await _send('GET', '/collection/summary') as Response<dynamic>;
+    return CollectionSummary.fromJson(res.data);
+  }
+
+  Future<List<CollectionClient>> collectionClients(String q) async {
+    final res = await _send(
+      'GET',
+      '/collection/clients',
+      query: {'q': q.trim()},
+    ) as Response<dynamic>;
+    return [
+      for (final row in listFrom(res.data, const ['clients']))
+        CollectionClient.fromJson(row),
+    ];
+  }
+
+  Future<PaymentReceipt> collectCash({
+    required int clientId,
+    required num amount,
+    required String requestKey,
+    String? note,
+  }) async {
+    final res = await _send(
+      'POST',
+      '/collection/cash',
+      body: {
+        'client_id': clientId,
+        'amount': amount,
+        'request_key': requestKey,
+        if (note != null && note.trim().isNotEmpty) 'note': note.trim(),
+      },
+    ) as Response<dynamic>;
+    return PaymentReceipt.fromJson(res.data);
+  }
+
+  Future<PaymentReceipt> collectGateway({
+    required int clientId,
+    required num amount,
+    required String gateway,
+    required String txnId,
+    required String requestKey,
+    String? note,
+  }) async {
+    final res = await _send(
+      'POST',
+      '/collection/gateway',
+      body: {
+        'client_id': clientId,
+        'amount': amount,
+        'gateway': gateway,
+        'txn_id': txnId.trim(),
+        'request_key': requestKey,
+        if (note != null && note.trim().isNotEmpty) 'note': note.trim(),
+      },
+    ) as Response<dynamic>;
+    return PaymentReceipt.fromJson(res.data);
+  }
+
+  Future<void> addExpense({
+    required num amount,
+    required String note,
+    required String requestKey,
+  }) {
+    return _send(
+      'POST',
+      '/collection/expenses',
+      body: {'amount': amount, 'note': note.trim(), 'request_key': requestKey},
+    );
+  }
+
+  Future<void> handover({
+    required String owner,
+    required String requestKey,
+    num? amount,
+    String? note,
+  }) {
+    return _send(
+      'POST',
+      '/collection/handover',
+      body: {
+        'owner': owner,
+        'request_key': requestKey,
+        'amount': ?amount,
+        if (note != null && note.trim().isNotEmpty) 'note': note.trim(),
+      },
+    );
+  }
+
+  Future<DuePage> dueList({String? q, int page = 1}) async {
+    final query = q?.trim() ?? '';
+    final res = await _send(
+      'GET',
+      '/due-list',
+      query: {if (query.length >= 2) 'q': query, 'page': page},
+    ) as Response<dynamic>;
+    return DuePage.fromJson(res.data);
+  }
+
+  Future<({List<CashHandoverItem> handovers, List<ExpenseItem> expenses})>
+  collectionApprovals() async {
+    final res =
+        await _send('GET', '/collection/approvals') as Response<dynamic>;
+    final root = asMap(res.data);
+    return (
+      handovers: [
+        for (final row in listFrom(root, const ['handovers']))
+          CashHandoverItem.fromJson(row),
+      ],
+      expenses: [
+        for (final row in listFrom(root, const ['expenses']))
+          ExpenseItem.fromJson(row),
+      ],
+    );
+  }
+
+  Future<void> approveHandover(int id, {required num amount, String? note}) {
+    return _send(
+      'POST',
+      '/collection/handovers/$id/approve',
+      body: {
+        'amount': amount,
+        if (note != null && note.trim().isNotEmpty) 'note': note.trim(),
+      },
+    );
+  }
+
+  Future<void> rejectHandover(int id, {required String note}) {
+    return _send(
+      'POST',
+      '/collection/handovers/$id/reject',
+      body: {'note': note.trim()},
+    );
   }
 
   /// Loads a note photo when the public URL refuses an unauthenticated GET.

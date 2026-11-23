@@ -128,10 +128,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get featureCollection => 'Bill collection';
 
   @override
+  String get featureDueList => 'Due list';
+
+  @override
+  String get featureApprovals => 'Approvals';
+
+  @override
   String get featureTickets => 'Tickets';
 
   @override
   String get featureClients => 'Clients';
+
+  @override
+  String get featureChat => 'Support chat';
 
   @override
   String get featureHr => 'Attendance, leave & advance';
@@ -563,4 +572,165 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get devicesSignOutOther =>
       'Sign that phone out? It will stop receiving staff notifications.';
+
+  @override
+  String get clientsSearch => 'Name, ID, phone or PPPoE';
+
+  @override
+  String get clientsEmpty => 'No clients.';
+
+  @override
+  String get clientsMore => 'More';
+
+  @override
+  String get clientsCode => 'ID';
+
+  @override
+  String get clientsAddress => 'Address';
+
+  @override
+  String get clientsStatus => 'Status';
+
+  @override
+  String get clientsPackage => 'Package';
+
+  @override
+  String get clientsPrice => 'Price';
+
+  @override
+  String get clientsExpiry => 'Expiry';
+
+  @override
+  String get clientsDue => 'Due';
+
+  @override
+  String get clientsAdvance => 'Advance';
+
+  @override
+  String get clientsBalance => 'Balance';
+
+  @override
+  String get clientsPppoe => 'PPPoE';
+
+  @override
+  String get clientsNid => 'NID';
+
+  @override
+  String get clientsPop => 'POP';
+
+  @override
+  String get clientsRouter => 'Router';
+
+  @override
+  String get clientsOnu => 'ONU';
+
+  @override
+  String get clientsRx => 'Last RX dBm';
+
+  @override
+  String get clientsConnection => 'Line status';
+
+  @override
+  String get clientsOnline => 'The line is online.';
+
+  @override
+  String get clientsOffline => 'The line is offline.';
+
+  @override
+  String clientsDisconnects(int count) {
+    return '$count disconnects in 24 hours';
+  }
+
+  @override
+  String get clientsOpenTickets => 'Open tickets';
+
+  @override
+  String get clientsPayments => 'Recent payments';
+
+  @override
+  String get chatsSearch => 'Client name, ID or phone';
+
+  @override
+  String get chatsEmpty => 'No conversations.';
+
+  @override
+  String chatsUnread(int count) {
+    return '$count new';
+  }
+
+  @override
+  String get chatsReply => 'Reply';
+
+  @override
+  String get collectionToday => 'Collected today';
+
+  @override
+  String get collectionInHand => 'Cash in hand';
+
+  @override
+  String get collectionNotHanded => 'Not handed over';
+
+  @override
+  String get collectionExpenseLeft => 'Left for expenses';
+
+  @override
+  String get collectionHold => 'Hand over cash before taking more.';
+
+  @override
+  String get collectionCash => 'Take cash';
+
+  @override
+  String get collectionExpense => 'Expense';
+
+  @override
+  String get collectionHandover => 'Hand over';
+
+  @override
+  String get collectionCashOwner => 'Cash owner';
+
+  @override
+  String get collectionDigitalOwner => 'Digital owner';
+
+  @override
+  String get collectionGateway => 'bKash / Nagad';
+
+  @override
+  String get collectionSearch => 'Name, ID, phone or PPPoE';
+
+  @override
+  String get collectionMore => 'More';
+
+  @override
+  String get collectionAmount => 'Amount';
+
+  @override
+  String get collectionNote => 'Note';
+
+  @override
+  String get collectionTxn => 'TrxID';
+
+  @override
+  String get collectionSave => 'Save';
+
+  @override
+  String get collectionReceipt => 'Receipt';
+
+  @override
+  String get collectionApproval => 'Approval';
+
+  @override
+  String get collectionPaidSms => 'Paid SMS';
+
+  @override
+  String get collectionSmsLater =>
+      'The client is told after the office approves.';
+
+  @override
+  String get dueEmpty => 'Nobody is on the due list.';
+
+  @override
+  String get approvalsEmpty => 'Nothing is waiting for you.';
+
+  @override
+  String get approvalsApprove => 'Approve';
 }
