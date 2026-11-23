@@ -78,5 +78,26 @@
   "dutyOutsideHours": "Duty can only start during duty hours.",
   "dutyStopped": "Duty ended. Location has stopped.",
   "dutyNotificationTitle": "MyNet: location on",
-  "dutyNotificationBody": "Location is shared only while you are on duty."
+  "dutyNotificationBody": "Location is shared only while you are on duty.",
+  "pushNotice": "New notification",
+  "pushOpen": "Open",
+  "pushTicketTitle": "Ticket #{id}",
+  "@pushTicketTitle": {
+    "placeholders": {
+      "id": {
+        "type": "int"
+      }
+    }
+  },
+  "pushTicketAssigned": "This ticket was assigned to you.",
+  "pushTicketHelper": "You were added as a helper on this ticket.",
+  "pushTicketUnassigned": "Nobody took this ticket. It is back with the office.",
+  "pushOfferTitle": "Ticket offer",
+  "pushOfferBody": "A nearby ticket was offered to you.",
+  "pushFromNotification": "Opened from a notification.",
+  "pushPriority": "Priority",
+  "priorityLow": "Low",
+  "priorityMedium": "Medium",
+  "priorityHigh": "High",
+  "priorityUrgent": "Urgent"
 }

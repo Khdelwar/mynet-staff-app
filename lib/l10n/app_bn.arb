@@ -71,5 +71,26 @@
   "dutyOutsideHours": "ডিউটি শুধু ডিউটির সময়ের মধ্যে শুরু করা যায়।",
   "dutyStopped": "ডিউটি শেষ। লোকেশন বন্ধ হয়েছে।",
   "dutyNotificationTitle": "MyNet: location on",
-  "dutyNotificationBody": "লোকেশন শুধু ডিউটিতে থাকাকালীন যায়।"
+  "dutyNotificationBody": "লোকেশন শুধু ডিউটিতে থাকাকালীন যায়।",
+  "pushNotice": "নতুন নোটিফিকেশন",
+  "pushOpen": "খুলুন",
+  "pushTicketTitle": "টিকেট #{id}",
+  "@pushTicketTitle": {
+    "placeholders": {
+      "id": {
+        "type": "int"
+      }
+    }
+  },
+  "pushTicketAssigned": "এই টিকেট আপনাকে দেওয়া হয়েছে।",
+  "pushTicketHelper": "আপনাকে এই টিকেটের সহকারী করা হয়েছে।",
+  "pushTicketUnassigned": "কেউ এই টিকেট নেয়নি। এটি অফিসের কাছে ফিরে গেছে।",
+  "pushOfferTitle": "টিকেট অফার",
+  "pushOfferBody": "কাছের একটি টিকেট আপনাকে দেওয়া হয়েছে।",
+  "pushFromNotification": "নোটিফিকেশন থেকে খোলা হয়েছে।",
+  "pushPriority": "অগ্রাধিকার",
+  "priorityLow": "কম",
+  "priorityMedium": "মাঝারি",
+  "priorityHigh": "বেশি",
+  "priorityUrgent": "জরুরি"
 }

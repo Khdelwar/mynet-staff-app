@@ -169,6 +169,18 @@ class StaffApi {
 
   Future<void> logout() async => _send('POST', '/auth/logout');
 
+  // --- Push (STF-02) ----------------------------------------------------
+
+  /// Stores this phone's FCM token on the signed-in session.
+  Future<void> registerPush(String token) async {
+    await _send('POST', '/push/register', body: {'token': token});
+  }
+
+  /// Stops pushes to this phone. The user stays signed in.
+  Future<void> unregisterPush() async {
+    await _send('POST', '/push/unregister');
+  }
+
   // --- Duty (STF-04) ----------------------------------------------------
 
   Future<DutySnapshot> duty() async {

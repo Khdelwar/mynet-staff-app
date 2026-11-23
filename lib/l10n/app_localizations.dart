@@ -499,6 +499,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Location is shared only while you are on duty.'**
   String get dutyNotificationBody;
+
+  /// No description provided for @pushNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'New notification'**
+  String get pushNotice;
+
+  /// No description provided for @pushOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get pushOpen;
+
+  /// No description provided for @pushTicketTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Ticket #{id}'**
+  String pushTicketTitle(int id);
+
+  /// No description provided for @pushTicketAssigned.
+  ///
+  /// In en, this message translates to:
+  /// **'This ticket was assigned to you.'**
+  String get pushTicketAssigned;
+
+  /// No description provided for @pushTicketHelper.
+  ///
+  /// In en, this message translates to:
+  /// **'You were added as a helper on this ticket.'**
+  String get pushTicketHelper;
+
+  /// No description provided for @pushTicketUnassigned.
+  ///
+  /// In en, this message translates to:
+  /// **'Nobody took this ticket. It is back with the office.'**
+  String get pushTicketUnassigned;
+
+  /// No description provided for @pushOfferTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Ticket offer'**
+  String get pushOfferTitle;
+
+  /// No description provided for @pushOfferBody.
+  ///
+  /// In en, this message translates to:
+  /// **'A nearby ticket was offered to you.'**
+  String get pushOfferBody;
+
+  /// No description provided for @pushFromNotification.
+  ///
+  /// In en, this message translates to:
+  /// **'Opened from a notification.'**
+  String get pushFromNotification;
+
+  /// No description provided for @pushPriority.
+  ///
+  /// In en, this message translates to:
+  /// **'Priority'**
+  String get pushPriority;
+
+  /// No description provided for @priorityLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Low'**
+  String get priorityLow;
+
+  /// No description provided for @priorityMedium.
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get priorityMedium;
+
+  /// No description provided for @priorityHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'High'**
+  String get priorityHigh;
+
+  /// No description provided for @priorityUrgent.
+  ///
+  /// In en, this message translates to:
+  /// **'Urgent'**
+  String get priorityUrgent;
 }
 
 class _AppLocalizationsDelegate
