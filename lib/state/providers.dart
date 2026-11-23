@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../api/models.dart';
 import '../api/staff_api.dart';
 import '../config.dart';
+import '../device.dart';
 import '../push/push.dart';
 import 'stores.dart';
 
@@ -118,12 +119,14 @@ class AuthController extends Notifier<AuthState> {
   }
 
   /// Signs in, or returns [TwoFactorNeeded] for the code step.
-  Future<LoginOutcome> login(
-    String identifier,
-    String password, {
-    String? device,
-  }) async {
-    final outcome = await _api.login(identifier, password, device: device);
+  Future<LoginOutcome> login(String email, String password) async {
+    final outcome = await _api.login(
+      email,
+      password,
+      deviceId: await ensureDeviceId(_store),
+      deviceName: deviceName(),
+      appVersion: staffAppVersion,
+    );
     if (outcome is SignedIn) await _start(outcome);
     return outcome;
   }

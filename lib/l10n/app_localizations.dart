@@ -173,8 +173,14 @@ abstract class AppLocalizations {
   /// No description provided for @loginIdentifier.
   ///
   /// In en, this message translates to:
-  /// **'Email or mobile number'**
+  /// **'Email'**
   String get loginIdentifier;
+
+  /// No description provided for @loginEmailInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the email address from the ERP.'**
+  String get loginEmailInvalid;
 
   /// No description provided for @loginPassword.
   ///
@@ -191,7 +197,7 @@ abstract class AppLocalizations {
   /// No description provided for @loginWrong.
   ///
   /// In en, this message translates to:
-  /// **'Email / mobile or password is incorrect.'**
+  /// **'Email or password is incorrect.'**
   String get loginWrong;
 
   /// No description provided for @loginHelp.
