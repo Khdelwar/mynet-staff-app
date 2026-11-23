@@ -128,6 +128,12 @@ class AppLocalizationsBn extends AppLocalizations {
   String get featureCollection => 'বিল কালেকশন';
 
   @override
+  String get featureDueList => 'বকেয়া তালিকা';
+
+  @override
+  String get featureApprovals => 'অনুমোদন';
+
+  @override
   String get featureTickets => 'টিকেট';
 
   @override
@@ -653,4 +659,76 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get chatsReply => 'উত্তর';
+
+  @override
+  String get collectionToday => 'আজকের কালেকশন';
+
+  @override
+  String get collectionInHand => 'হাতে নগদ';
+
+  @override
+  String get collectionNotHanded => 'এখনো জমা হয়নি';
+
+  @override
+  String get collectionExpenseLeft => 'খরচের জন্য বাকি';
+
+  @override
+  String get collectionHold => 'আর টাকা নেওয়ার আগে নগদ জমা দিন।';
+
+  @override
+  String get collectionCash => 'নগদ নিন';
+
+  @override
+  String get collectionExpense => 'খরচ';
+
+  @override
+  String get collectionHandover => 'জমা দিন';
+
+  @override
+  String get collectionCashOwner => 'নগদের মালিক';
+
+  @override
+  String get collectionDigitalOwner => 'ডিজিটালের মালিক';
+
+  @override
+  String get collectionGateway => 'বিকাশ / নগদ';
+
+  @override
+  String get collectionSearch => 'নাম, আইডি, ফোন বা PPPoE';
+
+  @override
+  String get collectionMore => 'আরও';
+
+  @override
+  String get collectionAmount => 'টাকা';
+
+  @override
+  String get collectionNote => 'নোট';
+
+  @override
+  String get collectionTxn => 'TrxID';
+
+  @override
+  String get collectionSave => 'সেভ';
+
+  @override
+  String get collectionReceipt => 'রসিদ';
+
+  @override
+  String get collectionApproval => 'অনুমোদন';
+
+  @override
+  String get collectionPaidSms => 'পেইড SMS';
+
+  @override
+  String get collectionSmsLater => 'অফিস অনুমোদনের পর ক্লায়েন্টকে জানানো হবে।';
+
+  @override
+  String get dueEmpty => 'বকেয়া তালিকায় কেউ নেই।';
+
+  @override
+  String get approvalsEmpty => 'আপনার জন্য কিছু অপেক্ষা করছে না।';
+
+  @override
+  String get approvalsApprove => 'অনুমোদন';
 }

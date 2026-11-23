@@ -320,6 +320,18 @@ abstract class AppLocalizations {
   /// **'Bill collection'**
   String get featureCollection;
 
+  /// No description provided for @featureDueList.
+  ///
+  /// In en, this message translates to:
+  /// **'Due list'**
+  String get featureDueList;
+
+  /// No description provided for @featureApprovals.
+  ///
+  /// In en, this message translates to:
+  /// **'Approvals'**
+  String get featureApprovals;
+
   /// No description provided for @featureTickets.
   ///
   /// In en, this message translates to:
@@ -1291,6 +1303,150 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Reply'**
   String get chatsReply;
+
+  /// No description provided for @collectionToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Collected today'**
+  String get collectionToday;
+
+  /// No description provided for @collectionInHand.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash in hand'**
+  String get collectionInHand;
+
+  /// No description provided for @collectionNotHanded.
+  ///
+  /// In en, this message translates to:
+  /// **'Not handed over'**
+  String get collectionNotHanded;
+
+  /// No description provided for @collectionExpenseLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'Left for expenses'**
+  String get collectionExpenseLeft;
+
+  /// No description provided for @collectionHold.
+  ///
+  /// In en, this message translates to:
+  /// **'Hand over cash before taking more.'**
+  String get collectionHold;
+
+  /// No description provided for @collectionCash.
+  ///
+  /// In en, this message translates to:
+  /// **'Take cash'**
+  String get collectionCash;
+
+  /// No description provided for @collectionExpense.
+  ///
+  /// In en, this message translates to:
+  /// **'Expense'**
+  String get collectionExpense;
+
+  /// No description provided for @collectionHandover.
+  ///
+  /// In en, this message translates to:
+  /// **'Hand over'**
+  String get collectionHandover;
+
+  /// No description provided for @collectionCashOwner.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash owner'**
+  String get collectionCashOwner;
+
+  /// No description provided for @collectionDigitalOwner.
+  ///
+  /// In en, this message translates to:
+  /// **'Digital owner'**
+  String get collectionDigitalOwner;
+
+  /// No description provided for @collectionGateway.
+  ///
+  /// In en, this message translates to:
+  /// **'bKash / Nagad'**
+  String get collectionGateway;
+
+  /// No description provided for @collectionSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Name, ID, phone or PPPoE'**
+  String get collectionSearch;
+
+  /// No description provided for @collectionMore.
+  ///
+  /// In en, this message translates to:
+  /// **'More'**
+  String get collectionMore;
+
+  /// No description provided for @collectionAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount'**
+  String get collectionAmount;
+
+  /// No description provided for @collectionNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Note'**
+  String get collectionNote;
+
+  /// No description provided for @collectionTxn.
+  ///
+  /// In en, this message translates to:
+  /// **'TrxID'**
+  String get collectionTxn;
+
+  /// No description provided for @collectionSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get collectionSave;
+
+  /// No description provided for @collectionReceipt.
+  ///
+  /// In en, this message translates to:
+  /// **'Receipt'**
+  String get collectionReceipt;
+
+  /// No description provided for @collectionApproval.
+  ///
+  /// In en, this message translates to:
+  /// **'Approval'**
+  String get collectionApproval;
+
+  /// No description provided for @collectionPaidSms.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid SMS'**
+  String get collectionPaidSms;
+
+  /// No description provided for @collectionSmsLater.
+  ///
+  /// In en, this message translates to:
+  /// **'The client is told after the office approves.'**
+  String get collectionSmsLater;
+
+  /// No description provided for @dueEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Nobody is on the due list.'**
+  String get dueEmpty;
+
+  /// No description provided for @approvalsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing is waiting for you.'**
+  String get approvalsEmpty;
+
+  /// No description provided for @approvalsApprove.
+  ///
+  /// In en, this message translates to:
+  /// **'Approve'**
+  String get approvalsApprove;
 }
 
 class _AppLocalizationsDelegate

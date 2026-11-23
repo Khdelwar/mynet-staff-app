@@ -128,6 +128,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get featureCollection => 'Bill collection';
 
   @override
+  String get featureDueList => 'Due list';
+
+  @override
+  String get featureApprovals => 'Approvals';
+
+  @override
   String get featureTickets => 'Tickets';
 
   @override
@@ -654,4 +660,77 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chatsReply => 'Reply';
+
+  @override
+  String get collectionToday => 'Collected today';
+
+  @override
+  String get collectionInHand => 'Cash in hand';
+
+  @override
+  String get collectionNotHanded => 'Not handed over';
+
+  @override
+  String get collectionExpenseLeft => 'Left for expenses';
+
+  @override
+  String get collectionHold => 'Hand over cash before taking more.';
+
+  @override
+  String get collectionCash => 'Take cash';
+
+  @override
+  String get collectionExpense => 'Expense';
+
+  @override
+  String get collectionHandover => 'Hand over';
+
+  @override
+  String get collectionCashOwner => 'Cash owner';
+
+  @override
+  String get collectionDigitalOwner => 'Digital owner';
+
+  @override
+  String get collectionGateway => 'bKash / Nagad';
+
+  @override
+  String get collectionSearch => 'Name, ID, phone or PPPoE';
+
+  @override
+  String get collectionMore => 'More';
+
+  @override
+  String get collectionAmount => 'Amount';
+
+  @override
+  String get collectionNote => 'Note';
+
+  @override
+  String get collectionTxn => 'TrxID';
+
+  @override
+  String get collectionSave => 'Save';
+
+  @override
+  String get collectionReceipt => 'Receipt';
+
+  @override
+  String get collectionApproval => 'Approval';
+
+  @override
+  String get collectionPaidSms => 'Paid SMS';
+
+  @override
+  String get collectionSmsLater =>
+      'The client is told after the office approves.';
+
+  @override
+  String get dueEmpty => 'Nobody is on the due list.';
+
+  @override
+  String get approvalsEmpty => 'Nothing is waiting for you.';
+
+  @override
+  String get approvalsApprove => 'Approve';
 }
