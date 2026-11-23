@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 
 import '../config.dart';
+import 'duty.dart';
 import 'json.dart';
 import 'models.dart';
 import 'offers.dart';
@@ -22,7 +23,7 @@ class ApiException implements Exception {
   /// ERP's machine code (`failed`, `inactive`, `not_allowed`, `throttled`).
   final String? code;
 
-  /// Laravel validation messages, keyed by field (`note`, `away_reason`, `offer`, …).
+  /// Laravel validation messages, keyed by field (`note`, `away_reason`, `duty`, `offer`, …).
   final Map<String, List<String>> errors;
 
   String? field(String name) {
@@ -180,6 +181,56 @@ class StaffApi {
   /// Stops pushes to this phone. The user stays signed in.
   Future<void> unregisterPush() async {
     await _send('POST', '/push/unregister');
+  }
+
+  // --- Duty (STF-04) ----------------------------------------------------
+
+  Future<DutySnapshot> duty() async {
+    final res = await _send('GET', '/duty') as Response<dynamic>;
+    return DutySnapshot.fromJson(res.data);
+  }
+
+  Future<DutySnapshot> startDuty({double? latitude, double? longitude}) async {
+    final res = await _send(
+      'POST',
+      '/duty/start',
+      body: {'latitude': ?latitude, 'longitude': ?longitude},
+    ) as Response<dynamic>;
+    return DutySnapshot.fromJson(res.data);
+  }
+
+  Future<DutySnapshot> endDuty() async {
+    final res = await _send('POST', '/duty/end') as Response<dynamic>;
+    return DutySnapshot.fromJson(res.data);
+  }
+
+  Future<LocationResult> sendLocations(List<LocationPoint> points) async {
+    final res = await _send(
+      'POST',
+      '/locations',
+      body: {
+        'points': [for (final point in points) point.toJson()],
+      },
+    ) as Response<dynamic>;
+    return LocationResult.fromJson(res.data);
+  }
+
+  /// True when one of this person's open tickets is `on_the_way`.
+  /// A 403 means they cannot see tickets; location then uses the moving
+  /// or still interval only.
+  Future<bool> anyTicketOnTheWay() async {
+    try {
+      final res = await _send(
+        'GET',
+        '/tickets',
+        query: {'scope': 'mine', 'status': 'active', 'per_page': 30},
+      ) as Response<dynamic>;
+      return asList(asMap(res.data)['tickets'])
+          .any((row) => asMap(row)['status'] == 'on_the_way');
+    } on ApiException catch (e) {
+      if (e.status == 403) return false;
+      rethrow;
+    }
   }
 
   // --- Nearest technician (STF-05) --------------------------------------

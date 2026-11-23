@@ -60,6 +60,25 @@
   "lockReason": "Unlock MyNet Staff",
   "unlock": "Unlock",
   "sessionEnded": "You were signed out. Sign in again.",
+  "featureDuty": "Duty",
+  "dutyStatus": "Duty",
+  "dutyOn": "On duty",
+  "dutyOff": "Off duty",
+  "dutyStart": "Start duty",
+  "dutyEnd": "End duty",
+  "dutyHours": "Duty hours",
+  "dutyTimezone": "Time zone",
+  "dutyDistance": "Distance today",
+  "dutyMeters": "{meters} m",
+  "@dutyMeters": {
+    "placeholders": {
+      "meters": { "type": "int" }
+    }
+  },
+  "dutyOutsideHours": "Duty can only start during duty hours.",
+  "dutyStopped": "Duty ended. Location has stopped.",
+  "dutyNotificationTitle": "MyNet: location on",
+  "dutyNotificationBody": "Location is shared only while you are on duty.",
   "featureOffers": "Job offers",
   "featureAssign": "Assign a technician",
   "offersEmpty": "No offers waiting.",

@@ -416,6 +416,90 @@ abstract class AppLocalizations {
   /// **'You were signed out. Sign in again.'**
   String get sessionEnded;
 
+  /// No description provided for @featureDuty.
+  ///
+  /// In en, this message translates to:
+  /// **'Duty'**
+  String get featureDuty;
+
+  /// No description provided for @dutyStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Duty'**
+  String get dutyStatus;
+
+  /// No description provided for @dutyOn.
+  ///
+  /// In en, this message translates to:
+  /// **'On duty'**
+  String get dutyOn;
+
+  /// No description provided for @dutyOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Off duty'**
+  String get dutyOff;
+
+  /// No description provided for @dutyStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Start duty'**
+  String get dutyStart;
+
+  /// No description provided for @dutyEnd.
+  ///
+  /// In en, this message translates to:
+  /// **'End duty'**
+  String get dutyEnd;
+
+  /// No description provided for @dutyHours.
+  ///
+  /// In en, this message translates to:
+  /// **'Duty hours'**
+  String get dutyHours;
+
+  /// No description provided for @dutyTimezone.
+  ///
+  /// In en, this message translates to:
+  /// **'Time zone'**
+  String get dutyTimezone;
+
+  /// No description provided for @dutyDistance.
+  ///
+  /// In en, this message translates to:
+  /// **'Distance today'**
+  String get dutyDistance;
+
+  /// No description provided for @dutyMeters.
+  ///
+  /// In en, this message translates to:
+  /// **'{meters} m'**
+  String dutyMeters(int meters);
+
+  /// No description provided for @dutyOutsideHours.
+  ///
+  /// In en, this message translates to:
+  /// **'Duty can only start during duty hours.'**
+  String get dutyOutsideHours;
+
+  /// No description provided for @dutyStopped.
+  ///
+  /// In en, this message translates to:
+  /// **'Duty ended. Location has stopped.'**
+  String get dutyStopped;
+
+  /// No description provided for @dutyNotificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'MyNet: location on'**
+  String get dutyNotificationTitle;
+
+  /// No description provided for @dutyNotificationBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Location is shared only while you are on duty.'**
+  String get dutyNotificationBody;
+
   /// No description provided for @featureOffers.
   ///
   /// In en, this message translates to:

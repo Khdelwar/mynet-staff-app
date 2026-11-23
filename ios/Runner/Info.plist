@@ -5,7 +5,9 @@
 	<key>NSFaceIDUsageDescription</key>
 	<string>Used to unlock the app when app lock is on.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Used to save the client's house location and to record where a ticket was finished.</string>
+	<string>Used to save the client's house location, to record where a ticket was finished, and to share your location while you are on duty.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Used to keep sharing your location while you are on duty and the app is in the background.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Used to attach a photo to a ticket note.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -59,6 +61,7 @@
 	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>location</string>
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>

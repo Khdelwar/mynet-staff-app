@@ -18,6 +18,7 @@ Flutter app (Android + iPhone) for MyNet ISP staff. All data comes from
 | Home | Name, staff code, roles, the work this login may do | `GET /me` |
 | Tickets | Own tickets (or everyone's, when the ERP allows it), status, notes with photos, house GPS, live dBm | `GET /tickets`, `POST /tickets/{id}/status`, `POST /tickets/{id}/comments`, `POST /clients/{id}/location`, `POST /clients/{id}/dbm` |
 | Account | Email, mobile, language, app lock, sign out | `POST /auth/logout` |
+| Duty | Start and end duty. While it is on, the phone sends location at the ERP's interval and shows "MyNet: location on" | `GET /duty`, `POST /duty/start`, `POST /duty/end`, `POST /locations` |
 | Job offers | Accept or reject a ticket offered to this technician (`tickets.update`) | `GET /offers`, `POST /offers/{id}/accept`, `POST /offers/{id}/reject` |
 | Assign | Nearest technicians, assign, or start an offer (`tickets.assign`) | `GET /tickets/{id}/suggestions`, `POST /tickets/{id}/assign`, `POST /tickets/{id}/offer` |
 | Push | This phone's notification token; tapping opens the ticket or the offer | `POST /push/register`, `POST /push/unregister` |
