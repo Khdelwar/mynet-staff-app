@@ -10,6 +10,7 @@ class StaffUser {
     this.phone,
     this.roles = const [],
     this.permissions = const {},
+    this.screens = const {},
     this.isSuperAdmin = false,
     this.staff,
   });
@@ -20,6 +21,10 @@ class StaffUser {
   final String? phone;
   final List<String> roles;
   final Set<String> permissions;
+
+  /// Screen keys from `/me`. Empty when the payload had no `screens` list
+  /// (older cached profiles). A non-empty list is what the ERP says to draw.
+  final Set<String> screens;
   final bool isSuperAdmin;
   final StaffProfile? staff;
 
@@ -28,22 +33,19 @@ class StaffUser {
 
   factory StaffUser.fromJson(Object? raw) {
     final root = asMap(raw);
-    final user = root['user'] is Map ? asMap(root['user']) : root;
+    final nested = root['user'] is Map;
+    final user = nested ? asMap(root['user']) : root;
     final staff = user['staff'];
     return StaffUser(
       id: toNum(user['id'])?.toInt() ?? 0,
       name: pickString(user, const ['name']) ?? '',
       email: pickString(user, const ['email']),
       phone: pickString(user, const ['phone']),
-      roles: [
-        for (final r in asList(user['roles']))
-          if (r is String && r.isNotEmpty) r,
-      ],
-      permissions: {
-        for (final p in asList(user['permissions']))
-          if (p is String && p.isNotEmpty) p,
-      },
-      isSuperAdmin: user['is_super_admin'] == true,
+      roles: _strings(root, user, 'roles', nested: nested),
+      permissions: _strings(root, user, 'permissions', nested: nested).toSet(),
+      screens: _strings(root, user, 'screens', nested: nested).toSet(),
+      isSuperAdmin:
+          root['is_super_admin'] == true || user['is_super_admin'] == true,
       staff: staff is Map ? StaffProfile.fromJson(staff) : null,
     );
   }
@@ -55,9 +57,29 @@ class StaffUser {
     'phone': phone,
     'roles': roles,
     'permissions': permissions.toList(),
+    'screens': screens.toList(),
     'is_super_admin': isSuperAdmin,
     'staff': staff?.toJson(),
   };
+}
+
+/// `/me` puts roles, permissions and screens on the root. Older fixtures and
+/// the cached profile keep them on the user object.
+List<String> _strings(
+  Json root,
+  Json user,
+  String key, {
+  required bool nested,
+}) {
+  final top = asList(root[key]);
+  final inner = asList(user[key]);
+  final source = nested && top.isNotEmpty
+      ? top
+      : (top.isNotEmpty ? top : inner);
+  return [
+    for (final item in source)
+      if (item is String && item.isNotEmpty) item,
+  ];
 }
 
 class StaffProfile {
