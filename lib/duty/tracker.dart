@@ -6,7 +6,7 @@ import 'package:geolocator/geolocator.dart';
 import '../api/duty.dart';
 
 /// Emits a point on the interval the ERP last sent. While this is running
-/// the phone shows a permanent "MyNet: location on" notification, which is
+/// the phone shows a permanent "Staff app: location on" notification, which is
 /// what Android requires for location taken in the background.
 abstract class DutyTracker {
   Stream<LocationPoint> get points;
