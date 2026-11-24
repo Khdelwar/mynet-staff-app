@@ -326,6 +326,44 @@ class _CollectScreenState extends ConsumerState<CollectScreen> {
     }
   }
 
+  /// "Near me with due": the phone's position, the ERP's list (nearest first).
+  Future<void> _nearMe() async {
+    final l = AppLocalizations.of(context);
+    setState(() => _error = null);
+    final fix = await ref.read(locationReaderProvider).current();
+    if (!mounted) return;
+    if (fix == null) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(l.collectionNoLocation)));
+      return;
+    }
+    try {
+      final clients = await ref
+          .read(apiProvider)
+          .collectionClientsNear(
+            latitude: fix.latitude,
+            longitude: fix.longitude,
+          );
+      if (!mounted) return;
+      setState(() => _clients = clients);
+    } catch (e) {
+      if (!mounted) return;
+      setState(() => _error = e);
+    }
+  }
+
+  /// The ERP shows due (and the near-me list) only with these rights.
+  bool get _canSeeDue {
+    final user = ref.watch(authProvider.select((a) => a.user));
+    return user != null &&
+        const [
+          'clients.view',
+          'billing.due_list',
+          'billing.view',
+          'billing.collect',
+        ].any(user.can);
+  }
+
   Future<void> _submit() async {
     final client = _picked;
     final amount = num.tryParse(_amount.text.trim());
@@ -414,6 +452,16 @@ class _CollectScreenState extends ConsumerState<CollectScreen> {
               decoration: InputDecoration(labelText: l.collectionSearch),
               onSubmitted: (_) => _searchClients(),
             ),
+            if (_canSeeDue)
+              Align(
+                alignment: Alignment.centerLeft,
+                child: TextButton.icon(
+                  key: const ValueKey('collect-near-me'),
+                  onPressed: _nearMe,
+                  icon: const Icon(Icons.near_me_outlined),
+                  label: Text(l.collectionNearMe),
+                ),
+              ),
             for (final client in _clients)
               ListTile(
                 key: ValueKey('pay-client-${client.id}'),
@@ -421,7 +469,9 @@ class _CollectScreenState extends ConsumerState<CollectScreen> {
                 subtitle: Text(
                   [
                     client.code,
-                    shownAmount(client.due),
+                    if (client.due != null) shownAmount(client.due),
+                    if (client.distanceM != null)
+                      l.collectionMetres(client.distanceM!.round()),
                   ].whereType<String>().join(' · '),
                 ),
                 selected: _picked?.id == client.id,

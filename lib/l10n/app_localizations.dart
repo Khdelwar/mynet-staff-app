@@ -1915,6 +1915,138 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{days} d'**
   String workWithinDays(int days);
+
+  /// No description provided for @approvalsAcceptAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount to accept (all or part)'**
+  String get approvalsAcceptAmount;
+
+  /// No description provided for @approvalsExpenses.
+  ///
+  /// In en, this message translates to:
+  /// **'Expenses'**
+  String get approvalsExpenses;
+
+  /// No description provided for @approvalsHandovers.
+  ///
+  /// In en, this message translates to:
+  /// **'Handovers'**
+  String get approvalsHandovers;
+
+  /// No description provided for @approvalsReject.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject'**
+  String get approvalsReject;
+
+  /// No description provided for @approvalsRejectNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Why? (required)'**
+  String get approvalsRejectNote;
+
+  /// No description provided for @collectionMetres.
+  ///
+  /// In en, this message translates to:
+  /// **'{metres} m away'**
+  String collectionMetres(int metres);
+
+  /// No description provided for @collectionNearMe.
+  ///
+  /// In en, this message translates to:
+  /// **'Near me with due'**
+  String get collectionNearMe;
+
+  /// No description provided for @collectionNoLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Location is off or not allowed.'**
+  String get collectionNoLocation;
+
+  /// No description provided for @supportCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get supportCategory;
+
+  /// No description provided for @supportClient.
+  ///
+  /// In en, this message translates to:
+  /// **'Client'**
+  String get supportClient;
+
+  /// No description provided for @supportClientSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Client saved.'**
+  String get supportClientSaved;
+
+  /// No description provided for @supportDetailsOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'Details (optional)'**
+  String get supportDetailsOptional;
+
+  /// No description provided for @supportNameOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'Name (optional)'**
+  String get supportNameOptional;
+
+  /// No description provided for @supportNewClient.
+  ///
+  /// In en, this message translates to:
+  /// **'New client'**
+  String get supportNewClient;
+
+  /// No description provided for @supportNewClientHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Without a POP the client waits as pending; with a POP the line goes on now.'**
+  String get supportNewClientHint;
+
+  /// No description provided for @supportNewTicket.
+  ///
+  /// In en, this message translates to:
+  /// **'New ticket'**
+  String get supportNewTicket;
+
+  /// No description provided for @supportPhoneOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile (optional)'**
+  String get supportPhoneOptional;
+
+  /// No description provided for @supportPopOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'POP (optional)'**
+  String get supportPopOptional;
+
+  /// No description provided for @supportPppoePassword.
+  ///
+  /// In en, this message translates to:
+  /// **'PPPoE password'**
+  String get supportPppoePassword;
+
+  /// No description provided for @supportPppoeUser.
+  ///
+  /// In en, this message translates to:
+  /// **'PPPoE username'**
+  String get supportPppoeUser;
+
+  /// No description provided for @supportSubject.
+  ///
+  /// In en, this message translates to:
+  /// **'Subject'**
+  String get supportSubject;
+
+  /// No description provided for @supportTicketOpened.
+  ///
+  /// In en, this message translates to:
+  /// **'Ticket opened.'**
+  String get supportTicketOpened;
 }
 
 class _AppLocalizationsDelegate

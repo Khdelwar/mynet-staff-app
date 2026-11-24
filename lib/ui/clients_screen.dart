@@ -7,6 +7,7 @@ import '../l10n/app_localizations.dart';
 import '../state/providers.dart';
 import 'client_detail_screen.dart';
 import 'common.dart';
+import 'support_screens.dart';
 
 /// What the ERP sent. Display only — the app does not add due and advance.
 String erpAmount(num? value) {
@@ -75,8 +76,24 @@ class _ClientListScreenState extends ConsumerState<ClientListScreen> {
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
+    final canCreate =
+        ref.watch(authProvider.select((a) => a.user))?.can('clients.create') ??
+        false;
     return Scaffold(
       appBar: AppBar(title: Text(l.featureClients)),
+      floatingActionButton: canCreate
+          ? FloatingActionButton.extended(
+              key: const ValueKey('new-client'),
+              onPressed: () async {
+                final made = await Navigator.of(context).push<bool>(
+                  MaterialPageRoute(builder: (_) => const NewClientScreen()),
+                );
+                if (made == true) await _load(reset: true);
+              },
+              icon: const Icon(Icons.person_add_alt),
+              label: Text(l.supportNewClient),
+            )
+          : null,
       body: Column(
         children: [
           Padding(

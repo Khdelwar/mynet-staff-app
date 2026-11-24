@@ -445,5 +445,34 @@
         "type": "int"
       }
     }
-  }
+  },
+  "approvalsAcceptAmount": "Amount to accept (all or part)",
+  "approvalsExpenses": "Expenses",
+  "approvalsHandovers": "Handovers",
+  "approvalsReject": "Reject",
+  "approvalsRejectNote": "Why? (required)",
+  "collectionMetres": "{metres} m away",
+  "@collectionMetres": {
+    "placeholders": {
+      "metres": {
+        "type": "int"
+      }
+    }
+  },
+  "collectionNearMe": "Near me with due",
+  "collectionNoLocation": "Location is off or not allowed.",
+  "supportCategory": "Category",
+  "supportClient": "Client",
+  "supportClientSaved": "Client saved.",
+  "supportDetailsOptional": "Details (optional)",
+  "supportNameOptional": "Name (optional)",
+  "supportNewClient": "New client",
+  "supportNewClientHint": "Without a POP the client waits as pending; with a POP the line goes on now.",
+  "supportNewTicket": "New ticket",
+  "supportPhoneOptional": "Mobile (optional)",
+  "supportPopOptional": "POP (optional)",
+  "supportPppoePassword": "PPPoE password",
+  "supportPppoeUser": "PPPoE username",
+  "supportSubject": "Subject",
+  "supportTicketOpened": "Ticket opened."
 }

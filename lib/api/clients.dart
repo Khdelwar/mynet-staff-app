@@ -147,6 +147,7 @@ class ClientDetail {
     this.openTickets = const [],
     this.recentPayments = const [],
     this.canUpdate = false,
+    this.canOpenTicket = false,
   });
 
   final ClientRow row;
@@ -161,6 +162,9 @@ class ClientDetail {
   final List<ClientTicket> openTickets;
   final List<ClientPayment> recentPayments;
   final bool canUpdate;
+
+  /// STF-07: may open a ticket for this client.
+  final bool canOpenTicket;
 
   factory ClientDetail.fromJson(Object? raw) {
     final root = asMap(raw);
@@ -188,6 +192,7 @@ class ClientDetail {
           ClientPayment.fromJson(row),
       ],
       canUpdate: can['update'] == true,
+      canOpenTicket: can['open_ticket'] == true,
     );
   }
 }

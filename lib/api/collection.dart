@@ -71,6 +71,7 @@ class CollectionClient {
     this.phone,
     this.due,
     this.balance,
+    this.distanceM,
   });
 
   final int id;
@@ -79,6 +80,9 @@ class CollectionClient {
   final String? phone;
   final num? due;
   final num? balance;
+
+  /// Only in the "near me" search: metres from the phone, as the ERP worked it out.
+  final num? distanceM;
 
   factory CollectionClient.fromJson(Object? raw) {
     final m = asMap(raw);
@@ -89,6 +93,7 @@ class CollectionClient {
       phone: pickString(m, const ['phone']),
       due: toNum(m['due']),
       balance: toNum(m['balance']),
+      distanceM: toNum(m['distance_m']),
     );
   }
 }
@@ -186,6 +191,7 @@ class ExpenseItem {
     this.amount,
     this.note,
     this.status,
+    this.receiptUrl,
   });
 
   final int id;
@@ -193,6 +199,9 @@ class ExpenseItem {
   final num? amount;
   final String? note;
   final String? status;
+
+  /// STF-06b: the receipt photo (needs the Bearer token).
+  final String? receiptUrl;
 
   factory ExpenseItem.fromJson(Object? raw) {
     final m = asMap(raw);
@@ -202,6 +211,7 @@ class ExpenseItem {
       amount: toNum(m['amount']),
       note: pickString(m, const ['note']),
       status: pickString(m, const ['status']),
+      receiptUrl: pickString(m, const ['receipt_url']),
     );
   }
 }
