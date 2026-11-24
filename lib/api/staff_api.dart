@@ -25,12 +25,12 @@ class ApiException implements Exception {
 ///
 /// Tokens, codes and passwords are never logged; this class has no logging.
 class StaffApi {
-  StaffApi({Dio? dio, this.onUnauthorized})
+  StaffApi({Dio? dio, String? server, this.onUnauthorized})
     : _dio =
           dio ??
           Dio(
             BaseOptions(
-              baseUrl: AppConfig.apiBaseUrl,
+              baseUrl: server == null ? '' : AppConfig.apiBase(server),
               // Field staff are often on weak mobile data: fail visibly.
               connectTimeout: const Duration(seconds: 15),
               sendTimeout: const Duration(seconds: 20),
@@ -40,6 +40,9 @@ class StaffApi {
           );
 
   final Dio _dio;
+
+  /// The ERP this client talks to (`https://host`), from the login screen.
+  set server(String server) => _dio.options.baseUrl = AppConfig.apiBase(server);
 
   /// Called when ERP rejects the session token (HTTP 401) on a signed-in call.
   final void Function(String rejectedToken, String? code)? onUnauthorized;

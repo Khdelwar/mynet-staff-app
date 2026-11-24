@@ -19,11 +19,34 @@ final secretStoreProvider = Provider<SecretStore>(
   (ref) => const SecureSecretStore(),
 );
 
-/// Whether this build has a usable ERP address (overridden in tests).
-final configuredProvider = Provider<bool>((ref) => AppConfig.isConfigured);
+/// The ERP this phone signs in to (`https://host`), or null until staff
+/// type one on the login screen. Saved after a successful sign-in, so the
+/// same app works for every ISP that runs the ERP.
+class ServerController extends Notifier<String?> {
+  static const key = 'erp_server';
+
+  @override
+  String? build() {
+    final saved = ref.read(prefsProvider).getString(key);
+    return (saved == null ? null : AppConfig.normalizeServer(saved)) ??
+        AppConfig.defaultServer;
+  }
+
+  void set(String server) {
+    state = server;
+    unawaited(ref.read(prefsProvider).setString(key, server));
+  }
+}
+
+final serverProvider = NotifierProvider<ServerController, String?>(
+  ServerController.new,
+);
 
 final apiProvider = Provider<StaffApi>((ref) {
   return StaffApi(
+    // Read once: the address only changes on the login screen, where
+    // AuthController.login points this client at the new one.
+    server: ref.read(serverProvider),
     onUnauthorized: (rejected, _) =>
         ref.read(authProvider.notifier).sessionExpired(rejectedToken: rejected),
   );
@@ -89,12 +112,24 @@ class AuthController extends Notifier<AuthState> {
     }
   }
 
-  /// Signs in, or returns [TwoFactorNeeded] for the code step.
+  /// ERP address of a sign-in still waiting for its 2FA code.
+  String? _pendingServer;
+
+  /// Signs in to [server] (default: the saved one), or returns
+  /// [TwoFactorNeeded] for the code step. The address is saved only once
+  /// the ERP has accepted the sign-in.
   Future<LoginOutcome> login(
     String identifier,
     String password, {
     String? device,
+    String? server,
   }) async {
+    final target = server ?? ref.read(serverProvider);
+    if (target == null) {
+      throw const ApiException(0, '', path: '/auth/login', code: 'no_server');
+    }
+    _api.server = target;
+    _pendingServer = target;
     final outcome = await _api.login(identifier, password, device: device);
     if (outcome is SignedIn) await _start(outcome);
     return outcome;
@@ -111,6 +146,11 @@ class AuthController extends Notifier<AuthState> {
   }
 
   Future<void> _start(SignedIn signedIn) async {
+    final server = _pendingServer;
+    if (server != null && server != ref.read(serverProvider)) {
+      ref.read(serverProvider.notifier).set(server);
+    }
+    _pendingServer = null;
     await _store.write(sessionTokenKey, signedIn.token);
     await _cache(signedIn.user);
     _api.token = signedIn.token;

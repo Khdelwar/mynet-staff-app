@@ -33,7 +33,6 @@ List<Override> _overrides(
   SharedPreferences prefs,
 ) => [
   prefsProvider.overrideWithValue(prefs),
-  configuredProvider.overrideWithValue(true),
   secretStoreProvider.overrideWithValue(store),
   connectivityProvider.overrideWith(
     (ref) => Stream.value([ConnectivityResult.wifi]),
@@ -52,7 +51,10 @@ Future<ProviderContainer> _container(
   FakeErp erp,
   MemorySecretStore store,
 ) async {
-  SharedPreferences.setMockInitialValues({'locale': 'en'});
+  SharedPreferences.setMockInitialValues({
+    'locale': 'en',
+    ServerController.key: 'https://erp.test',
+  });
   final prefs = await SharedPreferences.getInstance();
   final c = ProviderContainer(overrides: _overrides(erp, store, prefs));
   addTearDown(c.dispose);
@@ -189,7 +191,10 @@ void main() {
       FakeErp erp,
       MemorySecretStore store,
     ) async {
-      SharedPreferences.setMockInitialValues({'locale': 'en'});
+      SharedPreferences.setMockInitialValues({
+        'locale': 'en',
+        ServerController.key: 'https://erp.test',
+      });
       final prefs = await SharedPreferences.getInstance();
       await tester.pumpWidget(
         ProviderScope(

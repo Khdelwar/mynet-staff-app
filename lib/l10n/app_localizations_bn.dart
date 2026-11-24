@@ -32,6 +32,26 @@ class AppLocalizationsBn extends AppLocalizations {
       'এই অ্যাপে লগইন চালু নেই। অফিস থেকে সঠিক অ্যাপ নিন।';
 
   @override
+  String get serverLabel => 'ERP ঠিকানা';
+
+  @override
+  String get serverHint => 'bill.example.com';
+
+  @override
+  String get serverHelp =>
+      'আপনার কোম্পানির ERP-র ওয়েব ঠিকানা। না জানলে অফিসে জিজ্ঞেস করুন।';
+
+  @override
+  String get serverInvalid => 'https ওয়েব ঠিকানা দিন, যেমন bill.example.com';
+
+  @override
+  String get serverNotErp =>
+      'এই ঠিকানায় ERP পাওয়া যায়নি। ঠিকানা দেখে আবার চেষ্টা করুন।';
+
+  @override
+  String get serverChange => 'বদলান';
+
+  @override
   String get offlineBanner => 'ইন্টারনেট সংযোগ নেই';
 
   @override

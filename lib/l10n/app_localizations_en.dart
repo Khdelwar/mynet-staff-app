@@ -32,6 +32,27 @@ class AppLocalizationsEn extends AppLocalizations {
       'This app is not set up for sign-in. Ask the office for the right app.';
 
   @override
+  String get serverLabel => 'ERP address';
+
+  @override
+  String get serverHint => 'bill.example.com';
+
+  @override
+  String get serverHelp =>
+      'Your company\'s ERP web address. Ask the office if you don\'t know it.';
+
+  @override
+  String get serverInvalid =>
+      'Enter an https web address, e.g. bill.example.com';
+
+  @override
+  String get serverNotErp =>
+      'No ERP found at this address. Check it and try again.';
+
+  @override
+  String get serverChange => 'Change';
+
+  @override
   String get offlineBanner => 'No internet connection';
 
   @override

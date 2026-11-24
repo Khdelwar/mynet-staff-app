@@ -38,7 +38,10 @@ flutter pub get
 flutter run --dart-define=ERP_BASE_URL=https://your-erp-host
 ```
 
-Without `ERP_BASE_URL` (https) the app shows "not set up" and sign-in is off.
+One app serves every ISP that runs the ERP: on the login screen staff type
+their ERP address (e.g. `bill.example.com`, https only). It is saved after the
+first successful sign-in and shown with a "Change" button. `ERP_BASE_URL` is
+optional: it only pre-fills the address for a build made for one ISP.
 `DEBUG_API=true` shows API path / HTTP code in errors (debug builds only).
 
 ## Check
