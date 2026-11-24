@@ -30,6 +30,7 @@ in mynet-erp `docs/STAFF_APP_API.md`.
 | Wallet / Expiring / Recharge | Reseller wallet and transactions, own clients running out, recharge after the ERP's quote | `/reseller/wallet`, `/reseller/expiring`, `/clients/{id}/recharge-quote`, `/clients/{id}/recharge` |
 | Dashboard | The dashboard boxes this login may see | `GET /dashboard` |
 | HR | Own attendance, ask / cancel leave and advance | `/hr/me`, `/hr/leaves`, `/hr/advances` |
+| My payslips | Own payslips (approved / locked months): earnings, deductions, net, days; the same PDF as the web, shared from the phone | `GET /hr/payslips`, `GET /hr/payslips/{id}/pdf` |
 | Approvals | Handovers sent to you (approve all or part, reject with why) and others' expenses with the receipt photo (approve / reject) | `GET /collection/approvals`, `POST /collection/handovers/{id}/approve|reject`, `POST /collection/expenses/{id}/approve|reject` |
 | New client / contact / new ticket | Quick add (PPPoE, package, optional POP / router), fix phone / address / NID, open a ticket and go to the nearest technicians | `GET /clients/form-options`, `POST /clients`, `PATCH /clients/{id}/contact`, `GET /tickets/options`, `POST /tickets` |
 | Near me with due | From the collect screen: clients with a due near the phone, nearest first | `GET /collection/clients?lat&lng&due_only=1` |

@@ -552,3 +552,52 @@ class TicketOptions {
     );
   }
 }
+
+// --- Own payslip (owner, 2026-11-24) -------------------------------------
+
+/// One month's slip as the ERP made it (approved / locked payroll only).
+class Payslip {
+  const Payslip({
+    required this.id,
+    this.month,
+    this.earnings = const {},
+    this.deductions = const {},
+    this.netSalary,
+    this.days = const {},
+    this.paymentStatus,
+    this.paymentDate,
+    this.pdfUrl,
+  });
+
+  final int id;
+  final String? month;
+
+  /// ERP keys (`basic_salary`, `allowance`…) → amount, in the ERP's order.
+  final Map<String, num> earnings;
+  final Map<String, num> deductions;
+  final num? netSalary;
+  final Map<String, num> days;
+  final String? paymentStatus;
+  final String? paymentDate;
+  final String? pdfUrl;
+
+  static Map<String, num> _numbers(Object? raw) => {
+    for (final e in asMap(raw).entries)
+      if (toNum(e.value) != null) e.key: toNum(e.value)!,
+  };
+
+  factory Payslip.fromJson(Object? raw) {
+    final m = asMap(raw);
+    return Payslip(
+      id: toNum(m['id'])?.toInt() ?? 0,
+      month: pickString(m, const ['month']),
+      earnings: _numbers(m['earnings']),
+      deductions: _numbers(m['deductions']),
+      netSalary: toNum(m['net_salary']),
+      days: _numbers(m['days']),
+      paymentStatus: pickString(m, const ['payment_status']),
+      paymentDate: pickString(m, const ['payment_date']),
+      pdfUrl: pickString(m, const ['pdf_url']),
+    );
+  }
+}

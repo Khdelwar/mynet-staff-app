@@ -29,6 +29,9 @@ class _FixedScanner implements CodeScanner {
 class _RecordingSharer implements ImageSharer {
   Uint8List? png;
   String? name;
+  Uint8List? file;
+  String? fileName;
+  String? mimeType;
 
   @override
   Future<void> sharePng(
@@ -38,6 +41,17 @@ class _RecordingSharer implements ImageSharer {
   }) async {
     this.png = png;
     this.name = name;
+  }
+
+  @override
+  Future<void> shareFile(
+    Uint8List bytes, {
+    required String fileName,
+    required String mimeType,
+  }) async {
+    file = bytes;
+    this.fileName = fileName;
+    this.mimeType = mimeType;
   }
 }
 
@@ -188,5 +202,58 @@ void main() {
     expect(sharer.name, 'R-000812');
     // A real PNG: starts with the PNG signature.
     expect(sharer.png!.sublist(0, 4), [0x89, 0x50, 0x4E, 0x47]);
+  });
+
+  testWidgets('own payslip: the ERP lines, and the PDF shared with Bearer', (
+    tester,
+  ) async {
+    final sharer = _RecordingSharer();
+    final erp = FakeErp({
+      'GET /me': (_) => (
+        200,
+        {
+          'user': {
+            'id': 1,
+            'name': 'Rahim',
+            'permissions': ['hr.self'],
+          },
+        },
+      ),
+      'GET /hr/payslips': (_) => (
+        200,
+        {
+          'payslips': [
+            {
+              'id': 12,
+              'month': '2026-10',
+              'earnings': {'basic_salary': 18000, 'allowance': 500},
+              'deductions': {'late_penalty': 200},
+              'net_salary': 18300,
+              'days': {'working': 26, 'present': 25},
+              'payment_status': 'paid',
+              'pdf_url': 'https://erp.test/api/staff/v1/hr/payslips/12/pdf',
+            },
+          ],
+        },
+      ),
+      'GET /hr/payslips/12/pdf': (_) => (200, 'PDF'),
+    });
+    await _pump(tester, erp, const PayslipsScreen(), sharer: sharer);
+
+    expect(find.text('৳ 18300'), findsOne);
+    await tester.tap(find.byKey(const ValueKey('payslip-12')));
+    await tester.pumpAndSettle();
+    expect(find.text('Basic'), findsOne);
+    expect(find.text('18000'), findsOne);
+    expect(find.text('Late penalty'), findsOne);
+
+    await tester.tap(find.byKey(const ValueKey('payslip-pdf')));
+    await tester.pumpAndSettle();
+
+    final pdfCall = erp.requests.lastWhere((r) => r.uri.path.endsWith('/pdf'));
+    expect(pdfCall.headers['Authorization'], 'Bearer tok');
+    expect(sharer.fileName, 'payslip-2026-10.pdf');
+    expect(sharer.mimeType, 'application/pdf');
+    expect(sharer.file, isNotEmpty);
   });
 }

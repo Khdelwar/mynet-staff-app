@@ -168,4 +168,18 @@ class SystemSharer implements ImageSharer {
       ),
     );
   }
+
+  @override
+  Future<void> shareFile(
+    Uint8List bytes, {
+    required String fileName,
+    required String mimeType,
+  }) async {
+    final dir = await getTemporaryDirectory();
+    final file = File('${dir.path}/$fileName');
+    await file.writeAsBytes(bytes, flush: true);
+    await SharePlus.instance.share(
+      ShareParams(files: [XFile(file.path, mimeType: mimeType)]),
+    );
+  }
 }
