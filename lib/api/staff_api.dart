@@ -908,6 +908,104 @@ class StaffApi {
 
   Future<void> cancelAdvance(int id) =>
       _send('POST', '/hr/advances/$id/cancel');
+
+  // --- STF-06: expense decisions, clients near me ------------------------
+
+  /// Another person's expense (never one's own: R5, the ERP refuses it).
+  Future<void> decideExpense(int id, {required bool approve, String? note}) =>
+      _send(
+        'POST',
+        '/collection/expenses/$id/${approve ? 'approve' : 'reject'}',
+        body: {if (note != null && note.trim().isNotEmpty) 'note': note.trim()},
+      );
+
+  /// Clients with a due near the phone, nearest first (the ERP measures).
+  Future<List<CollectionClient>> collectionClientsNear({
+    required double latitude,
+    required double longitude,
+  }) async {
+    final res = await _send(
+      'GET',
+      '/collection/clients',
+      query: {'lat': latitude, 'lng': longitude, 'due_only': 1},
+    ) as Response<dynamic>;
+    return [
+      for (final row in listFrom(res.data, const ['clients']))
+        CollectionClient.fromJson(row),
+    ];
+  }
+
+  // --- STF-07: new client, contact, new ticket ---------------------------
+
+  Future<ClientFormOptions> clientFormOptions() async {
+    final res =
+        await _send('GET', '/clients/form-options') as Response<dynamic>;
+    return ClientFormOptions.fromJson(res.data);
+  }
+
+  /// Quick add, as on the web. Without a POP the client waits as pending.
+  /// Returns the new client's id.
+  Future<int> createClient({
+    required String pppoeUsername,
+    required String pppoePassword,
+    required int packageId,
+    String? name,
+    String? phone,
+    int? popId,
+    int? routerId,
+  }) async {
+    String? t(String? v) => v == null || v.trim().isEmpty ? null : v.trim();
+    final res = await _send(
+      'POST',
+      '/clients',
+      body: {
+        'pppoe_username': pppoeUsername.trim(),
+        'pppoe_password': pppoePassword,
+        'package_id': packageId,
+        'name': ?t(name),
+        'phone': ?t(phone),
+        'pop_id': ?popId,
+        'router_id': ?routerId,
+      },
+    ) as Response<dynamic>;
+    return toNum(asMap(asMap(res.data)['client'])['id'])?.toInt() ?? 0;
+  }
+
+  /// [field] is `phone`, `address` or `nid` (the ERP audits old / new).
+  Future<void> updateClientContact(int id, String field, String value) => _send(
+    'PATCH',
+    '/clients/$id/contact',
+    body: {'field': field, 'value': value.trim()},
+  );
+
+  Future<TicketOptions> ticketOptions() async {
+    final res = await _send('GET', '/tickets/options') as Response<dynamic>;
+    return TicketOptions.fromJson(res.data);
+  }
+
+  /// Opens a ticket (the ERP runs the nearest-technician dispatch).
+  /// Returns the new ticket's id.
+  Future<int> createTicket({
+    required int clientId,
+    required String subject,
+    String? description,
+    String? priority,
+    int? categoryId,
+  }) async {
+    final res = await _send(
+      'POST',
+      '/tickets',
+      body: {
+        'client_id': clientId,
+        'subject': subject.trim(),
+        if (description != null && description.trim().isNotEmpty)
+          'description': description.trim(),
+        'priority': ?priority,
+        'ticket_category_id': ?categoryId,
+      },
+    ) as Response<dynamic>;
+    return toNum(asMap(asMap(res.data)['ticket'])['id'])?.toInt() ?? 0;
+  }
 }
 
 String _fileName(String path) {

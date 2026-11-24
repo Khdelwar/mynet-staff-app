@@ -9,6 +9,7 @@ import '../l10n/app_localizations.dart';
 import '../state/providers.dart';
 import 'clients_screen.dart';
 import 'common.dart';
+import 'support_screens.dart';
 import 'work_screens.dart';
 
 class ClientDetailScreen extends ConsumerStatefulWidget {
@@ -77,6 +78,32 @@ class _ClientDetailScreenState extends ConsumerState<ClientDetailScreen> {
     }
   }
 
+  /// STF-07: tap to fix phone / address / NID when the ERP allows it.
+  Widget _contactRow(
+    String label,
+    String field,
+    String? value,
+    ClientDetail client,
+  ) {
+    final row = InfoRow(client.canUpdate ? '$label ✎' : label, value);
+    if (!client.canUpdate) return row;
+    return InkWell(
+      key: ValueKey('edit-$field'),
+      onTap: () async {
+        final saved = await editClientContact(
+          context,
+          ref,
+          clientId: widget.clientId,
+          field: field,
+          label: label,
+          current: value,
+        );
+        if (saved) await _load();
+      },
+      child: row,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
@@ -99,8 +126,13 @@ class _ClientDetailScreenState extends ConsumerState<ClientDetailScreen> {
                   SectionCard(
                     children: [
                       InfoRow(l.clientsCode, row.code),
-                      InfoRow(l.mobile, row.phone),
-                      InfoRow(l.clientsAddress, row.address),
+                      _contactRow(l.mobile, 'phone', row.phone, client!),
+                      _contactRow(
+                        l.clientsAddress,
+                        'address',
+                        row.address,
+                        client,
+                      ),
                       InfoRow(l.clientsStatus, row.status),
                       InfoRow(l.clientsPackage, row.packageName),
                       InfoRow(l.clientsPrice, erpAmount(row.packagePrice)),
@@ -108,8 +140,8 @@ class _ClientDetailScreenState extends ConsumerState<ClientDetailScreen> {
                       InfoRow(l.clientsDue, erpAmount(row.due)),
                       InfoRow(l.clientsAdvance, erpAmount(row.advance)),
                       InfoRow(l.clientsBalance, erpAmount(row.balance)),
-                      InfoRow(l.clientsPppoe, client!.pppoeUsername),
-                      InfoRow(l.clientsNid, client.nid),
+                      InfoRow(l.clientsPppoe, client.pppoeUsername),
+                      _contactRow(l.clientsNid, 'nid', client.nid, client),
                       InfoRow(l.clientsPop, client.pop),
                       InfoRow(l.clientsRouter, client.router),
                       InfoRow(l.clientsOnu, client.onuSn),
@@ -123,6 +155,20 @@ class _ClientDetailScreenState extends ConsumerState<ClientDetailScreen> {
                     icon: const Icon(Icons.wifi_tethering),
                     label: Text(l.clientsConnection),
                   ),
+                  if (client.canOpenTicket)
+                    OutlinedButton.icon(
+                      key: const ValueKey('client-new-ticket'),
+                      onPressed: () => Navigator.of(context).push(
+                        MaterialPageRoute<void>(
+                          builder: (_) => NewTicketScreen(
+                            clientId: row.id,
+                            clientName: row.name ?? '',
+                          ),
+                        ),
+                      ),
+                      icon: const Icon(Icons.add_task),
+                      label: Text(l.supportNewTicket),
+                    ),
                   if (_canRecharge(
                     ref.watch(authProvider.select((a) => a.user)),
                   ))

@@ -10,7 +10,10 @@ import 'common.dart';
 /// Office: the nearest technicians for a ticket, then assign or start an offer.
 /// Shown only when the user has `tickets.assign` or `tickets.manage`.
 class AssignScreen extends ConsumerStatefulWidget {
-  const AssignScreen({super.key});
+  const AssignScreen({super.key, this.ticketId});
+
+  /// Open this ticket's suggestions at once (after opening a new ticket).
+  final int? ticketId;
 
   @override
   ConsumerState<AssignScreen> createState() => _AssignScreenState();
@@ -31,6 +34,16 @@ class _AssignScreenState extends ConsumerState<AssignScreen> {
     final user = ref.watch(authProvider).user;
     return user != null &&
         (user.can('tickets.view') || user.can('tickets.manage'));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    final id = widget.ticketId;
+    if (id != null) {
+      _ticketId.text = '$id';
+      Future.microtask(() => _open(id));
+    }
   }
 
   @override

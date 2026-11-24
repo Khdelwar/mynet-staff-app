@@ -488,3 +488,67 @@ class HrView {
     );
   }
 }
+
+// --- STF-07: support (new client, contact, new ticket) -------------------
+
+class PackageOption {
+  const PackageOption(this.id, this.name, this.price);
+  final int id;
+  final String name;
+  final num? price;
+}
+
+class PopOption {
+  const PopOption(this.id, this.name, this.routers);
+  final int id;
+  final String name;
+  final List<NamedId> routers;
+}
+
+/// What this user may pick in the quick-add form (packages they may sell).
+class ClientFormOptions {
+  const ClientFormOptions({this.packages = const [], this.pops = const []});
+  final List<PackageOption> packages;
+  final List<PopOption> pops;
+
+  factory ClientFormOptions.fromJson(Object? raw) {
+    final m = asMap(raw);
+    return ClientFormOptions(
+      packages: [
+        for (final p in asList(m['packages']).map(asMap))
+          if (toNum(p['id']) != null)
+            PackageOption(
+              toNum(p['id'])!.toInt(),
+              pickString(p, const ['name']) ?? '',
+              toNum(p['price']),
+            ),
+      ],
+      pops: [
+        for (final p in asList(m['pops']).map(asMap))
+          if (toNum(p['id']) != null)
+            PopOption(
+              toNum(p['id'])!.toInt(),
+              pickString(p, const ['name']) ?? '',
+              NamedId.list(p['routers']),
+            ),
+      ],
+    );
+  }
+}
+
+class TicketOptions {
+  const TicketOptions({this.categories = const [], this.priorities = const []});
+  final List<NamedId> categories;
+  final List<String> priorities;
+
+  factory TicketOptions.fromJson(Object? raw) {
+    final m = asMap(raw);
+    return TicketOptions(
+      categories: NamedId.list(m['categories']),
+      priorities: [
+        for (final p in asList(m['priorities']))
+          if (p is String) p,
+      ],
+    );
+  }
+}

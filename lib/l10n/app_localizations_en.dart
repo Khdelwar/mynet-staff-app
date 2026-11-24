@@ -978,4 +978,73 @@ class AppLocalizationsEn extends AppLocalizations {
   String workWithinDays(int days) {
     return '$days d';
   }
+
+  @override
+  String get approvalsAcceptAmount => 'Amount to accept (all or part)';
+
+  @override
+  String get approvalsExpenses => 'Expenses';
+
+  @override
+  String get approvalsHandovers => 'Handovers';
+
+  @override
+  String get approvalsReject => 'Reject';
+
+  @override
+  String get approvalsRejectNote => 'Why? (required)';
+
+  @override
+  String collectionMetres(int metres) {
+    return '$metres m away';
+  }
+
+  @override
+  String get collectionNearMe => 'Near me with due';
+
+  @override
+  String get collectionNoLocation => 'Location is off or not allowed.';
+
+  @override
+  String get supportCategory => 'Category';
+
+  @override
+  String get supportClient => 'Client';
+
+  @override
+  String get supportClientSaved => 'Client saved.';
+
+  @override
+  String get supportDetailsOptional => 'Details (optional)';
+
+  @override
+  String get supportNameOptional => 'Name (optional)';
+
+  @override
+  String get supportNewClient => 'New client';
+
+  @override
+  String get supportNewClientHint =>
+      'Without a POP the client waits as pending; with a POP the line goes on now.';
+
+  @override
+  String get supportNewTicket => 'New ticket';
+
+  @override
+  String get supportPhoneOptional => 'Mobile (optional)';
+
+  @override
+  String get supportPopOptional => 'POP (optional)';
+
+  @override
+  String get supportPppoePassword => 'PPPoE password';
+
+  @override
+  String get supportPppoeUser => 'PPPoE username';
+
+  @override
+  String get supportSubject => 'Subject';
+
+  @override
+  String get supportTicketOpened => 'Ticket opened.';
 }

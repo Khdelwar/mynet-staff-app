@@ -975,4 +975,73 @@ class AppLocalizationsBn extends AppLocalizations {
   String workWithinDays(int days) {
     return '$days দিন';
   }
+
+  @override
+  String get approvalsAcceptAmount => 'কত টাকা নেবেন (সব বা কিছু অংশ)';
+
+  @override
+  String get approvalsExpenses => 'খরচ';
+
+  @override
+  String get approvalsHandovers => 'জমা';
+
+  @override
+  String get approvalsReject => 'বাতিল';
+
+  @override
+  String get approvalsRejectNote => 'কেন? (দরকার)';
+
+  @override
+  String collectionMetres(int metres) {
+    return '$metres মিটার দূরে';
+  }
+
+  @override
+  String get collectionNearMe => 'কাছের বকেয়া ক্লায়েন্ট';
+
+  @override
+  String get collectionNoLocation => 'Location বন্ধ বা অনুমতি নেই।';
+
+  @override
+  String get supportCategory => 'ধরন';
+
+  @override
+  String get supportClient => 'ক্লায়েন্ট';
+
+  @override
+  String get supportClientSaved => 'ক্লায়েন্ট সেভ হয়েছে।';
+
+  @override
+  String get supportDetailsOptional => 'বিস্তারিত (ইচ্ছা হলে)';
+
+  @override
+  String get supportNameOptional => 'নাম (ইচ্ছা হলে)';
+
+  @override
+  String get supportNewClient => 'নতুন ক্লায়েন্ট';
+
+  @override
+  String get supportNewClientHint =>
+      'POP ছাড়া ক্লায়েন্ট pending থাকবে; POP দিলে লাইন এখনই চালু হবে।';
+
+  @override
+  String get supportNewTicket => 'নতুন টিকেট';
+
+  @override
+  String get supportPhoneOptional => 'মোবাইল (ইচ্ছা হলে)';
+
+  @override
+  String get supportPopOptional => 'POP (ইচ্ছা হলে)';
+
+  @override
+  String get supportPppoePassword => 'PPPoE পাসওয়ার্ড';
+
+  @override
+  String get supportPppoeUser => 'PPPoE ইউজার';
+
+  @override
+  String get supportSubject => 'বিষয়';
+
+  @override
+  String get supportTicketOpened => 'টিকেট খোলা হয়েছে।';
 }
