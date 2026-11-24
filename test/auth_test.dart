@@ -170,17 +170,37 @@ void main() {
   });
 
   group('features', () {
-    test('only what the ERP permissions open', () {
+    test('without screens from the ERP: only what the permissions open', () {
       final user = StaffUser.fromJson(_user);
-      expect(featuresFor(user).map((f) => f.permission), [
-        'tickets.view',
-        'clients.view',
+      expect(featuresFor(user).map((f) => f.screen), [
+        'duty',
+        'tickets',
+        'clients',
       ]);
-      expect(
-        featuresFor(StaffUser.fromJson({'id': 1, 'is_super_admin': true})),
-        hasLength(features.length),
-      );
     });
+
+    test(
+      'the ERP\'s screens list decides, collection and expenses show once',
+      () {
+        final user = StaffUser.fromJson({
+          ..._user,
+          'screens': [
+            'clients',
+            'collection',
+            'expenses',
+            'olt',
+            'hr',
+            'tickets',
+          ],
+        });
+        expect(featuresFor(user).map((f) => f.screen), [
+          'tickets',
+          'collection',
+          'clients',
+          'hr',
+        ]);
+      },
+    );
   });
 
   group('screens', () {

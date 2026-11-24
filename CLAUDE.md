@@ -7,7 +7,7 @@ consumed over `{ERP_BASE_URL}/api/staff/v1` (`docs/STAFF_APP_API.md` there).
 Built the same way as the customer app (`mynet-app`).
 
 ## Roadmap
-mynet-erp `docs/ROADMAP.md` → Phase 14 (STF-01 … STF-06). Work items by ID in
+mynet-erp `docs/ROADMAP.md` → Phase 14 (STF-01 … STF-10). Work items by ID in
 order; the ERP side of each item (API + Pest tests) goes in mynet-erp first.
 
 ## Stack

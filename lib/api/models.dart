@@ -12,6 +12,7 @@ class StaffUser {
     this.permissions = const {},
     this.isSuperAdmin = false,
     this.staff,
+    this.screens = const [],
   });
 
   final int id;
@@ -23,8 +24,15 @@ class StaffUser {
   final bool isSuperAdmin;
   final StaffProfile? staff;
 
+  /// Home buttons the ERP lists for this login (`/me` → `screens`).
+  final List<String> screens;
+
   bool can(String permission) =>
       isSuperAdmin || permissions.contains(permission);
+
+  bool canAny(List<String> list) => list.any(can);
+
+  bool hasRole(String role) => roles.contains(role);
 
   factory StaffUser.fromJson(Object? raw) {
     final root = asMap(raw);
@@ -45,6 +53,10 @@ class StaffUser {
       },
       isSuperAdmin: user['is_super_admin'] == true,
       staff: staff is Map ? StaffProfile.fromJson(staff) : null,
+      screens: [
+        for (final s in asList(user['screens'] ?? root['screens']))
+          if (s is String && s.isNotEmpty) s,
+      ],
     );
   }
 
@@ -57,6 +69,7 @@ class StaffUser {
     'permissions': permissions.toList(),
     'is_super_admin': isSuperAdmin,
     'staff': staff?.toJson(),
+    'screens': screens,
   };
 }
 

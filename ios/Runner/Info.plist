@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>MyNet Staff uses your location when you start duty, finish a ticket or save a client's house location.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>MyNet Staff takes photos of receipts and ticket work.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>MyNet Staff attaches photos of receipts and ticket work.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Used to unlock the app when app lock is on.</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>

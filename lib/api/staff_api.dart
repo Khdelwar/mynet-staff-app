@@ -6,10 +6,25 @@ import 'models.dart';
 
 /// A failed ERP call. [status] is 0 when the server was not reached.
 class ApiException implements Exception {
-  const ApiException(this.status, this.message, {this.path = '', this.code});
+  const ApiException(
+    this.status,
+    this.message, {
+    this.path = '',
+    this.code,
+    this.errors = const {},
+  });
   final int status;
   final String message;
   final String path;
+
+  /// Laravel validation errors (`422`), field → messages.
+  final Map<String, List<String>> errors;
+
+  /// The first message for [field], if the ERP refused that field.
+  String? errorFor(String field) {
+    final list = errors[field];
+    return list == null || list.isEmpty ? null : list.first;
+  }
 
   /// ERP's machine code (`failed`, `inactive`, `not_allowed`, `throttled`).
   final String? code;
@@ -51,6 +66,7 @@ class StaffApi {
     String method,
     String path, {
     Object? body,
+    Map<String, dynamic>? query,
     bool auth = true,
   }) async {
     final sent = auth ? token : null;
@@ -58,6 +74,7 @@ class StaffApi {
       final res = await _dio.request<dynamic>(
         path,
         data: body,
+        queryParameters: query,
         options: Options(
           method: method,
           headers: {if (sent != null) 'Authorization': 'Bearer $sent'},
@@ -74,6 +91,13 @@ class StaffApi {
         pickString(record, const ['message', 'error']) ?? '',
         path: path,
         code: code,
+        errors: {
+          for (final e in asMap(record['errors']).entries)
+            e.key: [
+              for (final m in asList(e.value))
+                if (m is String) m,
+            ],
+        },
       );
     }
   }
@@ -130,4 +154,50 @@ class StaffApi {
   }
 
   Future<void> logout() async => _send('POST', '/auth/logout');
+
+  // --- Work screens (STF-03 … STF-09) ----------------------------------
+  //
+  // Each screen calls the paths in mynet-erp `docs/STAFF_APP_API.md` through
+  // these; the reply is the ERP's JSON object, read with `json.dart`.
+
+  Future<Json> get(String path, {Map<String, dynamic>? query}) async {
+    final res = await _send('GET', path, query: query) as Response<dynamic>;
+    return asMap(res.data);
+  }
+
+  Future<Json> post(String path, [Object? body]) async {
+    final res = await _send('POST', path, body: body) as Response<dynamic>;
+    return asMap(res.data);
+  }
+
+  Future<Json> patch(String path, Object? body) async {
+    final res = await _send('PATCH', path, body: body) as Response<dynamic>;
+    return asMap(res.data);
+  }
+
+  /// Multipart POST: [fields] plus files as `field → local paths`
+  /// (a list field is sent as `name[]`).
+  Future<Json> postFiles(
+    String path,
+    Map<String, Object?> fields, {
+    Map<String, List<String>> files = const {},
+  }) async {
+    final form = FormData();
+    for (final f in fields.entries) {
+      if (f.value != null) form.fields.add(MapEntry(f.key, '${f.value}'));
+    }
+    for (final f in files.entries) {
+      for (final file in f.value) {
+        form.files.add(MapEntry(f.key, await MultipartFile.fromFile(file)));
+      }
+    }
+    final res = await _send('POST', path, body: form) as Response<dynamic>;
+    return asMap(res.data);
+  }
+
+  /// Headers for an image the ERP serves only with the Bearer token
+  /// (note photos, receipt photos).
+  Map<String, String> get imageHeaders => {
+    if (token != null) 'Authorization': 'Bearer $token',
+  };
 }
