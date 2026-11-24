@@ -155,4 +155,87 @@ void main() {
     expect(find.text('Karim'), findsOneWidget);
     expect(find.text('600'), findsOneWidget);
   });
+
+  testWidgets('save never does nothing: it says what is missing, then saved', (
+    tester,
+  ) async {
+    final erp = FakeErp({
+      'GET /me': (_) => (
+        200,
+        {
+          'user': {
+            'id': 1,
+            'name': 'Rakib',
+            'permissions': ['collection.collect'],
+          },
+        },
+      ),
+      'GET /collection/clients': (_) => (
+        200,
+        {
+          'clients': [
+            {'id': 9, 'code': 'C-1001', 'name': 'Karim', 'due': 500},
+          ],
+        },
+      ),
+      'POST /collection/gateway': (o) => (
+        201,
+        {
+          'replayed': false,
+          'payment': {
+            'id': 813,
+            'receipt_no': 'R-000813',
+            'amount': o.data['amount'],
+            'method': 'nagad',
+            'approval_status': 'pending',
+            'paid_sms': 'after_approval',
+            'client': {'id': 9, 'name': 'Karim'},
+          },
+        },
+      ),
+    });
+    await _pump(tester, erp, const CollectScreen(cash: false));
+
+    // No client yet: a clear message, nothing sent.
+    await tester.tap(find.byKey(const ValueKey('collect-submit')));
+    await tester.pumpAndSettle();
+    expect(find.text('Pick the client first.'), findsOne);
+
+    // The search button works too, not only the keyboard.
+    await tester.enterText(find.byKey(const ValueKey('collect-search')), 'ka');
+    await tester.tap(find.byKey(const ValueKey('collect-search-go')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('pay-client-9')));
+    await tester.pumpAndSettle();
+    // The picked client is shown on its own; the due fills the amount.
+    expect(find.byKey(const ValueKey('collect-picked')), findsOne);
+    expect(find.byKey(const ValueKey('pay-client-9')), findsNothing);
+
+    await tester.tap(find.byKey(const ValueKey('collect-submit')));
+    await tester.pumpAndSettle();
+    expect(find.text('Enter the TrxID.'), findsOne);
+    expect(erp.calls, isNot(contains('POST /collection/gateway')));
+
+    await tester.enterText(find.byKey(const ValueKey('collect-txn')), 'NG1');
+    await tester.tap(find.byKey(const ValueKey('collect-submit')));
+    await tester.pumpAndSettle();
+
+    final body =
+        erp.requests.lastWhere((r) => r.uri.path.endsWith('/gateway')).data
+            as Map;
+    expect(body['amount'], 500);
+    expect(body['txn_id'], 'NG1');
+    expect(find.text('Saved. The money is taken.'), findsWidgets);
+    expect(find.text('Waiting for office approval'), findsOne);
+
+    // "Take another" gives an empty form for the next client.
+    tester
+        .state<ScaffoldMessengerState>(find.byType(ScaffoldMessenger))
+        .hideCurrentSnackBar();
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.byKey(const ValueKey('collect-another')));
+    await tester.tap(find.byKey(const ValueKey('collect-another')));
+    await tester.pumpAndSettle();
+    expect(find.byKey(const ValueKey('collect-search')), findsOne);
+  });
 }

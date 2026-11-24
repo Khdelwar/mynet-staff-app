@@ -1146,4 +1146,56 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get payslipOvertimeMinutes => 'ওভারটাইম (মিনিট)';
+
+  @override
+  String get collectionPickClient => 'আগে ক্লায়েন্ট বাছাই করুন।';
+
+  @override
+  String get collectionEnterAmount => 'টাকার পরিমাণ লিখুন।';
+
+  @override
+  String get collectionEnterTxn => 'TrxID লিখুন।';
+
+  @override
+  String get collectionEnterNote => 'কিসের খরচ, নোটে লিখুন।';
+
+  @override
+  String get collectionSaving => 'সেভ হচ্ছে…';
+
+  @override
+  String get collectionSaved => 'সেভ হয়েছে। টাকা নেওয়া হয়েছে।';
+
+  @override
+  String get collectionAlreadySaved => 'এটা আগেই সেভ হয়েছিল, দুইবার হয়নি।';
+
+  @override
+  String get collectionAnother => 'আরেকটা নিন';
+
+  @override
+  String get collectionDone => 'শেষ';
+
+  @override
+  String get collectionNoClients => 'কোনো ক্লায়েন্ট পাওয়া যায়নি।';
+
+  @override
+  String get collectionChange => 'বদলান';
+
+  @override
+  String get collectionDue => 'বকেয়া';
+
+  @override
+  String get collectionFind => 'খুঁজুন';
+
+  @override
+  String get collectionStatusPending => 'অফিসের অনুমোদনের অপেক্ষায়';
+
+  @override
+  String get collectionStatusApproved => 'অনুমোদিত';
+
+  @override
+  String get collectionExpenseSaved => 'খরচ সেভ হয়েছে, অনুমোদনের জন্য গেছে।';
+
+  @override
+  String get collectionHandoverSaved =>
+      'জমা পাঠানো হয়েছে, মালিকের গ্রহণের অপেক্ষায়।';
 }

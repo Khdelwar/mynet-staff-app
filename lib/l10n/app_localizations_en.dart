@@ -1151,4 +1151,57 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get payslipOvertimeMinutes => 'Overtime (minutes)';
+
+  @override
+  String get collectionPickClient => 'Pick the client first.';
+
+  @override
+  String get collectionEnterAmount => 'Enter the amount.';
+
+  @override
+  String get collectionEnterTxn => 'Enter the TrxID.';
+
+  @override
+  String get collectionEnterNote => 'Write what the expense was for.';
+
+  @override
+  String get collectionSaving => 'Saving…';
+
+  @override
+  String get collectionSaved => 'Saved. The money is taken.';
+
+  @override
+  String get collectionAlreadySaved =>
+      'This was already saved before; it was not saved twice.';
+
+  @override
+  String get collectionAnother => 'Take another';
+
+  @override
+  String get collectionDone => 'Done';
+
+  @override
+  String get collectionNoClients => 'No client found.';
+
+  @override
+  String get collectionChange => 'Change';
+
+  @override
+  String get collectionDue => 'Due';
+
+  @override
+  String get collectionFind => 'Search';
+
+  @override
+  String get collectionStatusPending => 'Waiting for office approval';
+
+  @override
+  String get collectionStatusApproved => 'Approved';
+
+  @override
+  String get collectionExpenseSaved => 'Expense saved and sent for approval.';
+
+  @override
+  String get collectionHandoverSaved =>
+      'Handover sent. Waiting for the owner to accept.';
 }

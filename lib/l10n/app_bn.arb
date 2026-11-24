@@ -462,5 +462,22 @@
   "payslipPresentDays": "উপস্থিত",
   "payslipAbsentDays": "অনুপস্থিত",
   "payslipLateDays": "দেরি",
-  "payslipOvertimeMinutes": "ওভারটাইম (মিনিট)"
+  "payslipOvertimeMinutes": "ওভারটাইম (মিনিট)",
+  "collectionPickClient": "আগে ক্লায়েন্ট বাছাই করুন।",
+  "collectionEnterAmount": "টাকার পরিমাণ লিখুন।",
+  "collectionEnterTxn": "TrxID লিখুন।",
+  "collectionEnterNote": "কিসের খরচ, নোটে লিখুন।",
+  "collectionSaving": "সেভ হচ্ছে…",
+  "collectionSaved": "সেভ হয়েছে। টাকা নেওয়া হয়েছে।",
+  "collectionAlreadySaved": "এটা আগেই সেভ হয়েছিল, দুইবার হয়নি।",
+  "collectionAnother": "আরেকটা নিন",
+  "collectionDone": "শেষ",
+  "collectionNoClients": "কোনো ক্লায়েন্ট পাওয়া যায়নি।",
+  "collectionChange": "বদলান",
+  "collectionDue": "বকেয়া",
+  "collectionFind": "খুঁজুন",
+  "collectionStatusPending": "অফিসের অনুমোদনের অপেক্ষায়",
+  "collectionStatusApproved": "অনুমোদিত",
+  "collectionExpenseSaved": "খরচ সেভ হয়েছে, অনুমোদনের জন্য গেছে।",
+  "collectionHandoverSaved": "জমা পাঠানো হয়েছে, মালিকের গ্রহণের অপেক্ষায়।"
 }

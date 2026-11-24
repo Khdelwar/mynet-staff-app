@@ -2245,6 +2245,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Overtime (minutes)'**
   String get payslipOvertimeMinutes;
+
+  /// No description provided for @collectionPickClient.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick the client first.'**
+  String get collectionPickClient;
+
+  /// No description provided for @collectionEnterAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the amount.'**
+  String get collectionEnterAmount;
+
+  /// No description provided for @collectionEnterTxn.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the TrxID.'**
+  String get collectionEnterTxn;
+
+  /// No description provided for @collectionEnterNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Write what the expense was for.'**
+  String get collectionEnterNote;
+
+  /// No description provided for @collectionSaving.
+  ///
+  /// In en, this message translates to:
+  /// **'Saving…'**
+  String get collectionSaving;
+
+  /// No description provided for @collectionSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved. The money is taken.'**
+  String get collectionSaved;
+
+  /// No description provided for @collectionAlreadySaved.
+  ///
+  /// In en, this message translates to:
+  /// **'This was already saved before; it was not saved twice.'**
+  String get collectionAlreadySaved;
+
+  /// No description provided for @collectionAnother.
+  ///
+  /// In en, this message translates to:
+  /// **'Take another'**
+  String get collectionAnother;
+
+  /// No description provided for @collectionDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get collectionDone;
+
+  /// No description provided for @collectionNoClients.
+  ///
+  /// In en, this message translates to:
+  /// **'No client found.'**
+  String get collectionNoClients;
+
+  /// No description provided for @collectionChange.
+  ///
+  /// In en, this message translates to:
+  /// **'Change'**
+  String get collectionChange;
+
+  /// No description provided for @collectionDue.
+  ///
+  /// In en, this message translates to:
+  /// **'Due'**
+  String get collectionDue;
+
+  /// No description provided for @collectionFind.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get collectionFind;
+
+  /// No description provided for @collectionStatusPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting for office approval'**
+  String get collectionStatusPending;
+
+  /// No description provided for @collectionStatusApproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Approved'**
+  String get collectionStatusApproved;
+
+  /// No description provided for @collectionExpenseSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Expense saved and sent for approval.'**
+  String get collectionExpenseSaved;
+
+  /// No description provided for @collectionHandoverSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Handover sent. Waiting for the owner to accept.'**
+  String get collectionHandoverSaved;
 }
 
 class _AppLocalizationsDelegate

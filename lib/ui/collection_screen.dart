@@ -63,83 +63,111 @@ class _CollectionScreenState extends ConsumerState<CollectionScreen> {
 
   Future<void> _moneyDialog({required bool expense}) async {
     final l = AppLocalizations.of(context);
+    final messenger = ScaffoldMessenger.of(context);
     final amount = TextEditingController();
     final note = TextEditingController();
     var owner = 'cash';
     String? receipt;
+    String? problem;
+    num? parsed;
     final key = newRequestKey();
     final ok = await showDialog<bool>(
       context: context,
-      builder: (dialog) => AlertDialog(
-        title: Text(expense ? l.collectionExpense : l.collectionHandover),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              key: const ValueKey('money-amount'),
-              controller: amount,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: l.collectionAmount),
-            ),
-            TextField(
-              key: const ValueKey('money-note'),
-              controller: note,
-              decoration: InputDecoration(labelText: l.collectionNote),
-            ),
-            // STF-06b: a photo of the receipt, for whoever approves it.
-            if (expense)
-              StatefulBuilder(
-                builder: (context, setLocal) => TextButton.icon(
-                  key: const ValueKey('expense-receipt'),
-                  onPressed: () async {
-                    final path = await ref
-                        .read(photoPickerProvider)
-                        .pick(PhotoSource.camera);
-                    if (path != null) setLocal(() => receipt = path);
-                  },
-                  icon: Icon(
-                    receipt == null
-                        ? Icons.add_a_photo_outlined
-                        : Icons.check_circle_outline,
+      builder: (dialog) => StatefulBuilder(
+        builder: (context, setLocal) => AlertDialog(
+          title: Text(expense ? l.collectionExpense : l.collectionHandover),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                if (problem != null)
+                  MessageBanner(problem!, tone: BannerTone.error),
+                TextField(
+                  key: const ValueKey('money-amount'),
+                  controller: amount,
+                  keyboardType: const TextInputType.numberWithOptions(
+                    decimal: true,
                   ),
-                  label: Text(
-                    receipt == null ? l.workReceiptPhoto : l.workReceiptAdded,
+                  decoration: InputDecoration(
+                    labelText: l.collectionAmount,
+                    prefixText: '৳ ',
                   ),
                 ),
-              ),
-            if (!expense)
-              StatefulBuilder(
-                builder: (context, setLocal) => DropdownButton<String>(
-                  key: const ValueKey('handover-owner'),
-                  value: owner,
-                  items: [
-                    DropdownMenuItem(
-                      value: 'cash',
-                      child: Text(l.collectionCashOwner),
-                    ),
-                    DropdownMenuItem(
-                      value: 'digital',
-                      child: Text(l.collectionDigitalOwner),
-                    ),
-                  ],
-                  onChanged: (value) {
-                    if (value != null) setLocal(() => owner = value);
-                  },
+                const SizedBox(height: 8),
+                TextField(
+                  key: const ValueKey('money-note'),
+                  controller: note,
+                  decoration: InputDecoration(labelText: l.collectionNote),
                 ),
-              ),
+                const SizedBox(height: 8),
+                // STF-06b: a photo of the receipt, for whoever approves it.
+                if (expense)
+                  TextButton.icon(
+                    key: const ValueKey('expense-receipt'),
+                    onPressed: () async {
+                      final path = await ref
+                          .read(photoPickerProvider)
+                          .pick(PhotoSource.camera);
+                      if (path != null) setLocal(() => receipt = path);
+                    },
+                    icon: Icon(
+                      receipt == null
+                          ? Icons.add_a_photo_outlined
+                          : Icons.check_circle_outline,
+                    ),
+                    label: Text(
+                      receipt == null ? l.workReceiptPhoto : l.workReceiptAdded,
+                    ),
+                  ),
+                if (!expense)
+                  DropdownButton<String>(
+                    key: const ValueKey('handover-owner'),
+                    isExpanded: true,
+                    value: owner,
+                    items: [
+                      DropdownMenuItem(
+                        value: 'cash',
+                        child: Text(l.collectionCashOwner),
+                      ),
+                      DropdownMenuItem(
+                        value: 'digital',
+                        child: Text(l.collectionDigitalOwner),
+                      ),
+                    ],
+                    onChanged: (value) {
+                      if (value != null) setLocal(() => owner = value);
+                    },
+                  ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(dialog).pop(false),
+              child: Text(l.cancel),
+            ),
+            FilledButton(
+              key: const ValueKey('money-save'),
+              onPressed: () {
+                // Say what is missing here, instead of closing and doing nothing.
+                final text = amount.text.trim();
+                parsed = num.tryParse(text);
+                final amountBad = expense
+                    ? (parsed == null || parsed! <= 0)
+                    : (text.isNotEmpty && (parsed == null || parsed! <= 0));
+                if (amountBad) {
+                  setLocal(() => problem = l.collectionEnterAmount);
+                } else if (expense && note.text.trim().isEmpty) {
+                  setLocal(() => problem = l.collectionEnterNote);
+                } else {
+                  Navigator.of(dialog).pop(true);
+                }
+              },
+              child: Text(l.collectionSave),
+            ),
           ],
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(dialog).pop(false),
-            child: Text(l.cancel),
-          ),
-          FilledButton(
-            key: const ValueKey('money-save'),
-            onPressed: () => Navigator.of(dialog).pop(true),
-            child: Text(l.collectionSave),
-          ),
-        ],
       ),
     );
     if (ok != true || !mounted) {
@@ -147,14 +175,12 @@ class _CollectionScreenState extends ConsumerState<CollectionScreen> {
       note.dispose();
       return;
     }
-    final parsed = num.tryParse(amount.text.trim());
     try {
       if (expense) {
-        if (parsed == null || note.text.trim().isEmpty) return;
         await ref
             .read(apiProvider)
             .addExpense(
-              amount: parsed,
+              amount: parsed!,
               note: note.text,
               requestKey: key,
               receiptPath: receipt,
@@ -169,21 +195,57 @@ class _CollectionScreenState extends ConsumerState<CollectionScreen> {
               note: note.text,
             );
       }
+      messenger.showSnackBar(
+        successSnack(
+          expense ? l.collectionExpenseSaved : l.collectionHandoverSaved,
+        ),
+      );
       if (mounted) await _load();
     } catch (e) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(errorText(l, e, l.errGeneric))));
+      messenger.showSnackBar(
+        SnackBar(content: Text(errorText(l, e, l.errGeneric))),
+      );
     } finally {
       amount.dispose();
       note.dispose();
     }
   }
 
-  void _openCollect({required bool cash}) {
-    Navigator.of(
+  Future<void> _openCollect({required bool cash}) async {
+    await Navigator.of(
       context,
     ).push(MaterialPageRoute<void>(builder: (_) => CollectScreen(cash: cash)));
+    // Back from taking money: show the new totals.
+    if (mounted) await _load();
+  }
+
+  Widget _action({
+    required String key,
+    required IconData icon,
+    required String label,
+    required VoidCallback? onPressed,
+    bool filled = false,
+  }) {
+    final child = Padding(
+      padding: const EdgeInsets.symmetric(vertical: 14),
+      child: Text(label, style: const TextStyle(fontSize: 16)),
+    );
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: filled
+          ? FilledButton.icon(
+              key: ValueKey(key),
+              onPressed: onPressed,
+              icon: Icon(icon),
+              label: child,
+            )
+          : OutlinedButton.icon(
+              key: ValueKey(key),
+              onPressed: onPressed,
+              icon: Icon(icon),
+              label: child,
+            ),
+    );
   }
 
   @override
@@ -241,30 +303,35 @@ class _CollectionScreenState extends ConsumerState<CollectionScreen> {
               ),
               const SizedBox(height: 12),
               if (summary.canCash)
-                FilledButton(
-                  key: const ValueKey('collect-cash'),
+                _action(
+                  key: 'collect-cash',
+                  icon: Icons.payments_outlined,
+                  label: l.collectionCash,
+                  filled: true,
                   onPressed: summary.holdBlocked
                       ? null
                       : () => _openCollect(cash: true),
-                  child: Text(l.collectionCash),
                 ),
               if (summary.canGateway)
-                OutlinedButton(
-                  key: const ValueKey('collect-gateway'),
+                _action(
+                  key: 'collect-gateway',
+                  icon: Icons.phone_android_outlined,
+                  label: l.collectionGateway,
                   onPressed: () => _openCollect(cash: false),
-                  child: Text(l.collectionGateway),
                 ),
               if (summary.canExpense)
-                OutlinedButton(
-                  key: const ValueKey('collect-expense'),
+                _action(
+                  key: 'collect-expense',
+                  icon: Icons.receipt_long_outlined,
+                  label: l.collectionExpense,
                   onPressed: () => _moneyDialog(expense: true),
-                  child: Text(l.collectionExpense),
                 ),
               if (summary.canHandover)
-                OutlinedButton(
-                  key: const ValueKey('collect-handover'),
+                _action(
+                  key: 'collect-handover',
+                  icon: Icons.move_to_inbox_outlined,
+                  label: l.collectionHandover,
                   onPressed: () => _moneyDialog(expense: false),
-                  child: Text(l.collectionHandover),
                 ),
               if (canApprove)
                 TextButton(
@@ -303,8 +370,12 @@ class _CollectScreenState extends ConsumerState<CollectScreen> {
   List<CollectionClient> _clients = const [];
   CollectionClient? _picked;
   PaymentReceipt? _receipt;
+  Object? _searchError;
   Object? _error;
+  String? _problem;
   bool _busy = false;
+  bool _searching = false;
+  bool _searched = false;
 
   @override
   void dispose() {
@@ -315,24 +386,40 @@ class _CollectScreenState extends ConsumerState<CollectScreen> {
     super.dispose();
   }
 
+  Future<void> _findClients(
+    Future<List<CollectionClient>> Function() fetch,
+  ) async {
+    setState(() {
+      _searchError = null;
+      _searching = true;
+    });
+    try {
+      final clients = await fetch();
+      if (!mounted) return;
+      setState(() {
+        _clients = clients;
+        _searching = false;
+        _searched = true;
+      });
+    } catch (e) {
+      if (!mounted) return;
+      setState(() {
+        _searching = false;
+        _searchError = e;
+      });
+    }
+  }
+
   Future<void> _searchClients() async {
     final q = _search.text.trim();
     if (q.length < 2) return;
-    setState(() => _error = null);
-    try {
-      final clients = await ref.read(apiProvider).collectionClients(q);
-      if (!mounted) return;
-      setState(() => _clients = clients);
-    } catch (e) {
-      if (!mounted) return;
-      setState(() => _error = e);
-    }
+    FocusScope.of(context).unfocus();
+    await _findClients(() => ref.read(apiProvider).collectionClients(q));
   }
 
   /// "Near me with due": the phone's position, the ERP's list (nearest first).
   Future<void> _nearMe() async {
     final l = AppLocalizations.of(context);
-    setState(() => _error = null);
     final fix = await ref.read(locationReaderProvider).current();
     if (!mounted) return;
     if (fix == null) {
@@ -340,19 +427,25 @@ class _CollectScreenState extends ConsumerState<CollectScreen> {
           .showSnackBar(SnackBar(content: Text(l.collectionNoLocation)));
       return;
     }
-    try {
-      final clients = await ref
+    await _findClients(
+      () => ref
           .read(apiProvider)
           .collectionClientsNear(
             latitude: fix.latitude,
             longitude: fix.longitude,
-          );
-      if (!mounted) return;
-      setState(() => _clients = clients);
-    } catch (e) {
-      if (!mounted) return;
-      setState(() => _error = e);
-    }
+          ),
+    );
+  }
+
+  void _pick(CollectionClient client) {
+    setState(() {
+      _picked = client;
+      _problem = null;
+      final due = client.due;
+      if (_amount.text.trim().isEmpty && due != null && due > 0) {
+        _amount.text = shownAmount(due);
+      }
+    });
   }
 
   /// The ERP shows due (and the near-me list) only with these rights.
@@ -368,30 +461,48 @@ class _CollectScreenState extends ConsumerState<CollectScreen> {
   }
 
   Future<void> _submit() async {
+    if (_busy) return;
+    final l = AppLocalizations.of(context);
     final client = _picked;
     final amount = num.tryParse(_amount.text.trim());
-    if (client == null || amount == null || _busy) return;
+    // Never a silent no-op: say what is missing.
+    final problem = client == null
+        ? l.collectionPickClient
+        : (amount == null || amount <= 0)
+        ? l.collectionEnterAmount
+        : (!widget.cash && _txn.text.trim().isEmpty)
+        ? l.collectionEnterTxn
+        : null;
+    if (problem != null) {
+      setState(() {
+        _problem = problem;
+        _error = null;
+      });
+      return;
+    }
+    FocusScope.of(context).unfocus();
     setState(() {
       _busy = true;
       _error = null;
+      _problem = null;
     });
     try {
       final receipt = widget.cash
           ? await ref
                 .read(apiProvider)
                 .collectCash(
-                  clientId: client.id,
-                  amount: amount,
+                  clientId: client!.id,
+                  amount: amount!,
                   requestKey: _key,
                   note: _note.text,
                 )
           : await ref
                 .read(apiProvider)
                 .collectGateway(
-                  clientId: client.id,
-                  amount: amount,
+                  clientId: client!.id,
+                  amount: amount!,
                   gateway: _gateway,
-                  txnId: _txn.text,
+                  txnId: _txn.text.trim(),
                   requestKey: _key,
                   note: _note.text,
                 );
@@ -401,6 +512,11 @@ class _CollectScreenState extends ConsumerState<CollectScreen> {
         _busy = false;
         _key = newRequestKey();
       });
+      ScaffoldMessenger.of(context).showSnackBar(
+        successSnack(
+          receipt.replayed ? l.collectionAlreadySaved : l.collectionSaved,
+        ),
+      );
     } on ApiException catch (e) {
       if (e.code == 'key_reused') _key = newRequestKey();
       if (!mounted) return;
@@ -415,6 +531,22 @@ class _CollectScreenState extends ConsumerState<CollectScreen> {
         _error = e;
       });
     }
+  }
+
+  /// A fresh form for the next client.
+  void _another() {
+    setState(() {
+      _receipt = null;
+      _picked = null;
+      _clients = const [];
+      _searched = false;
+      _error = null;
+      _problem = null;
+      _search.clear();
+      _amount.clear();
+      _note.clear();
+      _txn.clear();
+    });
   }
 
   final _receiptKey = GlobalKey();
@@ -442,10 +574,158 @@ class _CollectScreenState extends ConsumerState<CollectScreen> {
     }
   }
 
+  String? _status(AppLocalizations l, String? raw) => switch (raw) {
+    'pending' => l.collectionStatusPending,
+    'approved' => l.collectionStatusApproved,
+    _ => raw,
+  };
+
+  List<Widget> _receiptView(AppLocalizations l, PaymentReceipt receipt) => [
+    MessageBanner(
+      receipt.replayed ? l.collectionAlreadySaved : l.collectionSaved,
+      tone: BannerTone.success,
+    ),
+    // STF-10: the receipt is drawn here and shared as a picture
+    // (WhatsApp etc.); every value on it is the ERP's.
+    RepaintBoundary(
+      key: _receiptKey,
+      child: ColoredBox(
+        color: Theme.of(context).colorScheme.surface,
+        child: SectionCard(
+          // The receipt goes to the client: show the ISP's own name.
+          title:
+              ref.watch(authProvider.select((a) => a.user?.companyName)) ??
+              l.appTitle,
+          children: [
+            InfoRow(l.collectionReceipt, receipt.receiptNo),
+            if (receipt.clientName != null)
+              InfoRow(l.supportClient, receipt.clientName),
+            InfoRow(l.collectionAmount, '৳ ${shownAmount(receipt.amount)}'),
+            if (receipt.method != null) InfoRow(l.workMethod, receipt.method),
+            InfoRow(l.collectionApproval, _status(l, receipt.approvalStatus)),
+            InfoRow(
+              l.collectionPaidSms,
+              receipt.paidSms == 'after_approval'
+                  ? l.collectionSmsLater
+                  : receipt.paidSms,
+            ),
+          ],
+        ),
+      ),
+    ),
+    FilledButton.icon(
+      key: const ValueKey('share-receipt'),
+      onPressed: () => _shareReceipt(receipt),
+      icon: const Icon(Icons.share_outlined),
+      label: Text(l.collectionShareReceipt),
+    ),
+    const SizedBox(height: 8),
+    OutlinedButton.icon(
+      key: const ValueKey('collect-another'),
+      onPressed: _another,
+      icon: const Icon(Icons.add),
+      label: Text(l.collectionAnother),
+    ),
+    TextButton(
+      key: const ValueKey('collect-done'),
+      onPressed: () => Navigator.of(context).maybePop(),
+      child: Text(l.collectionDone),
+    ),
+  ];
+
+  Widget _pickedCard(AppLocalizations l, CollectionClient client) {
+    final scheme = Theme.of(context).colorScheme;
+    return Card(
+      key: const ValueKey('collect-picked'),
+      color: scheme.primaryContainer,
+      margin: const EdgeInsets.only(bottom: 12),
+      child: ListTile(
+        leading: Icon(Icons.check_circle, color: scheme.primary),
+        title: Text(client.name ?? '—'),
+        subtitle: Text(
+          [
+            client.code,
+            if (client.due != null)
+              '${l.collectionDue} ৳ ${shownAmount(client.due)}',
+          ].whereType<String>().join(' · '),
+        ),
+        trailing: TextButton(
+          key: const ValueKey('collect-change-client'),
+          onPressed: () => setState(() => _picked = null),
+          child: Text(l.collectionChange),
+        ),
+      ),
+    );
+  }
+
+  List<Widget> _clientPicker(AppLocalizations l) => [
+    TextField(
+      key: const ValueKey('collect-search'),
+      controller: _search,
+      textInputAction: TextInputAction.search,
+      decoration: InputDecoration(
+        labelText: l.collectionSearch,
+        border: const OutlineInputBorder(),
+        suffixIcon: IconButton(
+          key: const ValueKey('collect-search-go'),
+          tooltip: l.collectionFind,
+          icon: const Icon(Icons.search),
+          onPressed: _searchClients,
+        ),
+      ),
+      onSubmitted: (_) => _searchClients(),
+    ),
+    if (_canSeeDue)
+      Align(
+        alignment: Alignment.centerLeft,
+        child: TextButton.icon(
+          key: const ValueKey('collect-near-me'),
+          onPressed: _nearMe,
+          icon: const Icon(Icons.near_me_outlined),
+          label: Text(l.collectionNearMe),
+        ),
+      ),
+    if (_searchError != null)
+      MessageBanner(
+        errorText(l, _searchError!, l.errGeneric),
+        tone: BannerTone.error,
+      ),
+    if (_searching)
+      const Padding(
+        padding: EdgeInsets.all(12),
+        child: Center(child: CircularProgressIndicator()),
+      )
+    else if (_searched && _clients.isEmpty)
+      MessageBanner(l.collectionNoClients),
+    for (final client in _clients)
+      Card(
+        margin: const EdgeInsets.only(bottom: 6),
+        child: ListTile(
+          key: ValueKey('pay-client-${client.id}'),
+          leading: const Icon(Icons.person_outline),
+          title: Text(client.name ?? '—'),
+          subtitle: Text(
+            [
+              client.code,
+              if (client.due != null)
+                '${l.collectionDue} ৳ ${shownAmount(client.due)}',
+              if (client.distanceM != null)
+                l.collectionMetres(client.distanceM!.round()),
+            ].whereType<String>().join(' · '),
+          ),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => _pick(client),
+        ),
+      ),
+    const SizedBox(height: 8),
+  ];
+
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
     final receipt = _receipt;
+    final picked = _picked;
+    const gap = SizedBox(height: 12);
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.cash ? l.collectionCash : l.collectionGateway),
@@ -454,91 +734,28 @@ class _CollectScreenState extends ConsumerState<CollectScreen> {
         key: const ValueKey('collect'),
         padding: const EdgeInsets.all(16),
         children: [
-          if (_error != null)
-            MessageBanner(
-              errorText(l, _error!, l.errGeneric),
-              tone: BannerTone.error,
-            ),
-          if (receipt != null) ...[
-            // STF-10: the receipt is drawn here and shared as a picture
-            // (WhatsApp etc.); every value on it is the ERP's.
-            RepaintBoundary(
-              key: _receiptKey,
-              child: ColoredBox(
-                color: Theme.of(context).colorScheme.surface,
-                child: SectionCard(
-                  // The receipt goes to the client: show the ISP's own name.
-                  title:
-                      ref.watch(
-                        authProvider.select((a) => a.user?.companyName),
-                      ) ??
-                      l.appTitle,
-                  children: [
-                    InfoRow(l.collectionReceipt, receipt.receiptNo),
-                    if (receipt.clientName != null)
-                      InfoRow(l.supportClient, receipt.clientName),
-                    InfoRow(l.collectionAmount, shownAmount(receipt.amount)),
-                    if (receipt.method != null)
-                      InfoRow(l.workMethod, receipt.method),
-                    InfoRow(l.collectionApproval, receipt.approvalStatus),
-                    InfoRow(
-                      l.collectionPaidSms,
-                      receipt.paidSms == 'after_approval'
-                          ? l.collectionSmsLater
-                          : receipt.paidSms,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            FilledButton.icon(
-              key: const ValueKey('share-receipt'),
-              onPressed: () => _shareReceipt(receipt),
-              icon: const Icon(Icons.share_outlined),
-              label: Text(l.collectionShareReceipt),
-            ),
-          ] else ...[
-            TextField(
-              key: const ValueKey('collect-search'),
-              controller: _search,
-              decoration: InputDecoration(labelText: l.collectionSearch),
-              onSubmitted: (_) => _searchClients(),
-            ),
-            if (_canSeeDue)
-              Align(
-                alignment: Alignment.centerLeft,
-                child: TextButton.icon(
-                  key: const ValueKey('collect-near-me'),
-                  onPressed: _nearMe,
-                  icon: const Icon(Icons.near_me_outlined),
-                  label: Text(l.collectionNearMe),
-                ),
-              ),
-            for (final client in _clients)
-              ListTile(
-                key: ValueKey('pay-client-${client.id}'),
-                title: Text(client.name ?? '—'),
-                subtitle: Text(
-                  [
-                    client.code,
-                    if (client.due != null) shownAmount(client.due),
-                    if (client.distanceM != null)
-                      l.collectionMetres(client.distanceM!.round()),
-                  ].whereType<String>().join(' · '),
-                ),
-                selected: _picked?.id == client.id,
-                onTap: () => setState(() => _picked = client),
-              ),
+          if (receipt != null)
+            ..._receiptView(l, receipt)
+          else ...[
+            if (picked != null) _pickedCard(l, picked) else ..._clientPicker(l),
             TextField(
               key: const ValueKey('collect-amount'),
               controller: _amount,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: l.collectionAmount),
+              keyboardType: const TextInputType.numberWithOptions(
+                decimal: true,
+              ),
+              decoration: InputDecoration(
+                labelText: l.collectionAmount,
+                prefixText: '৳ ',
+                border: const OutlineInputBorder(),
+              ),
             ),
             if (!widget.cash) ...[
-              DropdownButton<String>(
+              gap,
+              DropdownButtonFormField<String>(
                 key: const ValueKey('collect-gateway-pick'),
-                value: _gateway,
+                initialValue: _gateway,
+                decoration: const InputDecoration(border: OutlineInputBorder()),
                 items: const [
                   DropdownMenuItem(value: 'bkash', child: Text('bKash')),
                   DropdownMenuItem(value: 'nagad', child: Text('Nagad')),
@@ -549,22 +766,55 @@ class _CollectScreenState extends ConsumerState<CollectScreen> {
                   if (value != null) setState(() => _gateway = value);
                 },
               ),
+              gap,
               TextField(
                 key: const ValueKey('collect-txn'),
                 controller: _txn,
-                decoration: InputDecoration(labelText: l.collectionTxn),
+                decoration: InputDecoration(
+                  labelText: l.collectionTxn,
+                  border: const OutlineInputBorder(),
+                ),
               ),
             ],
+            gap,
             TextField(
               key: const ValueKey('collect-note'),
               controller: _note,
-              decoration: InputDecoration(labelText: l.collectionNote),
+              decoration: InputDecoration(
+                labelText: l.collectionNote,
+                border: const OutlineInputBorder(),
+              ),
             ),
-            const SizedBox(height: 12),
-            FilledButton(
+            gap,
+            // Problems sit right above the button, where the eye already is.
+            if (_problem != null)
+              MessageBanner(
+                _problem!,
+                key: const ValueKey('collect-problem'),
+                tone: BannerTone.error,
+              ),
+            if (_error != null)
+              MessageBanner(
+                errorText(l, _error!, l.errGeneric),
+                tone: BannerTone.error,
+              ),
+            FilledButton.icon(
               key: const ValueKey('collect-submit'),
               onPressed: _busy ? null : _submit,
-              child: Text(l.collectionSave),
+              icon: _busy
+                  ? const SizedBox(
+                      width: 18,
+                      height: 18,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                  : const Icon(Icons.check),
+              label: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 14),
+                child: Text(
+                  _busy ? l.collectionSaving : l.collectionSave,
+                  style: const TextStyle(fontSize: 16),
+                ),
+              ),
             ),
           ],
         ],

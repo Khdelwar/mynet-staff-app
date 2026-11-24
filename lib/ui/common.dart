@@ -81,7 +81,7 @@ class InfoRow extends StatelessWidget {
   }
 }
 
-enum BannerTone { info, warning, error }
+enum BannerTone { info, success, warning, error }
 
 class MessageBanner extends StatelessWidget {
   const MessageBanner(this.text, {super.key, this.tone = BannerTone.info});
@@ -97,6 +97,11 @@ class MessageBanner extends StatelessWidget {
         scheme.errorContainer,
         scheme.onErrorContainer,
         Icons.error_outline,
+      ),
+      BannerTone.success => (
+        dark ? const Color(0xFF0F3D22) : const Color(0xFFD7F5E1),
+        dark ? const Color(0xFFA6E9BE) : const Color(0xFF0B5A2B),
+        Icons.check_circle_outline,
       ),
       BannerTone.warning => (
         dark ? const Color(0xFF4A3A00) : const Color(0xFFFFF3CD),
@@ -128,3 +133,17 @@ class MessageBanner extends StatelessWidget {
     );
   }
 }
+
+/// A green "it worked" message, so a save is never silent.
+SnackBar successSnack(String text) => SnackBar(
+  backgroundColor: const Color(0xFF1B7F3B),
+  content: Row(
+    children: [
+      const Icon(Icons.check_circle, color: Colors.white),
+      const SizedBox(width: 10),
+      Expanded(
+        child: Text(text, style: const TextStyle(color: Colors.white)),
+      ),
+    ],
+  ),
+);
