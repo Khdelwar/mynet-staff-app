@@ -507,5 +507,22 @@
   "payslipPresentDays": "Present",
   "payslipAbsentDays": "Absent",
   "payslipLateDays": "Late",
-  "payslipOvertimeMinutes": "Overtime (minutes)"
+  "payslipOvertimeMinutes": "Overtime (minutes)",
+  "collectionPickClient": "Pick the client first.",
+  "collectionEnterAmount": "Enter the amount.",
+  "collectionEnterTxn": "Enter the TrxID.",
+  "collectionEnterNote": "Write what the expense was for.",
+  "collectionSaving": "Saving…",
+  "collectionSaved": "Saved. The money is taken.",
+  "collectionAlreadySaved": "This was already saved before; it was not saved twice.",
+  "collectionAnother": "Take another",
+  "collectionDone": "Done",
+  "collectionNoClients": "No client found.",
+  "collectionChange": "Change",
+  "collectionDue": "Due",
+  "collectionFind": "Search",
+  "collectionStatusPending": "Waiting for office approval",
+  "collectionStatusApproved": "Approved",
+  "collectionExpenseSaved": "Expense saved and sent for approval.",
+  "collectionHandoverSaved": "Handover sent. Waiting for the owner to accept."
 }
