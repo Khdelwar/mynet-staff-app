@@ -210,6 +210,39 @@ void main() {
       );
     });
 
+    test('when the ERP sends screens, they decide the buttons', () {
+      // An extra per-user grant (collection.expense) opens the collection
+      // screen on the ERP even though the old app list did not have it.
+      final user = StaffUser.fromJson({
+        'user': {
+          'id': 8,
+          'name': 'Karim',
+          'permissions': ['staff.expense.submit'],
+          'screens': ['collection'],
+        },
+      });
+      final labels = featuresFor(user).map((f) => f.screen).toList();
+      expect(labels, ['collection']);
+    });
+
+    test('approval-only people get their own Approvals button', () {
+      final user = StaffUser.fromJson({
+        'user': {
+          'id': 9,
+          'name': 'Manager',
+          'permissions': ['approvals.cash'],
+          'screens': ['approvals'],
+        },
+      });
+      expect(featuresFor(user).map((f) => f.screen), ['approvals']);
+
+      final noScreens = StaffUser.fromJson({
+        'id': 9,
+        'permissions': ['ledger.approve'],
+      });
+      expect(featuresFor(noScreens).map((f) => f.screen), ['approvals']);
+    });
+
     test('roles and screens are read from user, company from the root', () {
       final user = StaffUser.fromJson({
         'user': {

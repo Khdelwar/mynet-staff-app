@@ -5,6 +5,7 @@ import '../api/models.dart';
 import '../l10n/app_localizations.dart';
 import '../nav/targets.dart';
 import '../state/providers.dart';
+import 'approvals_screen.dart';
 import 'assign_screen.dart';
 import 'chat_screen.dart';
 import 'clients_screen.dart';
@@ -36,7 +37,9 @@ class Feature {
   final WidgetBuilder? open;
 
   /// Drawn when `/me` grants the permission. When the ERP also sent a
-  /// `screens` list, the feature's screen has to be on it.
+  /// `screens` list, the feature's screen has to be on it. The permission
+  /// lists here match the ERP API routes, so an extra per-user grant that
+  /// opens the API also shows the button.
   bool allowed(StaffUser user) {
     final byPermission = user.can(permission) || also.any(user.can);
     if (user.screens.isNotEmpty && screen != null) {
@@ -61,13 +64,28 @@ final features = <Feature>[
     Icons.payments_outlined,
     (l) => l.featureCollection,
     screen: 'collection',
+    // Same list as the ERP's GET /collection/summary.
     also: const [
       'collection.gateway',
       'collection.expense',
       'collection.view',
       'billing.collect',
+      'collection.sell',
+      'staff.expense.submit',
+      'inventory.sell',
+      'collection.approve',
     ],
     open: _openCollection,
+  ),
+  // Approval-only people (cash / collections / ledger) cannot open the
+  // Collection screen, so approvals have their own button.
+  Feature(
+    'collection.approve',
+    Icons.fact_check_outlined,
+    (l) => l.featureApprovals,
+    screen: 'approvals',
+    also: const ['approvals.cash', 'approvals.collections', 'ledger.approve'],
+    open: _openApprovals,
   ),
   Feature(
     'tickets.view',
@@ -176,6 +194,8 @@ Widget _openClients(BuildContext context) => const ClientListScreen();
 Widget _openChat(BuildContext context) => const ChatListScreen();
 
 Widget _openCollection(BuildContext context) => const CollectionScreen();
+
+Widget _openApprovals(BuildContext context) => const ApprovalsScreen();
 
 Widget _openDueList(BuildContext context) => const DueListScreen();
 
