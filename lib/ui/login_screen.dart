@@ -19,6 +19,7 @@ class LoginScreen extends ConsumerStatefulWidget {
 
 class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _form = GlobalKey<FormState>();
+  final _server = TextEditingController();
   final _email = TextEditingController();
   final _password = TextEditingController();
   final _code = TextEditingController();
@@ -27,8 +28,19 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   String? _error;
   TwoFactorNeeded? _twoFactor;
 
+  /// Shows the ERP address field even though one is saved.
+  bool _editServer = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final saved = ref.read(serverProvider);
+    if (saved != null) _server.text = AppConfig.displayServer(saved);
+  }
+
   @override
   void dispose() {
+    _server.dispose();
     _email.dispose();
     _password.dispose();
     _code.dispose();
@@ -53,6 +65,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   String _message(Object e) {
     final l = AppLocalizations.of(context);
     if (e is ApiException && !e.isNetwork && !AppConfig.debugApi) {
+      // Not an ERP at that address: a web page, or nothing at the API path.
+      if (_twoFactor == null && const [200, 404, 405].contains(e.status)) {
+        return l.serverNotErp;
+      }
       if (_twoFactor != null && (e.status == 422 || e.status == 401)) {
         return e.message.isNotEmpty && e.status == 422
             ? e.message
@@ -68,7 +84,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   Future<void> _signIn() => _run(() async {
     final outcome = await ref
         .read(authProvider.notifier)
-        .login(_email.text, _password.text);
+        .login(
+          _email.text,
+          _password.text,
+          server: AppConfig.normalizeServer(_server.text),
+        );
     if (outcome is TwoFactorNeeded && mounted) {
       _code.clear();
       setState(() => _twoFactor = outcome);
@@ -87,7 +107,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
     final theme = Theme.of(context);
-    final configured = ref.watch(configuredProvider);
+    final saved = ref.watch(serverProvider);
+    final showServer = saved == null || _editServer;
     final ended = ref.watch(authProvider.select((a) => a.ended));
     final endMessage = ref.watch(authProvider.select((a) => a.endMessage));
     final step = _twoFactor;
@@ -145,22 +166,20 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 28),
-                    if (!configured)
-                      MessageBanner(l.notConfigured, tone: BannerTone.error),
                     if (ended && step == null && _error == null)
                       MessageBanner(
                         endMessage ?? l.sessionEnded,
                         tone: BannerTone.warning,
                       ),
-                    if (step == null) ..._credentials(l, configured),
+                    if (step == null) ..._credentials(l, showServer, saved),
                     if (step != null) ..._codeStep(l, step),
                     if (_error != null)
                       MessageBanner(_error!, tone: BannerTone.error),
                     FilledButton(
                       key: const ValueKey('submit'),
-                      onPressed: configured && !_busy
-                          ? (step == null ? _signIn : _verify)
-                          : null,
+                      onPressed: _busy
+                          ? null
+                          : (step == null ? _signIn : _verify),
                       child: _busy
                           ? const SizedBox.square(
                               dimension: 20,
@@ -188,11 +207,55 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     );
   }
 
-  List<Widget> _credentials(AppLocalizations l, bool configured) => [
+  List<Widget> _credentials(
+    AppLocalizations l,
+    bool showServer,
+    String? saved,
+  ) => [
+    if (showServer) ...[
+      TextFormField(
+        key: const ValueKey('server'),
+        controller: _server,
+        enabled: !_busy,
+        keyboardType: TextInputType.url,
+        autocorrect: false,
+        textInputAction: TextInputAction.next,
+        decoration: InputDecoration(
+          labelText: l.serverLabel,
+          hintText: l.serverHint,
+          helperText: l.serverHelp,
+          helperMaxLines: 3,
+          prefixIcon: const Icon(Icons.dns_outlined),
+        ),
+        validator: (v) =>
+            AppConfig.normalizeServer(v ?? '') == null ? l.serverInvalid : null,
+      ),
+      const SizedBox(height: 14),
+    ] else if (saved != null) ...[
+      Row(
+        children: [
+          const Icon(Icons.dns_outlined, size: 18),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              AppConfig.displayServer(saved),
+              key: const ValueKey('server-name'),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          TextButton(
+            key: const ValueKey('server-change'),
+            onPressed: _busy ? null : () => setState(() => _editServer = true),
+            child: Text(l.serverChange),
+          ),
+        ],
+      ),
+      const SizedBox(height: 8),
+    ],
     TextFormField(
       key: const ValueKey('email'),
       controller: _email,
-      enabled: configured && !_busy,
+      enabled: !_busy,
       keyboardType: TextInputType.emailAddress,
       autofillHints: const [AutofillHints.email],
       textInputAction: TextInputAction.next,
@@ -211,7 +274,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     TextFormField(
       key: const ValueKey('password'),
       controller: _password,
-      enabled: configured && !_busy,
+      enabled: !_busy,
       obscureText: !_showPassword,
       autofillHints: const [AutofillHints.password],
       onFieldSubmitted: (_) => _signIn(),

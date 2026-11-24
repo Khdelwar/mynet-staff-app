@@ -46,7 +46,7 @@ void main() {
       ProviderScope(
         overrides: [
           prefsProvider.overrideWithValue(prefs),
-          configuredProvider.overrideWithValue(true),
+          serverProvider.overrideWith(FixedServer.new),
           secretStoreProvider.overrideWithValue(MemorySecretStore()),
           apiProvider.overrideWith((ref) => StaffApi(dio: erp.dio)),
         ],

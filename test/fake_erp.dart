@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
+import 'package:mynet_staff/state/providers.dart';
 
 /// Answers ERP calls from a table of `METHOD /path` → handler.
 class FakeErp implements HttpClientAdapter {
@@ -55,4 +56,10 @@ class FakeErp implements HttpClientAdapter {
 
   @override
   void close({bool force = false}) {}
+}
+
+/// The phone already has `https://erp.test` saved as its ERP address.
+class FixedServer extends ServerController {
+  @override
+  String? build() => 'https://erp.test';
 }

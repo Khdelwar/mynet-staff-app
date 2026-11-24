@@ -134,9 +134,10 @@ class TicketPhoto {
     if (value.startsWith('http://') || value.startsWith('https://')) {
       return value;
     }
-    if (!AppConfig.isConfigured) return value;
+    final server = AppConfig.activeServer;
+    if (server == null) return value;
     final path = value.startsWith('/') ? value : '/$value';
-    return '${AppConfig.erpBaseUrl}$path';
+    return '$server$path';
   }
 
   factory TicketPhoto.fromJson(Object? raw) {
