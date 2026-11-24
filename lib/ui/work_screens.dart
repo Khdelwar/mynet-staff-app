@@ -5,6 +5,7 @@ import '../api/collection.dart';
 import '../api/staff_api.dart';
 import '../api/work.dart';
 import '../l10n/app_localizations.dart';
+import '../state/field.dart';
 import '../state/providers.dart';
 import 'clients_screen.dart' show erpAmount;
 import 'common.dart';
@@ -118,6 +119,7 @@ Future<String?> _askText(
   required String title,
   required String label,
   bool number = false,
+  Future<String?> Function()? scan,
 }) {
   final l = AppLocalizations.of(context);
   final controller = TextEditingController();
@@ -132,7 +134,23 @@ Future<String?> _askText(
         keyboardType: number
             ? const TextInputType.numberWithOptions(decimal: true)
             : null,
-        decoration: InputDecoration(labelText: label),
+        decoration: InputDecoration(
+          labelText: label,
+          // STF-10: read the code with the camera instead of typing it.
+          suffixIcon: scan == null
+              ? null
+              : IconButton(
+                  key: const ValueKey('ask-scan'),
+                  tooltip: l.scanTitle,
+                  icon: const Icon(Icons.qr_code_scanner),
+                  onPressed: () async {
+                    final code = await scan();
+                    if (code != null && dialog.mounted) {
+                      Navigator.of(dialog).pop(code);
+                    }
+                  },
+                ),
+        ),
       ),
       actions: [
         TextButton(
@@ -198,6 +216,7 @@ class _MaterialsScreenState extends ConsumerState<MaterialsScreen> {
       context,
       title: l.workScan,
       label: l.workCodeHint,
+      scan: () => ref.read(codeScannerProvider).scan(context),
     );
     if (code == null || code.isEmpty || !mounted) return;
     final key = newRequestKey();
@@ -513,6 +532,17 @@ class _InstallScreenState extends ConsumerState<InstallScreen> {
                 decoration: InputDecoration(
                   labelText: 'ONU SN',
                   errorText: _errors['onu_sn'],
+                  suffixIcon: IconButton(
+                    key: const ValueKey('install-sn-scan'),
+                    tooltip: l.scanTitle,
+                    icon: const Icon(Icons.qr_code_scanner),
+                    onPressed: () async {
+                      final code = await ref
+                          .read(codeScannerProvider)
+                          .scan(context);
+                      if (code != null) _sn.text = code;
+                    },
+                  ),
                 ),
               ),
               const SizedBox(height: 12),
@@ -668,6 +698,7 @@ class _SalesScreenState extends ConsumerState<SalesScreen> {
       context,
       title: l.workScan,
       label: l.workCodeHint,
+      scan: () => ref.read(codeScannerProvider).scan(context),
     );
     if (code == null || code.isEmpty || !mounted) return;
     final messenger = ScaffoldMessenger.of(context);

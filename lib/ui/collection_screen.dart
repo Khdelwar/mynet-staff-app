@@ -1,4 +1,7 @@
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../api/collection.dart';
@@ -414,6 +417,31 @@ class _CollectScreenState extends ConsumerState<CollectScreen> {
     }
   }
 
+  final _receiptKey = GlobalKey();
+
+  Future<void> _shareReceipt(PaymentReceipt receipt) async {
+    final l = AppLocalizations.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    final ratio = MediaQuery.devicePixelRatioOf(context);
+    try {
+      final boundary =
+          _receiptKey.currentContext!.findRenderObject()!
+              as RenderRepaintBoundary;
+      final image = await boundary.toImage(pixelRatio: ratio);
+      final data = await image.toByteData(format: ui.ImageByteFormat.png);
+      if (data == null) throw StateError('no image');
+      await ref
+          .read(imageSharerProvider)
+          .sharePng(
+            data.buffer.asUint8List(),
+            name: receipt.receiptNo ?? 'receipt',
+            text: '${l.collectionReceipt} ${receipt.receiptNo ?? ''}'.trim(),
+          );
+    } catch (_) {
+      messenger.showSnackBar(SnackBar(content: Text(l.errGeneric)));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
@@ -431,21 +459,40 @@ class _CollectScreenState extends ConsumerState<CollectScreen> {
               errorText(l, _error!, l.errGeneric),
               tone: BannerTone.error,
             ),
-          if (receipt != null)
-            SectionCard(
-              children: [
-                InfoRow(l.collectionReceipt, receipt.receiptNo),
-                InfoRow(l.collectionAmount, shownAmount(receipt.amount)),
-                InfoRow(l.collectionApproval, receipt.approvalStatus),
-                InfoRow(
-                  l.collectionPaidSms,
-                  receipt.paidSms == 'after_approval'
-                      ? l.collectionSmsLater
-                      : receipt.paidSms,
+          if (receipt != null) ...[
+            // STF-10: the receipt is drawn here and shared as a picture
+            // (WhatsApp etc.); every value on it is the ERP's.
+            RepaintBoundary(
+              key: _receiptKey,
+              child: ColoredBox(
+                color: Theme.of(context).colorScheme.surface,
+                child: SectionCard(
+                  title: l.appTitle,
+                  children: [
+                    InfoRow(l.collectionReceipt, receipt.receiptNo),
+                    if (receipt.clientName != null)
+                      InfoRow(l.supportClient, receipt.clientName),
+                    InfoRow(l.collectionAmount, shownAmount(receipt.amount)),
+                    if (receipt.method != null)
+                      InfoRow(l.workMethod, receipt.method),
+                    InfoRow(l.collectionApproval, receipt.approvalStatus),
+                    InfoRow(
+                      l.collectionPaidSms,
+                      receipt.paidSms == 'after_approval'
+                          ? l.collectionSmsLater
+                          : receipt.paidSms,
+                    ),
+                  ],
                 ),
-              ],
-            )
-          else ...[
+              ),
+            ),
+            FilledButton.icon(
+              key: const ValueKey('share-receipt'),
+              onPressed: () => _shareReceipt(receipt),
+              icon: const Icon(Icons.share_outlined),
+              label: Text(l.collectionShareReceipt),
+            ),
+          ] else ...[
             TextField(
               key: const ValueKey('collect-search'),
               controller: _search,

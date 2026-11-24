@@ -33,6 +33,7 @@ in mynet-erp `docs/STAFF_APP_API.md`.
 | Approvals | Handovers sent to you (approve all or part, reject with why) and others' expenses with the receipt photo (approve / reject) | `GET /collection/approvals`, `POST /collection/handovers/{id}/approve|reject`, `POST /collection/expenses/{id}/approve|reject` |
 | New client / contact / new ticket | Quick add (PPPoE, package, optional POP / router), fix phone / address / NID, open a ticket and go to the nearest technicians | `GET /clients/form-options`, `POST /clients`, `PATCH /clients/{id}/contact`, `GET /tickets/options`, `POST /tickets` |
 | Near me with due | From the collect screen: clients with a due near the phone, nearest first | `GET /collection/clients?lat&lng&due_only=1` |
+| Code scan / receipt share | Camera reads ONU / item / part codes (ticket scan, sales, install ONU SN); the payment receipt is shared as a picture (no printer) | (same endpoints) |
 
 `android/app/google-services.json` and `ios/Runner/GoogleService-Info.plist` are in git for app id `net.mynet.staff` (Firebase project `mynet-7e283`). The Android file also lists the customer app package. Push stays off if Firebase refuses the token.
 

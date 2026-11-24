@@ -2047,6 +2047,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Ticket opened.'**
   String get supportTicketOpened;
+
+  /// No description provided for @scanTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan code'**
+  String get scanTitle;
+
+  /// No description provided for @scanTorch.
+  ///
+  /// In en, this message translates to:
+  /// **'Torch'**
+  String get scanTorch;
+
+  /// No description provided for @scanCameraOff.
+  ///
+  /// In en, this message translates to:
+  /// **'The camera is off or not allowed. Type the code instead.'**
+  String get scanCameraOff;
+
+  /// No description provided for @collectionShareReceipt.
+  ///
+  /// In en, this message translates to:
+  /// **'Share receipt'**
+  String get collectionShareReceipt;
 }
 
 class _AppLocalizationsDelegate
