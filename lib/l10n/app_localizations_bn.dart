@@ -1044,4 +1044,16 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get supportTicketOpened => 'টিকেট খোলা হয়েছে।';
+
+  @override
+  String get scanTitle => 'কোড স্ক্যান';
+
+  @override
+  String get scanTorch => 'টর্চ';
+
+  @override
+  String get scanCameraOff => 'ক্যামেরা বন্ধ বা অনুমতি নেই। কোড হাতে লিখুন।';
+
+  @override
+  String get collectionShareReceipt => 'রসিদ শেয়ার';
 }

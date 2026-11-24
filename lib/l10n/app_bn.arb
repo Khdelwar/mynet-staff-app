@@ -429,5 +429,9 @@
   "supportPppoePassword": "PPPoE পাসওয়ার্ড",
   "supportPppoeUser": "PPPoE ইউজার",
   "supportSubject": "বিষয়",
-  "supportTicketOpened": "টিকেট খোলা হয়েছে।"
+  "supportTicketOpened": "টিকেট খোলা হয়েছে।",
+  "scanTitle": "কোড স্ক্যান",
+  "scanTorch": "টর্চ",
+  "scanCameraOff": "ক্যামেরা বন্ধ বা অনুমতি নেই। কোড হাতে লিখুন।",
+  "collectionShareReceipt": "রসিদ শেয়ার"
 }

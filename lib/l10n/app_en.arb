@@ -474,5 +474,9 @@
   "supportPppoePassword": "PPPoE password",
   "supportPppoeUser": "PPPoE username",
   "supportSubject": "Subject",
-  "supportTicketOpened": "Ticket opened."
+  "supportTicketOpened": "Ticket opened.",
+  "scanTitle": "Scan code",
+  "scanTorch": "Torch",
+  "scanCameraOff": "The camera is off or not allowed. Type the code instead.",
+  "collectionShareReceipt": "Share receipt"
 }

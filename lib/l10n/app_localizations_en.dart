@@ -1047,4 +1047,17 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get supportTicketOpened => 'Ticket opened.';
+
+  @override
+  String get scanTitle => 'Scan code';
+
+  @override
+  String get scanTorch => 'Torch';
+
+  @override
+  String get scanCameraOff =>
+      'The camera is off or not allowed. Type the code instead.';
+
+  @override
+  String get collectionShareReceipt => 'Share receipt';
 }

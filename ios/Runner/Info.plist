@@ -9,7 +9,7 @@
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Used to keep sharing your location while you are on duty and the app is in the background.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Used to attach a photo to a ticket note.</string>
+	<string>Used to scan ONU and item codes and to take photos of receipts and ticket work.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Used to attach a photo to a ticket note.</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
