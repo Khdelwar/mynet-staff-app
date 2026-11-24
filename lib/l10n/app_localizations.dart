@@ -101,7 +101,7 @@ abstract class AppLocalizations {
   /// No description provided for @appTitle.
   ///
   /// In en, this message translates to:
-  /// **'MyNet Staff'**
+  /// **'ISP Staff'**
   String get appTitle;
 
   /// No description provided for @loading.
@@ -461,13 +461,13 @@ abstract class AppLocalizations {
   /// No description provided for @lockTitle.
   ///
   /// In en, this message translates to:
-  /// **'MyNet Staff is locked'**
+  /// **'ISP Staff is locked'**
   String get lockTitle;
 
   /// No description provided for @lockReason.
   ///
   /// In en, this message translates to:
-  /// **'Unlock MyNet Staff'**
+  /// **'Unlock ISP Staff'**
   String get lockReason;
 
   /// No description provided for @unlock.
@@ -557,7 +557,7 @@ abstract class AppLocalizations {
   /// No description provided for @dutyNotificationTitle.
   ///
   /// In en, this message translates to:
-  /// **'MyNet: location on'**
+  /// **'Staff app: location on'**
   String get dutyNotificationTitle;
 
   /// No description provided for @dutyNotificationBody.

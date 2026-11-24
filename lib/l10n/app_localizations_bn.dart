@@ -10,7 +10,7 @@ class AppLocalizationsBn extends AppLocalizations {
   AppLocalizationsBn([String locale = 'bn']) : super(locale);
 
   @override
-  String get appTitle => 'MyNet Staff';
+  String get appTitle => 'আইএসপি স্টাফ';
 
   @override
   String get loading => 'লোড হচ্ছে…';
@@ -201,10 +201,10 @@ class AppLocalizationsBn extends AppLocalizations {
   String get logoutConfirm => 'এই ফোন থেকে লগআউট করবেন?';
 
   @override
-  String get lockTitle => 'MyNet Staff লক করা';
+  String get lockTitle => 'আইএসপি স্টাফ লক করা';
 
   @override
-  String get lockReason => 'MyNet Staff আনলক করুন';
+  String get lockReason => 'আইএসপি স্টাফ আনলক করুন';
 
   @override
   String get unlock => 'আনলক';
@@ -252,7 +252,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get dutyStopped => 'ডিউটি শেষ। লোকেশন বন্ধ হয়েছে।';
 
   @override
-  String get dutyNotificationTitle => 'MyNet: location on';
+  String get dutyNotificationTitle => 'স্টাফ অ্যাপ: লোকেশন চালু';
 
   @override
   String get dutyNotificationBody => 'লোকেশন শুধু ডিউটিতে থাকাকালীন যায়।';

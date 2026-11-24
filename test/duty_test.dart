@@ -111,7 +111,7 @@ void main() {
     expect(start['longitude'], 90.41);
     expect(tracker.running, isTrue);
     expect(find.text('On duty'), findsOneWidget);
-    expect(find.text('MyNet: location on'), findsOneWidget);
+    expect(find.text('Staff app: location on'), findsOneWidget);
 
     await tester.tap(find.byKey(const ValueKey('duty-end')));
     await tester.pump();

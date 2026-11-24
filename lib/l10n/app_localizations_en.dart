@@ -10,7 +10,7 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appTitle => 'MyNet Staff';
+  String get appTitle => 'ISP Staff';
 
   @override
   String get loading => 'Loading…';
@@ -203,10 +203,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get logoutConfirm => 'Sign out of this phone?';
 
   @override
-  String get lockTitle => 'MyNet Staff is locked';
+  String get lockTitle => 'ISP Staff is locked';
 
   @override
-  String get lockReason => 'Unlock MyNet Staff';
+  String get lockReason => 'Unlock ISP Staff';
 
   @override
   String get unlock => 'Unlock';
@@ -253,7 +253,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dutyStopped => 'Duty ended. Location has stopped.';
 
   @override
-  String get dutyNotificationTitle => 'MyNet: location on';
+  String get dutyNotificationTitle => 'Staff app: location on';
 
   @override
   String get dutyNotificationBody =>

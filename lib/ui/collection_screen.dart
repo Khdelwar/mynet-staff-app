@@ -467,7 +467,12 @@ class _CollectScreenState extends ConsumerState<CollectScreen> {
               child: ColoredBox(
                 color: Theme.of(context).colorScheme.surface,
                 child: SectionCard(
-                  title: l.appTitle,
+                  // The receipt goes to the client: show the ISP's own name.
+                  title:
+                      ref.watch(
+                        authProvider.select((a) => a.user?.companyName),
+                      ) ??
+                      l.appTitle,
                   children: [
                     InfoRow(l.collectionReceipt, receipt.receiptNo),
                     if (receipt.clientName != null)
