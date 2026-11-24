@@ -593,7 +593,7 @@ class AppLocalizationsBn extends AppLocalizations {
       'ওই ফোন থেকে সাইন আউট করবেন? সেখানে স্টাফ নোটিফিকেশন বন্ধ হবে।';
 
   @override
-  String get clientsSearch => 'নাম, আইডি, ফোন বা PPPoE';
+  String get clientsSearch => 'নাম, আইডি, ফোন, PPPoE বা ONU';
 
   @override
   String get clientsEmpty => 'কোনো ক্লায়েন্ট নেই।';
@@ -1198,4 +1198,72 @@ class AppLocalizationsBn extends AppLocalizations {
   @override
   String get collectionHandoverSaved =>
       'জমা পাঠানো হয়েছে, মালিকের গ্রহণের অপেক্ষায়।';
+
+  @override
+  String get clientsFilter => 'ফিল্টার';
+
+  @override
+  String get clientsAny => 'যেকোনো';
+
+  @override
+  String get clientsClear => 'মুছুন';
+
+  @override
+  String get clientsApply => 'দেখান';
+
+  @override
+  String get clientsFilterStatus => 'অবস্থা';
+
+  @override
+  String get clientsFilterZone => 'জোন';
+
+  @override
+  String get clientsFilterRouter => 'রাউটার';
+
+  @override
+  String get clientsFilterPackage => 'প্যাকেজ';
+
+  @override
+  String get clientsFilterReseller => 'রিসেলার';
+
+  @override
+  String get clientsFilterPolicy => 'বিলিং নিয়ম';
+
+  @override
+  String get clientsFilterType => 'ক্লায়েন্টের ধরন';
+
+  @override
+  String get clientsSort => 'সাজানো';
+
+  @override
+  String get clientsSortOrder => 'ক্রম';
+
+  @override
+  String get clientsSortDesc => 'বড় থেকে ছোট / নতুন আগে';
+
+  @override
+  String get clientsSortAsc => 'ছোট থেকে বড় / ক থেকে';
+
+  @override
+  String get clientsSortNewest => 'নতুন';
+
+  @override
+  String get clientsSortName => 'নাম';
+
+  @override
+  String get clientsSortClientId => 'ক্লায়েন্ট আইডি';
+
+  @override
+  String get clientsSortPackage => 'প্যাকেজ';
+
+  @override
+  String get clientsSortExpiry => 'মেয়াদ';
+
+  @override
+  String get clientsSortStatus => 'অবস্থা';
+
+  @override
+  String clientsTotal(int count) {
+    return '$count জন ক্লায়েন্ট';
+  }
 }

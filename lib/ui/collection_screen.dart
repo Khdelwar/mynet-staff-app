@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
@@ -376,9 +377,11 @@ class _CollectScreenState extends ConsumerState<CollectScreen> {
   bool _busy = false;
   bool _searching = false;
   bool _searched = false;
+  Timer? _typing;
 
   @override
   void dispose() {
+    _typing?.cancel();
     _search.dispose();
     _amount.dispose();
     _note.dispose();
@@ -411,9 +414,9 @@ class _CollectScreenState extends ConsumerState<CollectScreen> {
   }
 
   Future<void> _searchClients() async {
+    _typing?.cancel();
     final q = _search.text.trim();
     if (q.length < 2) return;
-    FocusScope.of(context).unfocus();
     await _findClients(() => ref.read(apiProvider).collectionClients(q));
   }
 
@@ -673,6 +676,12 @@ class _CollectScreenState extends ConsumerState<CollectScreen> {
           onPressed: _searchClients,
         ),
       ),
+      // As the web: results follow the typing.
+      onChanged: (text) {
+        _typing?.cancel();
+        if (text.trim().length < 2) return;
+        _typing = Timer(const Duration(milliseconds: 350), _searchClients);
+      },
       onSubmitted: (_) => _searchClients(),
     ),
     if (_canSeeDue)

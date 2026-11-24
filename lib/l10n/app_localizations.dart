@@ -1175,7 +1175,7 @@ abstract class AppLocalizations {
   /// No description provided for @clientsSearch.
   ///
   /// In en, this message translates to:
-  /// **'Name, ID, phone or PPPoE'**
+  /// **'Name, ID, phone, PPPoE or ONU'**
   String get clientsSearch;
 
   /// No description provided for @clientsEmpty.
@@ -2347,6 +2347,138 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Handover sent. Waiting for the owner to accept.'**
   String get collectionHandoverSaved;
+
+  /// No description provided for @clientsFilter.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter'**
+  String get clientsFilter;
+
+  /// No description provided for @clientsAny.
+  ///
+  /// In en, this message translates to:
+  /// **'Any'**
+  String get clientsAny;
+
+  /// No description provided for @clientsClear.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get clientsClear;
+
+  /// No description provided for @clientsApply.
+  ///
+  /// In en, this message translates to:
+  /// **'Show'**
+  String get clientsApply;
+
+  /// No description provided for @clientsFilterStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get clientsFilterStatus;
+
+  /// No description provided for @clientsFilterZone.
+  ///
+  /// In en, this message translates to:
+  /// **'Zone'**
+  String get clientsFilterZone;
+
+  /// No description provided for @clientsFilterRouter.
+  ///
+  /// In en, this message translates to:
+  /// **'Router'**
+  String get clientsFilterRouter;
+
+  /// No description provided for @clientsFilterPackage.
+  ///
+  /// In en, this message translates to:
+  /// **'Package'**
+  String get clientsFilterPackage;
+
+  /// No description provided for @clientsFilterReseller.
+  ///
+  /// In en, this message translates to:
+  /// **'Reseller'**
+  String get clientsFilterReseller;
+
+  /// No description provided for @clientsFilterPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Billing policy'**
+  String get clientsFilterPolicy;
+
+  /// No description provided for @clientsFilterType.
+  ///
+  /// In en, this message translates to:
+  /// **'Client type'**
+  String get clientsFilterType;
+
+  /// No description provided for @clientsSort.
+  ///
+  /// In en, this message translates to:
+  /// **'Sort by'**
+  String get clientsSort;
+
+  /// No description provided for @clientsSortOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Order'**
+  String get clientsSortOrder;
+
+  /// No description provided for @clientsSortDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'High to low / newest first'**
+  String get clientsSortDesc;
+
+  /// No description provided for @clientsSortAsc.
+  ///
+  /// In en, this message translates to:
+  /// **'Low to high / A to Z'**
+  String get clientsSortAsc;
+
+  /// No description provided for @clientsSortNewest.
+  ///
+  /// In en, this message translates to:
+  /// **'Newest'**
+  String get clientsSortNewest;
+
+  /// No description provided for @clientsSortName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get clientsSortName;
+
+  /// No description provided for @clientsSortClientId.
+  ///
+  /// In en, this message translates to:
+  /// **'Client ID'**
+  String get clientsSortClientId;
+
+  /// No description provided for @clientsSortPackage.
+  ///
+  /// In en, this message translates to:
+  /// **'Package'**
+  String get clientsSortPackage;
+
+  /// No description provided for @clientsSortExpiry.
+  ///
+  /// In en, this message translates to:
+  /// **'Expiry'**
+  String get clientsSortExpiry;
+
+  /// No description provided for @clientsSortStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get clientsSortStatus;
+
+  /// No description provided for @clientsTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} clients'**
+  String clientsTotal(int count);
 }
 
 class _AppLocalizationsDelegate

@@ -433,7 +433,15 @@ class StaffApi {
     return point;
   }
 
-  Future<ClientPage> clients({String? q, String? status, int page = 1}) async {
+  /// The web client list: [filters] are the web list's own (directory,
+  /// status, pop_id, zone_id, router_id, package_id, reseller_id,
+  /// billing_policy, client_type, sort, sort_dir).
+  Future<ClientPage> clients({
+    String? q,
+    String? status,
+    Map<String, String> filters = const {},
+    int page = 1,
+  }) async {
     final query = q?.trim() ?? '';
     final res = await _send(
       'GET',
@@ -441,10 +449,32 @@ class StaffApi {
       query: {
         if (query.length >= 2) 'q': query,
         if (status != null && status.isNotEmpty) 'status': status,
+        for (final e in filters.entries)
+          if (e.value.isNotEmpty) e.key: e.value,
         'page': page,
       },
     ) as Response<dynamic>;
     return ClientPage.fromJson(res.data);
+  }
+
+  /// Suggestions while typing, as the web header search.
+  Future<ClientSuggestions> clientSuggest(String q) async {
+    final res = await _send(
+      'GET',
+      '/clients/suggest',
+      query: {'q': q.trim()},
+    ) as Response<dynamic>;
+    return ClientSuggestions.fromJson(res.data);
+  }
+
+  /// The web list's filter choices, with the ERP's labels in [lang].
+  Future<ClientFilterOptions> clientFilters({required String lang}) async {
+    final res = await _send(
+      'GET',
+      '/clients/filters',
+      query: {'lang': lang},
+    ) as Response<dynamic>;
+    return ClientFilterOptions.fromJson(res.data);
   }
 
   Future<ClientDetail> client(int id) async {

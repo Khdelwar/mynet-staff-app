@@ -595,7 +595,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Sign that phone out? It will stop receiving staff notifications.';
 
   @override
-  String get clientsSearch => 'Name, ID, phone or PPPoE';
+  String get clientsSearch => 'Name, ID, phone, PPPoE or ONU';
 
   @override
   String get clientsEmpty => 'No clients.';
@@ -1204,4 +1204,72 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get collectionHandoverSaved =>
       'Handover sent. Waiting for the owner to accept.';
+
+  @override
+  String get clientsFilter => 'Filter';
+
+  @override
+  String get clientsAny => 'Any';
+
+  @override
+  String get clientsClear => 'Clear';
+
+  @override
+  String get clientsApply => 'Show';
+
+  @override
+  String get clientsFilterStatus => 'Status';
+
+  @override
+  String get clientsFilterZone => 'Zone';
+
+  @override
+  String get clientsFilterRouter => 'Router';
+
+  @override
+  String get clientsFilterPackage => 'Package';
+
+  @override
+  String get clientsFilterReseller => 'Reseller';
+
+  @override
+  String get clientsFilterPolicy => 'Billing policy';
+
+  @override
+  String get clientsFilterType => 'Client type';
+
+  @override
+  String get clientsSort => 'Sort by';
+
+  @override
+  String get clientsSortOrder => 'Order';
+
+  @override
+  String get clientsSortDesc => 'High to low / newest first';
+
+  @override
+  String get clientsSortAsc => 'Low to high / A to Z';
+
+  @override
+  String get clientsSortNewest => 'Newest';
+
+  @override
+  String get clientsSortName => 'Name';
+
+  @override
+  String get clientsSortClientId => 'Client ID';
+
+  @override
+  String get clientsSortPackage => 'Package';
+
+  @override
+  String get clientsSortExpiry => 'Expiry';
+
+  @override
+  String get clientsSortStatus => 'Status';
+
+  @override
+  String clientsTotal(int count) {
+    return '$count clients';
+  }
 }
