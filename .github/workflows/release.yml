@@ -8,7 +8,9 @@ name: Release APK
 #   ANDROID_KEYSTORE_PASSWORD  its password
 #   ANDROID_KEY_PASSWORD       the key password (leave unset if it is the same)
 #   ANDROID_KEY_ALIAS          the key alias (leave unset for "mynet")
-#   ERP_BASE_URL               https://... of the ERP
+#   ERP_BASE_URL               optional https://... default ERP address. Leave
+#                              unset for one APK for every ISP: staff type the
+#                              address at login.
 #
 # The same keystore must be used for every release, or phones cannot update.
 # It may be the customer app's keystore; the app id (net.mynet.staff) differs.
@@ -45,8 +47,8 @@ jobs:
             exit 1
           fi
           case "$ERP_BASE_URL" in
-            https://*) ;;
-            *) echo "::error::ERP_BASE_URL secret (https://...) is required."; exit 1 ;;
+            ''|https://*) ;;
+            *) echo "::error::ERP_BASE_URL secret must be empty or https://..."; exit 1 ;;
           esac
           echo "$KEYSTORE_BASE64" | base64 -d > android/app/release.keystore
           {
