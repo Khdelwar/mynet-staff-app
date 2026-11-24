@@ -906,6 +906,15 @@ class StaffApi {
     },
   );
 
+  /// Own payslips, newest month first (owner: everyone sees their own).
+  Future<List<Payslip>> payslips() async {
+    final res = await _send('GET', '/hr/payslips') as Response<dynamic>;
+    return [
+      for (final row in listFrom(res.data, const ['payslips']))
+        Payslip.fromJson(row),
+    ];
+  }
+
   Future<void> cancelAdvance(int id) =>
       _send('POST', '/hr/advances/$id/cancel');
 

@@ -1060,4 +1060,74 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get collectionShareReceipt => 'Share receipt';
+
+  @override
+  String get payslipTitle => 'My payslips';
+
+  @override
+  String get payslipNone =>
+      'No payslip yet. It shows once the month\'s payroll is approved.';
+
+  @override
+  String get payslipEarnings => 'Earnings';
+
+  @override
+  String get payslipDeductions => 'Deductions';
+
+  @override
+  String get payslipNet => 'Net salary';
+
+  @override
+  String get payslipPayment => 'Payment';
+
+  @override
+  String get payslipPaidOn => 'Paid on';
+
+  @override
+  String get payslipDays => 'Days';
+
+  @override
+  String get payslipSharePdf => 'Share PDF';
+
+  @override
+  String get payslipBasic => 'Basic';
+
+  @override
+  String get payslipAllowance => 'Allowance';
+
+  @override
+  String get payslipBonus => 'Bonus';
+
+  @override
+  String get payslipAttendanceBonus => 'Attendance bonus';
+
+  @override
+  String get payslipOvertime => 'Overtime';
+
+  @override
+  String get payslipLate => 'Late penalty';
+
+  @override
+  String get payslipAbsent => 'Absent deduction';
+
+  @override
+  String get payslipOther => 'Other deduction';
+
+  @override
+  String get payslipAdvance => 'Advance adjusted';
+
+  @override
+  String get payslipWorkingDays => 'Working days';
+
+  @override
+  String get payslipPresentDays => 'Present';
+
+  @override
+  String get payslipAbsentDays => 'Absent';
+
+  @override
+  String get payslipLateDays => 'Late';
+
+  @override
+  String get payslipOvertimeMinutes => 'Overtime (minutes)';
 }

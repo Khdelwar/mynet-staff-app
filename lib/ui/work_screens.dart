@@ -1343,6 +1343,17 @@ class _HrScreenState extends ConsumerState<HrScreen> {
                 ),
               ],
             ),
+            // Owner (2026-11-24): everyone sees their own payslip.
+            ListTile(
+              key: const ValueKey('my-payslips'),
+              contentPadding: EdgeInsets.zero,
+              leading: const Icon(Icons.receipt_long_outlined),
+              title: Text(l.payslipTitle),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute<void>(builder: (_) => const PayslipsScreen()),
+              ),
+            ),
             const SizedBox(height: 16),
             Text(l.workLeaves, style: Theme.of(context).textTheme.titleMedium),
             for (final v in hr.leaves)
@@ -1385,6 +1396,155 @@ class _HrScreenState extends ConsumerState<HrScreen> {
               ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+// --- Own payslip (owner, 2026-11-24) ---------------------------------------
+
+String _payslipLine(AppLocalizations l, String key) => switch (key) {
+  'basic_salary' => l.payslipBasic,
+  'allowance' => l.payslipAllowance,
+  'bonus' => l.payslipBonus,
+  'attendance_bonus' => l.payslipAttendanceBonus,
+  'overtime_amount' => l.payslipOvertime,
+  'late_penalty' => l.payslipLate,
+  'absent_deduction' => l.payslipAbsent,
+  'other_deduction' => l.payslipOther,
+  'advance_adjustment' => l.payslipAdvance,
+  'working' => l.payslipWorkingDays,
+  'present' => l.payslipPresentDays,
+  'absent' => l.payslipAbsentDays,
+  'late' => l.payslipLateDays,
+  'overtime_minutes' => l.payslipOvertimeMinutes,
+  _ => key,
+};
+
+/// Own payslips from approved / locked months, as the ERP made them.
+class PayslipsScreen extends StatelessWidget {
+  const PayslipsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
+    return Scaffold(
+      appBar: AppBar(title: Text(l.payslipTitle)),
+      body: _Loaded<List<Payslip>>(
+        load: (api) => api.payslips(),
+        builder: (context, slips, reload) => ListView(
+          key: const ValueKey('payslips'),
+          padding: const EdgeInsets.all(16),
+          children: [
+            if (slips.isEmpty) MessageBanner(l.payslipNone),
+            for (final p in slips)
+              Card(
+                child: ListTile(
+                  key: ValueKey('payslip-${p.id}'),
+                  title: Text(p.month ?? '—'),
+                  subtitle: Text(p.paymentStatus ?? ''),
+                  trailing: Text(
+                    '৳ ${erpAmount(p.netSalary)}',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => _PayslipScreen(slip: p),
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _PayslipScreen extends ConsumerStatefulWidget {
+  const _PayslipScreen({required this.slip});
+  final Payslip slip;
+
+  @override
+  ConsumerState<_PayslipScreen> createState() => _PayslipScreenState();
+}
+
+class _PayslipScreenState extends ConsumerState<_PayslipScreen> {
+  bool _busy = false;
+
+  /// The same PDF as the web, fetched with the Bearer token, then shared
+  /// (save to files, send on WhatsApp…).
+  Future<void> _sharePdf() async {
+    final l = AppLocalizations.of(context);
+    final url = widget.slip.pdfUrl;
+    if (url == null) return;
+    final messenger = ScaffoldMessenger.of(context);
+    setState(() => _busy = true);
+    try {
+      final bytes = await ref.read(apiProvider).authorizedBytes(url);
+      await ref
+          .read(imageSharerProvider)
+          .shareFile(
+            bytes,
+            fileName: 'payslip-${widget.slip.month ?? widget.slip.id}.pdf',
+            mimeType: 'application/pdf',
+          );
+    } catch (e) {
+      messenger.showSnackBar(
+        SnackBar(content: Text(errorText(l, e, l.errGeneric))),
+      );
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
+    final p = widget.slip;
+    return Scaffold(
+      appBar: AppBar(title: Text('${l.payslipTitle} · ${p.month ?? ''}')),
+      body: ListView(
+        key: const ValueKey('payslip'),
+        padding: const EdgeInsets.all(16),
+        children: [
+          SectionCard(
+            title: l.payslipEarnings,
+            children: [
+              for (final e in p.earnings.entries)
+                InfoRow(_payslipLine(l, e.key), erpAmount(e.value)),
+            ],
+          ),
+          SectionCard(
+            title: l.payslipDeductions,
+            children: [
+              for (final e in p.deductions.entries)
+                InfoRow(_payslipLine(l, e.key), erpAmount(e.value)),
+            ],
+          ),
+          SectionCard(
+            children: [
+              InfoRow(l.payslipNet, '৳ ${erpAmount(p.netSalary)}'),
+              InfoRow(l.payslipPayment, p.paymentStatus),
+              if (p.paymentDate != null)
+                InfoRow(l.payslipPaidOn, p.paymentDate),
+            ],
+          ),
+          SectionCard(
+            title: l.payslipDays,
+            children: [
+              for (final e in p.days.entries)
+                InfoRow(_payslipLine(l, e.key), erpAmount(e.value)),
+            ],
+          ),
+          if (p.pdfUrl != null)
+            FilledButton.icon(
+              key: const ValueKey('payslip-pdf'),
+              onPressed: _busy ? null : _sharePdf,
+              icon: const Icon(Icons.picture_as_pdf_outlined),
+              label: Text(l.payslipSharePdf),
+            ),
+        ],
       ),
     );
   }

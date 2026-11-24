@@ -1056,4 +1056,74 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get collectionShareReceipt => 'রসিদ শেয়ার';
+
+  @override
+  String get payslipTitle => 'আমার বেতনের স্লিপ';
+
+  @override
+  String get payslipNone =>
+      'এখনো কোনো স্লিপ নেই। মাসের payroll অনুমোদনের পরে দেখাবে।';
+
+  @override
+  String get payslipEarnings => 'আয়';
+
+  @override
+  String get payslipDeductions => 'কাটা';
+
+  @override
+  String get payslipNet => 'মোট বেতন';
+
+  @override
+  String get payslipPayment => 'পরিশোধ';
+
+  @override
+  String get payslipPaidOn => 'পরিশোধের তারিখ';
+
+  @override
+  String get payslipDays => 'দিন';
+
+  @override
+  String get payslipSharePdf => 'PDF শেয়ার';
+
+  @override
+  String get payslipBasic => 'মূল বেতন';
+
+  @override
+  String get payslipAllowance => 'ভাতা';
+
+  @override
+  String get payslipBonus => 'বোনাস';
+
+  @override
+  String get payslipAttendanceBonus => 'হাজিরা বোনাস';
+
+  @override
+  String get payslipOvertime => 'ওভারটাইম';
+
+  @override
+  String get payslipLate => 'দেরির জরিমানা';
+
+  @override
+  String get payslipAbsent => 'অনুপস্থিতির কাটা';
+
+  @override
+  String get payslipOther => 'অন্যান্য কাটা';
+
+  @override
+  String get payslipAdvance => 'অগ্রিম সমন্বয়';
+
+  @override
+  String get payslipWorkingDays => 'কর্মদিবস';
+
+  @override
+  String get payslipPresentDays => 'উপস্থিত';
+
+  @override
+  String get payslipAbsentDays => 'অনুপস্থিত';
+
+  @override
+  String get payslipLateDays => 'দেরি';
+
+  @override
+  String get payslipOvertimeMinutes => 'ওভারটাইম (মিনিট)';
 }

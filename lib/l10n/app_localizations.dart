@@ -2071,6 +2071,144 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Share receipt'**
   String get collectionShareReceipt;
+
+  /// No description provided for @payslipTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My payslips'**
+  String get payslipTitle;
+
+  /// No description provided for @payslipNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No payslip yet. It shows once the month\'s payroll is approved.'**
+  String get payslipNone;
+
+  /// No description provided for @payslipEarnings.
+  ///
+  /// In en, this message translates to:
+  /// **'Earnings'**
+  String get payslipEarnings;
+
+  /// No description provided for @payslipDeductions.
+  ///
+  /// In en, this message translates to:
+  /// **'Deductions'**
+  String get payslipDeductions;
+
+  /// No description provided for @payslipNet.
+  ///
+  /// In en, this message translates to:
+  /// **'Net salary'**
+  String get payslipNet;
+
+  /// No description provided for @payslipPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment'**
+  String get payslipPayment;
+
+  /// No description provided for @payslipPaidOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid on'**
+  String get payslipPaidOn;
+
+  /// No description provided for @payslipDays.
+  ///
+  /// In en, this message translates to:
+  /// **'Days'**
+  String get payslipDays;
+
+  /// No description provided for @payslipSharePdf.
+  ///
+  /// In en, this message translates to:
+  /// **'Share PDF'**
+  String get payslipSharePdf;
+
+  /// No description provided for @payslipBasic.
+  ///
+  /// In en, this message translates to:
+  /// **'Basic'**
+  String get payslipBasic;
+
+  /// No description provided for @payslipAllowance.
+  ///
+  /// In en, this message translates to:
+  /// **'Allowance'**
+  String get payslipAllowance;
+
+  /// No description provided for @payslipBonus.
+  ///
+  /// In en, this message translates to:
+  /// **'Bonus'**
+  String get payslipBonus;
+
+  /// No description provided for @payslipAttendanceBonus.
+  ///
+  /// In en, this message translates to:
+  /// **'Attendance bonus'**
+  String get payslipAttendanceBonus;
+
+  /// No description provided for @payslipOvertime.
+  ///
+  /// In en, this message translates to:
+  /// **'Overtime'**
+  String get payslipOvertime;
+
+  /// No description provided for @payslipLate.
+  ///
+  /// In en, this message translates to:
+  /// **'Late penalty'**
+  String get payslipLate;
+
+  /// No description provided for @payslipAbsent.
+  ///
+  /// In en, this message translates to:
+  /// **'Absent deduction'**
+  String get payslipAbsent;
+
+  /// No description provided for @payslipOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other deduction'**
+  String get payslipOther;
+
+  /// No description provided for @payslipAdvance.
+  ///
+  /// In en, this message translates to:
+  /// **'Advance adjusted'**
+  String get payslipAdvance;
+
+  /// No description provided for @payslipWorkingDays.
+  ///
+  /// In en, this message translates to:
+  /// **'Working days'**
+  String get payslipWorkingDays;
+
+  /// No description provided for @payslipPresentDays.
+  ///
+  /// In en, this message translates to:
+  /// **'Present'**
+  String get payslipPresentDays;
+
+  /// No description provided for @payslipAbsentDays.
+  ///
+  /// In en, this message translates to:
+  /// **'Absent'**
+  String get payslipAbsentDays;
+
+  /// No description provided for @payslipLateDays.
+  ///
+  /// In en, this message translates to:
+  /// **'Late'**
+  String get payslipLateDays;
+
+  /// No description provided for @payslipOvertimeMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'Overtime (minutes)'**
+  String get payslipOvertimeMinutes;
 }
 
 class _AppLocalizationsDelegate
