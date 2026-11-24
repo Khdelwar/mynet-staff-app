@@ -507,5 +507,115 @@
   "payslipPresentDays": "Present",
   "payslipAbsentDays": "Absent",
   "payslipLateDays": "Late",
-  "payslipOvertimeMinutes": "Overtime (minutes)"
+  "payslipOvertimeMinutes": "Overtime (minutes)",
+  "featureStock": "Stock",
+  "stockInHand": "In my hand",
+  "stockParts": "Parts in the store",
+  "stockCategories": "Items in the store",
+  "stockLow": "low",
+  "stockEmpty": "Nothing here.",
+  "stockSearch": "Search serial, MAC or name",
+  "featureStaffMap": "Staff on duty",
+  "staffStateFree": "Free",
+  "staffStateBusy": "Working",
+  "staffStateStale": "No signal",
+  "staffSeen": "{minutes} min ago",
+  "@staffSeen": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "staffAway": "{km} km away",
+  "@staffAway": {
+    "placeholders": {
+      "km": {
+        "type": "String"
+      }
+    }
+  },
+  "staffDoneToday": "{count} done today",
+  "@staffDoneToday": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "staffNone": "Nobody is on duty now.",
+  "fieldCall": "Call",
+  "fieldOpenMap": "Open map",
+  "featureOlt": "OLT",
+  "oltOnline": "Online",
+  "oltOffline": "Offline",
+  "oltUnknown": "Not checked",
+  "oltOnuSummary": "{online}/{total} online · {weak} weak · {critical} bad",
+  "@oltOnuSummary": {
+    "placeholders": {
+      "online": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "weak": {
+        "type": "int"
+      },
+      "critical": {
+        "type": "int"
+      }
+    }
+  },
+  "oltNone": "No OLT to show.",
+  "oltPorts": "PON ports",
+  "oltPortLine": "{online}/{total} online",
+  "@oltPortLine": {
+    "placeholders": {
+      "online": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "oltProblemsOnly": "Down or weak only",
+  "oltAllOnus": "All ONUs",
+  "oltNoProblems": "No down or weak ONU.",
+  "featureFiber": "Fiber near me",
+  "fiberNeedsGps": "Turn on the phone's location to find fiber near you.",
+  "fiberWithin": "Within {meters} m",
+  "@fiberWithin": {
+    "placeholders": {
+      "meters": {
+        "type": "int"
+      }
+    }
+  },
+  "fiberWider": "Search wider",
+  "fiberNone": "Nothing within this distance.",
+  "fiberJointBox": "Joint box",
+  "fiberSplitter": "Splitter",
+  "fiberPole": "Pole",
+  "fiberCut": "Fiber cut",
+  "fiberPortsFree": "{free}/{total} ports free",
+  "@fiberPortsFree": {
+    "placeholders": {
+      "free": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "fiberMeters": "{meters} m",
+  "@fiberMeters": {
+    "placeholders": {
+      "meters": {
+        "type": "int"
+      }
+    }
+  }
 }

@@ -8,6 +8,7 @@ import 'clients.dart';
 import 'collection.dart';
 import 'devices.dart';
 import 'duty.dart';
+import 'field_info.dart';
 import 'json.dart';
 import 'models.dart';
 import 'offers.dart';
@@ -857,6 +858,61 @@ class StaffApi {
       },
     ) as Response<dynamic>;
     return pickString(asMap(asMap(res.data)['client']), const ['expiry_date']);
+  }
+
+  // --- STF-11: stock, staff map, OLT, fiber (read-only) ----------------
+
+  Future<StockView> stock({String? q}) async {
+    final res = await _send(
+      'GET',
+      '/stock',
+      query: {if (q != null && q.trim().isNotEmpty) 'q': q.trim()},
+    ) as Response<dynamic>;
+    return StockView.fromJson(res.data);
+  }
+
+  Future<List<MapPerson>> staffMap({double? lat, double? lng}) async {
+    final res = await _send(
+      'GET',
+      '/staff-map',
+      query: {'lat': ?lat, 'lng': ?lng},
+    ) as Response<dynamic>;
+    return [
+      for (final r in listFrom(res.data, const ['staff']))
+        MapPerson.fromJson(r),
+    ];
+  }
+
+  Future<List<OltRow>> olts() async {
+    final res = await _send('GET', '/olts') as Response<dynamic>;
+    return [
+      for (final r in listFrom(res.data, const ['olts'])) OltRow.fromJson(r),
+    ];
+  }
+
+  Future<OltDetail> olt(int id, {bool all = false}) async {
+    final res = await _send(
+      'GET',
+      '/olts/$id',
+      query: {'show': all ? 'all' : 'problems'},
+    ) as Response<dynamic>;
+    return OltDetail.fromJson(res.data);
+  }
+
+  Future<List<FiberPlace>> fiberNearby({
+    required double lat,
+    required double lng,
+    int radiusM = 1000,
+  }) async {
+    final res = await _send(
+      'GET',
+      '/fiber/nearby',
+      query: {'lat': lat, 'lng': lng, 'radius_m': radiusM},
+    ) as Response<dynamic>;
+    return [
+      for (final r in listFrom(res.data, const ['items']))
+        FiberPlace.fromJson(r),
+    ];
   }
 
   // --- STF-09: dashboard and own HR -------------------------------------

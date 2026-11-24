@@ -1146,4 +1146,137 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get payslipOvertimeMinutes => 'ওভারটাইম (মিনিট)';
+
+  @override
+  String get featureStock => 'স্টক';
+
+  @override
+  String get stockInHand => 'আমার হাতে';
+
+  @override
+  String get stockParts => 'স্টোরে পার্টস';
+
+  @override
+  String get stockCategories => 'স্টোরে মাল';
+
+  @override
+  String get stockLow => 'কম';
+
+  @override
+  String get stockEmpty => 'কিছু নেই।';
+
+  @override
+  String get stockSearch => 'সিরিয়াল, MAC বা নাম খুঁজুন';
+
+  @override
+  String get featureStaffMap => 'ডিউটিতে স্টাফ';
+
+  @override
+  String get staffStateFree => 'ফ্রি';
+
+  @override
+  String get staffStateBusy => 'কাজে আছেন';
+
+  @override
+  String get staffStateStale => 'সিগন্যাল নেই';
+
+  @override
+  String staffSeen(int minutes) {
+    return '$minutes মিনিট আগে';
+  }
+
+  @override
+  String staffAway(String km) {
+    return '$km কিমি দূরে';
+  }
+
+  @override
+  String staffDoneToday(int count) {
+    return 'আজ $countটা শেষ';
+  }
+
+  @override
+  String get staffNone => 'এখন কেউ ডিউটিতে নেই।';
+
+  @override
+  String get fieldCall => 'ফোন';
+
+  @override
+  String get fieldOpenMap => 'ম্যাপে দেখুন';
+
+  @override
+  String get featureOlt => 'OLT';
+
+  @override
+  String get oltOnline => 'চালু';
+
+  @override
+  String get oltOffline => 'বন্ধ';
+
+  @override
+  String get oltUnknown => 'দেখা হয়নি';
+
+  @override
+  String oltOnuSummary(int online, int total, int weak, int critical) {
+    return '$online/$total চালু · দুর্বল $weak · খারাপ $critical';
+  }
+
+  @override
+  String get oltNone => 'দেখানোর মতো কোনো OLT নেই।';
+
+  @override
+  String get oltPorts => 'PON পোর্ট';
+
+  @override
+  String oltPortLine(int online, int total) {
+    return '$online/$total চালু';
+  }
+
+  @override
+  String get oltProblemsOnly => 'শুধু বন্ধ বা দুর্বল';
+
+  @override
+  String get oltAllOnus => 'সব ONU';
+
+  @override
+  String get oltNoProblems => 'বন্ধ বা দুর্বল কোনো ONU নেই।';
+
+  @override
+  String get featureFiber => 'কাছের ফাইবার';
+
+  @override
+  String get fiberNeedsGps => 'কাছের ফাইবার খুঁজতে ফোনের location চালু করুন।';
+
+  @override
+  String fiberWithin(int meters) {
+    return '$meters মিটারের মধ্যে';
+  }
+
+  @override
+  String get fiberWider => 'আরও দূরে খুঁজুন';
+
+  @override
+  String get fiberNone => 'এই দূরত্বে কিছু নেই।';
+
+  @override
+  String get fiberJointBox => 'জয়েন্ট বক্স';
+
+  @override
+  String get fiberSplitter => 'স্প্লিটার';
+
+  @override
+  String get fiberPole => 'খুঁটি';
+
+  @override
+  String get fiberCut => 'ফাইবার কাটা';
+
+  @override
+  String fiberPortsFree(int free, int total) {
+    return '$free/$total পোর্ট খালি';
+  }
+
+  @override
+  String fiberMeters(int meters) {
+    return '$meters মি';
+  }
 }

@@ -13,6 +13,7 @@ import 'collection_screen.dart';
 import 'due_list_screen.dart';
 import 'common.dart';
 import 'duty_screen.dart';
+import 'field_info_screens.dart';
 import 'offers_screen.dart';
 import 'ticket_detail_screen.dart';
 import 'tickets_screen.dart';
@@ -162,6 +163,39 @@ final features = <Feature>[
     screen: 'expiring',
     open: _openExpiring,
   ),
+  // STF-11: read-only field screens. The ERP never lists stock or fiber for
+  // a reseller, and gives them only their own OLTs and people.
+  Feature(
+    'inventory.use',
+    Icons.inventory_2_outlined,
+    (l) => l.featureStock,
+    screen: 'inventory',
+    also: const ['inventory.view', 'inventory.manage'],
+    open: _openStock,
+  ),
+  Feature(
+    'staff.location.view',
+    Icons.groups_outlined,
+    (l) => l.featureStaffMap,
+    screen: 'staff_map',
+    open: _openStaffMap,
+  ),
+  Feature(
+    'olt.view',
+    Icons.router_outlined,
+    (l) => l.featureOlt,
+    screen: 'olt',
+    also: const ['olt.manage', 'olt.create_own'],
+    open: _openOlt,
+  ),
+  Feature(
+    'fiber.view',
+    Icons.cable_outlined,
+    (l) => l.featureFiber,
+    screen: 'fiber',
+    also: const ['fiber.manage'],
+    open: _openFiber,
+  ),
   Feature(
     'tickets.assign',
     Icons.person_pin_outlined,
@@ -196,6 +230,14 @@ Widget _openChat(BuildContext context) => const ChatListScreen();
 Widget _openCollection(BuildContext context) => const CollectionScreen();
 
 Widget _openApprovals(BuildContext context) => const ApprovalsScreen();
+
+Widget _openStock(BuildContext context) => const StockScreen();
+
+Widget _openStaffMap(BuildContext context) => const StaffMapScreen();
+
+Widget _openOlt(BuildContext context) => const OltListScreen();
+
+Widget _openFiber(BuildContext context) => const FiberNearbyScreen();
 
 Widget _openDueList(BuildContext context) => const DueListScreen();
 

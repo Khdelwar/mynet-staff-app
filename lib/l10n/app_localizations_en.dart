@@ -1151,4 +1151,138 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get payslipOvertimeMinutes => 'Overtime (minutes)';
+
+  @override
+  String get featureStock => 'Stock';
+
+  @override
+  String get stockInHand => 'In my hand';
+
+  @override
+  String get stockParts => 'Parts in the store';
+
+  @override
+  String get stockCategories => 'Items in the store';
+
+  @override
+  String get stockLow => 'low';
+
+  @override
+  String get stockEmpty => 'Nothing here.';
+
+  @override
+  String get stockSearch => 'Search serial, MAC or name';
+
+  @override
+  String get featureStaffMap => 'Staff on duty';
+
+  @override
+  String get staffStateFree => 'Free';
+
+  @override
+  String get staffStateBusy => 'Working';
+
+  @override
+  String get staffStateStale => 'No signal';
+
+  @override
+  String staffSeen(int minutes) {
+    return '$minutes min ago';
+  }
+
+  @override
+  String staffAway(String km) {
+    return '$km km away';
+  }
+
+  @override
+  String staffDoneToday(int count) {
+    return '$count done today';
+  }
+
+  @override
+  String get staffNone => 'Nobody is on duty now.';
+
+  @override
+  String get fieldCall => 'Call';
+
+  @override
+  String get fieldOpenMap => 'Open map';
+
+  @override
+  String get featureOlt => 'OLT';
+
+  @override
+  String get oltOnline => 'Online';
+
+  @override
+  String get oltOffline => 'Offline';
+
+  @override
+  String get oltUnknown => 'Not checked';
+
+  @override
+  String oltOnuSummary(int online, int total, int weak, int critical) {
+    return '$online/$total online · $weak weak · $critical bad';
+  }
+
+  @override
+  String get oltNone => 'No OLT to show.';
+
+  @override
+  String get oltPorts => 'PON ports';
+
+  @override
+  String oltPortLine(int online, int total) {
+    return '$online/$total online';
+  }
+
+  @override
+  String get oltProblemsOnly => 'Down or weak only';
+
+  @override
+  String get oltAllOnus => 'All ONUs';
+
+  @override
+  String get oltNoProblems => 'No down or weak ONU.';
+
+  @override
+  String get featureFiber => 'Fiber near me';
+
+  @override
+  String get fiberNeedsGps =>
+      'Turn on the phone\'s location to find fiber near you.';
+
+  @override
+  String fiberWithin(int meters) {
+    return 'Within $meters m';
+  }
+
+  @override
+  String get fiberWider => 'Search wider';
+
+  @override
+  String get fiberNone => 'Nothing within this distance.';
+
+  @override
+  String get fiberJointBox => 'Joint box';
+
+  @override
+  String get fiberSplitter => 'Splitter';
+
+  @override
+  String get fiberPole => 'Pole';
+
+  @override
+  String get fiberCut => 'Fiber cut';
+
+  @override
+  String fiberPortsFree(int free, int total) {
+    return '$free/$total ports free';
+  }
+
+  @override
+  String fiberMeters(int meters) {
+    return '$meters m';
+  }
 }

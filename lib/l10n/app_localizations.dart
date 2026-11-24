@@ -2245,6 +2245,240 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Overtime (minutes)'**
   String get payslipOvertimeMinutes;
+
+  /// No description provided for @featureStock.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock'**
+  String get featureStock;
+
+  /// No description provided for @stockInHand.
+  ///
+  /// In en, this message translates to:
+  /// **'In my hand'**
+  String get stockInHand;
+
+  /// No description provided for @stockParts.
+  ///
+  /// In en, this message translates to:
+  /// **'Parts in the store'**
+  String get stockParts;
+
+  /// No description provided for @stockCategories.
+  ///
+  /// In en, this message translates to:
+  /// **'Items in the store'**
+  String get stockCategories;
+
+  /// No description provided for @stockLow.
+  ///
+  /// In en, this message translates to:
+  /// **'low'**
+  String get stockLow;
+
+  /// No description provided for @stockEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing here.'**
+  String get stockEmpty;
+
+  /// No description provided for @stockSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search serial, MAC or name'**
+  String get stockSearch;
+
+  /// No description provided for @featureStaffMap.
+  ///
+  /// In en, this message translates to:
+  /// **'Staff on duty'**
+  String get featureStaffMap;
+
+  /// No description provided for @staffStateFree.
+  ///
+  /// In en, this message translates to:
+  /// **'Free'**
+  String get staffStateFree;
+
+  /// No description provided for @staffStateBusy.
+  ///
+  /// In en, this message translates to:
+  /// **'Working'**
+  String get staffStateBusy;
+
+  /// No description provided for @staffStateStale.
+  ///
+  /// In en, this message translates to:
+  /// **'No signal'**
+  String get staffStateStale;
+
+  /// No description provided for @staffSeen.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes} min ago'**
+  String staffSeen(int minutes);
+
+  /// No description provided for @staffAway.
+  ///
+  /// In en, this message translates to:
+  /// **'{km} km away'**
+  String staffAway(String km);
+
+  /// No description provided for @staffDoneToday.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} done today'**
+  String staffDoneToday(int count);
+
+  /// No description provided for @staffNone.
+  ///
+  /// In en, this message translates to:
+  /// **'Nobody is on duty now.'**
+  String get staffNone;
+
+  /// No description provided for @fieldCall.
+  ///
+  /// In en, this message translates to:
+  /// **'Call'**
+  String get fieldCall;
+
+  /// No description provided for @fieldOpenMap.
+  ///
+  /// In en, this message translates to:
+  /// **'Open map'**
+  String get fieldOpenMap;
+
+  /// No description provided for @featureOlt.
+  ///
+  /// In en, this message translates to:
+  /// **'OLT'**
+  String get featureOlt;
+
+  /// No description provided for @oltOnline.
+  ///
+  /// In en, this message translates to:
+  /// **'Online'**
+  String get oltOnline;
+
+  /// No description provided for @oltOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline'**
+  String get oltOffline;
+
+  /// No description provided for @oltUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Not checked'**
+  String get oltUnknown;
+
+  /// No description provided for @oltOnuSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'{online}/{total} online · {weak} weak · {critical} bad'**
+  String oltOnuSummary(int online, int total, int weak, int critical);
+
+  /// No description provided for @oltNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No OLT to show.'**
+  String get oltNone;
+
+  /// No description provided for @oltPorts.
+  ///
+  /// In en, this message translates to:
+  /// **'PON ports'**
+  String get oltPorts;
+
+  /// No description provided for @oltPortLine.
+  ///
+  /// In en, this message translates to:
+  /// **'{online}/{total} online'**
+  String oltPortLine(int online, int total);
+
+  /// No description provided for @oltProblemsOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Down or weak only'**
+  String get oltProblemsOnly;
+
+  /// No description provided for @oltAllOnus.
+  ///
+  /// In en, this message translates to:
+  /// **'All ONUs'**
+  String get oltAllOnus;
+
+  /// No description provided for @oltNoProblems.
+  ///
+  /// In en, this message translates to:
+  /// **'No down or weak ONU.'**
+  String get oltNoProblems;
+
+  /// No description provided for @featureFiber.
+  ///
+  /// In en, this message translates to:
+  /// **'Fiber near me'**
+  String get featureFiber;
+
+  /// No description provided for @fiberNeedsGps.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn on the phone\'s location to find fiber near you.'**
+  String get fiberNeedsGps;
+
+  /// No description provided for @fiberWithin.
+  ///
+  /// In en, this message translates to:
+  /// **'Within {meters} m'**
+  String fiberWithin(int meters);
+
+  /// No description provided for @fiberWider.
+  ///
+  /// In en, this message translates to:
+  /// **'Search wider'**
+  String get fiberWider;
+
+  /// No description provided for @fiberNone.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing within this distance.'**
+  String get fiberNone;
+
+  /// No description provided for @fiberJointBox.
+  ///
+  /// In en, this message translates to:
+  /// **'Joint box'**
+  String get fiberJointBox;
+
+  /// No description provided for @fiberSplitter.
+  ///
+  /// In en, this message translates to:
+  /// **'Splitter'**
+  String get fiberSplitter;
+
+  /// No description provided for @fiberPole.
+  ///
+  /// In en, this message translates to:
+  /// **'Pole'**
+  String get fiberPole;
+
+  /// No description provided for @fiberCut.
+  ///
+  /// In en, this message translates to:
+  /// **'Fiber cut'**
+  String get fiberCut;
+
+  /// No description provided for @fiberPortsFree.
+  ///
+  /// In en, this message translates to:
+  /// **'{free}/{total} ports free'**
+  String fiberPortsFree(int free, int total);
+
+  /// No description provided for @fiberMeters.
+  ///
+  /// In en, this message translates to:
+  /// **'{meters} m'**
+  String fiberMeters(int meters);
 }
 
 class _AppLocalizationsDelegate
