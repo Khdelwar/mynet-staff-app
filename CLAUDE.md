@@ -19,7 +19,9 @@ of each section (API + Pest tests) goes in mynet-erp first.
 
 ## Rules for agents
 - Small PRs from `main`, one concern each. Never force push.
-- No hardcoded secrets or ERP hosts: `--dart-define=ERP_BASE_URL=https://…`.
+- No hardcoded secrets or ERP hosts. Staff type the ERP address at login
+  (saved after a successful sign-in, https only); `--dart-define=ERP_BASE_URL`
+  only sets a default.
 - Never log tokens, passwords, 2FA codes, client phone numbers or payments.
 - The ERP is the source of truth for money, due, balance, approval and
   permissions. The app never computes them as authoritative and never shows

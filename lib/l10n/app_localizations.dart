@@ -140,6 +140,42 @@ abstract class AppLocalizations {
   /// **'This app is not set up for sign-in. Ask the office for the right app.'**
   String get notConfigured;
 
+  /// No description provided for @serverLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'ERP address'**
+  String get serverLabel;
+
+  /// No description provided for @serverHint.
+  ///
+  /// In en, this message translates to:
+  /// **'bill.example.com'**
+  String get serverHint;
+
+  /// No description provided for @serverHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Your company\'s ERP web address. Ask the office if you don\'t know it.'**
+  String get serverHelp;
+
+  /// No description provided for @serverInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter an https web address, e.g. bill.example.com'**
+  String get serverInvalid;
+
+  /// No description provided for @serverNotErp.
+  ///
+  /// In en, this message translates to:
+  /// **'No ERP found at this address. Check it and try again.'**
+  String get serverNotErp;
+
+  /// No description provided for @serverChange.
+  ///
+  /// In en, this message translates to:
+  /// **'Change'**
+  String get serverChange;
+
   /// No description provided for @offlineBanner.
   ///
   /// In en, this message translates to:

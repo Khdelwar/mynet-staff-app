@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:local_auth/local_auth.dart';
 
+import '../config.dart';
 import '../l10n/app_localizations.dart';
 import '../state/providers.dart';
 import 'common.dart';
@@ -60,6 +61,7 @@ class AccountScreen extends ConsumerWidget {
     final l = AppLocalizations.of(context);
     final user = ref.watch(authProvider.select((a) => a.user));
     final locked = ref.watch(appLockProvider);
+    final server = ref.watch(serverProvider);
 
     return ListView(
       padding: const EdgeInsets.all(16),
@@ -70,6 +72,10 @@ class AccountScreen extends ConsumerWidget {
           children: [
             InfoRow(l.email, user?.email),
             InfoRow(l.mobile, user?.phone ?? user?.staff?.mobile),
+            InfoRow(
+              l.serverLabel,
+              server == null ? null : AppConfig.displayServer(server),
+            ),
           ],
         ),
         Card(

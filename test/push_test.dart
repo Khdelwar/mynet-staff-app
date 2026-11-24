@@ -139,7 +139,7 @@ void main() {
       final container = ProviderContainer(
         overrides: [
           prefsProvider.overrideWithValue(prefs),
-          configuredProvider.overrideWithValue(true),
+          serverProvider.overrideWith(FixedServer.new),
           secretStoreProvider.overrideWithValue(MemorySecretStore()),
           pushServiceProvider.overrideWithValue(push),
           apiProvider.overrideWith(
@@ -200,7 +200,7 @@ void main() {
         ProviderScope(
           overrides: [
             prefsProvider.overrideWithValue(prefs),
-            configuredProvider.overrideWithValue(true),
+            serverProvider.overrideWith(FixedServer.new),
             secretStoreProvider.overrideWithValue(
               MemorySecretStore()..values[sessionTokenKey] = 'tok',
             ),
