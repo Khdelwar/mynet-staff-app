@@ -15,6 +15,7 @@ import 'duty_screen.dart';
 import 'offers_screen.dart';
 import 'ticket_detail_screen.dart';
 import 'tickets_screen.dart';
+import 'work_screens.dart';
 
 /// One app feature and the ERP permission that opens it (same as the web).
 class Feature {
@@ -48,6 +49,13 @@ class Feature {
 /// Planned in mynet-erp ROADMAP Phase 14. Tickets, duty, and offers.
 /// The Clients tile opens the staff client list.
 final features = <Feature>[
+  Feature(
+    'dashboard.view',
+    Icons.dashboard_outlined,
+    (l) => l.featureDashboard,
+    screen: 'dashboard',
+    open: _openDashboard,
+  ),
   Feature(
     'collection.collect',
     Icons.payments_outlined,
@@ -88,6 +96,7 @@ final features = <Feature>[
     Icons.event_available_outlined,
     (l) => l.featureHr,
     screen: 'hr',
+    open: _openHr,
   ),
   Feature(
     'staff_app.use',
@@ -113,6 +122,29 @@ final features = <Feature>[
     open: _openDueList,
   ),
   Feature(
+    'inventory.sell',
+    Icons.point_of_sale_outlined,
+    (l) => l.featureSales,
+    screen: 'sales',
+    also: const ['inventory.manage'],
+    open: _openSales,
+  ),
+  // STF-08: the ERP lists these two only for a reseller (role:reseller).
+  Feature(
+    'clients.recharge',
+    Icons.account_balance_wallet_outlined,
+    (l) => l.featureWallet,
+    screen: 'reseller_wallet',
+    open: _openWallet,
+  ),
+  Feature(
+    'clients.recharge',
+    Icons.timer_outlined,
+    (l) => l.featureExpiring,
+    screen: 'expiring',
+    open: _openExpiring,
+  ),
+  Feature(
     'tickets.assign',
     Icons.person_pin_outlined,
     (l) => l.featureAssign,
@@ -122,6 +154,16 @@ final features = <Feature>[
 ];
 
 Widget _openDuty(BuildContext context) => const DutyScreen();
+
+Widget _openDashboard(BuildContext context) => const DashboardScreen();
+
+Widget _openHr(BuildContext context) => const HrScreen();
+
+Widget _openSales(BuildContext context) => const SalesScreen();
+
+Widget _openWallet(BuildContext context) => const ResellerWalletScreen();
+
+Widget _openExpiring(BuildContext context) => const ExpiringScreen();
 
 Widget _openOffers(BuildContext context) => const OffersScreen();
 

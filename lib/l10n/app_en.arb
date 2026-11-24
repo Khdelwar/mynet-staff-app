@@ -77,7 +77,9 @@
   "dutyMeters": "{meters} m",
   "@dutyMeters": {
     "placeholders": {
-      "meters": { "type": "int" }
+      "meters": {
+        "type": "int"
+      }
     }
   },
   "dutyOutsideHours": "Duty can only start during duty hours.",
@@ -90,31 +92,85 @@
   "offerAccept": "Accept",
   "offerReject": "No",
   "offerSeconds": "{seconds}s left",
-  "@offerSeconds": {"placeholders": {"seconds": {"type": "int"}}},
+  "@offerSeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "offerDistance": "{meters} m away",
-  "@offerDistance": {"placeholders": {"meters": {"type": "int"}}},
+  "@offerDistance": {
+    "placeholders": {
+      "meters": {
+        "type": "int"
+      }
+    }
+  },
   "offerTicket": "Ticket #{id}",
-  "@offerTicket": {"placeholders": {"id": {"type": "int"}}},
+  "@offerTicket": {
+    "placeholders": {
+      "id": {
+        "type": "int"
+      }
+    }
+  },
   "offerAccepted": "You took ticket #{id}.",
-  "@offerAccepted": {"placeholders": {"id": {"type": "int"}}},
+  "@offerAccepted": {
+    "placeholders": {
+      "id": {
+        "type": "int"
+      }
+    }
+  },
   "assignNoTickets": "No open tickets to assign.",
   "assignTicketId": "Ticket number",
   "assignLookup": "Show nearest",
   "assignForTicket": "Nearest for ticket #{id}",
-  "@assignForTicket": {"placeholders": {"id": {"type": "int"}}},
+  "@assignForTicket": {
+    "placeholders": {
+      "id": {
+        "type": "int"
+      }
+    }
+  },
   "assignNobody": "Nobody on duty nearby.",
   "assignScore": "Score {score}",
-  "@assignScore": {"placeholders": {"score": {"type": "String"}}},
+  "@assignScore": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
   "assignEta": "{minutes} min",
-  "@assignEta": {"placeholders": {"minutes": {"type": "int"}}},
+  "@assignEta": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
   "assignBusy": "Busy",
   "assignSameArea": "Same area",
   "assignButton": "Assign",
   "assignDone": "Assigned to {name}.",
-  "@assignDone": {"placeholders": {"name": {"type": "String"}}},
+  "@assignDone": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "assignOffer": "Offer to the nearest",
   "offerStarted": "Offered to {name}.",
-  "@offerStarted": {"placeholders": {"name": {"type": "String"}}},
+  "@offerStarted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "offerNobody": "Nobody left to offer. The office has been told.",
   "ticketsSearch": "Name, ID or phone",
   "ticketsActive": "Open",
@@ -142,7 +198,9 @@
   "pushTicketTitle": "Ticket #{id}",
   "@pushTicketTitle": {
     "placeholders": {
-      "id": { "type": "int" }
+      "id": {
+        "type": "int"
+      }
     }
   },
   "outcomeDone": "Done",
@@ -163,7 +221,9 @@
   "ticketMeters": "{meters} m",
   "@ticketMeters": {
     "placeholders": {
-      "meters": { "type": "int" }
+      "meters": {
+        "type": "int"
+      }
     }
   },
   "clientCode": "Client ID",
@@ -188,7 +248,9 @@
   "ticketPhotoCount": "{count} photo(s)",
   "@ticketPhotoCount": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "ticketPhotoLimit": "A note can have up to 5 photos.",
@@ -233,7 +295,9 @@
   "clientsDisconnects": "{count} disconnects in 24 hours",
   "@clientsDisconnects": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "clientsOpenTickets": "Open tickets",
@@ -243,7 +307,9 @@
   "chatsUnread": "{count} new",
   "@chatsUnread": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "chatsReply": "Reply",
@@ -270,5 +336,114 @@
   "collectionSmsLater": "The client is told after the office approves.",
   "dueEmpty": "Nobody is on the due list.",
   "approvalsEmpty": "Nothing is waiting for you.",
-  "approvalsApprove": "Approve"
+  "approvalsApprove": "Approve",
+  "featureDashboard": "Dashboard",
+  "featureExpiring": "Expiring clients",
+  "featureSales": "Sell products",
+  "featureWallet": "Wallet",
+  "workAdjustment": "Package change",
+  "workAdvances": "Advances",
+  "workAmount": "Amount",
+  "workAskAdvance": "Ask for advance",
+  "workAskLeave": "Ask for leave",
+  "workAttendance": "Attendance",
+  "workAvailable": "Can spend",
+  "workAwaitingClient": "Waiting for client ID",
+  "workCableMetres": "Cable (metres)",
+  "workCannotInstall": "Install details cannot be given on this ticket now (only the assigned technician, while the client is pending).",
+  "workClientSearch": "Name, ID, phone or PPPoE",
+  "workClientsAdvance": "Clients' advance held",
+  "workCodeHint": "Serial, barcode or SKU",
+  "workConfirmRecharge": "Recharge for {months} month(s), ৳ {amount}?",
+  "@workConfirmRecharge": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "months": {
+        "type": "int"
+      }
+    }
+  },
+  "workCreditAlert": "Your credit is nearly used up.",
+  "workCreditLimit": "Credit limit",
+  "workCreditUsed": "Credit used",
+  "workDaysLeft": "{days} days left",
+  "@workDaysLeft": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "workEnterQuantity": "Enter a quantity for at least one part.",
+  "workFillAll": "Fill in everything needed.",
+  "workForNewConnection": "For a new connection (client ID later)",
+  "workGiveClientId": "Give ID",
+  "workInStock": "In stock",
+  "workInstall": "New line install",
+  "workInstallHint": "Saving turns the line on and resolves the ticket.",
+  "workInstallSaved": "Install saved.",
+  "workLateMinutes": "Late (minutes)",
+  "workLeaves": "Leave",
+  "workMaterials": "Materials used",
+  "workMethod": "Method",
+  "workMonths": "Months",
+  "workNewExpiry": "New expiry",
+  "workNoDashboard": "No dashboard boxes for your login.",
+  "workNoExpiring": "No clients expiring.",
+  "workNoMaterials": "Nothing used on this ticket yet.",
+  "workNoSales": "No sales yet.",
+  "workNoteOptional": "Note (optional)",
+  "workOk": "OK",
+  "workOldExpiry": "Old expiry",
+  "workPayBank": "Bank",
+  "workPayCash": "Cash",
+  "workPayDigital": "Digital",
+  "workPayDue": "Due",
+  "workPayTotal": "To pay",
+  "workPickClient": "Choose client",
+  "workPonPort": "PON port",
+  "workPrice": "Price",
+  "workPurpose": "Purpose",
+  "workPurposeLineWork": "Line work",
+  "workPurposeNewConnection": "New connection",
+  "workPurposeOther": "Other",
+  "workPurposeRepair": "Repair",
+  "workPurposeShift": "Shifting",
+  "workQuantity": "Qty",
+  "workReason": "Reason",
+  "workReceiptAdded": "Receipt photo added",
+  "workReceiptPhoto": "Receipt photo",
+  "workRecentSales": "My last sales",
+  "workRecharge": "Recharge",
+  "workRechargeDone": "Recharged. New expiry: {expiry}",
+  "@workRechargeDone": {
+    "placeholders": {
+      "expiry": {
+        "type": "String"
+      }
+    }
+  },
+  "workRechargePending": "This client must be completed on the website first.",
+  "workRequestSent": "Request sent.",
+  "workSave": "Save",
+  "workSaved": "Saved.",
+  "workScan": "Scan / type code",
+  "workSell": "Sell",
+  "workSold": "Sold.",
+  "workSoldCash": "Sold. The cash goes into your day-end handover.",
+  "workTransactions": "Transactions",
+  "workUseParts": "Use parts",
+  "workWalletAfter": "Wallet after",
+  "workWalletBalance": "Wallet balance",
+  "workWalletCharge": "From wallet",
+  "workWithinDays": "{days} d",
+  "@workWithinDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  }
 }

@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../api/collection.dart';
 import '../api/staff_api.dart';
+import '../field/photos.dart';
 import '../l10n/app_localizations.dart';
+import '../state/field.dart';
 import '../state/providers.dart';
 import 'approvals_screen.dart';
 import 'common.dart';
@@ -61,6 +63,7 @@ class _CollectionScreenState extends ConsumerState<CollectionScreen> {
     final amount = TextEditingController();
     final note = TextEditingController();
     var owner = 'cash';
+    String? receipt;
     final key = newRequestKey();
     final ok = await showDialog<bool>(
       context: context,
@@ -80,6 +83,27 @@ class _CollectionScreenState extends ConsumerState<CollectionScreen> {
               controller: note,
               decoration: InputDecoration(labelText: l.collectionNote),
             ),
+            // STF-06b: a photo of the receipt, for whoever approves it.
+            if (expense)
+              StatefulBuilder(
+                builder: (context, setLocal) => TextButton.icon(
+                  key: const ValueKey('expense-receipt'),
+                  onPressed: () async {
+                    final path = await ref
+                        .read(photoPickerProvider)
+                        .pick(PhotoSource.camera);
+                    if (path != null) setLocal(() => receipt = path);
+                  },
+                  icon: Icon(
+                    receipt == null
+                        ? Icons.add_a_photo_outlined
+                        : Icons.check_circle_outline,
+                  ),
+                  label: Text(
+                    receipt == null ? l.workReceiptPhoto : l.workReceiptAdded,
+                  ),
+                ),
+              ),
             if (!expense)
               StatefulBuilder(
                 builder: (context, setLocal) => DropdownButton<String>(
@@ -126,7 +150,12 @@ class _CollectionScreenState extends ConsumerState<CollectionScreen> {
         if (parsed == null || note.text.trim().isEmpty) return;
         await ref
             .read(apiProvider)
-            .addExpense(amount: parsed, note: note.text, requestKey: key);
+            .addExpense(
+              amount: parsed,
+              note: note.text,
+              requestKey: key,
+              receiptPath: receipt,
+            );
       } else {
         await ref
             .read(apiProvider)

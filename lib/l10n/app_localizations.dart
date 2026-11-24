@@ -1447,6 +1447,474 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Approve'**
   String get approvalsApprove;
+
+  /// No description provided for @featureDashboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Dashboard'**
+  String get featureDashboard;
+
+  /// No description provided for @featureExpiring.
+  ///
+  /// In en, this message translates to:
+  /// **'Expiring clients'**
+  String get featureExpiring;
+
+  /// No description provided for @featureSales.
+  ///
+  /// In en, this message translates to:
+  /// **'Sell products'**
+  String get featureSales;
+
+  /// No description provided for @featureWallet.
+  ///
+  /// In en, this message translates to:
+  /// **'Wallet'**
+  String get featureWallet;
+
+  /// No description provided for @workAdjustment.
+  ///
+  /// In en, this message translates to:
+  /// **'Package change'**
+  String get workAdjustment;
+
+  /// No description provided for @workAdvances.
+  ///
+  /// In en, this message translates to:
+  /// **'Advances'**
+  String get workAdvances;
+
+  /// No description provided for @workAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount'**
+  String get workAmount;
+
+  /// No description provided for @workAskAdvance.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask for advance'**
+  String get workAskAdvance;
+
+  /// No description provided for @workAskLeave.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask for leave'**
+  String get workAskLeave;
+
+  /// No description provided for @workAttendance.
+  ///
+  /// In en, this message translates to:
+  /// **'Attendance'**
+  String get workAttendance;
+
+  /// No description provided for @workAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Can spend'**
+  String get workAvailable;
+
+  /// No description provided for @workAwaitingClient.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting for client ID'**
+  String get workAwaitingClient;
+
+  /// No description provided for @workCableMetres.
+  ///
+  /// In en, this message translates to:
+  /// **'Cable (metres)'**
+  String get workCableMetres;
+
+  /// No description provided for @workCannotInstall.
+  ///
+  /// In en, this message translates to:
+  /// **'Install details cannot be given on this ticket now (only the assigned technician, while the client is pending).'**
+  String get workCannotInstall;
+
+  /// No description provided for @workClientSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Name, ID, phone or PPPoE'**
+  String get workClientSearch;
+
+  /// No description provided for @workClientsAdvance.
+  ///
+  /// In en, this message translates to:
+  /// **'Clients\' advance held'**
+  String get workClientsAdvance;
+
+  /// No description provided for @workCodeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Serial, barcode or SKU'**
+  String get workCodeHint;
+
+  /// No description provided for @workConfirmRecharge.
+  ///
+  /// In en, this message translates to:
+  /// **'Recharge for {months} month(s), ৳ {amount}?'**
+  String workConfirmRecharge(String amount, int months);
+
+  /// No description provided for @workCreditAlert.
+  ///
+  /// In en, this message translates to:
+  /// **'Your credit is nearly used up.'**
+  String get workCreditAlert;
+
+  /// No description provided for @workCreditLimit.
+  ///
+  /// In en, this message translates to:
+  /// **'Credit limit'**
+  String get workCreditLimit;
+
+  /// No description provided for @workCreditUsed.
+  ///
+  /// In en, this message translates to:
+  /// **'Credit used'**
+  String get workCreditUsed;
+
+  /// No description provided for @workDaysLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'{days} days left'**
+  String workDaysLeft(int days);
+
+  /// No description provided for @workEnterQuantity.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a quantity for at least one part.'**
+  String get workEnterQuantity;
+
+  /// No description provided for @workFillAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Fill in everything needed.'**
+  String get workFillAll;
+
+  /// No description provided for @workForNewConnection.
+  ///
+  /// In en, this message translates to:
+  /// **'For a new connection (client ID later)'**
+  String get workForNewConnection;
+
+  /// No description provided for @workGiveClientId.
+  ///
+  /// In en, this message translates to:
+  /// **'Give ID'**
+  String get workGiveClientId;
+
+  /// No description provided for @workInStock.
+  ///
+  /// In en, this message translates to:
+  /// **'In stock'**
+  String get workInStock;
+
+  /// No description provided for @workInstall.
+  ///
+  /// In en, this message translates to:
+  /// **'New line install'**
+  String get workInstall;
+
+  /// No description provided for @workInstallHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Saving turns the line on and resolves the ticket.'**
+  String get workInstallHint;
+
+  /// No description provided for @workInstallSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Install saved.'**
+  String get workInstallSaved;
+
+  /// No description provided for @workLateMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'Late (minutes)'**
+  String get workLateMinutes;
+
+  /// No description provided for @workLeaves.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave'**
+  String get workLeaves;
+
+  /// No description provided for @workMaterials.
+  ///
+  /// In en, this message translates to:
+  /// **'Materials used'**
+  String get workMaterials;
+
+  /// No description provided for @workMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'Method'**
+  String get workMethod;
+
+  /// No description provided for @workMonths.
+  ///
+  /// In en, this message translates to:
+  /// **'Months'**
+  String get workMonths;
+
+  /// No description provided for @workNewExpiry.
+  ///
+  /// In en, this message translates to:
+  /// **'New expiry'**
+  String get workNewExpiry;
+
+  /// No description provided for @workNoDashboard.
+  ///
+  /// In en, this message translates to:
+  /// **'No dashboard boxes for your login.'**
+  String get workNoDashboard;
+
+  /// No description provided for @workNoExpiring.
+  ///
+  /// In en, this message translates to:
+  /// **'No clients expiring.'**
+  String get workNoExpiring;
+
+  /// No description provided for @workNoMaterials.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing used on this ticket yet.'**
+  String get workNoMaterials;
+
+  /// No description provided for @workNoSales.
+  ///
+  /// In en, this message translates to:
+  /// **'No sales yet.'**
+  String get workNoSales;
+
+  /// No description provided for @workNoteOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'Note (optional)'**
+  String get workNoteOptional;
+
+  /// No description provided for @workOk.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get workOk;
+
+  /// No description provided for @workOldExpiry.
+  ///
+  /// In en, this message translates to:
+  /// **'Old expiry'**
+  String get workOldExpiry;
+
+  /// No description provided for @workPayBank.
+  ///
+  /// In en, this message translates to:
+  /// **'Bank'**
+  String get workPayBank;
+
+  /// No description provided for @workPayCash.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash'**
+  String get workPayCash;
+
+  /// No description provided for @workPayDigital.
+  ///
+  /// In en, this message translates to:
+  /// **'Digital'**
+  String get workPayDigital;
+
+  /// No description provided for @workPayDue.
+  ///
+  /// In en, this message translates to:
+  /// **'Due'**
+  String get workPayDue;
+
+  /// No description provided for @workPayTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'To pay'**
+  String get workPayTotal;
+
+  /// No description provided for @workPickClient.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose client'**
+  String get workPickClient;
+
+  /// No description provided for @workPonPort.
+  ///
+  /// In en, this message translates to:
+  /// **'PON port'**
+  String get workPonPort;
+
+  /// No description provided for @workPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Price'**
+  String get workPrice;
+
+  /// No description provided for @workPurpose.
+  ///
+  /// In en, this message translates to:
+  /// **'Purpose'**
+  String get workPurpose;
+
+  /// No description provided for @workPurposeLineWork.
+  ///
+  /// In en, this message translates to:
+  /// **'Line work'**
+  String get workPurposeLineWork;
+
+  /// No description provided for @workPurposeNewConnection.
+  ///
+  /// In en, this message translates to:
+  /// **'New connection'**
+  String get workPurposeNewConnection;
+
+  /// No description provided for @workPurposeOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get workPurposeOther;
+
+  /// No description provided for @workPurposeRepair.
+  ///
+  /// In en, this message translates to:
+  /// **'Repair'**
+  String get workPurposeRepair;
+
+  /// No description provided for @workPurposeShift.
+  ///
+  /// In en, this message translates to:
+  /// **'Shifting'**
+  String get workPurposeShift;
+
+  /// No description provided for @workQuantity.
+  ///
+  /// In en, this message translates to:
+  /// **'Qty'**
+  String get workQuantity;
+
+  /// No description provided for @workReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason'**
+  String get workReason;
+
+  /// No description provided for @workReceiptAdded.
+  ///
+  /// In en, this message translates to:
+  /// **'Receipt photo added'**
+  String get workReceiptAdded;
+
+  /// No description provided for @workReceiptPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Receipt photo'**
+  String get workReceiptPhoto;
+
+  /// No description provided for @workRecentSales.
+  ///
+  /// In en, this message translates to:
+  /// **'My last sales'**
+  String get workRecentSales;
+
+  /// No description provided for @workRecharge.
+  ///
+  /// In en, this message translates to:
+  /// **'Recharge'**
+  String get workRecharge;
+
+  /// No description provided for @workRechargeDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Recharged. New expiry: {expiry}'**
+  String workRechargeDone(String expiry);
+
+  /// No description provided for @workRechargePending.
+  ///
+  /// In en, this message translates to:
+  /// **'This client must be completed on the website first.'**
+  String get workRechargePending;
+
+  /// No description provided for @workRequestSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Request sent.'**
+  String get workRequestSent;
+
+  /// No description provided for @workSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get workSave;
+
+  /// No description provided for @workSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved.'**
+  String get workSaved;
+
+  /// No description provided for @workScan.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan / type code'**
+  String get workScan;
+
+  /// No description provided for @workSell.
+  ///
+  /// In en, this message translates to:
+  /// **'Sell'**
+  String get workSell;
+
+  /// No description provided for @workSold.
+  ///
+  /// In en, this message translates to:
+  /// **'Sold.'**
+  String get workSold;
+
+  /// No description provided for @workSoldCash.
+  ///
+  /// In en, this message translates to:
+  /// **'Sold. The cash goes into your day-end handover.'**
+  String get workSoldCash;
+
+  /// No description provided for @workTransactions.
+  ///
+  /// In en, this message translates to:
+  /// **'Transactions'**
+  String get workTransactions;
+
+  /// No description provided for @workUseParts.
+  ///
+  /// In en, this message translates to:
+  /// **'Use parts'**
+  String get workUseParts;
+
+  /// No description provided for @workWalletAfter.
+  ///
+  /// In en, this message translates to:
+  /// **'Wallet after'**
+  String get workWalletAfter;
+
+  /// No description provided for @workWalletBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'Wallet balance'**
+  String get workWalletBalance;
+
+  /// No description provided for @workWalletCharge.
+  ///
+  /// In en, this message translates to:
+  /// **'From wallet'**
+  String get workWalletCharge;
+
+  /// No description provided for @workWithinDays.
+  ///
+  /// In en, this message translates to:
+  /// **'{days} d'**
+  String workWithinDays(int days);
 }
 
 class _AppLocalizationsDelegate

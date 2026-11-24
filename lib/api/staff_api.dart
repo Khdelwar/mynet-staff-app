@@ -12,6 +12,7 @@ import 'json.dart';
 import 'models.dart';
 import 'offers.dart';
 import 'tickets.dart';
+import 'work.dart';
 
 /// A failed ERP call. [status] is 0 when the server was not reached.
 class ApiException implements Exception {
@@ -554,15 +555,30 @@ class StaffApi {
     return PaymentReceipt.fromJson(res.data);
   }
 
+  /// [receiptPath] is a photo of the receipt on the phone (STF-06b).
   Future<void> addExpense({
     required num amount,
     required String note,
     required String requestKey,
-  }) {
-    return _send(
+    String? receiptPath,
+  }) async {
+    final fields = {
+      'amount': amount,
+      'note': note.trim(),
+      'request_key': requestKey,
+    };
+    await _send(
       'POST',
       '/collection/expenses',
-      body: {'amount': amount, 'note': note.trim(), 'request_key': requestKey},
+      body: receiptPath == null
+          ? fields
+          : FormData.fromMap({
+              ...fields,
+              'receipt': await MultipartFile.fromFile(
+                receiptPath,
+                filename: _fileName(receiptPath),
+              ),
+            }),
     );
   }
 
@@ -659,6 +675,239 @@ class StaffApi {
     final res = await _send('POST', '/clients/$id/dbm') as Response<dynamic>;
     return DbmReading.fromJson(res.data);
   }
+
+  // --- STF-03b: materials and install on a ticket ------------------------
+
+  Future<MaterialsView> ticketMaterials(int ticketId) async {
+    final res =
+        await _send('GET', '/tickets/$ticketId/materials') as Response<dynamic>;
+    return MaterialsView.fromJson(res.data);
+  }
+
+  /// Parts from the office stock. The same [requestKey] twice takes stock once.
+  Future<List<UsedMaterial>> useMaterials(
+    int ticketId, {
+    required Map<int, num> lines,
+    required String purpose,
+    required String requestKey,
+    String? note,
+  }) async {
+    final res = await _send(
+      'POST',
+      '/tickets/$ticketId/materials',
+      body: {
+        'lines': [
+          for (final e in lines.entries)
+            {'consumable_id': e.key, 'quantity': e.value},
+        ],
+        'purpose': purpose,
+        'request_key': requestKey,
+        if (note != null && note.trim().isNotEmpty) 'note': note.trim(),
+      },
+    ) as Response<dynamic>;
+    return UsedMaterial.list(asMap(res.data)['materials']);
+  }
+
+  /// A serial / barcode (issued to the ticket's client) or a part's SKU.
+  Future<List<UsedMaterial>> scanForTicket(
+    int ticketId, {
+    required String code,
+    required String requestKey,
+  }) async {
+    final res = await _send(
+      'POST',
+      '/tickets/$ticketId/scan',
+      body: {'code': code.trim(), 'request_key': requestKey},
+    ) as Response<dynamic>;
+    return UsedMaterial.list(asMap(res.data)['materials']);
+  }
+
+  Future<InstallForm> installForm(int ticketId, {int? popId}) async {
+    final res = await _send(
+      'GET',
+      '/tickets/$ticketId/install',
+      query: {'pop_id': ?popId},
+    ) as Response<dynamic>;
+    return InstallForm.fromJson(res.data);
+  }
+
+  /// The new line's install (the ERP turns the line on and resolves the ticket).
+  Future<void> recordInstall(
+    int ticketId, {
+    required int popId,
+    int? routerId,
+    String? onuSn,
+    String? onuMac,
+    String? ponPort,
+    int? cableM,
+    String? note,
+  }) {
+    String? t(String? v) => v == null || v.trim().isEmpty ? null : v.trim();
+    return _send(
+      'POST',
+      '/tickets/$ticketId/install',
+      body: {
+        'pop_id': popId,
+        'router_id': ?routerId,
+        'onu_sn': ?t(onuSn),
+        'onu_mac': ?t(onuMac),
+        'pon_port': ?t(ponPort),
+        'cable_m': ?cableM,
+        'note': ?t(note),
+      },
+    );
+  }
+
+  // --- STF-06b: product sales -------------------------------------------
+
+  Future<SalesView> sales() async {
+    final res = await _send('GET', '/sales') as Response<dynamic>;
+    return SalesView.fromJson(res.data);
+  }
+
+  Future<ScannedProduct> scanProduct(String code) async {
+    final res = await _send(
+      'POST',
+      '/sales/scan',
+      body: {'code': code.trim()},
+    ) as Response<dynamic>;
+    return ScannedProduct.fromJson(res.data);
+  }
+
+  /// Either [clientId] or [newConnection]. The ERP refuses a price below cost.
+  Future<SaleItem> sell({
+    required String code,
+    required num price,
+    required String payment,
+    required String requestKey,
+    String? paymentMethod,
+    num? quantity,
+    int? clientId,
+    bool newConnection = false,
+    String? note,
+  }) async {
+    final res = await _send(
+      'POST',
+      '/sales',
+      body: {
+        'code': code,
+        'price': price,
+        'payment': payment,
+        'payment_method': ?paymentMethod,
+        'quantity': ?quantity,
+        if (newConnection) 'new_connection': true else 'client_id': clientId,
+        if (note != null && note.trim().isNotEmpty) 'note': note.trim(),
+        'request_key': requestKey,
+      },
+    ) as Response<dynamic>;
+    return SaleItem.fromJson(asMap(res.data)['sale']);
+  }
+
+  Future<void> giveSaleClient(int saleId, int clientId) =>
+      _send('POST', '/sales/$saleId/client', body: {'client_id': clientId});
+
+  // --- STF-08: reseller and recharge ------------------------------------
+
+  Future<ResellerWallet> resellerWallet() async {
+    final res = await _send('GET', '/reseller/wallet') as Response<dynamic>;
+    return ResellerWallet.fromJson(res.data);
+  }
+
+  Future<List<ExpiringClient>> expiringClients({int days = 3}) async {
+    final res = await _send(
+      'GET',
+      '/reseller/expiring',
+      query: {'days': days},
+    ) as Response<dynamic>;
+    return [
+      for (final row in listFrom(res.data, const ['clients']))
+        ExpiringClient.fromJson(row),
+    ];
+  }
+
+  Future<RechargeQuote> rechargeQuote(int clientId, {int months = 1}) async {
+    final res = await _send(
+      'GET',
+      '/clients/$clientId/recharge-quote',
+      query: {'months': months},
+    ) as Response<dynamic>;
+    return RechargeQuote.fromJson(res.data);
+  }
+
+  /// Returns the client's new expiry date. The same [requestKey] twice recharges once.
+  Future<String?> recharge(
+    int clientId, {
+    required int months,
+    required String method,
+    required String requestKey,
+    String? remarks,
+  }) async {
+    final res = await _send(
+      'POST',
+      '/clients/$clientId/recharge',
+      body: {
+        'months': months,
+        'method': method,
+        'request_key': requestKey,
+        if (remarks != null && remarks.trim().isNotEmpty)
+          'remarks': remarks.trim(),
+      },
+    ) as Response<dynamic>;
+    return pickString(asMap(asMap(res.data)['client']), const ['expiry_date']);
+  }
+
+  // --- STF-09: dashboard and own HR -------------------------------------
+
+  Future<List<Kpi>> dashboard() async {
+    final res = await _send('GET', '/dashboard') as Response<dynamic>;
+    return [
+      for (final k in listFrom(res.data, const ['kpis'])) Kpi.fromJson(k),
+    ];
+  }
+
+  Future<HrView> myHr({String? month}) async {
+    final res = await _send(
+      'GET',
+      '/hr/me',
+      query: {'month': ?month},
+    ) as Response<dynamic>;
+    return HrView.fromJson(res.data);
+  }
+
+  Future<void> askLeave({
+    required String startDate,
+    required String endDate,
+    required String reason,
+    bool unpaid = false,
+  }) => _send(
+    'POST',
+    '/hr/leaves',
+    body: {
+      'pay': unpaid ? 'unpaid' : 'paid',
+      'start_date': startDate,
+      'end_date': endDate,
+      'reason': reason.trim(),
+    },
+  );
+
+  Future<void> cancelLeave(int id) => _send('POST', '/hr/leaves/$id/cancel');
+
+  Future<void> askAdvance({
+    required num amount,
+    required String month,
+    String? note,
+  }) => _send(
+    'POST',
+    '/hr/advances',
+    body: {
+      'amount': amount,
+      'month': month,
+      if (note != null && note.trim().isNotEmpty) 'note': note.trim(),
+    },
+  );
+
+  Future<void> cancelAdvance(int id) =>
+      _send('POST', '/hr/advances/$id/cancel');
 }
 
 String _fileName(String path) {

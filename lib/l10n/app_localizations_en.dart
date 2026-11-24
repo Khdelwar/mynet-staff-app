@@ -733,4 +733,249 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get approvalsApprove => 'Approve';
+
+  @override
+  String get featureDashboard => 'Dashboard';
+
+  @override
+  String get featureExpiring => 'Expiring clients';
+
+  @override
+  String get featureSales => 'Sell products';
+
+  @override
+  String get featureWallet => 'Wallet';
+
+  @override
+  String get workAdjustment => 'Package change';
+
+  @override
+  String get workAdvances => 'Advances';
+
+  @override
+  String get workAmount => 'Amount';
+
+  @override
+  String get workAskAdvance => 'Ask for advance';
+
+  @override
+  String get workAskLeave => 'Ask for leave';
+
+  @override
+  String get workAttendance => 'Attendance';
+
+  @override
+  String get workAvailable => 'Can spend';
+
+  @override
+  String get workAwaitingClient => 'Waiting for client ID';
+
+  @override
+  String get workCableMetres => 'Cable (metres)';
+
+  @override
+  String get workCannotInstall =>
+      'Install details cannot be given on this ticket now (only the assigned technician, while the client is pending).';
+
+  @override
+  String get workClientSearch => 'Name, ID, phone or PPPoE';
+
+  @override
+  String get workClientsAdvance => 'Clients\' advance held';
+
+  @override
+  String get workCodeHint => 'Serial, barcode or SKU';
+
+  @override
+  String workConfirmRecharge(String amount, int months) {
+    return 'Recharge for $months month(s), ৳ $amount?';
+  }
+
+  @override
+  String get workCreditAlert => 'Your credit is nearly used up.';
+
+  @override
+  String get workCreditLimit => 'Credit limit';
+
+  @override
+  String get workCreditUsed => 'Credit used';
+
+  @override
+  String workDaysLeft(int days) {
+    return '$days days left';
+  }
+
+  @override
+  String get workEnterQuantity => 'Enter a quantity for at least one part.';
+
+  @override
+  String get workFillAll => 'Fill in everything needed.';
+
+  @override
+  String get workForNewConnection => 'For a new connection (client ID later)';
+
+  @override
+  String get workGiveClientId => 'Give ID';
+
+  @override
+  String get workInStock => 'In stock';
+
+  @override
+  String get workInstall => 'New line install';
+
+  @override
+  String get workInstallHint =>
+      'Saving turns the line on and resolves the ticket.';
+
+  @override
+  String get workInstallSaved => 'Install saved.';
+
+  @override
+  String get workLateMinutes => 'Late (minutes)';
+
+  @override
+  String get workLeaves => 'Leave';
+
+  @override
+  String get workMaterials => 'Materials used';
+
+  @override
+  String get workMethod => 'Method';
+
+  @override
+  String get workMonths => 'Months';
+
+  @override
+  String get workNewExpiry => 'New expiry';
+
+  @override
+  String get workNoDashboard => 'No dashboard boxes for your login.';
+
+  @override
+  String get workNoExpiring => 'No clients expiring.';
+
+  @override
+  String get workNoMaterials => 'Nothing used on this ticket yet.';
+
+  @override
+  String get workNoSales => 'No sales yet.';
+
+  @override
+  String get workNoteOptional => 'Note (optional)';
+
+  @override
+  String get workOk => 'OK';
+
+  @override
+  String get workOldExpiry => 'Old expiry';
+
+  @override
+  String get workPayBank => 'Bank';
+
+  @override
+  String get workPayCash => 'Cash';
+
+  @override
+  String get workPayDigital => 'Digital';
+
+  @override
+  String get workPayDue => 'Due';
+
+  @override
+  String get workPayTotal => 'To pay';
+
+  @override
+  String get workPickClient => 'Choose client';
+
+  @override
+  String get workPonPort => 'PON port';
+
+  @override
+  String get workPrice => 'Price';
+
+  @override
+  String get workPurpose => 'Purpose';
+
+  @override
+  String get workPurposeLineWork => 'Line work';
+
+  @override
+  String get workPurposeNewConnection => 'New connection';
+
+  @override
+  String get workPurposeOther => 'Other';
+
+  @override
+  String get workPurposeRepair => 'Repair';
+
+  @override
+  String get workPurposeShift => 'Shifting';
+
+  @override
+  String get workQuantity => 'Qty';
+
+  @override
+  String get workReason => 'Reason';
+
+  @override
+  String get workReceiptAdded => 'Receipt photo added';
+
+  @override
+  String get workReceiptPhoto => 'Receipt photo';
+
+  @override
+  String get workRecentSales => 'My last sales';
+
+  @override
+  String get workRecharge => 'Recharge';
+
+  @override
+  String workRechargeDone(String expiry) {
+    return 'Recharged. New expiry: $expiry';
+  }
+
+  @override
+  String get workRechargePending =>
+      'This client must be completed on the website first.';
+
+  @override
+  String get workRequestSent => 'Request sent.';
+
+  @override
+  String get workSave => 'Save';
+
+  @override
+  String get workSaved => 'Saved.';
+
+  @override
+  String get workScan => 'Scan / type code';
+
+  @override
+  String get workSell => 'Sell';
+
+  @override
+  String get workSold => 'Sold.';
+
+  @override
+  String get workSoldCash => 'Sold. The cash goes into your day-end handover.';
+
+  @override
+  String get workTransactions => 'Transactions';
+
+  @override
+  String get workUseParts => 'Use parts';
+
+  @override
+  String get workWalletAfter => 'Wallet after';
+
+  @override
+  String get workWalletBalance => 'Wallet balance';
+
+  @override
+  String get workWalletCharge => 'From wallet';
+
+  @override
+  String workWithinDays(int days) {
+    return '$days d';
+  }
 }
