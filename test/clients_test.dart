@@ -157,4 +157,133 @@ void main() {
     expect(find.text('2 disconnects in 24 hours'), findsOneWidget);
     expect(erp.calls, contains('GET /clients/9/connection'));
   });
+
+  testWidgets('search and filters work as the web client list', (tester) async {
+    SharedPreferences.setMockInitialValues({'locale': 'en'});
+    final prefs = await SharedPreferences.getInstance();
+    final erp = FakeErp({
+      'GET /me': (_) => (
+        200,
+        {
+          'user': {'id': 1, 'name': 'Rahim'},
+        },
+      ),
+      'GET /clients': (o) => (
+        200,
+        {
+          'clients': [
+            {
+              ..._row(),
+              'display_status': 'due',
+              'pppoe_username': 'karim01',
+              'pop': 'Mirpur',
+            },
+          ],
+          'page': 1,
+          'last_page': 1,
+          'total': 1,
+        },
+      ),
+      'GET /clients/suggest': (o) => (
+        200,
+        {
+          'clients': [_row()],
+          'exact_id': o.queryParameters['q'] == 'C-1001' ? 9 : null,
+        },
+      ),
+      'GET /clients/filters': (o) => (
+        200,
+        {
+          'directories': [
+            {'value': 'all', 'label': 'All clients'},
+            {'value': 'expired', 'label': 'Expired clients'},
+          ],
+          'statuses': [
+            {'value': 'due', 'label': 'Has due'},
+          ],
+          'pops': [
+            {'id': 3, 'name': 'Mirpur'},
+          ],
+          'packages': [],
+          'sorts': ['id', 'name'],
+        },
+      ),
+      'GET /clients/9': (_) => (
+        200,
+        {
+          'client': {..._row(), 'can': {}},
+        },
+      ),
+    });
+    final container = ProviderContainer(
+      overrides: [
+        prefsProvider.overrideWithValue(prefs),
+        secretStoreProvider.overrideWithValue(
+          MemorySecretStore()..values[sessionTokenKey] = 'tok',
+        ),
+        apiProvider.overrideWith((ref) => StaffApi(dio: erp.dio)),
+      ],
+    );
+    addTearDown(container.dispose);
+    container.read(authProvider);
+    await tester.pump();
+    await tester.pump();
+    await tester.pumpWidget(
+      UncontrolledProviderScope(
+        container: container,
+        child: const MaterialApp(
+          locale: Locale('en'),
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: ClientListScreen(),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    // The ERP's own label for the status, and the language asked for.
+    expect(find.textContaining('Has due'), findsOne);
+    expect(find.textContaining('karim01'), findsOne);
+    expect(find.text('1 clients'), findsOne);
+    final filters = erp.requests.firstWhere(
+      (r) => r.uri.path.endsWith('/clients/filters'),
+    );
+    expect(filters.uri.queryParameters['lang'], 'en');
+
+    // Results follow the typing, without pressing Enter.
+    await tester.enterText(find.byKey(const ValueKey('client-search')), 'kar');
+    await tester.pump(const Duration(milliseconds: 400));
+    await tester.pumpAndSettle();
+    expect(
+      erp.requests.last.uri.queryParameters['q'],
+      'kar',
+      reason: 'live search',
+    );
+
+    // Filters: the web's choices; the list asks the ERP with them.
+    await tester.tap(find.byKey(const ValueKey('client-filters')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('filter-directory-expired')));
+    await tester.tap(find.byKey(const ValueKey('filter-pop_id')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Mirpur').last);
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('filter-apply')));
+    await tester.pumpAndSettle();
+    final filtered = erp.requests.lastWhere(
+      (r) => r.uri.path.endsWith('/clients'),
+    );
+    expect(filtered.uri.queryParameters['directory'], 'expired');
+    expect(filtered.uri.queryParameters['pop_id'], '3');
+    expect(filtered.uri.queryParameters['q'], 'kar');
+
+    // Enter on an exact client ID opens that client, as the web does.
+    await tester.enterText(
+      find.byKey(const ValueKey('client-search')),
+      'C-1001',
+    );
+    await tester.testTextInput.receiveAction(TextInputAction.search);
+    await tester.pumpAndSettle();
+    expect(find.byKey(const ValueKey('client-detail')), findsOneWidget);
+  });
 }

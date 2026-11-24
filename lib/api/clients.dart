@@ -42,6 +42,11 @@ class ClientRow {
     this.advance,
     this.balance,
     this.seenOnline,
+    this.displayStatus,
+    this.pppoe,
+    this.pop,
+    this.isVip = false,
+    this.canRecharge,
   });
 
   final int id;
@@ -57,6 +62,15 @@ class ClientRow {
   final num? advance;
   final num? balance;
   final bool? seenOnline;
+
+  /// As the web list shows it ("paid" when active with nothing due).
+  final String? displayStatus;
+  final String? pppoe;
+  final String? pop;
+  final bool isVip;
+
+  /// Only in suggestions.
+  final bool? canRecharge;
 
   factory ClientRow.fromJson(Object? raw) {
     final m = asMap(raw);
@@ -75,6 +89,123 @@ class ClientRow {
       advance: toNum(m['advance']),
       balance: toNum(m['balance']),
       seenOnline: m['seen_online'] is bool ? m['seen_online'] as bool : null,
+      displayStatus: pickString(m, const ['display_status', 'status']),
+      pppoe: pickString(m, const ['pppoe_username']),
+      pop: pickString(m, const ['pop']),
+      isVip: m['is_vip'] == true,
+      canRecharge: m['can_recharge'] is bool ? m['can_recharge'] as bool : null,
+    );
+  }
+}
+
+/// `/clients/suggest`: as the web header search.
+class ClientSuggestions {
+  const ClientSuggestions({required this.clients, this.exactId});
+
+  final List<ClientRow> clients;
+
+  /// The one client whose ID or PPPoE is exactly what was typed.
+  final int? exactId;
+
+  factory ClientSuggestions.fromJson(Object? raw) {
+    final m = asMap(raw);
+    return ClientSuggestions(
+      clients: [
+        for (final row in listFrom(m, const ['clients']))
+          ClientRow.fromJson(row),
+      ],
+      exactId: toNum(m['exact_id'])?.toInt(),
+    );
+  }
+}
+
+/// A choice with the ERP's own label.
+class FilterOption {
+  const FilterOption(this.value, this.label);
+  final String value;
+  final String label;
+}
+
+/// `/clients/filters`: the web client list's filter choices.
+class ClientFilterOptions {
+  const ClientFilterOptions({
+    this.directories = const [],
+    this.statuses = const [],
+    this.billingPolicies = const [],
+    this.clientTypes = const [],
+    this.pops = const [],
+    this.zones = const [],
+    this.routers = const [],
+    this.packages = const [],
+    this.resellers = const [],
+    this.sorts = const [],
+  });
+
+  final List<FilterOption> directories;
+  final List<FilterOption> statuses;
+  final List<FilterOption> billingPolicies;
+  final List<FilterOption> clientTypes;
+  final List<FilterOption> pops;
+  final List<FilterOption> zones;
+
+  /// Each router with the id of its POP.
+  final List<(FilterOption, String?)> routers;
+  final List<FilterOption> packages;
+  final List<FilterOption> resellers;
+  final List<String> sorts;
+
+  /// The ERP label for a status value, or the value itself.
+  String statusLabel(String? value) {
+    if (value == null) return '';
+    for (final o in statuses) {
+      if (o.value == value) return o.label;
+    }
+    return value;
+  }
+
+  factory ClientFilterOptions.fromJson(Object? raw) {
+    final m = asMap(raw);
+    List<FilterOption> labelled(String key) => [
+      for (final row in listFrom(m, [key]))
+        if (pickString(asMap(row), const ['value']) != null)
+          FilterOption(
+            pickString(asMap(row), const ['value'])!,
+            pickString(asMap(row), const ['label']) ??
+                pickString(asMap(row), const ['value'])!,
+          ),
+    ];
+    List<FilterOption> named(String key) => [
+      for (final row in listFrom(m, [key]))
+        if (toNum(asMap(row)['id']) != null)
+          FilterOption(
+            toNum(asMap(row)['id'])!.toInt().toString(),
+            pickString(asMap(row), const ['name']) ?? '—',
+          ),
+    ];
+    return ClientFilterOptions(
+      directories: labelled('directories'),
+      statuses: labelled('statuses'),
+      billingPolicies: labelled('billing_policies'),
+      clientTypes: labelled('client_types'),
+      pops: named('pops'),
+      zones: named('zones'),
+      routers: [
+        for (final row in listFrom(m, const ['routers']))
+          if (toNum(asMap(row)['id']) != null)
+            (
+              FilterOption(
+                toNum(asMap(row)['id'])!.toInt().toString(),
+                pickString(asMap(row), const ['name']) ?? '—',
+              ),
+              toNum(asMap(row)['pop_id'])?.toInt().toString(),
+            ),
+      ],
+      packages: named('packages'),
+      resellers: named('resellers'),
+      sorts: [
+        for (final s in m['sorts'] is List ? m['sorts'] as List : const [])
+          if (s is String) s,
+      ],
     );
   }
 }
