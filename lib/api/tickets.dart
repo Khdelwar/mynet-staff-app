@@ -190,9 +190,17 @@ class TicketCan {
     this.comment = false,
     this.setLocation = false,
     this.checkDbm = false,
+    this.useMaterials = false,
+    this.scanItems = false,
+    this.install = false,
   });
 
   final bool updateStatus;
+  final bool useMaterials;
+  final bool scanItems;
+
+  /// A new connection's install form (assigned technician, client pending).
+  final bool install;
   final bool close;
   final bool comment;
   final bool setLocation;
@@ -206,6 +214,9 @@ class TicketCan {
       comment: m['comment'] == true,
       setLocation: m['set_location'] == true,
       checkDbm: m['check_dbm'] == true,
+      useMaterials: m['use_materials'] == true,
+      scanItems: m['scan_items'] == true,
+      install: m['install'] == true,
     );
   }
 }

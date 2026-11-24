@@ -731,4 +731,248 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get approvalsApprove => 'অনুমোদন';
+
+  @override
+  String get featureDashboard => 'ড্যাশবোর্ড';
+
+  @override
+  String get featureExpiring => 'মেয়াদ শেষ হচ্ছে';
+
+  @override
+  String get featureSales => 'মাল বিক্রি';
+
+  @override
+  String get featureWallet => 'ওয়ালেট';
+
+  @override
+  String get workAdjustment => 'প্যাকেজ বদলের হিসাব';
+
+  @override
+  String get workAdvances => 'অগ্রিম';
+
+  @override
+  String get workAmount => 'টাকা';
+
+  @override
+  String get workAskAdvance => 'অগ্রিম চাই';
+
+  @override
+  String get workAskLeave => 'ছুটি চাই';
+
+  @override
+  String get workAttendance => 'হাজিরা';
+
+  @override
+  String get workAvailable => 'খরচ করা যাবে';
+
+  @override
+  String get workAwaitingClient => 'ক্লায়েন্ট আইডি বাকি';
+
+  @override
+  String get workCableMetres => 'ক্যাবল (মিটার)';
+
+  @override
+  String get workCannotInstall =>
+      'এই টিকেটে এখন install তথ্য দেওয়া যাবে না (শুধু দায়িত্বপ্রাপ্ত technician, ক্লায়েন্ট pending থাকা অবস্থায়)।';
+
+  @override
+  String get workClientSearch => 'নাম, আইডি, ফোন বা PPPoE';
+
+  @override
+  String get workClientsAdvance => 'গ্রাহকের অগ্রিম হাতে';
+
+  @override
+  String get workCodeHint => 'সিরিয়াল, বারকোড বা SKU';
+
+  @override
+  String workConfirmRecharge(String amount, int months) {
+    return '$months মাসের রিচার্জ, ৳ $amount?';
+  }
+
+  @override
+  String get workCreditAlert => 'আপনার ক্রেডিট প্রায় শেষ।';
+
+  @override
+  String get workCreditLimit => 'ক্রেডিট লিমিট';
+
+  @override
+  String get workCreditUsed => 'ক্রেডিট ব্যবহার';
+
+  @override
+  String workDaysLeft(int days) {
+    return '$days দিন বাকি';
+  }
+
+  @override
+  String get workEnterQuantity => 'অন্তত একটা মালের পরিমাণ দিন।';
+
+  @override
+  String get workFillAll => 'দরকারি সব ঘর পূরণ করুন।';
+
+  @override
+  String get workForNewConnection => 'নতুন সংযোগের জন্য (আইডি পরে)';
+
+  @override
+  String get workGiveClientId => 'আইডি দিন';
+
+  @override
+  String get workInStock => 'স্টকে';
+
+  @override
+  String get workInstall => 'নতুন লাইনের install';
+
+  @override
+  String get workInstallHint => 'সেভ করলে লাইন চালু হবে আর টিকেট resolved হবে।';
+
+  @override
+  String get workInstallSaved => 'Install সেভ হয়েছে।';
+
+  @override
+  String get workLateMinutes => 'দেরি (মিনিট)';
+
+  @override
+  String get workLeaves => 'ছুটি';
+
+  @override
+  String get workMaterials => 'ব্যবহৃত মাল';
+
+  @override
+  String get workMethod => 'মাধ্যম';
+
+  @override
+  String get workMonths => 'মাস';
+
+  @override
+  String get workNewExpiry => 'নতুন মেয়াদ';
+
+  @override
+  String get workNoDashboard => 'আপনার লগইনে ড্যাশবোর্ডের কোনো বক্স নেই।';
+
+  @override
+  String get workNoExpiring => 'কারো মেয়াদ শেষ হচ্ছে না।';
+
+  @override
+  String get workNoMaterials => 'এই টিকেটে এখনো কোনো মাল ব্যবহার হয়নি।';
+
+  @override
+  String get workNoSales => 'এখনো বিক্রি নেই।';
+
+  @override
+  String get workNoteOptional => 'নোট (ইচ্ছা হলে)';
+
+  @override
+  String get workOk => 'ঠিক আছে';
+
+  @override
+  String get workOldExpiry => 'পুরনো মেয়াদ';
+
+  @override
+  String get workPayBank => 'ব্যাংক';
+
+  @override
+  String get workPayCash => 'ক্যাশ';
+
+  @override
+  String get workPayDigital => 'ডিজিটাল';
+
+  @override
+  String get workPayDue => 'বাকি';
+
+  @override
+  String get workPayTotal => 'মোট দিতে হবে';
+
+  @override
+  String get workPickClient => 'ক্লায়েন্ট বাছুন';
+
+  @override
+  String get workPonPort => 'PON পোর্ট';
+
+  @override
+  String get workPrice => 'দাম';
+
+  @override
+  String get workPurpose => 'কাজের ধরন';
+
+  @override
+  String get workPurposeLineWork => 'লাইনের কাজ';
+
+  @override
+  String get workPurposeNewConnection => 'নতুন সংযোগ';
+
+  @override
+  String get workPurposeOther => 'অন্যান্য';
+
+  @override
+  String get workPurposeRepair => 'মেরামত';
+
+  @override
+  String get workPurposeShift => 'স্থানান্তর';
+
+  @override
+  String get workQuantity => 'পরিমাণ';
+
+  @override
+  String get workReason => 'কারণ';
+
+  @override
+  String get workReceiptAdded => 'রসিদের ছবি দেওয়া হয়েছে';
+
+  @override
+  String get workReceiptPhoto => 'রসিদের ছবি';
+
+  @override
+  String get workRecentSales => 'আমার শেষ বিক্রি';
+
+  @override
+  String get workRecharge => 'রিচার্জ';
+
+  @override
+  String workRechargeDone(String expiry) {
+    return 'রিচার্জ হয়েছে। নতুন মেয়াদ: $expiry';
+  }
+
+  @override
+  String get workRechargePending =>
+      'এই ক্লায়েন্টের তথ্য আগে ওয়েবসাইটে পূরণ করতে হবে।';
+
+  @override
+  String get workRequestSent => 'আবেদন পাঠানো হয়েছে।';
+
+  @override
+  String get workSave => 'সেভ';
+
+  @override
+  String get workSaved => 'সেভ হয়েছে।';
+
+  @override
+  String get workScan => 'কোড স্ক্যান / লিখুন';
+
+  @override
+  String get workSell => 'বিক্রি';
+
+  @override
+  String get workSold => 'বিক্রি হয়েছে।';
+
+  @override
+  String get workSoldCash => 'বিক্রি হয়েছে। টাকা দিন শেষের জমায় যাবে।';
+
+  @override
+  String get workTransactions => 'লেনদেন';
+
+  @override
+  String get workUseParts => 'মাল ব্যবহার';
+
+  @override
+  String get workWalletAfter => 'পরে ওয়ালেটে থাকবে';
+
+  @override
+  String get workWalletBalance => 'ওয়ালেট ব্যালান্স';
+
+  @override
+  String get workWalletCharge => 'ওয়ালেট থেকে কাটবে';
+
+  @override
+  String workWithinDays(int days) {
+    return '$days দিন';
+  }
 }

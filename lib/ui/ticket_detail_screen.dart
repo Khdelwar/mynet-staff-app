@@ -15,6 +15,7 @@ import '../state/providers.dart';
 import 'common.dart';
 import 'note_photo.dart';
 import 'ticket_labels.dart';
+import 'work_screens.dart';
 
 class TicketDetailScreen extends ConsumerStatefulWidget {
   const TicketDetailScreen({super.key, required this.ticketId});
@@ -439,6 +440,40 @@ class _TicketDetailScreenState extends ConsumerState<TicketDetailScreen> {
                       children: [Text(ticket.description!)],
                     ),
                   if (ticket.client != null) _clientCard(l, ticket),
+                  // STF-03b: parts used and a new line's install details.
+                  if (ticket.can.useMaterials || ticket.can.scanItems)
+                    ListTile(
+                      key: const ValueKey('ticket-materials'),
+                      contentPadding: EdgeInsets.zero,
+                      leading: const Icon(Icons.inventory_2_outlined),
+                      title: Text(l.workMaterials),
+                      trailing: const Icon(Icons.chevron_right),
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute<void>(
+                          builder: (_) => MaterialsScreen(
+                            ticketId: ticket.id,
+                            canUse: ticket.can.useMaterials,
+                            canScan: ticket.can.scanItems,
+                          ),
+                        ),
+                      ),
+                    ),
+                  if (ticket.can.install)
+                    ListTile(
+                      key: const ValueKey('ticket-install'),
+                      contentPadding: EdgeInsets.zero,
+                      leading: const Icon(Icons.router_outlined),
+                      title: Text(l.workInstall),
+                      trailing: const Icon(Icons.chevron_right),
+                      onTap: () async {
+                        final done = await Navigator.of(context).push<bool>(
+                          MaterialPageRoute(
+                            builder: (_) => InstallScreen(ticketId: ticket.id),
+                          ),
+                        );
+                        if (done == true) await _load();
+                      },
+                    ),
                   if (ticket.can.updateStatus)
                     Wrap(
                       spacing: 8,

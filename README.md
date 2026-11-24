@@ -24,6 +24,12 @@ in mynet-erp `docs/STAFF_APP_API.md`.
 | Job offers | Accept or reject a ticket offered to this technician (`tickets.update`) | `GET /offers`, `POST /offers/{id}/accept`, `POST /offers/{id}/reject` |
 | Assign | Nearest technicians, assign, or start an offer (`tickets.assign`) | `GET /tickets/{id}/suggestions`, `POST /tickets/{id}/assign`, `POST /tickets/{id}/offer` |
 | Push | After sign-in, and when Firebase refreshes the token, this phone is registered. Sign-out unregisters, then logs out. A tap opens the ticket (`ticket_assigned`, `ticket_helper`, `ticket_unassigned`), the offer (`ticket_offer`), or the chat (`support_chat`) | `POST /push/register`, `POST /push/unregister` |
+| Materials / Install | Parts used on a ticket and scanned items (one `request_key` per save); a new line's ONU SN/MAC, POP, router | `/tickets/{id}/materials`, `/tickets/{id}/scan`, `/tickets/{id}/install` |
+| Sell products | Scan or type a code, price, cash / due / digital, a client or "new connection" (client ID later) | `GET /sales`, `POST /sales/scan`, `POST /sales`, `POST /sales/{id}/client` |
+| Expense receipt | The expense dialog takes a receipt photo (multipart `receipt`) | `POST /collection/expenses` |
+| Wallet / Expiring / Recharge | Reseller wallet and transactions, own clients running out, recharge after the ERP's quote | `/reseller/wallet`, `/reseller/expiring`, `/clients/{id}/recharge-quote`, `/clients/{id}/recharge` |
+| Dashboard | The dashboard boxes this login may see | `GET /dashboard` |
+| HR | Own attendance, ask / cancel leave and advance | `/hr/me`, `/hr/leaves`, `/hr/advances` |
 
 `android/app/google-services.json` and `ios/Runner/GoogleService-Info.plist` are in git for app id `net.mynet.staff` (Firebase project `mynet-7e283`). The Android file also lists the customer app package. Push stays off if Firebase refuses the token.
 

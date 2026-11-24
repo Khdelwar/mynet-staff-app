@@ -70,7 +70,9 @@
   "dutyMeters": "{meters} মি",
   "@dutyMeters": {
     "placeholders": {
-      "meters": { "type": "int" }
+      "meters": {
+        "type": "int"
+      }
     }
   },
   "dutyOutsideHours": "ডিউটি শুধু ডিউটির সময়ের মধ্যে শুরু করা যায়।",
@@ -83,31 +85,85 @@
   "offerAccept": "নেব",
   "offerReject": "না",
   "offerSeconds": "আর {seconds} সেকেন্ড",
-  "@offerSeconds": {"placeholders": {"seconds": {"type": "int"}}},
+  "@offerSeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "offerDistance": "{meters} মিটার দূরে",
-  "@offerDistance": {"placeholders": {"meters": {"type": "int"}}},
+  "@offerDistance": {
+    "placeholders": {
+      "meters": {
+        "type": "int"
+      }
+    }
+  },
   "offerTicket": "টিকেট #{id}",
-  "@offerTicket": {"placeholders": {"id": {"type": "int"}}},
+  "@offerTicket": {
+    "placeholders": {
+      "id": {
+        "type": "int"
+      }
+    }
+  },
   "offerAccepted": "আপনি টিকেট #{id} নিয়েছেন।",
-  "@offerAccepted": {"placeholders": {"id": {"type": "int"}}},
+  "@offerAccepted": {
+    "placeholders": {
+      "id": {
+        "type": "int"
+      }
+    }
+  },
   "assignNoTickets": "দেওয়ার মতো খোলা টিকেট নেই।",
   "assignTicketId": "টিকেট নম্বর",
   "assignLookup": "কাছের জন দেখুন",
   "assignForTicket": "টিকেট #{id}-এর কাছের জন",
-  "@assignForTicket": {"placeholders": {"id": {"type": "int"}}},
+  "@assignForTicket": {
+    "placeholders": {
+      "id": {
+        "type": "int"
+      }
+    }
+  },
   "assignNobody": "ডিউটিতে কাছে কেউ নেই।",
   "assignScore": "নম্বর {score}",
-  "@assignScore": {"placeholders": {"score": {"type": "String"}}},
+  "@assignScore": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
   "assignEta": "{minutes} মিনিট",
-  "@assignEta": {"placeholders": {"minutes": {"type": "int"}}},
+  "@assignEta": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
   "assignBusy": "ব্যস্ত",
   "assignSameArea": "একই এলাকা",
   "assignButton": "দিন",
   "assignDone": "{name}-কে দেওয়া হয়েছে।",
-  "@assignDone": {"placeholders": {"name": {"type": "String"}}},
+  "@assignDone": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "assignOffer": "কাছের জনকে অফার",
   "offerStarted": "{name}-কে অফার করা হয়েছে।",
-  "@offerStarted": {"placeholders": {"name": {"type": "String"}}},
+  "@offerStarted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "offerNobody": "আর কাউকে অফার করার নেই। অফিসকে জানানো হয়েছে।",
   "ticketsSearch": "নাম, আইডি বা ফোন",
   "ticketsActive": "খোলা",
@@ -135,7 +191,9 @@
   "pushTicketTitle": "টিকেট #{id}",
   "@pushTicketTitle": {
     "placeholders": {
-      "id": { "type": "int" }
+      "id": {
+        "type": "int"
+      }
     }
   },
   "outcomeDone": "হয়ে গেছে",
@@ -156,7 +214,9 @@
   "ticketMeters": "{meters} মি",
   "@ticketMeters": {
     "placeholders": {
-      "meters": { "type": "int" }
+      "meters": {
+        "type": "int"
+      }
     }
   },
   "clientCode": "ক্লায়েন্ট আইডি",
@@ -181,7 +241,9 @@
   "ticketPhotoCount": "{count}টা ছবি",
   "@ticketPhotoCount": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "ticketPhotoLimit": "একটা নোটে সর্বোচ্চ ৫টা ছবি।",
@@ -226,7 +288,9 @@
   "clientsDisconnects": "২৪ ঘণ্টায় {count} বার সংযোগ ছিঁড়েছে",
   "@clientsDisconnects": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "clientsOpenTickets": "খোলা টিকেট",
@@ -236,7 +300,9 @@
   "chatsUnread": "{count} নতুন",
   "@chatsUnread": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "chatsReply": "উত্তর",
@@ -263,5 +329,83 @@
   "collectionSmsLater": "অফিস অনুমোদনের পর ক্লায়েন্টকে জানানো হবে।",
   "dueEmpty": "বকেয়া তালিকায় কেউ নেই।",
   "approvalsEmpty": "আপনার জন্য কিছু অপেক্ষা করছে না।",
-  "approvalsApprove": "অনুমোদন"
+  "approvalsApprove": "অনুমোদন",
+  "featureDashboard": "ড্যাশবোর্ড",
+  "featureExpiring": "মেয়াদ শেষ হচ্ছে",
+  "featureSales": "মাল বিক্রি",
+  "featureWallet": "ওয়ালেট",
+  "workAdjustment": "প্যাকেজ বদলের হিসাব",
+  "workAdvances": "অগ্রিম",
+  "workAmount": "টাকা",
+  "workAskAdvance": "অগ্রিম চাই",
+  "workAskLeave": "ছুটি চাই",
+  "workAttendance": "হাজিরা",
+  "workAvailable": "খরচ করা যাবে",
+  "workAwaitingClient": "ক্লায়েন্ট আইডি বাকি",
+  "workCableMetres": "ক্যাবল (মিটার)",
+  "workCannotInstall": "এই টিকেটে এখন install তথ্য দেওয়া যাবে না (শুধু দায়িত্বপ্রাপ্ত technician, ক্লায়েন্ট pending থাকা অবস্থায়)।",
+  "workClientSearch": "নাম, আইডি, ফোন বা PPPoE",
+  "workClientsAdvance": "গ্রাহকের অগ্রিম হাতে",
+  "workCodeHint": "সিরিয়াল, বারকোড বা SKU",
+  "workConfirmRecharge": "{months} মাসের রিচার্জ, ৳ {amount}?",
+  "workCreditAlert": "আপনার ক্রেডিট প্রায় শেষ।",
+  "workCreditLimit": "ক্রেডিট লিমিট",
+  "workCreditUsed": "ক্রেডিট ব্যবহার",
+  "workDaysLeft": "{days} দিন বাকি",
+  "workEnterQuantity": "অন্তত একটা মালের পরিমাণ দিন।",
+  "workFillAll": "দরকারি সব ঘর পূরণ করুন।",
+  "workForNewConnection": "নতুন সংযোগের জন্য (আইডি পরে)",
+  "workGiveClientId": "আইডি দিন",
+  "workInStock": "স্টকে",
+  "workInstall": "নতুন লাইনের install",
+  "workInstallHint": "সেভ করলে লাইন চালু হবে আর টিকেট resolved হবে।",
+  "workInstallSaved": "Install সেভ হয়েছে।",
+  "workLateMinutes": "দেরি (মিনিট)",
+  "workLeaves": "ছুটি",
+  "workMaterials": "ব্যবহৃত মাল",
+  "workMethod": "মাধ্যম",
+  "workMonths": "মাস",
+  "workNewExpiry": "নতুন মেয়াদ",
+  "workNoDashboard": "আপনার লগইনে ড্যাশবোর্ডের কোনো বক্স নেই।",
+  "workNoExpiring": "কারো মেয়াদ শেষ হচ্ছে না।",
+  "workNoMaterials": "এই টিকেটে এখনো কোনো মাল ব্যবহার হয়নি।",
+  "workNoSales": "এখনো বিক্রি নেই।",
+  "workNoteOptional": "নোট (ইচ্ছা হলে)",
+  "workOk": "ঠিক আছে",
+  "workOldExpiry": "পুরনো মেয়াদ",
+  "workPayBank": "ব্যাংক",
+  "workPayCash": "ক্যাশ",
+  "workPayDigital": "ডিজিটাল",
+  "workPayDue": "বাকি",
+  "workPayTotal": "মোট দিতে হবে",
+  "workPickClient": "ক্লায়েন্ট বাছুন",
+  "workPonPort": "PON পোর্ট",
+  "workPrice": "দাম",
+  "workPurpose": "কাজের ধরন",
+  "workPurposeLineWork": "লাইনের কাজ",
+  "workPurposeNewConnection": "নতুন সংযোগ",
+  "workPurposeOther": "অন্যান্য",
+  "workPurposeRepair": "মেরামত",
+  "workPurposeShift": "স্থানান্তর",
+  "workQuantity": "পরিমাণ",
+  "workReason": "কারণ",
+  "workReceiptAdded": "রসিদের ছবি দেওয়া হয়েছে",
+  "workReceiptPhoto": "রসিদের ছবি",
+  "workRecentSales": "আমার শেষ বিক্রি",
+  "workRecharge": "রিচার্জ",
+  "workRechargeDone": "রিচার্জ হয়েছে। নতুন মেয়াদ: {expiry}",
+  "workRechargePending": "এই ক্লায়েন্টের তথ্য আগে ওয়েবসাইটে পূরণ করতে হবে।",
+  "workRequestSent": "আবেদন পাঠানো হয়েছে।",
+  "workSave": "সেভ",
+  "workSaved": "সেভ হয়েছে।",
+  "workScan": "কোড স্ক্যান / লিখুন",
+  "workSell": "বিক্রি",
+  "workSold": "বিক্রি হয়েছে।",
+  "workSoldCash": "বিক্রি হয়েছে। টাকা দিন শেষের জমায় যাবে।",
+  "workTransactions": "লেনদেন",
+  "workUseParts": "মাল ব্যবহার",
+  "workWalletAfter": "পরে ওয়ালেটে থাকবে",
+  "workWalletBalance": "ওয়ালেট ব্যালান্স",
+  "workWalletCharge": "ওয়ালেট থেকে কাটবে",
+  "workWithinDays": "{days} দিন"
 }

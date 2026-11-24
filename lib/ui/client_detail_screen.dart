@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../api/models.dart';
+
 import '../api/clients.dart';
 import '../api/staff_api.dart';
 import '../l10n/app_localizations.dart';
 import '../state/providers.dart';
 import 'clients_screen.dart';
 import 'common.dart';
+import 'work_screens.dart';
 
 class ClientDetailScreen extends ConsumerStatefulWidget {
   const ClientDetailScreen({super.key, required this.clientId});
@@ -120,6 +123,25 @@ class _ClientDetailScreenState extends ConsumerState<ClientDetailScreen> {
                     icon: const Icon(Icons.wifi_tethering),
                     label: Text(l.clientsConnection),
                   ),
+                  if (_canRecharge(
+                    ref.watch(authProvider.select((a) => a.user)),
+                  ))
+                    FilledButton.tonalIcon(
+                      key: const ValueKey('client-recharge'),
+                      onPressed: () async {
+                        final done = await Navigator.of(context).push<bool>(
+                          MaterialPageRoute(
+                            builder: (_) => RechargeScreen(
+                              clientId: row.id,
+                              clientName: row.name ?? '',
+                            ),
+                          ),
+                        );
+                        if (done == true) await _load();
+                      },
+                      icon: const Icon(Icons.autorenew),
+                      label: Text(l.workRecharge),
+                    ),
                   if (_connection != null) ...[
                     const SizedBox(height: 8),
                     MessageBanner(
@@ -170,3 +192,9 @@ class _ClientDetailScreenState extends ConsumerState<ClientDetailScreen> {
     );
   }
 }
+
+/// STF-08: recharge is the web's `clients.recharge|billing.collect`; the ERP
+/// checks the client's policy again.
+bool _canRecharge(StaffUser? user) =>
+    user != null &&
+    (user.can('clients.recharge') || user.can('billing.collect'));
