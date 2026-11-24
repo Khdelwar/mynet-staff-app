@@ -51,13 +51,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loginIdentifier => 'Email or mobile number';
 
   @override
+  String get loginIdentifierInvalid =>
+      'Enter the ERP email, or a mobile like 01711000001.';
+
+  @override
+  String get loginEmailInvalid => 'Enter the email address from the ERP.';
+
+  @override
   String get loginPassword => 'Password';
 
   @override
   String get loginButton => 'Sign in';
 
   @override
-  String get loginWrong => 'Email / mobile or password is incorrect.';
+  String get loginWrong => 'Email or password is incorrect.';
 
   @override
   String get loginHelp =>
@@ -121,10 +128,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get featureCollection => 'Bill collection';
 
   @override
+  String get featureDueList => 'Due list';
+
+  @override
+  String get featureApprovals => 'Approvals';
+
+  @override
   String get featureTickets => 'Tickets';
 
   @override
   String get featureClients => 'Clients';
+
+  @override
+  String get featureChat => 'Support chat';
 
   @override
   String get featureHr => 'Attendance, leave & advance';
@@ -178,763 +194,543 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sessionEnded => 'You were signed out. Sign in again.';
 
   @override
-  String get acceptAmount => 'Amount to accept';
-
-  @override
-  String get addExpense => 'Expense';
-
-  @override
-  String get addNote => 'Add note';
-
-  @override
-  String get addPhotosQuestion => 'Add photos to this note?';
-
-  @override
-  String get address => 'Address';
-
-  @override
-  String get adjustment => 'Package change';
-
-  @override
-  String get advance => 'Advance';
-
-  @override
-  String get advances => 'Advances';
-
-  @override
-  String get alreadySaved =>
-      'This was already saved earlier. Do not take the money again.';
-
-  @override
-  String get amount => 'Amount';
-
-  @override
-  String get amountPartOptional => 'Amount (empty = all)';
-
-  @override
-  String get approve => 'Approve';
-
-  @override
-  String get askAdvance => 'Ask for advance';
-
-  @override
-  String get askLeave => 'Ask for leave';
-
-  @override
-  String get assign => 'Assign';
-
-  @override
-  String get assignTechnician => 'Nearest technicians';
-
-  @override
-  String get assigned => 'Assigned.';
-
-  @override
-  String get attendance => 'Attendance';
-
-  @override
-  String get available => 'Can spend';
-
-  @override
-  String get awaitingClientId => 'Waiting for client ID';
-
-  @override
-  String get awayTitle => 'Far from the house';
-
-  @override
-  String get busy => 'busy';
-
-  @override
-  String get cableMetres => 'Cable (metres)';
-
-  @override
-  String get call => 'Call';
-
-  @override
-  String get cancelRequestQuestion => 'Cancel this request?';
-
-  @override
-  String get cannotInstall =>
-      'This ticket cannot take install details now (only the assigned technician, while the client is pending).';
-
-  @override
-  String get cashHint =>
-      'The line turns on now. The payment waits for the owner; the client\'s paid SMS goes after approval.';
-
-  @override
-  String get category => 'Category';
-
-  @override
-  String get client => 'Client';
-
-  @override
-  String get clientId => 'Client ID';
-
-  @override
-  String get clientSaved => 'Client saved.';
-
-  @override
-  String get clientSearchHint => 'Name, ID, phone or PPPoE';
-
-  @override
-  String get clientsAdvanceHeld => 'Clients\' advance held';
-
-  @override
-  String get collected => 'Collected';
-
-  @override
-  String get collectedBy => 'Collected by';
-
-  @override
-  String get collectedToday => 'Collected today';
-
-  @override
-  String confirmRecharge(String amount, String months) {
-    return 'Recharge for $months month(s), $amount?';
-  }
-
-  @override
-  String confirmTake(String amount, String name) {
-    return 'Take $amount from $name?';
-  }
-
-  @override
-  String get creditAlert => 'Your credit is nearly used up.';
-
-  @override
-  String get creditLimit => 'Credit limit';
-
-  @override
-  String get creditUsed => 'Credit used';
-
-  @override
-  String get date => 'Date';
-
-  @override
-  String get dayEndHandover => 'Day-end handover';
-
-  @override
-  String daysLeft(int days) {
-    return '$days days left';
-  }
-
-  @override
-  String get decline => 'No';
-
-  @override
-  String get descriptionOptional => 'Details (optional)';
-
-  @override
-  String get disconnects24h => 'Disconnects (24 h)';
-
-  @override
-  String get distance => 'Distance';
-
-  @override
-  String get due => 'Due';
-
-  @override
-  String get dutyEnded => 'Duty ended.';
-
-  @override
-  String get dutyHours => 'Duty hours';
-
-  @override
-  String get dutyLocationHint =>
-      'Your location is asked when you start or end duty. Location is never taken off duty.';
-
-  @override
-  String get dutyStarted => 'Duty started.';
+  String get featureDuty => 'Duty';
 
   @override
   String get dutyStatus => 'Duty';
 
   @override
-  String get endDuty => 'End duty';
+  String get dutyOn => 'On duty';
 
   @override
-  String get enterQuantity => 'Enter a quantity for at least one part.';
+  String get dutyOff => 'Off duty';
 
   @override
-  String get expenseAvailable => 'Can spend on expenses';
+  String get dutyStart => 'Start duty';
 
   @override
-  String get expenseHint => 'Every expense waits for someone else\'s approval.';
+  String get dutyEnd => 'End duty';
 
   @override
-  String get expenseSaved => 'Expense saved. It waits for approval.';
+  String get dutyHours => 'Duty hours';
 
   @override
-  String get expenses => 'Expenses';
+  String get dutyTimezone => 'Time zone';
 
   @override
-  String get expiry => 'Expiry';
+  String get dutyDistance => 'Distance today';
 
   @override
-  String get featureApprovals => 'Approvals';
+  String dutyMeters(int meters) {
+    return '$meters m';
+  }
 
   @override
-  String get featureChat => 'Support chat';
+  String get dutyOutsideHours => 'Duty can only start during duty hours.';
 
   @override
-  String get featureDashboard => 'Dashboard';
+  String get dutyStopped => 'Duty ended. Location has stopped.';
 
   @override
-  String get featureDueList => 'Due list';
+  String get dutyNotificationTitle => 'MyNet: location on';
 
   @override
-  String get featureDuty => 'Duty';
-
-  @override
-  String get featureExpenses => 'Expenses';
-
-  @override
-  String get featureExpiring => 'Expiring clients';
+  String get dutyNotificationBody =>
+      'Location is shared only while you are on duty.';
 
   @override
   String get featureOffers => 'Job offers';
 
   @override
-  String get featureSales => 'Sell products';
+  String get featureAssign => 'Assign a technician';
 
   @override
-  String get featureWallet => 'Wallet';
+  String get offersEmpty => 'No offers waiting.';
 
   @override
-  String get fillAll => 'Fill in everything needed.';
+  String get offerAccept => 'Accept';
 
   @override
-  String get forNewConnection => 'For a new connection';
+  String get offerReject => 'No';
 
   @override
-  String get forNewConnectionHint => 'The client ID is given later.';
-
-  @override
-  String get gateway => 'Gateway';
-
-  @override
-  String get giveClientId => 'Give ID';
-
-  @override
-  String get handoverDue => 'To hand over';
-
-  @override
-  String get handoverSent => 'Handover sent to the owner.';
-
-  @override
-  String get handovers => 'Handovers';
-
-  @override
-  String get holdBlocked => 'Your cash limit is reached. Hand over first.';
-
-  @override
-  String get inHand => 'In hand';
-
-  @override
-  String get inStock => 'In stock';
-
-  @override
-  String get installHint =>
-      'Saving turns the line on from today and resolves the ticket.';
-
-  @override
-  String get installSaved => 'Install saved.';
-
-  @override
-  String get installedAt => 'Installed';
-
-  @override
-  String get lastDisconnect => 'Last disconnect';
-
-  @override
-  String get lastRx => 'Last RX power';
-
-  @override
-  String get lateMinutes => 'Late (minutes)';
-
-  @override
-  String get leaveReason => 'Reason';
-
-  @override
-  String get leaveUnpaidQuestion => 'Unpaid leave? (Cancel = paid leave)';
-
-  @override
-  String get leaves => 'Leave';
-
-  @override
-  String get liveConnection => 'Online now?';
-
-  @override
-  String get locationOff => 'Location is off or not allowed.';
-
-  @override
-  String get map => 'Map';
-
-  @override
-  String get materials => 'Materials used';
-
-  @override
-  String get method => 'Method';
-
-  @override
-  String get minutes => 'min';
-
-  @override
-  String get mobileOptional => 'Mobile (optional)';
-
-  @override
-  String get months => 'Months';
-
-  @override
-  String get myExpenses => 'My expenses (7 days)';
-
-  @override
-  String get name => 'Name';
-
-  @override
-  String get nameOptional => 'Name (optional)';
-
-  @override
-  String get newClient => 'New client';
-
-  @override
-  String get newClientHint =>
-      'Without a POP the client waits as pending; with a POP the line goes on now.';
-
-  @override
-  String get newConnection => 'New connection';
-
-  @override
-  String get newExpiry => 'New expiry';
-
-  @override
-  String get newTicket => 'New ticket';
-
-  @override
-  String get nextStep => 'Next step';
-
-  @override
-  String get noChats => 'No conversations.';
-
-  @override
-  String get noClients => 'No clients found.';
-
-  @override
-  String get noDashboard => 'No dashboard boxes for your login.';
-
-  @override
-  String get noDues => 'No dues.';
-
-  @override
-  String get noExpiring => 'No clients expiring.';
-
-  @override
-  String get noMaterials => 'Nothing used on this ticket yet.';
-
-  @override
-  String get noNotes => 'No notes yet.';
-
-  @override
-  String get noOffers => 'No job offers now.';
-
-  @override
-  String get noParts => 'The office has no parts in stock.';
-
-  @override
-  String get noPayments => 'No payments.';
-
-  @override
-  String get noSales => 'No sales yet.';
-
-  @override
-  String get noSuggestions => 'No technician on duty nearby.';
-
-  @override
-  String get noTickets => 'No tickets.';
-
-  @override
-  String get none => 'None.';
-
-  @override
-  String get note => 'Note';
-
-  @override
-  String get noteOptional => 'Note (optional)';
-
-  @override
-  String get noteRequired => 'Note (required)';
-
-  @override
-  String get notes => 'Notes';
-
-  @override
-  String get nothingToApprove => 'Nothing waiting for you.';
-
-  @override
-  String get offDuty => 'Off duty';
-
-  @override
-  String get offerSent => 'Offered to the nearest technician.';
-
-  @override
-  String get offerTaken => 'The ticket is yours.';
-
-  @override
-  String get offerToNearest => 'Offer to the nearest';
-
-  @override
-  String get offline => 'Offline';
-
-  @override
-  String get ok => 'OK';
-
-  @override
-  String get oldExpiry => 'Old expiry';
-
-  @override
-  String get onDuty => 'On duty';
-
-  @override
-  String get online => 'Online';
-
-  @override
-  String get onuPower => 'ONU power';
-
-  @override
-  String get openTickets => 'Open tickets';
-
-  @override
-  String get outCancelled => 'Cancelled';
-
-  @override
-  String get outDone => 'Work done';
-
-  @override
-  String get outDuplicate => 'Duplicate';
-
-  @override
-  String get outNoIssue => 'No problem found';
-
-  @override
-  String get outcomeTitle => 'How did it end?';
-
-  @override
-  String get outsideDutyHours => 'Outside duty hours: duty cannot start now.';
-
-  @override
-  String get overdue => 'Late';
-
-  @override
-  String get ownerCash => 'Cash owner';
-
-  @override
-  String get ownerDigital => 'Digital owner';
-
-  @override
-  String get package => 'Package';
-
-  @override
-  String get payBank => 'Bank';
-
-  @override
-  String get payCash => 'Cash';
-
-  @override
-  String get payDigital => 'Digital';
-
-  @override
-  String get payDue => 'Due';
-
-  @override
-  String get payTotal => 'To pay';
-
-  @override
-  String get photoCamera => 'Camera';
-
-  @override
-  String get photoGallery => 'Gallery';
-
-  @override
-  String get pickClient => 'Choose client';
-
-  @override
-  String get ponPort => 'PON port';
-
-  @override
-  String get pop => 'POP';
-
-  @override
-  String get popOptional => 'POP (optional)';
-
-  @override
-  String get pppoePassword => 'PPPoE password';
-
-  @override
-  String get pppoeUser => 'PPPoE username';
-
-  @override
-  String get prHigh => 'High';
-
-  @override
-  String get prLow => 'Low';
-
-  @override
-  String get prMedium => 'Medium';
-
-  @override
-  String get prUrgent => 'Urgent';
-
-  @override
-  String get price => 'Price';
-
-  @override
-  String get priority => 'Priority';
-
-  @override
-  String get purLineWork => 'Line work';
-
-  @override
-  String get purNewConnection => 'New connection';
-
-  @override
-  String get purOther => 'Other';
-
-  @override
-  String get purRepair => 'Repair';
-
-  @override
-  String get purShift => 'Shifting';
-
-  @override
-  String get purpose => 'Purpose';
-
-  @override
-  String get quantity => 'Qty';
-
-  @override
-  String get receipt => 'Receipt';
-
-  @override
-  String get receiptNotImage =>
-      'This receipt is not a picture. Open it on the ERP website.';
-
-  @override
-  String get receiptPhoto => 'Receipt photo';
-
-  @override
-  String get receiptPhotoAdded => 'Receipt photo added';
-
-  @override
-  String get recentPayments => 'Last payments';
-
-  @override
-  String get recentSales => 'My last sales';
-
-  @override
-  String get recharge => 'Recharge';
-
-  @override
-  String rechargeDone(String expiry) {
-    return 'Recharged. New expiry: $expiry';
+  String offerSeconds(int seconds) {
+    return '${seconds}s left';
   }
 
   @override
-  String get rechargePending =>
-      'This client must be completed on the website first.';
+  String offerDistance(int meters) {
+    return '$meters m away';
+  }
 
   @override
-  String get recordInstall => 'Record install';
+  String offerTicket(int id) {
+    return 'Ticket #$id';
+  }
 
   @override
-  String get reject => 'Reject';
+  String offerAccepted(int id) {
+    return 'You took ticket #$id.';
+  }
 
   @override
-  String get requestSent => 'Request sent.';
+  String get assignNoTickets => 'No open tickets to assign.';
+
+  @override
+  String get assignTicketId => 'Ticket number';
+
+  @override
+  String get assignLookup => 'Show nearest';
+
+  @override
+  String assignForTicket(int id) {
+    return 'Nearest for ticket #$id';
+  }
+
+  @override
+  String get assignNobody => 'Nobody on duty nearby.';
+
+  @override
+  String assignScore(String score) {
+    return 'Score $score';
+  }
+
+  @override
+  String assignEta(int minutes) {
+    return '$minutes min';
+  }
+
+  @override
+  String get assignBusy => 'Busy';
+
+  @override
+  String get assignSameArea => 'Same area';
+
+  @override
+  String get assignButton => 'Assign';
+
+  @override
+  String assignDone(String name) {
+    return 'Assigned to $name.';
+  }
+
+  @override
+  String get assignOffer => 'Offer to the nearest';
+
+  @override
+  String offerStarted(String name) {
+    return 'Offered to $name.';
+  }
+
+  @override
+  String get offerNobody => 'Nobody left to offer. The office has been told.';
+
+  @override
+  String get ticketsSearch => 'Name, ID or phone';
+
+  @override
+  String get ticketsActive => 'Open';
+
+  @override
+  String get ticketsDone => 'Finished';
+
+  @override
+  String get ticketsAny => 'Any status';
+
+  @override
+  String get ticketsMine => 'My tickets';
+
+  @override
+  String get ticketsAll => 'Everyone\'s tickets';
+
+  @override
+  String get ticketsEmpty => 'No tickets here.';
+
+  @override
+  String get loadMore => 'Load more';
+
+  @override
+  String get overdue => 'Over SLA';
+
+  @override
+  String get ticketStatus => 'Status';
+
+  @override
+  String get statusOpen => 'Open';
+
+  @override
+  String get statusAssigned => 'Assigned';
+
+  @override
+  String get statusScheduled => 'Scheduled';
+
+  @override
+  String get statusOnTheWay => 'On the way';
+
+  @override
+  String get statusInProgress => 'Working';
+
+  @override
+  String get statusResolved => 'Resolved';
+
+  @override
+  String get statusReopened => 'Reopened';
+
+  @override
+  String get statusClosed => 'Closed';
+
+  @override
+  String get priorityLow => 'Low';
+
+  @override
+  String get priorityMedium => 'Medium';
+
+  @override
+  String get priorityHigh => 'High';
+
+  @override
+  String get priorityUrgent => 'Urgent';
+
+  @override
+  String get pushPriority => 'Priority';
+
+  @override
+  String pushTicketTitle(int id) {
+    return 'Ticket #$id';
+  }
+
+  @override
+  String get outcomeDone => 'Done';
+
+  @override
+  String get outcomeNoIssue => 'No issue';
+
+  @override
+  String get outcomeDuplicate => 'Duplicate';
+
+  @override
+  String get outcomeCancelled => 'Cancelled';
+
+  @override
+  String get roleMain => 'Main';
 
   @override
   String get roleHelper => 'Helper';
 
   @override
-  String get router => 'Router';
+  String get ticketDescription => 'Details';
 
   @override
-  String get sales => 'Sales';
+  String get ticketComments => 'Notes';
 
   @override
-  String get save => 'Save';
+  String get ticketNoComments => 'No notes yet.';
 
   @override
-  String get saveHouseLocation => 'Save house GPS';
+  String get ticketNote => 'Note';
 
   @override
-  String get saveHouseLocationQuestion =>
-      'Are you standing at the client\'s house? Save this place as the house location?';
+  String get ticketSend => 'Save';
 
   @override
-  String get saved => 'Saved.';
+  String get ticketNewConnectionHint =>
+      'A new connection closes only with the client\'s PPPoE ID in the note.';
 
   @override
-  String get scanCodeHint => 'Serial, barcode or SKU';
+  String get ticketAwayTitle => 'Away from the house';
 
   @override
-  String get scanItem => 'Scan / type code';
+  String get ticketAwayHint =>
+      'Why are you finishing from here? (at least 5 characters)';
 
   @override
-  String secondsLeft(int seconds) {
-    return '$seconds s left';
+  String get ticketFinishDistance => 'Distance from the house';
+
+  @override
+  String ticketMeters(int meters) {
+    return '$meters m';
   }
 
   @override
-  String get sell => 'Sell';
+  String get clientCode => 'Client ID';
 
   @override
-  String get send => 'Send';
+  String get clientAddress => 'Address';
 
   @override
-  String get since => 'Since';
+  String get clientPppoe => 'PPPoE';
 
   @override
-  String get sold => 'Sold.';
+  String get onuSn => 'ONU serial';
 
   @override
-  String get soldCashToHandover =>
-      'Sold. The cash goes into your day-end handover.';
+  String get onuMac => 'ONU MAC';
 
   @override
-  String get stActive => 'Active';
+  String get onuPort => 'PON port';
 
   @override
-  String get stApproved => 'Approved';
+  String get ticketCall => 'Call';
 
   @override
-  String get stAssigned => 'Assigned';
+  String get ticketMap => 'Map';
 
   @override
-  String get stAwaitingClient => 'Waiting for client ID';
+  String get ticketLocation => 'Save house GPS';
 
   @override
-  String get stCancelled => 'Cancelled';
+  String get ticketSaveLocation => 'Save this spot as the client\'s house?';
 
   @override
-  String get stClosed => 'Closed';
+  String get ticketLocationSaved => 'House location saved.';
 
   @override
-  String get stDone => 'Done';
+  String get ticketLocationDenied =>
+      'Location is off. Turn it on and try again.';
 
   @override
-  String get stExpired => 'Expired';
+  String get ticketLocationMock =>
+      'This looks like a fake GPS. Turn it off before saving the house.';
 
   @override
-  String get stInProgress => 'Working';
+  String get ticketDbm => 'Check dBm';
 
   @override
-  String get stOnTheWay => 'On the way';
+  String get ticketDbmRx => 'RX dBm';
 
   @override
-  String get stOpen => 'Open';
+  String get ticketDbmTx => 'TX dBm';
 
   @override
-  String get stPartial => 'Partly approved';
+  String get ticketDbmLevel => 'Level';
 
   @override
-  String get stPending => 'Waiting';
+  String get ticketTakePhoto => 'Camera';
 
   @override
-  String get stRejected => 'Rejected';
+  String get ticketAddPhoto => 'Gallery';
 
   @override
-  String get stReopened => 'Reopened';
-
-  @override
-  String get stResolved => 'Resolved';
-
-  @override
-  String get stScheduled => 'Scheduled';
-
-  @override
-  String get stSuspended => 'Suspended';
-
-  @override
-  String get startDuty => 'Start duty';
-
-  @override
-  String get startedAt => 'Started';
-
-  @override
-  String get status => 'Status';
-
-  @override
-  String get subject => 'Subject';
-
-  @override
-  String get subjectRequired => 'Write the subject.';
-
-  @override
-  String get take => 'Take';
-
-  @override
-  String get takeCash => 'Cash';
-
-  @override
-  String get takeTrx => 'bKash / Nagad TrxID';
-
-  @override
-  String get ticketOpened => 'Ticket opened.';
-
-  @override
-  String get ticketSearchHint => 'Subject, #ID, client';
-
-  @override
-  String get ticketsActive => 'Active';
-
-  @override
-  String get ticketsAll => 'All';
-
-  @override
-  String get ticketsDone => 'Done (30 days)';
-
-  @override
-  String get ticketsMine => 'Mine';
-
-  @override
-  String get transactions => 'Transactions';
-
-  @override
-  String get trxHint => 'The digital owner checks the TrxID before it counts.';
-
-  @override
-  String get trxId => 'TrxID';
-
-  @override
-  String get useParts => 'Use parts';
-
-  @override
-  String get useWebsite => 'Use the ERP website for this.';
-
-  @override
-  String get waitingHandovers => 'Handovers waiting';
-
-  @override
-  String get waitsForApproval =>
-      'The client\'s paid SMS goes after the owner approves.';
-
-  @override
-  String get walletAfter => 'Wallet after';
-
-  @override
-  String get walletBalance => 'Wallet balance';
-
-  @override
-  String get walletCharge => 'From wallet';
-
-  @override
-  String get whatFor => 'What for';
-
-  @override
-  String withinDays(int days) {
-    return '$days d';
+  String ticketPhotoCount(int count) {
+    return '$count photo(s)';
   }
 
   @override
-  String get writeMessage => 'Write a message';
+  String get ticketPhotoLimit => 'A note can have up to 5 photos.';
+
+  @override
+  String get ticketPhotoTooBig => 'That photo is larger than 5 MB.';
+
+  @override
+  String get ticketCommentKept =>
+      'No internet. The note stays on this phone and will be sent later.';
+
+  @override
+  String get pushNotice => 'New notification';
+
+  @override
+  String get pushOpen => 'Open';
+
+  @override
+  String get pushTicketAssigned => 'This ticket was assigned to you.';
+
+  @override
+  String get pushTicketHelper => 'You were added as a helper on this ticket.';
+
+  @override
+  String get pushTicketUnassigned =>
+      'Nobody took this ticket. It is back with the office.';
+
+  @override
+  String get pushOfferTitle => 'Ticket offer';
+
+  @override
+  String get pushOfferBody => 'A nearby ticket was offered to you.';
+
+  @override
+  String get pushFromNotification => 'Opened from a notification.';
+
+  @override
+  String get devicesTitle => 'My phones';
+
+  @override
+  String get devicesEmpty => 'No phones are signed in.';
+
+  @override
+  String get devicesUnnamed => 'Phone';
+
+  @override
+  String get devicesThisPhone => 'This phone';
+
+  @override
+  String get devicesSignOut => 'Sign out';
+
+  @override
+  String get devicesSignOutThis =>
+      'Sign this phone out? You will need to sign in again.';
+
+  @override
+  String get devicesSignOutOther =>
+      'Sign that phone out? It will stop receiving staff notifications.';
+
+  @override
+  String get clientsSearch => 'Name, ID, phone or PPPoE';
+
+  @override
+  String get clientsEmpty => 'No clients.';
+
+  @override
+  String get clientsMore => 'More';
+
+  @override
+  String get clientsCode => 'ID';
+
+  @override
+  String get clientsAddress => 'Address';
+
+  @override
+  String get clientsStatus => 'Status';
+
+  @override
+  String get clientsPackage => 'Package';
+
+  @override
+  String get clientsPrice => 'Price';
+
+  @override
+  String get clientsExpiry => 'Expiry';
+
+  @override
+  String get clientsDue => 'Due';
+
+  @override
+  String get clientsAdvance => 'Advance';
+
+  @override
+  String get clientsBalance => 'Balance';
+
+  @override
+  String get clientsPppoe => 'PPPoE';
+
+  @override
+  String get clientsNid => 'NID';
+
+  @override
+  String get clientsPop => 'POP';
+
+  @override
+  String get clientsRouter => 'Router';
+
+  @override
+  String get clientsOnu => 'ONU';
+
+  @override
+  String get clientsRx => 'Last RX dBm';
+
+  @override
+  String get clientsConnection => 'Line status';
+
+  @override
+  String get clientsOnline => 'The line is online.';
+
+  @override
+  String get clientsOffline => 'The line is offline.';
+
+  @override
+  String clientsDisconnects(int count) {
+    return '$count disconnects in 24 hours';
+  }
+
+  @override
+  String get clientsOpenTickets => 'Open tickets';
+
+  @override
+  String get clientsPayments => 'Recent payments';
+
+  @override
+  String get chatsSearch => 'Client name, ID or phone';
+
+  @override
+  String get chatsEmpty => 'No conversations.';
+
+  @override
+  String chatsUnread(int count) {
+    return '$count new';
+  }
+
+  @override
+  String get chatsReply => 'Reply';
+
+  @override
+  String get collectionToday => 'Collected today';
+
+  @override
+  String get collectionInHand => 'Cash in hand';
+
+  @override
+  String get collectionNotHanded => 'Not handed over';
+
+  @override
+  String get collectionExpenseLeft => 'Left for expenses';
+
+  @override
+  String get collectionHold => 'Hand over cash before taking more.';
+
+  @override
+  String get collectionCash => 'Take cash';
+
+  @override
+  String get collectionExpense => 'Expense';
+
+  @override
+  String get collectionHandover => 'Hand over';
+
+  @override
+  String get collectionCashOwner => 'Cash owner';
+
+  @override
+  String get collectionDigitalOwner => 'Digital owner';
+
+  @override
+  String get collectionGateway => 'bKash / Nagad';
+
+  @override
+  String get collectionSearch => 'Name, ID, phone or PPPoE';
+
+  @override
+  String get collectionMore => 'More';
+
+  @override
+  String get collectionAmount => 'Amount';
+
+  @override
+  String get collectionNote => 'Note';
+
+  @override
+  String get collectionTxn => 'TrxID';
+
+  @override
+  String get collectionSave => 'Save';
+
+  @override
+  String get collectionReceipt => 'Receipt';
+
+  @override
+  String get collectionApproval => 'Approval';
+
+  @override
+  String get collectionPaidSms => 'Paid SMS';
+
+  @override
+  String get collectionSmsLater =>
+      'The client is told after the office approves.';
+
+  @override
+  String get dueEmpty => 'Nobody is on the due list.';
+
+  @override
+  String get approvalsEmpty => 'Nothing is waiting for you.';
+
+  @override
+  String get approvalsApprove => 'Approve';
 }

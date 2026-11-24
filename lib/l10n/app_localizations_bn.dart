@@ -51,13 +51,20 @@ class AppLocalizationsBn extends AppLocalizations {
   String get loginIdentifier => 'ইমেইল বা মোবাইল নম্বর';
 
   @override
+  String get loginIdentifierInvalid =>
+      'ERP ইমেইল দিন, অথবা 01711000001-এর মতো মোবাইল।';
+
+  @override
+  String get loginEmailInvalid => 'ERP-এর ইমেইল দিন।';
+
+  @override
   String get loginPassword => 'পাসওয়ার্ড';
 
   @override
   String get loginButton => 'লগইন';
 
   @override
-  String get loginWrong => 'ইমেইল / মোবাইল বা পাসওয়ার্ড সঠিক নয়।';
+  String get loginWrong => 'ইমেইল বা পাসওয়ার্ড সঠিক নয়।';
 
   @override
   String get loginHelp =>
@@ -121,10 +128,19 @@ class AppLocalizationsBn extends AppLocalizations {
   String get featureCollection => 'বিল কালেকশন';
 
   @override
+  String get featureDueList => 'বকেয়া তালিকা';
+
+  @override
+  String get featureApprovals => 'অনুমোদন';
+
+  @override
   String get featureTickets => 'টিকেট';
 
   @override
   String get featureClients => 'ক্লায়েন্ট';
+
+  @override
+  String get featureChat => 'সাপোর্ট চ্যাট';
 
   @override
   String get featureHr => 'হাজিরা, ছুটি ও অগ্রিম';
@@ -177,761 +193,542 @@ class AppLocalizationsBn extends AppLocalizations {
   String get sessionEnded => 'আপনাকে লগআউট করা হয়েছে। আবার লগইন করুন।';
 
   @override
-  String get acceptAmount => 'কত টাকা নেবেন';
-
-  @override
-  String get addExpense => 'খরচ';
-
-  @override
-  String get addNote => 'নোট লিখুন';
-
-  @override
-  String get addPhotosQuestion => 'এই নোটের সাথে ছবি দেবেন?';
-
-  @override
-  String get address => 'ঠিকানা';
-
-  @override
-  String get adjustment => 'প্যাকেজ বদলের হিসাব';
-
-  @override
-  String get advance => 'অগ্রিম';
-
-  @override
-  String get advances => 'অগ্রিম';
-
-  @override
-  String get alreadySaved => 'এটা আগেই সেভ হয়েছে। আবার টাকা নেবেন না।';
-
-  @override
-  String get amount => 'টাকা';
-
-  @override
-  String get amountPartOptional => 'টাকা (খালি রাখলে সব)';
-
-  @override
-  String get approve => 'অনুমোদন';
-
-  @override
-  String get askAdvance => 'অগ্রিম চাই';
-
-  @override
-  String get askLeave => 'ছুটি চাই';
-
-  @override
-  String get assign => 'দিন';
-
-  @override
-  String get assignTechnician => 'কাছের technician';
-
-  @override
-  String get assigned => 'দেওয়া হয়েছে।';
-
-  @override
-  String get attendance => 'হাজিরা';
-
-  @override
-  String get available => 'খরচ করা যাবে';
-
-  @override
-  String get awaitingClientId => 'ক্লায়েন্ট আইডি বাকি';
-
-  @override
-  String get awayTitle => 'বাসা থেকে দূরে';
-
-  @override
-  String get busy => 'ব্যস্ত';
-
-  @override
-  String get cableMetres => 'ক্যাবল (মিটার)';
-
-  @override
-  String get call => 'কল';
-
-  @override
-  String get cancelRequestQuestion => 'এই আবেদন ফেরত নেবেন?';
-
-  @override
-  String get cannotInstall =>
-      'এই টিকেটে এখন install তথ্য দেওয়া যাবে না (শুধু দায়িত্বপ্রাপ্ত technician, ক্লায়েন্ট pending থাকা অবস্থায়)।';
-
-  @override
-  String get cashHint =>
-      'লাইন এখনই চালু হবে। পেমেন্ট মালিকের অনুমোদনের অপেক্ষায় থাকবে; অনুমোদনের পরে ক্লায়েন্ট paid SMS পাবেন।';
-
-  @override
-  String get category => 'ধরন';
-
-  @override
-  String get client => 'ক্লায়েন্ট';
-
-  @override
-  String get clientId => 'ক্লায়েন্ট আইডি';
-
-  @override
-  String get clientSaved => 'ক্লায়েন্ট সেভ হয়েছে।';
-
-  @override
-  String get clientSearchHint => 'নাম, আইডি, ফোন বা PPPoE';
-
-  @override
-  String get clientsAdvanceHeld => 'গ্রাহকের অগ্রিম হাতে';
-
-  @override
-  String get collected => 'কালেকশন';
-
-  @override
-  String get collectedBy => 'যিনি নিলেন';
-
-  @override
-  String get collectedToday => 'আজ কালেকশন';
-
-  @override
-  String confirmRecharge(String amount, String months) {
-    return '$months মাসের রিচার্জ, $amount?';
-  }
-
-  @override
-  String confirmTake(String amount, String name) {
-    return '$name-এর কাছ থেকে $amount নেবেন?';
-  }
-
-  @override
-  String get creditAlert => 'আপনার ক্রেডিট প্রায় শেষ।';
-
-  @override
-  String get creditLimit => 'ক্রেডিট লিমিট';
-
-  @override
-  String get creditUsed => 'ক্রেডিট ব্যবহার';
-
-  @override
-  String get date => 'তারিখ';
-
-  @override
-  String get dayEndHandover => 'দিন শেষের জমা';
-
-  @override
-  String daysLeft(int days) {
-    return '$days দিন বাকি';
-  }
-
-  @override
-  String get decline => 'না';
-
-  @override
-  String get descriptionOptional => 'বিস্তারিত (ইচ্ছা হলে)';
-
-  @override
-  String get disconnects24h => 'সংযোগ কাটা (২৪ ঘণ্টা)';
-
-  @override
-  String get distance => 'দূরত্ব';
-
-  @override
-  String get due => 'বকেয়া';
-
-  @override
-  String get dutyEnded => 'ডিউটি শেষ।';
-
-  @override
-  String get dutyHours => 'ডিউটির সময়';
-
-  @override
-  String get dutyLocationHint =>
-      'ডিউটি শুরু বা শেষ করার সময় আপনার location নেওয়া হয়। ডিউটির বাইরে কখনো নয়।';
-
-  @override
-  String get dutyStarted => 'ডিউটি শুরু।';
+  String get featureDuty => 'ডিউটি';
 
   @override
   String get dutyStatus => 'ডিউটি';
 
   @override
-  String get endDuty => 'ডিউটি শেষ';
+  String get dutyOn => 'ডিউটিতে';
 
   @override
-  String get enterQuantity => 'অন্তত একটা মালের পরিমাণ দিন।';
+  String get dutyOff => 'ডিউটি বন্ধ';
 
   @override
-  String get expenseAvailable => 'খরচ করা যাবে';
+  String get dutyStart => 'ডিউটি শুরু';
 
   @override
-  String get expenseHint => 'প্রতিটা খরচ অন্য একজনের অনুমোদনের অপেক্ষায় থাকে।';
+  String get dutyEnd => 'ডিউটি শেষ';
 
   @override
-  String get expenseSaved => 'খরচ সেভ হয়েছে। অনুমোদনের অপেক্ষায়।';
+  String get dutyHours => 'ডিউটির সময়';
 
   @override
-  String get expenses => 'খরচ';
+  String get dutyTimezone => 'সময় অঞ্চল';
 
   @override
-  String get expiry => 'মেয়াদ';
+  String get dutyDistance => 'আজকের দূরত্ব';
 
   @override
-  String get featureApprovals => 'অনুমোদন';
+  String dutyMeters(int meters) {
+    return '$meters মি';
+  }
 
   @override
-  String get featureChat => 'সাপোর্ট চ্যাট';
+  String get dutyOutsideHours =>
+      'ডিউটি শুধু ডিউটির সময়ের মধ্যে শুরু করা যায়।';
 
   @override
-  String get featureDashboard => 'ড্যাশবোর্ড';
+  String get dutyStopped => 'ডিউটি শেষ। লোকেশন বন্ধ হয়েছে।';
 
   @override
-  String get featureDueList => 'বকেয়া তালিকা';
+  String get dutyNotificationTitle => 'MyNet: location on';
 
   @override
-  String get featureDuty => 'ডিউটি';
-
-  @override
-  String get featureExpenses => 'খরচ';
-
-  @override
-  String get featureExpiring => 'মেয়াদ শেষ হচ্ছে';
+  String get dutyNotificationBody => 'লোকেশন শুধু ডিউটিতে থাকাকালীন যায়।';
 
   @override
   String get featureOffers => 'কাজের অফার';
 
   @override
-  String get featureSales => 'মাল বিক্রি';
+  String get featureAssign => 'টেকনিশিয়ান দিন';
 
   @override
-  String get featureWallet => 'ওয়ালেট';
+  String get offersEmpty => 'কোনো অফার নেই।';
 
   @override
-  String get fillAll => 'দরকারি সব ঘর পূরণ করুন।';
+  String get offerAccept => 'নেব';
 
   @override
-  String get forNewConnection => 'নতুন সংযোগের জন্য';
+  String get offerReject => 'না';
 
   @override
-  String get forNewConnectionHint => 'ক্লায়েন্ট আইডি পরে দেওয়া হবে।';
-
-  @override
-  String get gateway => 'মাধ্যম';
-
-  @override
-  String get giveClientId => 'আইডি দিন';
-
-  @override
-  String get handoverDue => 'জমা দিতে হবে';
-
-  @override
-  String get handoverSent => 'মালিকের কাছে জমা পাঠানো হয়েছে।';
-
-  @override
-  String get handovers => 'জমা';
-
-  @override
-  String get holdBlocked => 'হাতে টাকার সীমা পূর্ণ। আগে জমা দিন।';
-
-  @override
-  String get inHand => 'হাতে';
-
-  @override
-  String get inStock => 'স্টকে';
-
-  @override
-  String get installHint =>
-      'সেভ করলে আজ থেকে লাইন চালু হবে আর টিকেট resolved হবে।';
-
-  @override
-  String get installSaved => 'Install সেভ হয়েছে।';
-
-  @override
-  String get installedAt => 'Install হয়েছে';
-
-  @override
-  String get lastDisconnect => 'শেষ সংযোগ কাটা';
-
-  @override
-  String get lastRx => 'শেষ RX power';
-
-  @override
-  String get lateMinutes => 'দেরি (মিনিট)';
-
-  @override
-  String get leaveReason => 'কারণ';
-
-  @override
-  String get leaveUnpaidQuestion => 'বিনা বেতনে ছুটি? (বাতিল = বেতনসহ)';
-
-  @override
-  String get leaves => 'ছুটি';
-
-  @override
-  String get liveConnection => 'এখন অনলাইন?';
-
-  @override
-  String get locationOff => 'Location বন্ধ বা অনুমতি নেই।';
-
-  @override
-  String get map => 'ম্যাপ';
-
-  @override
-  String get materials => 'ব্যবহৃত মাল';
-
-  @override
-  String get method => 'মাধ্যম';
-
-  @override
-  String get minutes => 'মিনিট';
-
-  @override
-  String get mobileOptional => 'মোবাইল (ইচ্ছা হলে)';
-
-  @override
-  String get months => 'মাস';
-
-  @override
-  String get myExpenses => 'আমার খরচ (৭ দিন)';
-
-  @override
-  String get name => 'নাম';
-
-  @override
-  String get nameOptional => 'নাম (ইচ্ছা হলে)';
-
-  @override
-  String get newClient => 'নতুন ক্লায়েন্ট';
-
-  @override
-  String get newClientHint =>
-      'POP ছাড়া ক্লায়েন্ট pending থাকবে; POP দিলে লাইন এখনই চালু হবে।';
-
-  @override
-  String get newConnection => 'নতুন সংযোগ';
-
-  @override
-  String get newExpiry => 'নতুন মেয়াদ';
-
-  @override
-  String get newTicket => 'নতুন টিকেট';
-
-  @override
-  String get nextStep => 'পরের ধাপ';
-
-  @override
-  String get noChats => 'কোনো কথোপকথন নেই।';
-
-  @override
-  String get noClients => 'কোনো ক্লায়েন্ট পাওয়া যায়নি।';
-
-  @override
-  String get noDashboard => 'আপনার লগইনে ড্যাশবোর্ডের কোনো বক্স নেই।';
-
-  @override
-  String get noDues => 'কোনো বকেয়া নেই।';
-
-  @override
-  String get noExpiring => 'কারো মেয়াদ শেষ হচ্ছে না।';
-
-  @override
-  String get noMaterials => 'এই টিকেটে এখনো কোনো মাল ব্যবহার হয়নি।';
-
-  @override
-  String get noNotes => 'এখনো কোনো নোট নেই।';
-
-  @override
-  String get noOffers => 'এখন কোনো অফার নেই।';
-
-  @override
-  String get noParts => 'অফিসে কোনো মাল স্টকে নেই।';
-
-  @override
-  String get noPayments => 'কোনো পেমেন্ট নেই।';
-
-  @override
-  String get noSales => 'এখনো বিক্রি নেই।';
-
-  @override
-  String get noSuggestions => 'কাছে কোনো technician ডিউটিতে নেই।';
-
-  @override
-  String get noTickets => 'কোনো টিকেট নেই।';
-
-  @override
-  String get none => 'নেই।';
-
-  @override
-  String get note => 'নোট';
-
-  @override
-  String get noteOptional => 'নোট (ইচ্ছা হলে)';
-
-  @override
-  String get noteRequired => 'নোট (দরকার)';
-
-  @override
-  String get notes => 'নোট';
-
-  @override
-  String get nothingToApprove => 'আপনার অনুমোদনের কিছু নেই।';
-
-  @override
-  String get offDuty => 'ডিউটিতে নেই';
-
-  @override
-  String get offerSent => 'কাছের technician-কে অফার পাঠানো হয়েছে।';
-
-  @override
-  String get offerTaken => 'টিকেট আপনার।';
-
-  @override
-  String get offerToNearest => 'কাছের জনকে অফার';
-
-  @override
-  String get offline => 'অফলাইন';
-
-  @override
-  String get ok => 'ঠিক আছে';
-
-  @override
-  String get oldExpiry => 'পুরনো মেয়াদ';
-
-  @override
-  String get onDuty => 'ডিউটিতে';
-
-  @override
-  String get online => 'অনলাইন';
-
-  @override
-  String get onuPower => 'ONU power';
-
-  @override
-  String get openTickets => 'খোলা টিকেট';
-
-  @override
-  String get outCancelled => 'বাতিল';
-
-  @override
-  String get outDone => 'কাজ শেষ';
-
-  @override
-  String get outDuplicate => 'একই টিকেট আগে আছে';
-
-  @override
-  String get outNoIssue => 'কোনো সমস্যা পাওয়া যায়নি';
-
-  @override
-  String get outcomeTitle => 'কীভাবে শেষ হলো?';
-
-  @override
-  String get outsideDutyHours =>
-      'ডিউটির সময়ের বাইরে: এখন ডিউটি শুরু করা যাবে না।';
-
-  @override
-  String get overdue => 'দেরি';
-
-  @override
-  String get ownerCash => 'ক্যাশ মালিক';
-
-  @override
-  String get ownerDigital => 'ডিজিটাল মালিক';
-
-  @override
-  String get package => 'প্যাকেজ';
-
-  @override
-  String get payBank => 'ব্যাংক';
-
-  @override
-  String get payCash => 'ক্যাশ';
-
-  @override
-  String get payDigital => 'ডিজিটাল';
-
-  @override
-  String get payDue => 'বাকি';
-
-  @override
-  String get payTotal => 'মোট দিতে হবে';
-
-  @override
-  String get photoCamera => 'ক্যামেরা';
-
-  @override
-  String get photoGallery => 'গ্যালারি';
-
-  @override
-  String get pickClient => 'ক্লায়েন্ট বাছুন';
-
-  @override
-  String get ponPort => 'PON পোর্ট';
-
-  @override
-  String get pop => 'POP';
-
-  @override
-  String get popOptional => 'POP (ইচ্ছা হলে)';
-
-  @override
-  String get pppoePassword => 'PPPoE পাসওয়ার্ড';
-
-  @override
-  String get pppoeUser => 'PPPoE ইউজার';
-
-  @override
-  String get prHigh => 'জরুরি';
-
-  @override
-  String get prLow => 'কম';
-
-  @override
-  String get prMedium => 'মাঝারি';
-
-  @override
-  String get prUrgent => 'খুব জরুরি';
-
-  @override
-  String get price => 'দাম';
-
-  @override
-  String get priority => 'গুরুত্ব';
-
-  @override
-  String get purLineWork => 'লাইনের কাজ';
-
-  @override
-  String get purNewConnection => 'নতুন সংযোগ';
-
-  @override
-  String get purOther => 'অন্যান্য';
-
-  @override
-  String get purRepair => 'মেরামত';
-
-  @override
-  String get purShift => 'স্থানান্তর';
-
-  @override
-  String get purpose => 'কাজের ধরন';
-
-  @override
-  String get quantity => 'পরিমাণ';
-
-  @override
-  String get receipt => 'রসিদ';
-
-  @override
-  String get receiptNotImage => 'এই রসিদ ছবি নয়। ERP ওয়েবসাইটে খুলুন।';
-
-  @override
-  String get receiptPhoto => 'রসিদের ছবি';
-
-  @override
-  String get receiptPhotoAdded => 'রসিদের ছবি দেওয়া হয়েছে';
-
-  @override
-  String get recentPayments => 'শেষ পেমেন্ট';
-
-  @override
-  String get recentSales => 'আমার শেষ বিক্রি';
-
-  @override
-  String get recharge => 'রিচার্জ';
-
-  @override
-  String rechargeDone(String expiry) {
-    return 'রিচার্জ হয়েছে। নতুন মেয়াদ: $expiry';
+  String offerSeconds(int seconds) {
+    return 'আর $seconds সেকেন্ড';
   }
 
   @override
-  String get rechargePending =>
-      'এই ক্লায়েন্টের তথ্য আগে ওয়েবসাইটে পূরণ করতে হবে।';
+  String offerDistance(int meters) {
+    return '$meters মিটার দূরে';
+  }
 
   @override
-  String get recordInstall => 'Install তথ্য দিন';
+  String offerTicket(int id) {
+    return 'টিকেট #$id';
+  }
 
   @override
-  String get reject => 'বাতিল';
+  String offerAccepted(int id) {
+    return 'আপনি টিকেট #$id নিয়েছেন।';
+  }
 
   @override
-  String get requestSent => 'আবেদন পাঠানো হয়েছে।';
+  String get assignNoTickets => 'দেওয়ার মতো খোলা টিকেট নেই।';
+
+  @override
+  String get assignTicketId => 'টিকেট নম্বর';
+
+  @override
+  String get assignLookup => 'কাছের জন দেখুন';
+
+  @override
+  String assignForTicket(int id) {
+    return 'টিকেট #$id-এর কাছের জন';
+  }
+
+  @override
+  String get assignNobody => 'ডিউটিতে কাছে কেউ নেই।';
+
+  @override
+  String assignScore(String score) {
+    return 'নম্বর $score';
+  }
+
+  @override
+  String assignEta(int minutes) {
+    return '$minutes মিনিট';
+  }
+
+  @override
+  String get assignBusy => 'ব্যস্ত';
+
+  @override
+  String get assignSameArea => 'একই এলাকা';
+
+  @override
+  String get assignButton => 'দিন';
+
+  @override
+  String assignDone(String name) {
+    return '$name-কে দেওয়া হয়েছে।';
+  }
+
+  @override
+  String get assignOffer => 'কাছের জনকে অফার';
+
+  @override
+  String offerStarted(String name) {
+    return '$name-কে অফার করা হয়েছে।';
+  }
+
+  @override
+  String get offerNobody => 'আর কাউকে অফার করার নেই। অফিসকে জানানো হয়েছে।';
+
+  @override
+  String get ticketsSearch => 'নাম, আইডি বা ফোন';
+
+  @override
+  String get ticketsActive => 'খোলা';
+
+  @override
+  String get ticketsDone => 'শেষ';
+
+  @override
+  String get ticketsAny => 'সব স্ট্যাটাস';
+
+  @override
+  String get ticketsMine => 'আমার টিকেট';
+
+  @override
+  String get ticketsAll => 'সবার টিকেট';
+
+  @override
+  String get ticketsEmpty => 'এখানে কোনো টিকেট নেই।';
+
+  @override
+  String get loadMore => 'আরও দেখুন';
+
+  @override
+  String get overdue => 'সময় পার';
+
+  @override
+  String get ticketStatus => 'স্ট্যাটাস';
+
+  @override
+  String get statusOpen => 'খোলা';
+
+  @override
+  String get statusAssigned => 'দেওয়া হয়েছে';
+
+  @override
+  String get statusScheduled => 'সময় ধার্য';
+
+  @override
+  String get statusOnTheWay => 'রাস্তায়';
+
+  @override
+  String get statusInProgress => 'কাজ চলছে';
+
+  @override
+  String get statusResolved => 'সমাধান';
+
+  @override
+  String get statusReopened => 'আবার খোলা';
+
+  @override
+  String get statusClosed => 'বন্ধ';
+
+  @override
+  String get priorityLow => 'কম';
+
+  @override
+  String get priorityMedium => 'মাঝারি';
+
+  @override
+  String get priorityHigh => 'বেশি';
+
+  @override
+  String get priorityUrgent => 'জরুরি';
+
+  @override
+  String get pushPriority => 'অগ্রাধিকার';
+
+  @override
+  String pushTicketTitle(int id) {
+    return 'টিকেট #$id';
+  }
+
+  @override
+  String get outcomeDone => 'হয়ে গেছে';
+
+  @override
+  String get outcomeNoIssue => 'সমস্যা ছিল না';
+
+  @override
+  String get outcomeDuplicate => 'ডুপ্লিকেট';
+
+  @override
+  String get outcomeCancelled => 'বাতিল';
+
+  @override
+  String get roleMain => 'মূল দায়িত্ব';
 
   @override
   String get roleHelper => 'সহকারী';
 
   @override
-  String get router => 'রাউটার';
+  String get ticketDescription => 'বিবরণ';
 
   @override
-  String get sales => 'বিক্রি';
+  String get ticketComments => 'নোট';
 
   @override
-  String get save => 'সেভ';
+  String get ticketNoComments => 'এখনো কোনো নোট নেই।';
 
   @override
-  String get saveHouseLocation => 'বাসার GPS সেভ';
+  String get ticketNote => 'নোট';
 
   @override
-  String get saveHouseLocationQuestion =>
-      'আপনি কি ক্লায়েন্টের বাসায় দাঁড়িয়ে আছেন? এই জায়গাকে বাসার location হিসেবে সেভ করবেন?';
+  String get ticketSend => 'সেভ';
 
   @override
-  String get saved => 'সেভ হয়েছে।';
+  String get ticketNewConnectionHint =>
+      'নতুন লাইন বন্ধ করতে নোটে ক্লায়েন্টের PPPoE আইডি লাগবে।';
 
   @override
-  String get scanCodeHint => 'সিরিয়াল, বারকোড বা SKU';
+  String get ticketAwayTitle => 'বাসা থেকে দূরে';
 
   @override
-  String get scanItem => 'কোড স্ক্যান / লিখুন';
+  String get ticketAwayHint => 'এখান থেকে শেষ করছেন কেন? (কমপক্ষে ৫ অক্ষর)';
 
   @override
-  String secondsLeft(int seconds) {
-    return '$seconds সেকেন্ড বাকি';
+  String get ticketFinishDistance => 'বাসা থেকে দূরত্ব';
+
+  @override
+  String ticketMeters(int meters) {
+    return '$meters মি';
   }
 
   @override
-  String get sell => 'বিক্রি';
+  String get clientCode => 'ক্লায়েন্ট আইডি';
 
   @override
-  String get send => 'পাঠান';
+  String get clientAddress => 'ঠিকানা';
 
   @override
-  String get since => 'কখন থেকে';
+  String get clientPppoe => 'PPPoE';
 
   @override
-  String get sold => 'বিক্রি হয়েছে।';
+  String get onuSn => 'ONU সিরিয়াল';
 
   @override
-  String get soldCashToHandover => 'বিক্রি হয়েছে। টাকা দিন শেষের জমায় যাবে।';
+  String get onuMac => 'ONU MAC';
 
   @override
-  String get stActive => 'চালু';
+  String get onuPort => 'PON পোর্ট';
 
   @override
-  String get stApproved => 'অনুমোদিত';
+  String get ticketCall => 'কল';
 
   @override
-  String get stAssigned => 'দেওয়া হয়েছে';
+  String get ticketMap => 'ম্যাপ';
 
   @override
-  String get stAwaitingClient => 'আইডি বাকি';
+  String get ticketLocation => 'বাসার GPS সেভ';
 
   @override
-  String get stCancelled => 'বাতিল';
+  String get ticketSaveLocation =>
+      'এই জায়গাটা ক্লায়েন্টের বাসা হিসেবে সেভ করবেন?';
 
   @override
-  String get stClosed => 'বন্ধ';
+  String get ticketLocationSaved => 'বাসার লোকেশন সেভ হয়েছে।';
 
   @override
-  String get stDone => 'শেষ';
+  String get ticketLocationDenied =>
+      'লোকেশন বন্ধ আছে। চালু করে আবার চেষ্টা করুন।';
 
   @override
-  String get stExpired => 'মেয়াদ শেষ';
+  String get ticketLocationMock =>
+      'এটা নকল GPS মনে হচ্ছে। বাসা সেভ করার আগে বন্ধ করুন।';
 
   @override
-  String get stInProgress => 'কাজ চলছে';
+  String get ticketDbm => 'dBm দেখুন';
 
   @override
-  String get stOnTheWay => 'যাচ্ছি';
+  String get ticketDbmRx => 'RX dBm';
 
   @override
-  String get stOpen => 'খোলা';
+  String get ticketDbmTx => 'TX dBm';
 
   @override
-  String get stPartial => 'আংশিক অনুমোদিত';
+  String get ticketDbmLevel => 'লেভেল';
 
   @override
-  String get stPending => 'অপেক্ষায়';
+  String get ticketTakePhoto => 'ক্যামেরা';
 
   @override
-  String get stRejected => 'বাতিল';
+  String get ticketAddPhoto => 'গ্যালারি';
 
   @override
-  String get stReopened => 'আবার খোলা';
-
-  @override
-  String get stResolved => 'সমাধান';
-
-  @override
-  String get stScheduled => 'সময় ঠিক';
-
-  @override
-  String get stSuspended => 'স্থগিত';
-
-  @override
-  String get startDuty => 'ডিউটি শুরু';
-
-  @override
-  String get startedAt => 'শুরু';
-
-  @override
-  String get status => 'অবস্থা';
-
-  @override
-  String get subject => 'বিষয়';
-
-  @override
-  String get subjectRequired => 'বিষয় লিখুন।';
-
-  @override
-  String get take => 'নেব';
-
-  @override
-  String get takeCash => 'ক্যাশ';
-
-  @override
-  String get takeTrx => 'bKash / Nagad TrxID';
-
-  @override
-  String get ticketOpened => 'টিকেট খোলা হয়েছে।';
-
-  @override
-  String get ticketSearchHint => 'বিষয়, #আইডি, ক্লায়েন্ট';
-
-  @override
-  String get ticketsActive => 'চলমান';
-
-  @override
-  String get ticketsAll => 'সব';
-
-  @override
-  String get ticketsDone => 'শেষ (৩০ দিন)';
-
-  @override
-  String get ticketsMine => 'আমার';
-
-  @override
-  String get transactions => 'লেনদেন';
-
-  @override
-  String get trxHint => 'ডিজিটাল মালিক TrxID যাচাই করার পরে গণ্য হবে।';
-
-  @override
-  String get trxId => 'TrxID';
-
-  @override
-  String get useParts => 'মাল ব্যবহার';
-
-  @override
-  String get useWebsite => 'এটার জন্য ERP ওয়েবসাইট ব্যবহার করুন।';
-
-  @override
-  String get waitingHandovers => 'অপেক্ষায় থাকা জমা';
-
-  @override
-  String get waitsForApproval =>
-      'মালিক অনুমোদন দিলে ক্লায়েন্ট paid SMS পাবেন।';
-
-  @override
-  String get walletAfter => 'পরে ওয়ালেটে থাকবে';
-
-  @override
-  String get walletBalance => 'ওয়ালেট ব্যালান্স';
-
-  @override
-  String get walletCharge => 'ওয়ালেট থেকে কাটবে';
-
-  @override
-  String get whatFor => 'কিসের খরচ';
-
-  @override
-  String withinDays(int days) {
-    return '$days দিন';
+  String ticketPhotoCount(int count) {
+    return '$countটা ছবি';
   }
 
   @override
-  String get writeMessage => 'মেসেজ লিখুন';
+  String get ticketPhotoLimit => 'একটা নোটে সর্বোচ্চ ৫টা ছবি।';
+
+  @override
+  String get ticketPhotoTooBig => 'ছবিটা ৫ MB-এর বেশি।';
+
+  @override
+  String get ticketCommentKept =>
+      'ইন্টারনেট নেই। নোটটা ফোনে থাকবে, পরে পাঠানো হবে।';
+
+  @override
+  String get pushNotice => 'নতুন নোটিফিকেশন';
+
+  @override
+  String get pushOpen => 'খুলুন';
+
+  @override
+  String get pushTicketAssigned => 'এই টিকেট আপনাকে দেওয়া হয়েছে।';
+
+  @override
+  String get pushTicketHelper => 'আপনাকে এই টিকেটের সহকারী করা হয়েছে।';
+
+  @override
+  String get pushTicketUnassigned =>
+      'কেউ এই টিকেট নেয়নি। এটি অফিসের কাছে ফিরে গেছে।';
+
+  @override
+  String get pushOfferTitle => 'টিকেট অফার';
+
+  @override
+  String get pushOfferBody => 'কাছের একটি টিকেট আপনাকে দেওয়া হয়েছে।';
+
+  @override
+  String get pushFromNotification => 'নোটিফিকেশন থেকে খোলা হয়েছে।';
+
+  @override
+  String get devicesTitle => 'আমার ফোন';
+
+  @override
+  String get devicesEmpty => 'কোনো ফোন লগইন নেই।';
+
+  @override
+  String get devicesUnnamed => 'ফোন';
+
+  @override
+  String get devicesThisPhone => 'এই ফোন';
+
+  @override
+  String get devicesSignOut => 'সাইন আউট';
+
+  @override
+  String get devicesSignOutThis =>
+      'এই ফোন থেকে সাইন আউট করবেন? আবার লগইন করতে হবে।';
+
+  @override
+  String get devicesSignOutOther =>
+      'ওই ফোন থেকে সাইন আউট করবেন? সেখানে স্টাফ নোটিফিকেশন বন্ধ হবে।';
+
+  @override
+  String get clientsSearch => 'নাম, আইডি, ফোন বা PPPoE';
+
+  @override
+  String get clientsEmpty => 'কোনো ক্লায়েন্ট নেই।';
+
+  @override
+  String get clientsMore => 'আরও';
+
+  @override
+  String get clientsCode => 'আইডি';
+
+  @override
+  String get clientsAddress => 'ঠিকানা';
+
+  @override
+  String get clientsStatus => 'অবস্থা';
+
+  @override
+  String get clientsPackage => 'প্যাকেজ';
+
+  @override
+  String get clientsPrice => 'দাম';
+
+  @override
+  String get clientsExpiry => 'মেয়াদ';
+
+  @override
+  String get clientsDue => 'বকেয়া';
+
+  @override
+  String get clientsAdvance => 'অগ্রিম';
+
+  @override
+  String get clientsBalance => 'ব্যালেন্স';
+
+  @override
+  String get clientsPppoe => 'PPPoE';
+
+  @override
+  String get clientsNid => 'এনআইডি';
+
+  @override
+  String get clientsPop => 'পপ';
+
+  @override
+  String get clientsRouter => 'রাউটার';
+
+  @override
+  String get clientsOnu => 'ONU';
+
+  @override
+  String get clientsRx => 'শেষ RX dBm';
+
+  @override
+  String get clientsConnection => 'লাইন স্ট্যাটাস';
+
+  @override
+  String get clientsOnline => 'লাইন অনলাইন।';
+
+  @override
+  String get clientsOffline => 'লাইন অফলাইন।';
+
+  @override
+  String clientsDisconnects(int count) {
+    return '২৪ ঘণ্টায় $count বার সংযোগ ছিঁড়েছে';
+  }
+
+  @override
+  String get clientsOpenTickets => 'খোলা টিকেট';
+
+  @override
+  String get clientsPayments => 'সাম্প্রতিক পেমেন্ট';
+
+  @override
+  String get chatsSearch => 'ক্লায়েন্টের নাম, আইডি বা ফোন';
+
+  @override
+  String get chatsEmpty => 'কোনো কথোপকথন নেই।';
+
+  @override
+  String chatsUnread(int count) {
+    return '$count নতুন';
+  }
+
+  @override
+  String get chatsReply => 'উত্তর';
+
+  @override
+  String get collectionToday => 'আজকের কালেকশন';
+
+  @override
+  String get collectionInHand => 'হাতে নগদ';
+
+  @override
+  String get collectionNotHanded => 'এখনো জমা হয়নি';
+
+  @override
+  String get collectionExpenseLeft => 'খরচের জন্য বাকি';
+
+  @override
+  String get collectionHold => 'আর টাকা নেওয়ার আগে নগদ জমা দিন।';
+
+  @override
+  String get collectionCash => 'নগদ নিন';
+
+  @override
+  String get collectionExpense => 'খরচ';
+
+  @override
+  String get collectionHandover => 'জমা দিন';
+
+  @override
+  String get collectionCashOwner => 'নগদের মালিক';
+
+  @override
+  String get collectionDigitalOwner => 'ডিজিটালের মালিক';
+
+  @override
+  String get collectionGateway => 'বিকাশ / নগদ';
+
+  @override
+  String get collectionSearch => 'নাম, আইডি, ফোন বা PPPoE';
+
+  @override
+  String get collectionMore => 'আরও';
+
+  @override
+  String get collectionAmount => 'টাকা';
+
+  @override
+  String get collectionNote => 'নোট';
+
+  @override
+  String get collectionTxn => 'TrxID';
+
+  @override
+  String get collectionSave => 'সেভ';
+
+  @override
+  String get collectionReceipt => 'রসিদ';
+
+  @override
+  String get collectionApproval => 'অনুমোদন';
+
+  @override
+  String get collectionPaidSms => 'পেইড SMS';
+
+  @override
+  String get collectionSmsLater => 'অফিস অনুমোদনের পর ক্লায়েন্টকে জানানো হবে।';
+
+  @override
+  String get dueEmpty => 'বকেয়া তালিকায় কেউ নেই।';
+
+  @override
+  String get approvalsEmpty => 'আপনার জন্য কিছু অপেক্ষা করছে না।';
+
+  @override
+  String get approvalsApprove => 'অনুমোদন';
 }

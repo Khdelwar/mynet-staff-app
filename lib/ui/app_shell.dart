@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../l10n/app_localizations.dart';
+import '../nav/targets.dart';
+import '../push/message.dart';
 import '../state/providers.dart';
 import 'account_screen.dart';
 import 'home_screen.dart';
+import 'push_pages.dart';
 
 final connectivityProvider = StreamProvider<List<ConnectivityResult>>(
   (ref) => Connectivity().onConnectivityChanged,
@@ -34,6 +37,54 @@ class _AppShellState extends ConsumerState<AppShell>
     super.dispose();
   }
 
+  void _present(PushMessage message) {
+    if (!message.tapped) {
+      final l = AppLocalizations.of(context);
+      final text = message.title ?? message.body ?? l.pushNotice;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(text),
+          action: message.opensTicket || message.opensOffer || message.opensChat
+              ? SnackBarAction(
+                  label: l.pushOpen,
+                  onPressed: () => _open(message),
+                )
+              : null,
+        ),
+      );
+      return;
+    }
+    _open(message);
+  }
+
+  void _open(PushMessage message) {
+    final Widget page;
+    if (message.opensTicket) {
+      final id = message.ticketId!;
+      page =
+          NavTargets.ticket?.call(id) ??
+          PushTicketPage(
+            ticketId: id,
+            title: message.title,
+            body: message.body,
+            priority: message.priority,
+            helper: message.type == 'ticket_helper',
+            unassigned: message.type == 'ticket_unassigned',
+          );
+    } else if (message.opensOffer) {
+      page =
+          NavTargets.offers?.call(message.offerId, message.ticketId) ??
+          PushOfferPage(offerId: message.offerId, ticketId: message.ticketId);
+    } else if (message.opensChat) {
+      final opened = NavTargets.chat?.call(message.conversationId!);
+      if (opened == null) return;
+      page = opened;
+    } else {
+      return;
+    }
+    Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => page));
+  }
+
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     // Roles and permissions belong to the ERP: re-read them on return.
@@ -45,12 +96,20 @@ class _AppShellState extends ConsumerState<AppShell>
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
+    ref.listen(pushInboxProvider, (previous, next) {
+      if (next == null) return;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _present(next);
+      });
+    });
     final connection = ref.watch(connectivityProvider).value;
     final offline =
         connection != null &&
         connection.every((c) => c == ConnectivityResult.none);
 
+    final company = ref.watch(authProvider.select((a) => a.user?.companyName));
     return Scaffold(
+      appBar: AppBar(title: Text(company ?? l.appTitle)),
       body: SafeArea(
         child: Column(
           children: [

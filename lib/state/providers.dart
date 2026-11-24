@@ -8,6 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../api/models.dart';
 import '../api/staff_api.dart';
 import '../config.dart';
+import '../device.dart';
+import '../push/push.dart';
 import 'stores.dart';
 
 /// Overridden in `main()` with the loaded instance.
@@ -24,10 +26,37 @@ final configuredProvider = Provider<bool>((ref) => AppConfig.isConfigured);
 
 final apiProvider = Provider<StaffApi>((ref) {
   return StaffApi(
-    onUnauthorized: (rejected, _) =>
-        ref.read(authProvider.notifier).sessionExpired(rejectedToken: rejected),
+    onUnauthorized: (rejected, code, message) => ref
+        .read(authProvider.notifier)
+        .sessionExpired(rejectedToken: rejected, code: code, message: message),
   );
 });
+
+/// Overridden in tests. The real one no-ops until Firebase is configured.
+final pushServiceProvider = Provider<PushService>(
+  (ref) => FirebasePush.instance,
+);
+
+/// Latest notification. The shell turns a tap into a page.
+class PushInbox extends Notifier<PushMessage?> {
+  @override
+  PushMessage? build() {
+    final service = ref.watch(pushServiceProvider);
+    final sub = service.messages.listen((message) => state = message);
+    ref.onDispose(sub.cancel);
+    final pending = service.takePending();
+    if (pending != null) {
+      Future.microtask(() {
+        if (state == null) state = pending;
+      });
+    }
+    return null;
+  }
+}
+
+final pushInboxProvider = NotifierProvider<PushInbox, PushMessage?>(
+  PushInbox.new,
+);
 
 // --- Session ------------------------------------------------------------
 
@@ -38,6 +67,7 @@ class AuthState {
     this.user,
     this.session = 0,
     this.ended = false,
+    this.endMessage,
   });
 
   /// False until the stored token has been read at startup.
@@ -54,8 +84,18 @@ class AuthState {
   /// changed, token expired): the login screen says so.
   final bool ended;
 
+  /// Server text for a 401 that ends the session. Not cached.
+  final String? endMessage;
+
   bool get signedIn => token != null;
 }
+
+const _sessionEndCodes = {
+  'unauthenticated',
+  'inactive',
+  'no_access',
+  'reseller_inactive',
+};
 
 class AuthController extends Notifier<AuthState> {
   @override
@@ -87,15 +127,18 @@ class AuthController extends Notifier<AuthState> {
     } on ApiException {
       // Offline: keep the cached profile; a 401 already signed out.
     }
+    if (state.signedIn) unawaited(_bindPush());
   }
 
   /// Signs in, or returns [TwoFactorNeeded] for the code step.
-  Future<LoginOutcome> login(
-    String identifier,
-    String password, {
-    String? device,
-  }) async {
-    final outcome = await _api.login(identifier, password, device: device);
+  Future<LoginOutcome> login(String email, String password) async {
+    final outcome = await _api.login(
+      email,
+      password,
+      deviceId: await ensureDeviceId(_store),
+      deviceName: await deviceName(),
+      appVersion: staffAppVersion,
+    );
     if (outcome is SignedIn) await _start(outcome);
     return outcome;
   }
@@ -120,6 +163,17 @@ class AuthController extends Notifier<AuthState> {
       user: signedIn.user,
       session: state.session + 1,
     );
+    unawaited(_bindPush());
+  }
+
+  /// Tells the ERP this phone's FCM token. Failures never block sign-in.
+  Future<void> _bindPush() async {
+    if (state.token == null) return;
+    try {
+      await ref.read(pushServiceProvider).register(_api);
+    } catch (_) {
+      // Push stays off.
+    }
   }
 
   Future<void> refreshProfile() async {
@@ -145,6 +199,13 @@ class AuthController extends Notifier<AuthState> {
   }
 
   Future<void> logout() async {
+    // Clear the FCM token while the session still exists, then sign out.
+    // Logout on the server also drops pushes if this call does not land.
+    try {
+      await ref.read(pushServiceProvider).unregister(_api);
+    } catch (_) {
+      // Signing out continues.
+    }
     try {
       await _api.logout();
     } catch (_) {
@@ -153,17 +214,28 @@ class AuthController extends Notifier<AuthState> {
     await _clear(ended: false);
   }
 
-  /// ERP answered 401 for [rejectedToken].
-  Future<void> sessionExpired({required String rejectedToken}) async {
+  /// ERP answered 401 for [rejectedToken]. The cached profile is dropped.
+  Future<void> sessionExpired({
+    required String rejectedToken,
+    String? code,
+    String? message,
+  }) async {
     if (state.token != rejectedToken) return; // an older request
-    await _clear(ended: true);
+    final text = message?.trim() ?? '';
+    final show = text.isNotEmpty && _sessionEndCodes.contains(code);
+    await _clear(ended: true, message: show ? text : null);
   }
 
-  Future<void> _clear({required bool ended}) async {
+  Future<void> _clear({required bool ended, String? message}) async {
     _api.token = null;
     await _store.delete(sessionTokenKey);
     await _store.delete(cachedUserKey);
-    state = AuthState(ready: true, session: state.session + 1, ended: ended);
+    state = AuthState(
+      ready: true,
+      session: state.session + 1,
+      ended: ended,
+      endMessage: message,
+    );
   }
 }
 

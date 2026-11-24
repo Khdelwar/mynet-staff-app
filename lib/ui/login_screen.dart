@@ -5,10 +5,11 @@ import '../api/models.dart';
 import '../api/staff_api.dart';
 import '../config.dart';
 import '../l10n/app_localizations.dart';
+import '../login_id.dart';
 import '../state/providers.dart';
 import 'common.dart';
 
-/// Email / mobile + password, then the 2FA code when the user has it on.
+/// ERP email + password, then the 2FA code when the user has it on.
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
@@ -18,7 +19,7 @@ class LoginScreen extends ConsumerStatefulWidget {
 
 class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _form = GlobalKey<FormState>();
-  final _identifier = TextEditingController();
+  final _email = TextEditingController();
   final _password = TextEditingController();
   final _code = TextEditingController();
   bool _busy = false;
@@ -28,7 +29,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   @override
   void dispose() {
-    _identifier.dispose();
+    _email.dispose();
     _password.dispose();
     _code.dispose();
     super.dispose();
@@ -57,7 +58,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             ? e.message
             : l.twoFactorWrong;
       }
-      if (e.status == 401 || e.code == 'failed') return l.loginWrong;
+      if (e.status == 401 || e.code == 'invalid' || e.code == 'failed') {
+        return l.loginWrong;
+      }
     }
     return errorText(l, e, l.errGeneric);
   }
@@ -65,7 +68,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   Future<void> _signIn() => _run(() async {
     final outcome = await ref
         .read(authProvider.notifier)
-        .login(_identifier.text, _password.text);
+        .login(_email.text, _password.text);
     if (outcome is TwoFactorNeeded && mounted) {
       _code.clear();
       setState(() => _twoFactor = outcome);
@@ -86,6 +89,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     final theme = Theme.of(context);
     final configured = ref.watch(configuredProvider);
     final ended = ref.watch(authProvider.select((a) => a.ended));
+    final endMessage = ref.watch(authProvider.select((a) => a.endMessage));
     final step = _twoFactor;
 
     return Scaffold(
@@ -144,7 +148,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     if (!configured)
                       MessageBanner(l.notConfigured, tone: BannerTone.error),
                     if (ended && step == null && _error == null)
-                      MessageBanner(l.sessionEnded, tone: BannerTone.warning),
+                      MessageBanner(
+                        endMessage ?? l.sessionEnded,
+                        tone: BannerTone.warning,
+                      ),
                     if (step == null) ..._credentials(l, configured),
                     if (step != null) ..._codeStep(l, step),
                     if (_error != null)
@@ -183,17 +190,22 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   List<Widget> _credentials(AppLocalizations l, bool configured) => [
     TextFormField(
-      key: const ValueKey('identifier'),
-      controller: _identifier,
+      key: const ValueKey('email'),
+      controller: _email,
       enabled: configured && !_busy,
       keyboardType: TextInputType.emailAddress,
-      autofillHints: const [AutofillHints.username],
+      autofillHints: const [AutofillHints.email],
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
         labelText: l.loginIdentifier,
-        prefixIcon: const Icon(Icons.person_outline),
+        prefixIcon: const Icon(Icons.email_outlined),
       ),
-      validator: (v) => (v ?? '').trim().isEmpty ? l.fieldRequired : null,
+      validator: (v) {
+        final value = (v ?? '').trim();
+        if (value.isEmpty) return l.fieldRequired;
+        if (!isStaffLoginId(value)) return l.loginIdentifierInvalid;
+        return null;
+      },
     ),
     const SizedBox(height: 14),
     TextFormField(

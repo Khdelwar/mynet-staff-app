@@ -3,156 +3,144 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../api/models.dart';
 import '../l10n/app_localizations.dart';
+import '../nav/targets.dart';
 import '../state/providers.dart';
+import 'assign_screen.dart';
+import 'chat_screen.dart';
 import 'clients_screen.dart';
 import 'collection_screen.dart';
+import 'due_list_screen.dart';
 import 'common.dart';
-import 'kit.dart';
-import 'office_screens.dart';
+import 'duty_screen.dart';
+import 'offers_screen.dart';
+import 'ticket_detail_screen.dart';
 import 'tickets_screen.dart';
 
-/// One work screen. [screen] is the ERP's name for it in `/me` → `screens`
-/// (mynet-erp `config/staff_app.php`); [permissions] is the fallback for a
-/// cached profile from an older ERP without `screens`.
+/// One app feature and the ERP permission that opens it (same as the web).
 class Feature {
   const Feature(
-    this.screen,
-    this.permissions,
+    this.permission,
     this.icon,
-    this.label,
-    this.page,
-  );
-  final String screen;
-  final List<String> permissions;
+    this.label, {
+    this.screen,
+    this.also = const [],
+    this.open,
+  });
+
+  final String permission;
+  final String? screen;
+  final List<String> also;
   final IconData icon;
   final String Function(AppLocalizations) label;
-  final Widget Function() page;
+  final WidgetBuilder? open;
+
+  /// Drawn when `/me` grants the permission. When the ERP also sent a
+  /// `screens` list, the feature's screen has to be on it.
+  bool allowed(StaffUser user) {
+    final byPermission = user.can(permission) || also.any(user.can);
+    if (user.screens.isNotEmpty && screen != null) {
+      return user.screens.contains(screen) && byPermission;
+    }
+    return byPermission;
+  }
 }
 
+/// Planned in mynet-erp ROADMAP Phase 14. Tickets, duty, and offers.
+/// The Clients tile opens the staff client list.
 final features = <Feature>[
   Feature(
-    'dashboard',
-    const ['dashboard.view'],
-    Icons.dashboard_outlined,
-    (l) => l.featureDashboard,
-    () => const DashboardScreen(),
-  ),
-  Feature(
-    'duty',
-    const ['staff_app.use'],
-    Icons.badge_outlined,
-    (l) => l.featureDuty,
-    () => const DutyScreen(),
-  ),
-  Feature(
-    'tickets',
-    const ['tickets.view'],
-    Icons.build_outlined,
-    (l) => l.featureTickets,
-    () => const TicketsScreen(),
-  ),
-  Feature(
-    'offers',
-    const [],
-    Icons.campaign_outlined,
-    (l) => l.featureOffers,
-    () => const OffersScreen(),
-  ),
-  Feature(
-    'collection',
-    const ['collection.collect', 'collection.gateway', 'billing.collect'],
+    'collection.collect',
     Icons.payments_outlined,
     (l) => l.featureCollection,
-    () => const CollectionScreen(),
-  ),
-  Feature(
-    'expenses',
-    const ['collection.expense'],
-    Icons.receipt_long_outlined,
-    (l) => l.featureExpenses,
-    () => const CollectionScreen(),
-  ),
-  Feature(
-    'approvals',
-    const [
-      'collection.approve',
-      'approvals.cash',
-      'approvals.collections',
-      'ledger.approve',
+    screen: 'collection',
+    also: const [
+      'collection.gateway',
+      'collection.expense',
+      'collection.view',
+      'billing.collect',
     ],
-    Icons.fact_check_outlined,
-    (l) => l.featureApprovals,
-    () => const ApprovalsScreen(),
+    open: _openCollection,
   ),
   Feature(
-    'sales',
-    const ['inventory.sell', 'inventory.manage'],
-    Icons.point_of_sale_outlined,
-    (l) => l.featureSales,
-    () => const SalesScreen(),
+    'tickets.view',
+    Icons.build_outlined,
+    (l) => l.featureTickets,
+    screen: 'tickets',
+    also: const ['tickets.manage'],
+    open: _openTickets,
   ),
   Feature(
-    'clients',
-    const ['clients.view'],
+    'clients.view',
     Icons.people_outline,
     (l) => l.featureClients,
-    () => const ClientsScreen(),
+    screen: 'clients',
+    open: _openClients,
   ),
   Feature(
-    'due_list',
-    const ['billing.due_list'],
-    Icons.request_quote_outlined,
-    (l) => l.featureDueList,
-    () => const DueListScreen(),
-  ),
-  Feature(
-    'support_chat',
-    const ['support_chat.manage'],
-    Icons.chat_outlined,
+    'support_chat.manage',
+    Icons.forum_outlined,
     (l) => l.featureChat,
-    () => const ChatsScreen(),
+    screen: 'support_chat',
+    open: _openChat,
   ),
   Feature(
-    'reseller_wallet',
-    const [],
-    Icons.account_balance_wallet_outlined,
-    (l) => l.featureWallet,
-    () => const ResellerWalletScreen(),
-  ),
-  Feature(
-    'expiring',
-    const [],
-    Icons.timer_outlined,
-    (l) => l.featureExpiring,
-    () => const ExpiringScreen(),
-  ),
-  Feature(
-    'hr',
-    const ['hr.self'],
+    'hr.self',
     Icons.event_available_outlined,
     (l) => l.featureHr,
-    () => const HrScreen(),
+    screen: 'hr',
+  ),
+  Feature(
+    'staff_app.use',
+    Icons.my_location_outlined,
+    (l) => l.featureDuty,
+    screen: 'duty',
+    open: _openDuty,
+  ),
+  Feature(
+    'tickets.update',
+    Icons.notifications_active_outlined,
+    (l) => l.featureOffers,
+    screen: 'offers',
+    also: const ['tickets.manage'],
+    open: _openOffers,
+  ),
+  Feature(
+    'billing.due_list',
+    Icons.receipt_long_outlined,
+    (l) => l.featureDueList,
+    screen: 'due_list',
+    also: const ['billing.view', 'billing.collect'],
+    open: _openDueList,
+  ),
+  Feature(
+    'tickets.assign',
+    Icons.person_pin_outlined,
+    (l) => l.featureAssign,
+    also: const ['tickets.manage'],
+    open: _openAssign,
   ),
 ];
 
-/// The work this login may do: what the ERP lists, in the app's order. The
-/// ERP lists collection and expenses separately; they are one screen here.
-List<Feature> featuresFor(StaffUser user) {
-  final listed = user.screens.isNotEmpty
-      ? [
-          for (final f in features)
-            if (user.screens.contains(f.screen)) f,
-        ]
-      : [
-          for (final f in features)
-            if (f.permissions.isNotEmpty && user.canAny(f.permissions)) f,
-        ];
-  final hasCollection = listed.any((f) => f.screen == 'collection');
-  return [
-    for (final f in listed)
-      if (!(f.screen == 'expenses' && hasCollection)) f,
-  ];
-}
+Widget _openDuty(BuildContext context) => const DutyScreen();
+
+Widget _openOffers(BuildContext context) => const OffersScreen();
+
+Widget _openAssign(BuildContext context) => const AssignScreen();
+
+Widget _openTickets(BuildContext context) => const TicketListScreen();
+
+Widget _openClients(BuildContext context) => const ClientListScreen();
+
+Widget _openChat(BuildContext context) => const ChatListScreen();
+
+Widget _openCollection(BuildContext context) => const CollectionScreen();
+
+Widget _openDueList(BuildContext context) => const DueListScreen();
+
+List<Feature> featuresFor(StaffUser user) => [
+  for (final f in features)
+    if (f.allowed(user)) f,
+];
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -162,6 +150,24 @@ class HomeScreen extends ConsumerWidget {
     final l = AppLocalizations.of(context);
     final theme = Theme.of(context);
     final user = ref.watch(authProvider.select((a) => a.user));
+    final canTickets =
+        user != null &&
+        features.any((f) => f.screen == 'tickets' && f.allowed(user));
+    final canOffers =
+        user != null &&
+        features.any((f) => f.screen == 'offers' && f.allowed(user));
+    final canChat =
+        user != null &&
+        features.any((f) => f.screen == 'support_chat' && f.allowed(user));
+    NavTargets.ticket = canTickets
+        ? (id) => TicketDetailScreen(ticketId: id)
+        : null;
+    NavTargets.offers = canOffers
+        ? (offerId, _) => OffersScreen(offerId: offerId)
+        : null;
+    NavTargets.chat = canChat
+        ? (id) => ChatThreadScreen(conversationId: id)
+        : null;
 
     return RefreshIndicator(
       onRefresh: () =>
@@ -207,8 +213,12 @@ class HomeScreen extends ConsumerWidget {
                   child: ListTile(
                     leading: Icon(f.icon, color: theme.colorScheme.primary),
                     title: Text(f.label(l)),
-                    trailing: const Icon(Icons.chevron_right),
-                    onTap: () => open<void>(context, f.page()),
+                    subtitle: f.open == null ? Text(l.comingSoon) : null,
+                    enabled: f.open != null,
+                    onTap: f.open == null
+                        ? null
+                        : () => Navigator.of(context)
+                              .push(MaterialPageRoute<void>(builder: f.open!)),
                   ),
                 ),
           ],

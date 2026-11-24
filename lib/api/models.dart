@@ -10,9 +10,10 @@ class StaffUser {
     this.phone,
     this.roles = const [],
     this.permissions = const {},
+    this.screens = const {},
     this.isSuperAdmin = false,
     this.staff,
-    this.screens = const [],
+    this.companyName,
   });
 
   final int id;
@@ -21,42 +22,36 @@ class StaffUser {
   final String? phone;
   final List<String> roles;
   final Set<String> permissions;
+
+  /// Screen keys from `/me`. Empty when the payload had no `screens` list
+  /// (older cached profiles). A non-empty list is what the ERP says to draw.
+  final Set<String> screens;
   final bool isSuperAdmin;
   final StaffProfile? staff;
 
-  /// Home buttons the ERP lists for this login (`/me` → `screens`).
-  final List<String> screens;
+  /// `company.name` from `/me`. Shown in the app bar. Display only.
+  final String? companyName;
 
   bool can(String permission) =>
       isSuperAdmin || permissions.contains(permission);
 
-  bool canAny(List<String> list) => list.any(can);
-
-  bool hasRole(String role) => roles.contains(role);
-
   factory StaffUser.fromJson(Object? raw) {
     final root = asMap(raw);
-    final user = root['user'] is Map ? asMap(root['user']) : root;
-    final staff = user['staff'];
+    final nested = root['user'] is Map;
+    final user = nested ? asMap(root['user']) : root;
+    final staffRaw = user.containsKey('staff') ? user['staff'] : root['staff'];
     return StaffUser(
       id: toNum(user['id'])?.toInt() ?? 0,
       name: pickString(user, const ['name']) ?? '',
       email: pickString(user, const ['email']),
       phone: pickString(user, const ['phone']),
-      roles: [
-        for (final r in asList(user['roles']))
-          if (r is String && r.isNotEmpty) r,
-      ],
-      permissions: {
-        for (final p in asList(user['permissions']))
-          if (p is String && p.isNotEmpty) p,
-      },
-      isSuperAdmin: user['is_super_admin'] == true,
-      staff: staff is Map ? StaffProfile.fromJson(staff) : null,
-      screens: [
-        for (final s in asList(user['screens'] ?? root['screens']))
-          if (s is String && s.isNotEmpty) s,
-      ],
+      roles: _strings(root, user, 'roles'),
+      permissions: _strings(root, user, 'permissions').toSet(),
+      screens: _strings(root, user, 'screens').toSet(),
+      isSuperAdmin:
+          user['is_super_admin'] == true || root['is_super_admin'] == true,
+      staff: staffRaw is Map ? StaffProfile.fromJson(staffRaw) : null,
+      companyName: pickString(asMap(root['company']), const ['name']),
     );
   }
 
@@ -67,10 +62,21 @@ class StaffUser {
     'phone': phone,
     'roles': roles,
     'permissions': permissions.toList(),
+    'screens': screens.toList(),
     'is_super_admin': isSuperAdmin,
     'staff': staff?.toJson(),
-    'screens': screens,
+    if (companyName != null) 'company': {'name': companyName},
   };
+}
+
+/// Roles, permissions and screens live on `user`. The same lists are also
+/// at the top of `/me`; use those only when `user` does not carry the key.
+List<String> _strings(Json root, Json user, String key) {
+  final source = user.containsKey(key) ? asList(user[key]) : asList(root[key]);
+  return [
+    for (final item in source)
+      if (item is String && item.isNotEmpty) item,
+  ];
 }
 
 class StaffProfile {

@@ -2,14 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>MyNet Staff uses your location when you start duty, finish a ticket or save a client's house location.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>MyNet Staff takes photos of receipts and ticket work.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>MyNet Staff attaches photos of receipts and ticket work.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Used to unlock the app when app lock is on.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Used to save the client's house location, to record where a ticket was finished, and to share your location while you are on duty.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Used to keep sharing your location while you are on duty and the app is in the background.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Used to attach a photo to a ticket note.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Used to attach a photo to a ticket note.</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -57,6 +59,11 @@
 	</dict>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

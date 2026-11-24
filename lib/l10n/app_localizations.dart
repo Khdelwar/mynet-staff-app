@@ -176,6 +176,18 @@ abstract class AppLocalizations {
   /// **'Email or mobile number'**
   String get loginIdentifier;
 
+  /// No description provided for @loginIdentifierInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the ERP email, or a mobile like 01711000001.'**
+  String get loginIdentifierInvalid;
+
+  /// No description provided for @loginEmailInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the email address from the ERP.'**
+  String get loginEmailInvalid;
+
   /// No description provided for @loginPassword.
   ///
   /// In en, this message translates to:
@@ -191,7 +203,7 @@ abstract class AppLocalizations {
   /// No description provided for @loginWrong.
   ///
   /// In en, this message translates to:
-  /// **'Email / mobile or password is incorrect.'**
+  /// **'Email or password is incorrect.'**
   String get loginWrong;
 
   /// No description provided for @loginHelp.
@@ -308,6 +320,18 @@ abstract class AppLocalizations {
   /// **'Bill collection'**
   String get featureCollection;
 
+  /// No description provided for @featureDueList.
+  ///
+  /// In en, this message translates to:
+  /// **'Due list'**
+  String get featureDueList;
+
+  /// No description provided for @featureApprovals.
+  ///
+  /// In en, this message translates to:
+  /// **'Approvals'**
+  String get featureApprovals;
+
   /// No description provided for @featureTickets.
   ///
   /// In en, this message translates to:
@@ -319,6 +343,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Clients'**
   String get featureClients;
+
+  /// No description provided for @featureChat.
+  ///
+  /// In en, this message translates to:
+  /// **'Support chat'**
+  String get featureChat;
 
   /// No description provided for @featureHr.
   ///
@@ -416,323 +446,11 @@ abstract class AppLocalizations {
   /// **'You were signed out. Sign in again.'**
   String get sessionEnded;
 
-  /// No description provided for @acceptAmount.
+  /// No description provided for @featureDuty.
   ///
   /// In en, this message translates to:
-  /// **'Amount to accept'**
-  String get acceptAmount;
-
-  /// No description provided for @addExpense.
-  ///
-  /// In en, this message translates to:
-  /// **'Expense'**
-  String get addExpense;
-
-  /// No description provided for @addNote.
-  ///
-  /// In en, this message translates to:
-  /// **'Add note'**
-  String get addNote;
-
-  /// No description provided for @addPhotosQuestion.
-  ///
-  /// In en, this message translates to:
-  /// **'Add photos to this note?'**
-  String get addPhotosQuestion;
-
-  /// No description provided for @address.
-  ///
-  /// In en, this message translates to:
-  /// **'Address'**
-  String get address;
-
-  /// No description provided for @adjustment.
-  ///
-  /// In en, this message translates to:
-  /// **'Package change'**
-  String get adjustment;
-
-  /// No description provided for @advance.
-  ///
-  /// In en, this message translates to:
-  /// **'Advance'**
-  String get advance;
-
-  /// No description provided for @advances.
-  ///
-  /// In en, this message translates to:
-  /// **'Advances'**
-  String get advances;
-
-  /// No description provided for @alreadySaved.
-  ///
-  /// In en, this message translates to:
-  /// **'This was already saved earlier. Do not take the money again.'**
-  String get alreadySaved;
-
-  /// No description provided for @amount.
-  ///
-  /// In en, this message translates to:
-  /// **'Amount'**
-  String get amount;
-
-  /// No description provided for @amountPartOptional.
-  ///
-  /// In en, this message translates to:
-  /// **'Amount (empty = all)'**
-  String get amountPartOptional;
-
-  /// No description provided for @approve.
-  ///
-  /// In en, this message translates to:
-  /// **'Approve'**
-  String get approve;
-
-  /// No description provided for @askAdvance.
-  ///
-  /// In en, this message translates to:
-  /// **'Ask for advance'**
-  String get askAdvance;
-
-  /// No description provided for @askLeave.
-  ///
-  /// In en, this message translates to:
-  /// **'Ask for leave'**
-  String get askLeave;
-
-  /// No description provided for @assign.
-  ///
-  /// In en, this message translates to:
-  /// **'Assign'**
-  String get assign;
-
-  /// No description provided for @assignTechnician.
-  ///
-  /// In en, this message translates to:
-  /// **'Nearest technicians'**
-  String get assignTechnician;
-
-  /// No description provided for @assigned.
-  ///
-  /// In en, this message translates to:
-  /// **'Assigned.'**
-  String get assigned;
-
-  /// No description provided for @attendance.
-  ///
-  /// In en, this message translates to:
-  /// **'Attendance'**
-  String get attendance;
-
-  /// No description provided for @available.
-  ///
-  /// In en, this message translates to:
-  /// **'Can spend'**
-  String get available;
-
-  /// No description provided for @awaitingClientId.
-  ///
-  /// In en, this message translates to:
-  /// **'Waiting for client ID'**
-  String get awaitingClientId;
-
-  /// No description provided for @awayTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Far from the house'**
-  String get awayTitle;
-
-  /// No description provided for @busy.
-  ///
-  /// In en, this message translates to:
-  /// **'busy'**
-  String get busy;
-
-  /// No description provided for @cableMetres.
-  ///
-  /// In en, this message translates to:
-  /// **'Cable (metres)'**
-  String get cableMetres;
-
-  /// No description provided for @call.
-  ///
-  /// In en, this message translates to:
-  /// **'Call'**
-  String get call;
-
-  /// No description provided for @cancelRequestQuestion.
-  ///
-  /// In en, this message translates to:
-  /// **'Cancel this request?'**
-  String get cancelRequestQuestion;
-
-  /// No description provided for @cannotInstall.
-  ///
-  /// In en, this message translates to:
-  /// **'This ticket cannot take install details now (only the assigned technician, while the client is pending).'**
-  String get cannotInstall;
-
-  /// No description provided for @cashHint.
-  ///
-  /// In en, this message translates to:
-  /// **'The line turns on now. The payment waits for the owner; the client\'s paid SMS goes after approval.'**
-  String get cashHint;
-
-  /// No description provided for @category.
-  ///
-  /// In en, this message translates to:
-  /// **'Category'**
-  String get category;
-
-  /// No description provided for @client.
-  ///
-  /// In en, this message translates to:
-  /// **'Client'**
-  String get client;
-
-  /// No description provided for @clientId.
-  ///
-  /// In en, this message translates to:
-  /// **'Client ID'**
-  String get clientId;
-
-  /// No description provided for @clientSaved.
-  ///
-  /// In en, this message translates to:
-  /// **'Client saved.'**
-  String get clientSaved;
-
-  /// No description provided for @clientSearchHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Name, ID, phone or PPPoE'**
-  String get clientSearchHint;
-
-  /// No description provided for @clientsAdvanceHeld.
-  ///
-  /// In en, this message translates to:
-  /// **'Clients\' advance held'**
-  String get clientsAdvanceHeld;
-
-  /// No description provided for @collected.
-  ///
-  /// In en, this message translates to:
-  /// **'Collected'**
-  String get collected;
-
-  /// No description provided for @collectedBy.
-  ///
-  /// In en, this message translates to:
-  /// **'Collected by'**
-  String get collectedBy;
-
-  /// No description provided for @collectedToday.
-  ///
-  /// In en, this message translates to:
-  /// **'Collected today'**
-  String get collectedToday;
-
-  /// No description provided for @confirmRecharge.
-  ///
-  /// In en, this message translates to:
-  /// **'Recharge for {months} month(s), {amount}?'**
-  String confirmRecharge(String amount, String months);
-
-  /// No description provided for @confirmTake.
-  ///
-  /// In en, this message translates to:
-  /// **'Take {amount} from {name}?'**
-  String confirmTake(String amount, String name);
-
-  /// No description provided for @creditAlert.
-  ///
-  /// In en, this message translates to:
-  /// **'Your credit is nearly used up.'**
-  String get creditAlert;
-
-  /// No description provided for @creditLimit.
-  ///
-  /// In en, this message translates to:
-  /// **'Credit limit'**
-  String get creditLimit;
-
-  /// No description provided for @creditUsed.
-  ///
-  /// In en, this message translates to:
-  /// **'Credit used'**
-  String get creditUsed;
-
-  /// No description provided for @date.
-  ///
-  /// In en, this message translates to:
-  /// **'Date'**
-  String get date;
-
-  /// No description provided for @dayEndHandover.
-  ///
-  /// In en, this message translates to:
-  /// **'Day-end handover'**
-  String get dayEndHandover;
-
-  /// No description provided for @daysLeft.
-  ///
-  /// In en, this message translates to:
-  /// **'{days} days left'**
-  String daysLeft(int days);
-
-  /// No description provided for @decline.
-  ///
-  /// In en, this message translates to:
-  /// **'No'**
-  String get decline;
-
-  /// No description provided for @descriptionOptional.
-  ///
-  /// In en, this message translates to:
-  /// **'Details (optional)'**
-  String get descriptionOptional;
-
-  /// No description provided for @disconnects24h.
-  ///
-  /// In en, this message translates to:
-  /// **'Disconnects (24 h)'**
-  String get disconnects24h;
-
-  /// No description provided for @distance.
-  ///
-  /// In en, this message translates to:
-  /// **'Distance'**
-  String get distance;
-
-  /// No description provided for @due.
-  ///
-  /// In en, this message translates to:
-  /// **'Due'**
-  String get due;
-
-  /// No description provided for @dutyEnded.
-  ///
-  /// In en, this message translates to:
-  /// **'Duty ended.'**
-  String get dutyEnded;
-
-  /// No description provided for @dutyHours.
-  ///
-  /// In en, this message translates to:
-  /// **'Duty hours'**
-  String get dutyHours;
-
-  /// No description provided for @dutyLocationHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Your location is asked when you start or end duty. Location is never taken off duty.'**
-  String get dutyLocationHint;
-
-  /// No description provided for @dutyStarted.
-  ///
-  /// In en, this message translates to:
-  /// **'Duty started.'**
-  String get dutyStarted;
+  /// **'Duty'**
+  String get featureDuty;
 
   /// No description provided for @dutyStatus.
   ///
@@ -740,89 +458,77 @@ abstract class AppLocalizations {
   /// **'Duty'**
   String get dutyStatus;
 
-  /// No description provided for @endDuty.
+  /// No description provided for @dutyOn.
+  ///
+  /// In en, this message translates to:
+  /// **'On duty'**
+  String get dutyOn;
+
+  /// No description provided for @dutyOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Off duty'**
+  String get dutyOff;
+
+  /// No description provided for @dutyStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Start duty'**
+  String get dutyStart;
+
+  /// No description provided for @dutyEnd.
   ///
   /// In en, this message translates to:
   /// **'End duty'**
-  String get endDuty;
+  String get dutyEnd;
 
-  /// No description provided for @enterQuantity.
+  /// No description provided for @dutyHours.
   ///
   /// In en, this message translates to:
-  /// **'Enter a quantity for at least one part.'**
-  String get enterQuantity;
+  /// **'Duty hours'**
+  String get dutyHours;
 
-  /// No description provided for @expenseAvailable.
+  /// No description provided for @dutyTimezone.
   ///
   /// In en, this message translates to:
-  /// **'Can spend on expenses'**
-  String get expenseAvailable;
+  /// **'Time zone'**
+  String get dutyTimezone;
 
-  /// No description provided for @expenseHint.
+  /// No description provided for @dutyDistance.
   ///
   /// In en, this message translates to:
-  /// **'Every expense waits for someone else\'s approval.'**
-  String get expenseHint;
+  /// **'Distance today'**
+  String get dutyDistance;
 
-  /// No description provided for @expenseSaved.
+  /// No description provided for @dutyMeters.
   ///
   /// In en, this message translates to:
-  /// **'Expense saved. It waits for approval.'**
-  String get expenseSaved;
+  /// **'{meters} m'**
+  String dutyMeters(int meters);
 
-  /// No description provided for @expenses.
+  /// No description provided for @dutyOutsideHours.
   ///
   /// In en, this message translates to:
-  /// **'Expenses'**
-  String get expenses;
+  /// **'Duty can only start during duty hours.'**
+  String get dutyOutsideHours;
 
-  /// No description provided for @expiry.
+  /// No description provided for @dutyStopped.
   ///
   /// In en, this message translates to:
-  /// **'Expiry'**
-  String get expiry;
+  /// **'Duty ended. Location has stopped.'**
+  String get dutyStopped;
 
-  /// No description provided for @featureApprovals.
+  /// No description provided for @dutyNotificationTitle.
   ///
   /// In en, this message translates to:
-  /// **'Approvals'**
-  String get featureApprovals;
+  /// **'MyNet: location on'**
+  String get dutyNotificationTitle;
 
-  /// No description provided for @featureChat.
+  /// No description provided for @dutyNotificationBody.
   ///
   /// In en, this message translates to:
-  /// **'Support chat'**
-  String get featureChat;
-
-  /// No description provided for @featureDashboard.
-  ///
-  /// In en, this message translates to:
-  /// **'Dashboard'**
-  String get featureDashboard;
-
-  /// No description provided for @featureDueList.
-  ///
-  /// In en, this message translates to:
-  /// **'Due list'**
-  String get featureDueList;
-
-  /// No description provided for @featureDuty.
-  ///
-  /// In en, this message translates to:
-  /// **'Duty'**
-  String get featureDuty;
-
-  /// No description provided for @featureExpenses.
-  ///
-  /// In en, this message translates to:
-  /// **'Expenses'**
-  String get featureExpenses;
-
-  /// No description provided for @featureExpiring.
-  ///
-  /// In en, this message translates to:
-  /// **'Expiring clients'**
-  String get featureExpiring;
+  /// **'Location is shared only while you are on duty.'**
+  String get dutyNotificationBody;
 
   /// No description provided for @featureOffers.
   ///
@@ -830,707 +536,311 @@ abstract class AppLocalizations {
   /// **'Job offers'**
   String get featureOffers;
 
-  /// No description provided for @featureSales.
+  /// No description provided for @featureAssign.
   ///
   /// In en, this message translates to:
-  /// **'Sell products'**
-  String get featureSales;
+  /// **'Assign a technician'**
+  String get featureAssign;
 
-  /// No description provided for @featureWallet.
+  /// No description provided for @offersEmpty.
   ///
   /// In en, this message translates to:
-  /// **'Wallet'**
-  String get featureWallet;
+  /// **'No offers waiting.'**
+  String get offersEmpty;
 
-  /// No description provided for @fillAll.
+  /// No description provided for @offerAccept.
   ///
   /// In en, this message translates to:
-  /// **'Fill in everything needed.'**
-  String get fillAll;
+  /// **'Accept'**
+  String get offerAccept;
 
-  /// No description provided for @forNewConnection.
+  /// No description provided for @offerReject.
   ///
   /// In en, this message translates to:
-  /// **'For a new connection'**
-  String get forNewConnection;
+  /// **'No'**
+  String get offerReject;
 
-  /// No description provided for @forNewConnectionHint.
+  /// No description provided for @offerSeconds.
   ///
   /// In en, this message translates to:
-  /// **'The client ID is given later.'**
-  String get forNewConnectionHint;
+  /// **'{seconds}s left'**
+  String offerSeconds(int seconds);
 
-  /// No description provided for @gateway.
+  /// No description provided for @offerDistance.
   ///
   /// In en, this message translates to:
-  /// **'Gateway'**
-  String get gateway;
+  /// **'{meters} m away'**
+  String offerDistance(int meters);
 
-  /// No description provided for @giveClientId.
+  /// No description provided for @offerTicket.
   ///
   /// In en, this message translates to:
-  /// **'Give ID'**
-  String get giveClientId;
+  /// **'Ticket #{id}'**
+  String offerTicket(int id);
 
-  /// No description provided for @handoverDue.
+  /// No description provided for @offerAccepted.
   ///
   /// In en, this message translates to:
-  /// **'To hand over'**
-  String get handoverDue;
+  /// **'You took ticket #{id}.'**
+  String offerAccepted(int id);
 
-  /// No description provided for @handoverSent.
+  /// No description provided for @assignNoTickets.
   ///
   /// In en, this message translates to:
-  /// **'Handover sent to the owner.'**
-  String get handoverSent;
+  /// **'No open tickets to assign.'**
+  String get assignNoTickets;
 
-  /// No description provided for @handovers.
+  /// No description provided for @assignTicketId.
   ///
   /// In en, this message translates to:
-  /// **'Handovers'**
-  String get handovers;
+  /// **'Ticket number'**
+  String get assignTicketId;
 
-  /// No description provided for @holdBlocked.
+  /// No description provided for @assignLookup.
   ///
   /// In en, this message translates to:
-  /// **'Your cash limit is reached. Hand over first.'**
-  String get holdBlocked;
+  /// **'Show nearest'**
+  String get assignLookup;
 
-  /// No description provided for @inHand.
+  /// No description provided for @assignForTicket.
   ///
   /// In en, this message translates to:
-  /// **'In hand'**
-  String get inHand;
+  /// **'Nearest for ticket #{id}'**
+  String assignForTicket(int id);
 
-  /// No description provided for @inStock.
+  /// No description provided for @assignNobody.
   ///
   /// In en, this message translates to:
-  /// **'In stock'**
-  String get inStock;
+  /// **'Nobody on duty nearby.'**
+  String get assignNobody;
 
-  /// No description provided for @installHint.
+  /// No description provided for @assignScore.
   ///
   /// In en, this message translates to:
-  /// **'Saving turns the line on from today and resolves the ticket.'**
-  String get installHint;
+  /// **'Score {score}'**
+  String assignScore(String score);
 
-  /// No description provided for @installSaved.
+  /// No description provided for @assignEta.
   ///
   /// In en, this message translates to:
-  /// **'Install saved.'**
-  String get installSaved;
+  /// **'{minutes} min'**
+  String assignEta(int minutes);
 
-  /// No description provided for @installedAt.
+  /// No description provided for @assignBusy.
   ///
   /// In en, this message translates to:
-  /// **'Installed'**
-  String get installedAt;
+  /// **'Busy'**
+  String get assignBusy;
 
-  /// No description provided for @lastDisconnect.
+  /// No description provided for @assignSameArea.
   ///
   /// In en, this message translates to:
-  /// **'Last disconnect'**
-  String get lastDisconnect;
+  /// **'Same area'**
+  String get assignSameArea;
 
-  /// No description provided for @lastRx.
+  /// No description provided for @assignButton.
   ///
   /// In en, this message translates to:
-  /// **'Last RX power'**
-  String get lastRx;
+  /// **'Assign'**
+  String get assignButton;
 
-  /// No description provided for @lateMinutes.
+  /// No description provided for @assignDone.
   ///
   /// In en, this message translates to:
-  /// **'Late (minutes)'**
-  String get lateMinutes;
+  /// **'Assigned to {name}.'**
+  String assignDone(String name);
 
-  /// No description provided for @leaveReason.
-  ///
-  /// In en, this message translates to:
-  /// **'Reason'**
-  String get leaveReason;
-
-  /// No description provided for @leaveUnpaidQuestion.
-  ///
-  /// In en, this message translates to:
-  /// **'Unpaid leave? (Cancel = paid leave)'**
-  String get leaveUnpaidQuestion;
-
-  /// No description provided for @leaves.
-  ///
-  /// In en, this message translates to:
-  /// **'Leave'**
-  String get leaves;
-
-  /// No description provided for @liveConnection.
-  ///
-  /// In en, this message translates to:
-  /// **'Online now?'**
-  String get liveConnection;
-
-  /// No description provided for @locationOff.
-  ///
-  /// In en, this message translates to:
-  /// **'Location is off or not allowed.'**
-  String get locationOff;
-
-  /// No description provided for @map.
-  ///
-  /// In en, this message translates to:
-  /// **'Map'**
-  String get map;
-
-  /// No description provided for @materials.
-  ///
-  /// In en, this message translates to:
-  /// **'Materials used'**
-  String get materials;
-
-  /// No description provided for @method.
-  ///
-  /// In en, this message translates to:
-  /// **'Method'**
-  String get method;
-
-  /// No description provided for @minutes.
-  ///
-  /// In en, this message translates to:
-  /// **'min'**
-  String get minutes;
-
-  /// No description provided for @mobileOptional.
-  ///
-  /// In en, this message translates to:
-  /// **'Mobile (optional)'**
-  String get mobileOptional;
-
-  /// No description provided for @months.
-  ///
-  /// In en, this message translates to:
-  /// **'Months'**
-  String get months;
-
-  /// No description provided for @myExpenses.
-  ///
-  /// In en, this message translates to:
-  /// **'My expenses (7 days)'**
-  String get myExpenses;
-
-  /// No description provided for @name.
-  ///
-  /// In en, this message translates to:
-  /// **'Name'**
-  String get name;
-
-  /// No description provided for @nameOptional.
-  ///
-  /// In en, this message translates to:
-  /// **'Name (optional)'**
-  String get nameOptional;
-
-  /// No description provided for @newClient.
-  ///
-  /// In en, this message translates to:
-  /// **'New client'**
-  String get newClient;
-
-  /// No description provided for @newClientHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Without a POP the client waits as pending; with a POP the line goes on now.'**
-  String get newClientHint;
-
-  /// No description provided for @newConnection.
-  ///
-  /// In en, this message translates to:
-  /// **'New connection'**
-  String get newConnection;
-
-  /// No description provided for @newExpiry.
-  ///
-  /// In en, this message translates to:
-  /// **'New expiry'**
-  String get newExpiry;
-
-  /// No description provided for @newTicket.
-  ///
-  /// In en, this message translates to:
-  /// **'New ticket'**
-  String get newTicket;
-
-  /// No description provided for @nextStep.
-  ///
-  /// In en, this message translates to:
-  /// **'Next step'**
-  String get nextStep;
-
-  /// No description provided for @noChats.
-  ///
-  /// In en, this message translates to:
-  /// **'No conversations.'**
-  String get noChats;
-
-  /// No description provided for @noClients.
-  ///
-  /// In en, this message translates to:
-  /// **'No clients found.'**
-  String get noClients;
-
-  /// No description provided for @noDashboard.
-  ///
-  /// In en, this message translates to:
-  /// **'No dashboard boxes for your login.'**
-  String get noDashboard;
-
-  /// No description provided for @noDues.
-  ///
-  /// In en, this message translates to:
-  /// **'No dues.'**
-  String get noDues;
-
-  /// No description provided for @noExpiring.
-  ///
-  /// In en, this message translates to:
-  /// **'No clients expiring.'**
-  String get noExpiring;
-
-  /// No description provided for @noMaterials.
-  ///
-  /// In en, this message translates to:
-  /// **'Nothing used on this ticket yet.'**
-  String get noMaterials;
-
-  /// No description provided for @noNotes.
-  ///
-  /// In en, this message translates to:
-  /// **'No notes yet.'**
-  String get noNotes;
-
-  /// No description provided for @noOffers.
-  ///
-  /// In en, this message translates to:
-  /// **'No job offers now.'**
-  String get noOffers;
-
-  /// No description provided for @noParts.
-  ///
-  /// In en, this message translates to:
-  /// **'The office has no parts in stock.'**
-  String get noParts;
-
-  /// No description provided for @noPayments.
-  ///
-  /// In en, this message translates to:
-  /// **'No payments.'**
-  String get noPayments;
-
-  /// No description provided for @noSales.
-  ///
-  /// In en, this message translates to:
-  /// **'No sales yet.'**
-  String get noSales;
-
-  /// No description provided for @noSuggestions.
-  ///
-  /// In en, this message translates to:
-  /// **'No technician on duty nearby.'**
-  String get noSuggestions;
-
-  /// No description provided for @noTickets.
-  ///
-  /// In en, this message translates to:
-  /// **'No tickets.'**
-  String get noTickets;
-
-  /// No description provided for @none.
-  ///
-  /// In en, this message translates to:
-  /// **'None.'**
-  String get none;
-
-  /// No description provided for @note.
-  ///
-  /// In en, this message translates to:
-  /// **'Note'**
-  String get note;
-
-  /// No description provided for @noteOptional.
-  ///
-  /// In en, this message translates to:
-  /// **'Note (optional)'**
-  String get noteOptional;
-
-  /// No description provided for @noteRequired.
-  ///
-  /// In en, this message translates to:
-  /// **'Note (required)'**
-  String get noteRequired;
-
-  /// No description provided for @notes.
-  ///
-  /// In en, this message translates to:
-  /// **'Notes'**
-  String get notes;
-
-  /// No description provided for @nothingToApprove.
-  ///
-  /// In en, this message translates to:
-  /// **'Nothing waiting for you.'**
-  String get nothingToApprove;
-
-  /// No description provided for @offDuty.
-  ///
-  /// In en, this message translates to:
-  /// **'Off duty'**
-  String get offDuty;
-
-  /// No description provided for @offerSent.
-  ///
-  /// In en, this message translates to:
-  /// **'Offered to the nearest technician.'**
-  String get offerSent;
-
-  /// No description provided for @offerTaken.
-  ///
-  /// In en, this message translates to:
-  /// **'The ticket is yours.'**
-  String get offerTaken;
-
-  /// No description provided for @offerToNearest.
+  /// No description provided for @assignOffer.
   ///
   /// In en, this message translates to:
   /// **'Offer to the nearest'**
-  String get offerToNearest;
+  String get assignOffer;
 
-  /// No description provided for @offline.
+  /// No description provided for @offerStarted.
   ///
   /// In en, this message translates to:
-  /// **'Offline'**
-  String get offline;
+  /// **'Offered to {name}.'**
+  String offerStarted(String name);
 
-  /// No description provided for @ok.
+  /// No description provided for @offerNobody.
   ///
   /// In en, this message translates to:
-  /// **'OK'**
-  String get ok;
+  /// **'Nobody left to offer. The office has been told.'**
+  String get offerNobody;
 
-  /// No description provided for @oldExpiry.
+  /// No description provided for @ticketsSearch.
   ///
   /// In en, this message translates to:
-  /// **'Old expiry'**
-  String get oldExpiry;
+  /// **'Name, ID or phone'**
+  String get ticketsSearch;
 
-  /// No description provided for @onDuty.
+  /// No description provided for @ticketsActive.
   ///
   /// In en, this message translates to:
-  /// **'On duty'**
-  String get onDuty;
+  /// **'Open'**
+  String get ticketsActive;
 
-  /// No description provided for @online.
+  /// No description provided for @ticketsDone.
   ///
   /// In en, this message translates to:
-  /// **'Online'**
-  String get online;
+  /// **'Finished'**
+  String get ticketsDone;
 
-  /// No description provided for @onuPower.
+  /// No description provided for @ticketsAny.
   ///
   /// In en, this message translates to:
-  /// **'ONU power'**
-  String get onuPower;
+  /// **'Any status'**
+  String get ticketsAny;
 
-  /// No description provided for @openTickets.
+  /// No description provided for @ticketsMine.
   ///
   /// In en, this message translates to:
-  /// **'Open tickets'**
-  String get openTickets;
+  /// **'My tickets'**
+  String get ticketsMine;
 
-  /// No description provided for @outCancelled.
+  /// No description provided for @ticketsAll.
   ///
   /// In en, this message translates to:
-  /// **'Cancelled'**
-  String get outCancelled;
+  /// **'Everyone\'s tickets'**
+  String get ticketsAll;
 
-  /// No description provided for @outDone.
+  /// No description provided for @ticketsEmpty.
   ///
   /// In en, this message translates to:
-  /// **'Work done'**
-  String get outDone;
+  /// **'No tickets here.'**
+  String get ticketsEmpty;
 
-  /// No description provided for @outDuplicate.
+  /// No description provided for @loadMore.
   ///
   /// In en, this message translates to:
-  /// **'Duplicate'**
-  String get outDuplicate;
-
-  /// No description provided for @outNoIssue.
-  ///
-  /// In en, this message translates to:
-  /// **'No problem found'**
-  String get outNoIssue;
-
-  /// No description provided for @outcomeTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'How did it end?'**
-  String get outcomeTitle;
-
-  /// No description provided for @outsideDutyHours.
-  ///
-  /// In en, this message translates to:
-  /// **'Outside duty hours: duty cannot start now.'**
-  String get outsideDutyHours;
+  /// **'Load more'**
+  String get loadMore;
 
   /// No description provided for @overdue.
   ///
   /// In en, this message translates to:
-  /// **'Late'**
+  /// **'Over SLA'**
   String get overdue;
 
-  /// No description provided for @ownerCash.
+  /// No description provided for @ticketStatus.
   ///
   /// In en, this message translates to:
-  /// **'Cash owner'**
-  String get ownerCash;
+  /// **'Status'**
+  String get ticketStatus;
 
-  /// No description provided for @ownerDigital.
+  /// No description provided for @statusOpen.
   ///
   /// In en, this message translates to:
-  /// **'Digital owner'**
-  String get ownerDigital;
+  /// **'Open'**
+  String get statusOpen;
 
-  /// No description provided for @package.
+  /// No description provided for @statusAssigned.
   ///
   /// In en, this message translates to:
-  /// **'Package'**
-  String get package;
+  /// **'Assigned'**
+  String get statusAssigned;
 
-  /// No description provided for @payBank.
+  /// No description provided for @statusScheduled.
   ///
   /// In en, this message translates to:
-  /// **'Bank'**
-  String get payBank;
+  /// **'Scheduled'**
+  String get statusScheduled;
 
-  /// No description provided for @payCash.
+  /// No description provided for @statusOnTheWay.
   ///
   /// In en, this message translates to:
-  /// **'Cash'**
-  String get payCash;
+  /// **'On the way'**
+  String get statusOnTheWay;
 
-  /// No description provided for @payDigital.
+  /// No description provided for @statusInProgress.
   ///
   /// In en, this message translates to:
-  /// **'Digital'**
-  String get payDigital;
+  /// **'Working'**
+  String get statusInProgress;
 
-  /// No description provided for @payDue.
+  /// No description provided for @statusResolved.
   ///
   /// In en, this message translates to:
-  /// **'Due'**
-  String get payDue;
+  /// **'Resolved'**
+  String get statusResolved;
 
-  /// No description provided for @payTotal.
+  /// No description provided for @statusReopened.
   ///
   /// In en, this message translates to:
-  /// **'To pay'**
-  String get payTotal;
+  /// **'Reopened'**
+  String get statusReopened;
 
-  /// No description provided for @photoCamera.
+  /// No description provided for @statusClosed.
   ///
   /// In en, this message translates to:
-  /// **'Camera'**
-  String get photoCamera;
+  /// **'Closed'**
+  String get statusClosed;
 
-  /// No description provided for @photoGallery.
-  ///
-  /// In en, this message translates to:
-  /// **'Gallery'**
-  String get photoGallery;
-
-  /// No description provided for @pickClient.
-  ///
-  /// In en, this message translates to:
-  /// **'Choose client'**
-  String get pickClient;
-
-  /// No description provided for @ponPort.
-  ///
-  /// In en, this message translates to:
-  /// **'PON port'**
-  String get ponPort;
-
-  /// No description provided for @pop.
-  ///
-  /// In en, this message translates to:
-  /// **'POP'**
-  String get pop;
-
-  /// No description provided for @popOptional.
-  ///
-  /// In en, this message translates to:
-  /// **'POP (optional)'**
-  String get popOptional;
-
-  /// No description provided for @pppoePassword.
-  ///
-  /// In en, this message translates to:
-  /// **'PPPoE password'**
-  String get pppoePassword;
-
-  /// No description provided for @pppoeUser.
-  ///
-  /// In en, this message translates to:
-  /// **'PPPoE username'**
-  String get pppoeUser;
-
-  /// No description provided for @prHigh.
-  ///
-  /// In en, this message translates to:
-  /// **'High'**
-  String get prHigh;
-
-  /// No description provided for @prLow.
+  /// No description provided for @priorityLow.
   ///
   /// In en, this message translates to:
   /// **'Low'**
-  String get prLow;
+  String get priorityLow;
 
-  /// No description provided for @prMedium.
+  /// No description provided for @priorityMedium.
   ///
   /// In en, this message translates to:
   /// **'Medium'**
-  String get prMedium;
+  String get priorityMedium;
 
-  /// No description provided for @prUrgent.
+  /// No description provided for @priorityHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'High'**
+  String get priorityHigh;
+
+  /// No description provided for @priorityUrgent.
   ///
   /// In en, this message translates to:
   /// **'Urgent'**
-  String get prUrgent;
+  String get priorityUrgent;
 
-  /// No description provided for @price.
-  ///
-  /// In en, this message translates to:
-  /// **'Price'**
-  String get price;
-
-  /// No description provided for @priority.
+  /// No description provided for @pushPriority.
   ///
   /// In en, this message translates to:
   /// **'Priority'**
-  String get priority;
+  String get pushPriority;
 
-  /// No description provided for @purLineWork.
+  /// No description provided for @pushTicketTitle.
   ///
   /// In en, this message translates to:
-  /// **'Line work'**
-  String get purLineWork;
+  /// **'Ticket #{id}'**
+  String pushTicketTitle(int id);
 
-  /// No description provided for @purNewConnection.
+  /// No description provided for @outcomeDone.
   ///
   /// In en, this message translates to:
-  /// **'New connection'**
-  String get purNewConnection;
+  /// **'Done'**
+  String get outcomeDone;
 
-  /// No description provided for @purOther.
+  /// No description provided for @outcomeNoIssue.
   ///
   /// In en, this message translates to:
-  /// **'Other'**
-  String get purOther;
+  /// **'No issue'**
+  String get outcomeNoIssue;
 
-  /// No description provided for @purRepair.
+  /// No description provided for @outcomeDuplicate.
   ///
   /// In en, this message translates to:
-  /// **'Repair'**
-  String get purRepair;
+  /// **'Duplicate'**
+  String get outcomeDuplicate;
 
-  /// No description provided for @purShift.
+  /// No description provided for @outcomeCancelled.
   ///
   /// In en, this message translates to:
-  /// **'Shifting'**
-  String get purShift;
+  /// **'Cancelled'**
+  String get outcomeCancelled;
 
-  /// No description provided for @purpose.
+  /// No description provided for @roleMain.
   ///
   /// In en, this message translates to:
-  /// **'Purpose'**
-  String get purpose;
-
-  /// No description provided for @quantity.
-  ///
-  /// In en, this message translates to:
-  /// **'Qty'**
-  String get quantity;
-
-  /// No description provided for @receipt.
-  ///
-  /// In en, this message translates to:
-  /// **'Receipt'**
-  String get receipt;
-
-  /// No description provided for @receiptNotImage.
-  ///
-  /// In en, this message translates to:
-  /// **'This receipt is not a picture. Open it on the ERP website.'**
-  String get receiptNotImage;
-
-  /// No description provided for @receiptPhoto.
-  ///
-  /// In en, this message translates to:
-  /// **'Receipt photo'**
-  String get receiptPhoto;
-
-  /// No description provided for @receiptPhotoAdded.
-  ///
-  /// In en, this message translates to:
-  /// **'Receipt photo added'**
-  String get receiptPhotoAdded;
-
-  /// No description provided for @recentPayments.
-  ///
-  /// In en, this message translates to:
-  /// **'Last payments'**
-  String get recentPayments;
-
-  /// No description provided for @recentSales.
-  ///
-  /// In en, this message translates to:
-  /// **'My last sales'**
-  String get recentSales;
-
-  /// No description provided for @recharge.
-  ///
-  /// In en, this message translates to:
-  /// **'Recharge'**
-  String get recharge;
-
-  /// No description provided for @rechargeDone.
-  ///
-  /// In en, this message translates to:
-  /// **'Recharged. New expiry: {expiry}'**
-  String rechargeDone(String expiry);
-
-  /// No description provided for @rechargePending.
-  ///
-  /// In en, this message translates to:
-  /// **'This client must be completed on the website first.'**
-  String get rechargePending;
-
-  /// No description provided for @recordInstall.
-  ///
-  /// In en, this message translates to:
-  /// **'Record install'**
-  String get recordInstall;
-
-  /// No description provided for @reject.
-  ///
-  /// In en, this message translates to:
-  /// **'Reject'**
-  String get reject;
-
-  /// No description provided for @requestSent.
-  ///
-  /// In en, this message translates to:
-  /// **'Request sent.'**
-  String get requestSent;
+  /// **'Main'**
+  String get roleMain;
 
   /// No description provided for @roleHelper.
   ///
@@ -1538,359 +848,605 @@ abstract class AppLocalizations {
   /// **'Helper'**
   String get roleHelper;
 
-  /// No description provided for @router.
+  /// No description provided for @ticketDescription.
   ///
   /// In en, this message translates to:
-  /// **'Router'**
-  String get router;
+  /// **'Details'**
+  String get ticketDescription;
 
-  /// No description provided for @sales.
+  /// No description provided for @ticketComments.
   ///
   /// In en, this message translates to:
-  /// **'Sales'**
-  String get sales;
+  /// **'Notes'**
+  String get ticketComments;
 
-  /// No description provided for @save.
+  /// No description provided for @ticketNoComments.
+  ///
+  /// In en, this message translates to:
+  /// **'No notes yet.'**
+  String get ticketNoComments;
+
+  /// No description provided for @ticketNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Note'**
+  String get ticketNote;
+
+  /// No description provided for @ticketSend.
   ///
   /// In en, this message translates to:
   /// **'Save'**
-  String get save;
+  String get ticketSend;
 
-  /// No description provided for @saveHouseLocation.
+  /// No description provided for @ticketNewConnectionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'A new connection closes only with the client\'s PPPoE ID in the note.'**
+  String get ticketNewConnectionHint;
+
+  /// No description provided for @ticketAwayTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Away from the house'**
+  String get ticketAwayTitle;
+
+  /// No description provided for @ticketAwayHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Why are you finishing from here? (at least 5 characters)'**
+  String get ticketAwayHint;
+
+  /// No description provided for @ticketFinishDistance.
+  ///
+  /// In en, this message translates to:
+  /// **'Distance from the house'**
+  String get ticketFinishDistance;
+
+  /// No description provided for @ticketMeters.
+  ///
+  /// In en, this message translates to:
+  /// **'{meters} m'**
+  String ticketMeters(int meters);
+
+  /// No description provided for @clientCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Client ID'**
+  String get clientCode;
+
+  /// No description provided for @clientAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get clientAddress;
+
+  /// No description provided for @clientPppoe.
+  ///
+  /// In en, this message translates to:
+  /// **'PPPoE'**
+  String get clientPppoe;
+
+  /// No description provided for @onuSn.
+  ///
+  /// In en, this message translates to:
+  /// **'ONU serial'**
+  String get onuSn;
+
+  /// No description provided for @onuMac.
+  ///
+  /// In en, this message translates to:
+  /// **'ONU MAC'**
+  String get onuMac;
+
+  /// No description provided for @onuPort.
+  ///
+  /// In en, this message translates to:
+  /// **'PON port'**
+  String get onuPort;
+
+  /// No description provided for @ticketCall.
+  ///
+  /// In en, this message translates to:
+  /// **'Call'**
+  String get ticketCall;
+
+  /// No description provided for @ticketMap.
+  ///
+  /// In en, this message translates to:
+  /// **'Map'**
+  String get ticketMap;
+
+  /// No description provided for @ticketLocation.
   ///
   /// In en, this message translates to:
   /// **'Save house GPS'**
-  String get saveHouseLocation;
+  String get ticketLocation;
 
-  /// No description provided for @saveHouseLocationQuestion.
+  /// No description provided for @ticketSaveLocation.
   ///
   /// In en, this message translates to:
-  /// **'Are you standing at the client\'s house? Save this place as the house location?'**
-  String get saveHouseLocationQuestion;
+  /// **'Save this spot as the client\'s house?'**
+  String get ticketSaveLocation;
 
-  /// No description provided for @saved.
+  /// No description provided for @ticketLocationSaved.
   ///
   /// In en, this message translates to:
-  /// **'Saved.'**
-  String get saved;
+  /// **'House location saved.'**
+  String get ticketLocationSaved;
 
-  /// No description provided for @scanCodeHint.
+  /// No description provided for @ticketLocationDenied.
   ///
   /// In en, this message translates to:
-  /// **'Serial, barcode or SKU'**
-  String get scanCodeHint;
+  /// **'Location is off. Turn it on and try again.'**
+  String get ticketLocationDenied;
 
-  /// No description provided for @scanItem.
+  /// No description provided for @ticketLocationMock.
   ///
   /// In en, this message translates to:
-  /// **'Scan / type code'**
-  String get scanItem;
+  /// **'This looks like a fake GPS. Turn it off before saving the house.'**
+  String get ticketLocationMock;
 
-  /// No description provided for @secondsLeft.
+  /// No description provided for @ticketDbm.
   ///
   /// In en, this message translates to:
-  /// **'{seconds} s left'**
-  String secondsLeft(int seconds);
+  /// **'Check dBm'**
+  String get ticketDbm;
 
-  /// No description provided for @sell.
+  /// No description provided for @ticketDbmRx.
   ///
   /// In en, this message translates to:
-  /// **'Sell'**
-  String get sell;
+  /// **'RX dBm'**
+  String get ticketDbmRx;
 
-  /// No description provided for @send.
+  /// No description provided for @ticketDbmTx.
   ///
   /// In en, this message translates to:
-  /// **'Send'**
-  String get send;
+  /// **'TX dBm'**
+  String get ticketDbmTx;
 
-  /// No description provided for @since.
+  /// No description provided for @ticketDbmLevel.
   ///
   /// In en, this message translates to:
-  /// **'Since'**
-  String get since;
+  /// **'Level'**
+  String get ticketDbmLevel;
 
-  /// No description provided for @sold.
+  /// No description provided for @ticketTakePhoto.
   ///
   /// In en, this message translates to:
-  /// **'Sold.'**
-  String get sold;
+  /// **'Camera'**
+  String get ticketTakePhoto;
 
-  /// No description provided for @soldCashToHandover.
+  /// No description provided for @ticketAddPhoto.
   ///
   /// In en, this message translates to:
-  /// **'Sold. The cash goes into your day-end handover.'**
-  String get soldCashToHandover;
+  /// **'Gallery'**
+  String get ticketAddPhoto;
 
-  /// No description provided for @stActive.
+  /// No description provided for @ticketPhotoCount.
   ///
   /// In en, this message translates to:
-  /// **'Active'**
-  String get stActive;
+  /// **'{count} photo(s)'**
+  String ticketPhotoCount(int count);
 
-  /// No description provided for @stApproved.
+  /// No description provided for @ticketPhotoLimit.
   ///
   /// In en, this message translates to:
-  /// **'Approved'**
-  String get stApproved;
+  /// **'A note can have up to 5 photos.'**
+  String get ticketPhotoLimit;
 
-  /// No description provided for @stAssigned.
+  /// No description provided for @ticketPhotoTooBig.
   ///
   /// In en, this message translates to:
-  /// **'Assigned'**
-  String get stAssigned;
+  /// **'That photo is larger than 5 MB.'**
+  String get ticketPhotoTooBig;
 
-  /// No description provided for @stAwaitingClient.
+  /// No description provided for @ticketCommentKept.
   ///
   /// In en, this message translates to:
-  /// **'Waiting for client ID'**
-  String get stAwaitingClient;
+  /// **'No internet. The note stays on this phone and will be sent later.'**
+  String get ticketCommentKept;
 
-  /// No description provided for @stCancelled.
+  /// No description provided for @pushNotice.
   ///
   /// In en, this message translates to:
-  /// **'Cancelled'**
-  String get stCancelled;
+  /// **'New notification'**
+  String get pushNotice;
 
-  /// No description provided for @stClosed.
-  ///
-  /// In en, this message translates to:
-  /// **'Closed'**
-  String get stClosed;
-
-  /// No description provided for @stDone.
-  ///
-  /// In en, this message translates to:
-  /// **'Done'**
-  String get stDone;
-
-  /// No description provided for @stExpired.
-  ///
-  /// In en, this message translates to:
-  /// **'Expired'**
-  String get stExpired;
-
-  /// No description provided for @stInProgress.
-  ///
-  /// In en, this message translates to:
-  /// **'Working'**
-  String get stInProgress;
-
-  /// No description provided for @stOnTheWay.
-  ///
-  /// In en, this message translates to:
-  /// **'On the way'**
-  String get stOnTheWay;
-
-  /// No description provided for @stOpen.
+  /// No description provided for @pushOpen.
   ///
   /// In en, this message translates to:
   /// **'Open'**
-  String get stOpen;
+  String get pushOpen;
 
-  /// No description provided for @stPartial.
+  /// No description provided for @pushTicketAssigned.
   ///
   /// In en, this message translates to:
-  /// **'Partly approved'**
-  String get stPartial;
+  /// **'This ticket was assigned to you.'**
+  String get pushTicketAssigned;
 
-  /// No description provided for @stPending.
+  /// No description provided for @pushTicketHelper.
   ///
   /// In en, this message translates to:
-  /// **'Waiting'**
-  String get stPending;
+  /// **'You were added as a helper on this ticket.'**
+  String get pushTicketHelper;
 
-  /// No description provided for @stRejected.
+  /// No description provided for @pushTicketUnassigned.
   ///
   /// In en, this message translates to:
-  /// **'Rejected'**
-  String get stRejected;
+  /// **'Nobody took this ticket. It is back with the office.'**
+  String get pushTicketUnassigned;
 
-  /// No description provided for @stReopened.
+  /// No description provided for @pushOfferTitle.
   ///
   /// In en, this message translates to:
-  /// **'Reopened'**
-  String get stReopened;
+  /// **'Ticket offer'**
+  String get pushOfferTitle;
 
-  /// No description provided for @stResolved.
+  /// No description provided for @pushOfferBody.
   ///
   /// In en, this message translates to:
-  /// **'Resolved'**
-  String get stResolved;
+  /// **'A nearby ticket was offered to you.'**
+  String get pushOfferBody;
 
-  /// No description provided for @stScheduled.
+  /// No description provided for @pushFromNotification.
   ///
   /// In en, this message translates to:
-  /// **'Scheduled'**
-  String get stScheduled;
+  /// **'Opened from a notification.'**
+  String get pushFromNotification;
 
-  /// No description provided for @stSuspended.
+  /// No description provided for @devicesTitle.
   ///
   /// In en, this message translates to:
-  /// **'Suspended'**
-  String get stSuspended;
+  /// **'My phones'**
+  String get devicesTitle;
 
-  /// No description provided for @startDuty.
+  /// No description provided for @devicesEmpty.
   ///
   /// In en, this message translates to:
-  /// **'Start duty'**
-  String get startDuty;
+  /// **'No phones are signed in.'**
+  String get devicesEmpty;
 
-  /// No description provided for @startedAt.
+  /// No description provided for @devicesUnnamed.
   ///
   /// In en, this message translates to:
-  /// **'Started'**
-  String get startedAt;
+  /// **'Phone'**
+  String get devicesUnnamed;
 
-  /// No description provided for @status.
+  /// No description provided for @devicesThisPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'This phone'**
+  String get devicesThisPhone;
+
+  /// No description provided for @devicesSignOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out'**
+  String get devicesSignOut;
+
+  /// No description provided for @devicesSignOutThis.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign this phone out? You will need to sign in again.'**
+  String get devicesSignOutThis;
+
+  /// No description provided for @devicesSignOutOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign that phone out? It will stop receiving staff notifications.'**
+  String get devicesSignOutOther;
+
+  /// No description provided for @clientsSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Name, ID, phone or PPPoE'**
+  String get clientsSearch;
+
+  /// No description provided for @clientsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No clients.'**
+  String get clientsEmpty;
+
+  /// No description provided for @clientsMore.
+  ///
+  /// In en, this message translates to:
+  /// **'More'**
+  String get clientsMore;
+
+  /// No description provided for @clientsCode.
+  ///
+  /// In en, this message translates to:
+  /// **'ID'**
+  String get clientsCode;
+
+  /// No description provided for @clientsAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get clientsAddress;
+
+  /// No description provided for @clientsStatus.
   ///
   /// In en, this message translates to:
   /// **'Status'**
-  String get status;
+  String get clientsStatus;
 
-  /// No description provided for @subject.
+  /// No description provided for @clientsPackage.
   ///
   /// In en, this message translates to:
-  /// **'Subject'**
-  String get subject;
+  /// **'Package'**
+  String get clientsPackage;
 
-  /// No description provided for @subjectRequired.
+  /// No description provided for @clientsPrice.
   ///
   /// In en, this message translates to:
-  /// **'Write the subject.'**
-  String get subjectRequired;
+  /// **'Price'**
+  String get clientsPrice;
 
-  /// No description provided for @take.
+  /// No description provided for @clientsExpiry.
   ///
   /// In en, this message translates to:
-  /// **'Take'**
-  String get take;
+  /// **'Expiry'**
+  String get clientsExpiry;
 
-  /// No description provided for @takeCash.
+  /// No description provided for @clientsDue.
   ///
   /// In en, this message translates to:
-  /// **'Cash'**
-  String get takeCash;
+  /// **'Due'**
+  String get clientsDue;
 
-  /// No description provided for @takeTrx.
+  /// No description provided for @clientsAdvance.
   ///
   /// In en, this message translates to:
-  /// **'bKash / Nagad TrxID'**
-  String get takeTrx;
+  /// **'Advance'**
+  String get clientsAdvance;
 
-  /// No description provided for @ticketOpened.
+  /// No description provided for @clientsBalance.
   ///
   /// In en, this message translates to:
-  /// **'Ticket opened.'**
-  String get ticketOpened;
+  /// **'Balance'**
+  String get clientsBalance;
 
-  /// No description provided for @ticketSearchHint.
+  /// No description provided for @clientsPppoe.
   ///
   /// In en, this message translates to:
-  /// **'Subject, #ID, client'**
-  String get ticketSearchHint;
+  /// **'PPPoE'**
+  String get clientsPppoe;
 
-  /// No description provided for @ticketsActive.
+  /// No description provided for @clientsNid.
   ///
   /// In en, this message translates to:
-  /// **'Active'**
-  String get ticketsActive;
+  /// **'NID'**
+  String get clientsNid;
 
-  /// No description provided for @ticketsAll.
+  /// No description provided for @clientsPop.
   ///
   /// In en, this message translates to:
-  /// **'All'**
-  String get ticketsAll;
+  /// **'POP'**
+  String get clientsPop;
 
-  /// No description provided for @ticketsDone.
+  /// No description provided for @clientsRouter.
   ///
   /// In en, this message translates to:
-  /// **'Done (30 days)'**
-  String get ticketsDone;
+  /// **'Router'**
+  String get clientsRouter;
 
-  /// No description provided for @ticketsMine.
+  /// No description provided for @clientsOnu.
   ///
   /// In en, this message translates to:
-  /// **'Mine'**
-  String get ticketsMine;
+  /// **'ONU'**
+  String get clientsOnu;
 
-  /// No description provided for @transactions.
+  /// No description provided for @clientsRx.
   ///
   /// In en, this message translates to:
-  /// **'Transactions'**
-  String get transactions;
+  /// **'Last RX dBm'**
+  String get clientsRx;
 
-  /// No description provided for @trxHint.
+  /// No description provided for @clientsConnection.
   ///
   /// In en, this message translates to:
-  /// **'The digital owner checks the TrxID before it counts.'**
-  String get trxHint;
+  /// **'Line status'**
+  String get clientsConnection;
 
-  /// No description provided for @trxId.
+  /// No description provided for @clientsOnline.
+  ///
+  /// In en, this message translates to:
+  /// **'The line is online.'**
+  String get clientsOnline;
+
+  /// No description provided for @clientsOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'The line is offline.'**
+  String get clientsOffline;
+
+  /// No description provided for @clientsDisconnects.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} disconnects in 24 hours'**
+  String clientsDisconnects(int count);
+
+  /// No description provided for @clientsOpenTickets.
+  ///
+  /// In en, this message translates to:
+  /// **'Open tickets'**
+  String get clientsOpenTickets;
+
+  /// No description provided for @clientsPayments.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent payments'**
+  String get clientsPayments;
+
+  /// No description provided for @chatsSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Client name, ID or phone'**
+  String get chatsSearch;
+
+  /// No description provided for @chatsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No conversations.'**
+  String get chatsEmpty;
+
+  /// No description provided for @chatsUnread.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} new'**
+  String chatsUnread(int count);
+
+  /// No description provided for @chatsReply.
+  ///
+  /// In en, this message translates to:
+  /// **'Reply'**
+  String get chatsReply;
+
+  /// No description provided for @collectionToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Collected today'**
+  String get collectionToday;
+
+  /// No description provided for @collectionInHand.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash in hand'**
+  String get collectionInHand;
+
+  /// No description provided for @collectionNotHanded.
+  ///
+  /// In en, this message translates to:
+  /// **'Not handed over'**
+  String get collectionNotHanded;
+
+  /// No description provided for @collectionExpenseLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'Left for expenses'**
+  String get collectionExpenseLeft;
+
+  /// No description provided for @collectionHold.
+  ///
+  /// In en, this message translates to:
+  /// **'Hand over cash before taking more.'**
+  String get collectionHold;
+
+  /// No description provided for @collectionCash.
+  ///
+  /// In en, this message translates to:
+  /// **'Take cash'**
+  String get collectionCash;
+
+  /// No description provided for @collectionExpense.
+  ///
+  /// In en, this message translates to:
+  /// **'Expense'**
+  String get collectionExpense;
+
+  /// No description provided for @collectionHandover.
+  ///
+  /// In en, this message translates to:
+  /// **'Hand over'**
+  String get collectionHandover;
+
+  /// No description provided for @collectionCashOwner.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash owner'**
+  String get collectionCashOwner;
+
+  /// No description provided for @collectionDigitalOwner.
+  ///
+  /// In en, this message translates to:
+  /// **'Digital owner'**
+  String get collectionDigitalOwner;
+
+  /// No description provided for @collectionGateway.
+  ///
+  /// In en, this message translates to:
+  /// **'bKash / Nagad'**
+  String get collectionGateway;
+
+  /// No description provided for @collectionSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Name, ID, phone or PPPoE'**
+  String get collectionSearch;
+
+  /// No description provided for @collectionMore.
+  ///
+  /// In en, this message translates to:
+  /// **'More'**
+  String get collectionMore;
+
+  /// No description provided for @collectionAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount'**
+  String get collectionAmount;
+
+  /// No description provided for @collectionNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Note'**
+  String get collectionNote;
+
+  /// No description provided for @collectionTxn.
   ///
   /// In en, this message translates to:
   /// **'TrxID'**
-  String get trxId;
+  String get collectionTxn;
 
-  /// No description provided for @useParts.
+  /// No description provided for @collectionSave.
   ///
   /// In en, this message translates to:
-  /// **'Use parts'**
-  String get useParts;
+  /// **'Save'**
+  String get collectionSave;
 
-  /// No description provided for @useWebsite.
+  /// No description provided for @collectionReceipt.
   ///
   /// In en, this message translates to:
-  /// **'Use the ERP website for this.'**
-  String get useWebsite;
+  /// **'Receipt'**
+  String get collectionReceipt;
 
-  /// No description provided for @waitingHandovers.
+  /// No description provided for @collectionApproval.
   ///
   /// In en, this message translates to:
-  /// **'Handovers waiting'**
-  String get waitingHandovers;
+  /// **'Approval'**
+  String get collectionApproval;
 
-  /// No description provided for @waitsForApproval.
+  /// No description provided for @collectionPaidSms.
   ///
   /// In en, this message translates to:
-  /// **'The client\'s paid SMS goes after the owner approves.'**
-  String get waitsForApproval;
+  /// **'Paid SMS'**
+  String get collectionPaidSms;
 
-  /// No description provided for @walletAfter.
+  /// No description provided for @collectionSmsLater.
   ///
   /// In en, this message translates to:
-  /// **'Wallet after'**
-  String get walletAfter;
+  /// **'The client is told after the office approves.'**
+  String get collectionSmsLater;
 
-  /// No description provided for @walletBalance.
+  /// No description provided for @dueEmpty.
   ///
   /// In en, this message translates to:
-  /// **'Wallet balance'**
-  String get walletBalance;
+  /// **'Nobody is on the due list.'**
+  String get dueEmpty;
 
-  /// No description provided for @walletCharge.
+  /// No description provided for @approvalsEmpty.
   ///
   /// In en, this message translates to:
-  /// **'From wallet'**
-  String get walletCharge;
+  /// **'Nothing is waiting for you.'**
+  String get approvalsEmpty;
 
-  /// No description provided for @whatFor.
+  /// No description provided for @approvalsApprove.
   ///
   /// In en, this message translates to:
-  /// **'What for'**
-  String get whatFor;
-
-  /// No description provided for @withinDays.
-  ///
-  /// In en, this message translates to:
-  /// **'{days} d'**
-  String withinDays(int days);
-
-  /// No description provided for @writeMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'Write a message'**
-  String get writeMessage;
+  /// **'Approve'**
+  String get approvalsApprove;
 }
 
 class _AppLocalizationsDelegate
