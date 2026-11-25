@@ -2485,6 +2485,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count} clients'**
   String clientsTotal(int count);
+
+  /// No description provided for @featureStaffMap.
+  ///
+  /// In en, this message translates to:
+  /// **'Staff map'**
+  String get featureStaffMap;
+
+  /// No description provided for @mapIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Staff appear here only while on duty in the staff app. Outside duty hours nothing is recorded. The map refreshes every 30 seconds.'**
+  String get mapIntro;
+
+  /// No description provided for @mapFree.
+  ///
+  /// In en, this message translates to:
+  /// **'Free'**
+  String get mapFree;
+
+  /// No description provided for @mapBusy.
+  ///
+  /// In en, this message translates to:
+  /// **'On a ticket'**
+  String get mapBusy;
+
+  /// No description provided for @mapStale.
+  ///
+  /// In en, this message translates to:
+  /// **'No signal'**
+  String get mapStale;
+
+  /// No description provided for @mapLegendTicket.
+  ///
+  /// In en, this message translates to:
+  /// **'Open ticket'**
+  String get mapLegendTicket;
+
+  /// No description provided for @mapOnDuty.
+  ///
+  /// In en, this message translates to:
+  /// **'On duty ({count})'**
+  String mapOnDuty(int count);
+
+  /// No description provided for @mapNobody.
+  ///
+  /// In en, this message translates to:
+  /// **'Nobody is on duty right now.'**
+  String get mapNobody;
+
+  /// No description provided for @mapSeenAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes} min ago'**
+  String mapSeenAgo(int minutes);
+
+  /// No description provided for @mapNoPoint.
+  ///
+  /// In en, this message translates to:
+  /// **'no location yet'**
+  String get mapNoPoint;
+
+  /// No description provided for @mapDistance.
+  ///
+  /// In en, this message translates to:
+  /// **'Travelled this duty'**
+  String get mapDistance;
+
+  /// No description provided for @mapClosedToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Tickets finished today'**
+  String get mapClosedToday;
+
+  /// No description provided for @mapOnDutySince.
+  ///
+  /// In en, this message translates to:
+  /// **'On duty since'**
+  String get mapOnDutySince;
+
+  /// No description provided for @mapBattery.
+  ///
+  /// In en, this message translates to:
+  /// **'Battery'**
+  String get mapBattery;
+
+  /// No description provided for @mapSuspicious.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} location points today looked fake or wrong (mock GPS, poor accuracy or an impossible jump). They are not used.'**
+  String mapSuspicious(int count);
+
+  /// No description provided for @mapTicket.
+  ///
+  /// In en, this message translates to:
+  /// **'Ticket'**
+  String get mapTicket;
+
+  /// No description provided for @mapLoadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load the map.'**
+  String get mapLoadFailed;
+
+  /// No description provided for @mapShowAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Show everyone'**
+  String get mapShowAll;
 }
 
 class _AppLocalizationsDelegate
