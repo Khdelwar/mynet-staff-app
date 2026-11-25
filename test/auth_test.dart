@@ -204,9 +204,56 @@ void main() {
         'clients.view',
         'staff_app.use',
       ]);
+      // Super admin: every permission button; the reseller-only two follow
+      // the ERP's role:reseller and stay hidden.
+      expect(
+        featuresFor(StaffUser.fromJson({'id': 1, 'is_super_admin': true}))
+            .map((f) => f.screen),
+        isNot(anyOf(contains('reseller_wallet'), contains('expiring'))),
+      );
       expect(
         featuresFor(StaffUser.fromJson({'id': 1, 'is_super_admin': true})),
-        hasLength(features.length),
+        hasLength(features.length - 2),
+      );
+    });
+
+    test('a reseller gets wallet and expiring by role, as the ERP', () {
+      // No clients.recharge: the ERP still lists both screens (role:reseller).
+      final reseller = StaffUser.fromJson({
+        'user': {
+          'id': 5,
+          'name': 'Reseller',
+          'roles': ['reseller'],
+          'permissions': ['staff_app.use', 'clients.view'],
+          'screens': ['clients', 'reseller_wallet', 'expiring', 'duty'],
+        },
+      });
+      expect(
+        featuresFor(reseller).map((f) => f.screen),
+        containsAll(['reseller_wallet', 'expiring']),
+      );
+
+      // Older cached profile without screens: the role alone decides.
+      final cached = StaffUser.fromJson({
+        'id': 5,
+        'roles': ['reseller'],
+        'permissions': ['staff_app.use'],
+      });
+      expect(
+        featuresFor(cached).map((f) => f.screen),
+        containsAll(['reseller_wallet', 'expiring']),
+      );
+
+      // Someone with clients.recharge but not the reseller role: the ERP
+      // refuses these two (role:reseller), so no button.
+      final office = StaffUser.fromJson({
+        'id': 6,
+        'roles': ['manager'],
+        'permissions': ['clients.recharge'],
+      });
+      expect(
+        featuresFor(office).map((f) => f.screen),
+        isNot(anyOf(contains('reseller_wallet'), contains('expiring'))),
       );
     });
 

@@ -28,6 +28,7 @@ class Feature {
     this.label, {
     this.screen,
     this.also = const [],
+    this.roles = const [],
     this.open,
     this.section = ErpSection.overview,
   });
@@ -35,6 +36,10 @@ class Feature {
   final String permission;
   final String? screen;
   final List<String> also;
+
+  /// For screens the ERP gives by role, not permission (`role:reseller`
+  /// API routes): any of these roles opens it, no permission needed.
+  final List<String> roles;
   final IconData icon;
   final String Function(AppLocalizations) label;
   final WidgetBuilder? open;
@@ -47,7 +52,9 @@ class Feature {
   /// lists here match the ERP API routes, so an extra per-user grant that
   /// opens the API also shows the button.
   bool allowed(StaffUser user) {
-    final byPermission = user.can(permission) || also.any(user.can);
+    final byPermission = roles.isNotEmpty
+        ? roles.any(user.roles.contains)
+        : user.can(permission) || also.any(user.can);
     if (user.screens.isNotEmpty && screen != null) {
       return user.screens.contains(screen) && byPermission;
     }
@@ -164,12 +171,14 @@ final features = <Feature>[
     open: _openSales,
     section: ErpSection.inventory,
   ),
-  // STF-08: the ERP lists these two only for a reseller (role:reseller).
+  // STF-08: the ERP gives these two to a reseller by role (role:reseller on
+  // the API and in `screens`), with or without clients.recharge.
   Feature(
     'clients.recharge',
     Icons.account_balance_wallet_outlined,
     (l) => l.featureWallet,
     screen: 'reseller_wallet',
+    roles: const ['reseller'],
     open: _openWallet,
     section: ErpSection.resellers,
   ),
@@ -178,6 +187,7 @@ final features = <Feature>[
     Icons.timer_outlined,
     (l) => l.featureExpiring,
     screen: 'expiring',
+    roles: const ['reseller'],
     open: _openExpiring,
     section: ErpSection.resellers,
   ),
