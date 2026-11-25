@@ -1276,4 +1276,101 @@ class AppLocalizationsEn extends AppLocalizations {
   String clientsTotal(int count) {
     return '$count clients';
   }
+
+  @override
+  String get featureOlt => 'OLT';
+
+  @override
+  String get oltHelp => 'The ERP\'s OLT pages. View only.';
+
+  @override
+  String get oltOnus => 'ONUs';
+
+  @override
+  String get oltOnline => 'Online';
+
+  @override
+  String get oltOffline => 'Offline';
+
+  @override
+  String get oltWeak => 'Weak Rx';
+
+  @override
+  String get oltUnreachable => 'Unreachable';
+
+  @override
+  String get oltInactive => 'Off';
+
+  @override
+  String get oltAlerts => 'Recent alerts';
+
+  @override
+  String oltUnmatched(int count) {
+    return 'Unmatched ONUs ($count)';
+  }
+
+  @override
+  String get oltNone => 'No OLTs.';
+
+  @override
+  String get oltPorts => 'PON ports';
+
+  @override
+  String get oltPortDead => 'Whole port down';
+
+  @override
+  String get oltFilterAll => 'All ONUs';
+
+  @override
+  String get oltFilterGood => 'Good';
+
+  @override
+  String get oltFilterWarning => 'Warning';
+
+  @override
+  String get oltFilterCritical => 'Critical';
+
+  @override
+  String get oltFilterDown => 'Down';
+
+  @override
+  String get oltFilterWeak => 'Weak Rx';
+
+  @override
+  String get oltSort => 'Sort';
+
+  @override
+  String get oltSortPon => 'Port';
+
+  @override
+  String get oltSortRx => 'Rx';
+
+  @override
+  String get oltSortDistance => 'Distance';
+
+  @override
+  String get oltSortUptime => 'Uptime';
+
+  @override
+  String get oltSortStatus => 'Status';
+
+  @override
+  String oltAvgRx(String rx) {
+    return 'Average Rx: $rx dBm';
+  }
+
+  @override
+  String get oltNoOnus => 'No ONUs found.';
+
+  @override
+  String get oltMore => 'Show more';
+
+  @override
+  String get oltSearchOnu => 'Serial, MAC, port or description';
+
+  @override
+  String get oltLoadFailed => 'Could not load the OLT data.';
+
+  @override
+  String get oltNoClient => 'No client';
 }

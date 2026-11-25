@@ -1270,4 +1270,101 @@ class AppLocalizationsBn extends AppLocalizations {
   String clientsTotal(int count) {
     return '$count জন ক্লায়েন্ট';
   }
+
+  @override
+  String get featureOlt => 'OLT';
+
+  @override
+  String get oltHelp => 'ERP-র OLT পেজের একই তথ্য। এখান থেকে শুধু দেখা যায়।';
+
+  @override
+  String get oltOnus => 'ONU';
+
+  @override
+  String get oltOnline => 'অনলাইন';
+
+  @override
+  String get oltOffline => 'অফলাইন';
+
+  @override
+  String get oltWeak => 'দুর্বল Rx';
+
+  @override
+  String get oltUnreachable => 'পৌঁছানো যাচ্ছে না';
+
+  @override
+  String get oltInactive => 'বন্ধ';
+
+  @override
+  String get oltAlerts => 'সাম্প্রতিক সতর্কতা';
+
+  @override
+  String oltUnmatched(int count) {
+    return 'মিল নেই এমন ONU ($count)';
+  }
+
+  @override
+  String get oltNone => 'কোনো OLT নেই।';
+
+  @override
+  String get oltPorts => 'PON পোর্ট';
+
+  @override
+  String get oltPortDead => 'পুরো পোর্ট বন্ধ';
+
+  @override
+  String get oltFilterAll => 'সব ONU';
+
+  @override
+  String get oltFilterGood => 'ভালো';
+
+  @override
+  String get oltFilterWarning => 'সতর্কতা';
+
+  @override
+  String get oltFilterCritical => 'খারাপ';
+
+  @override
+  String get oltFilterDown => 'বন্ধ';
+
+  @override
+  String get oltFilterWeak => 'দুর্বল Rx';
+
+  @override
+  String get oltSort => 'সাজানো';
+
+  @override
+  String get oltSortPon => 'পোর্ট';
+
+  @override
+  String get oltSortRx => 'Rx';
+
+  @override
+  String get oltSortDistance => 'দূরত্ব';
+
+  @override
+  String get oltSortUptime => 'চালু সময়';
+
+  @override
+  String get oltSortStatus => 'অবস্থা';
+
+  @override
+  String oltAvgRx(String rx) {
+    return 'গড় Rx: $rx dBm';
+  }
+
+  @override
+  String get oltNoOnus => 'কোনো ONU পাওয়া যায়নি।';
+
+  @override
+  String get oltMore => 'আরও দেখুন';
+
+  @override
+  String get oltSearchOnu => 'সিরিয়াল, MAC, পোর্ট বা বিবরণ';
+
+  @override
+  String get oltLoadFailed => 'OLT-এর তথ্য আনা গেল না।';
+
+  @override
+  String get oltNoClient => 'ক্লায়েন্ট নেই';
 }

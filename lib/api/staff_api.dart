@@ -11,6 +11,7 @@ import 'duty.dart';
 import 'json.dart';
 import 'models.dart';
 import 'offers.dart';
+import 'olt.dart';
 import 'tickets.dart';
 import 'work.dart';
 
@@ -890,6 +891,50 @@ class StaffApi {
   }
 
   // --- STF-09: dashboard and own HR -------------------------------------
+
+  Future<OltList> olts() async {
+    final res = await _send('GET', '/olts') as Response<dynamic>;
+    return OltList.fromJson(res.data);
+  }
+
+  Future<OltPorts> oltPorts(int id) async {
+    final res = await _send('GET', '/olts/$id') as Response<dynamic>;
+    return OltPorts.fromJson(res.data);
+  }
+
+  Future<OnuPage> ponOnus(
+    int oltId,
+    String port, {
+    String filter = 'all',
+    String sort = 'pon',
+    String dir = 'asc',
+    int page = 1,
+  }) async {
+    final res = await _send(
+      'GET',
+      '/olts/$oltId/onus',
+      query: {
+        'port': port,
+        'filter': filter,
+        'sort': sort,
+        'dir': dir,
+        'page': page,
+      },
+    ) as Response<dynamic>;
+    return OnuPage.fromJson(res.data);
+  }
+
+  Future<OnuPage> unmatchedOnus({String? q, int page = 1}) async {
+    final res = await _send(
+      'GET',
+      '/olts/unmatched',
+      query: {
+        if (q != null && q.trim().isNotEmpty) 'q': q.trim(),
+        'page': page,
+      },
+    ) as Response<dynamic>;
+    return OnuPage.fromJson(res.data);
+  }
 
   Future<List<Kpi>> dashboard() async {
     final res = await _send('GET', '/dashboard') as Response<dynamic>;

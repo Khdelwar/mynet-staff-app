@@ -2485,6 +2485,192 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count} clients'**
   String clientsTotal(int count);
+
+  /// No description provided for @featureOlt.
+  ///
+  /// In en, this message translates to:
+  /// **'OLT'**
+  String get featureOlt;
+
+  /// No description provided for @oltHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'The ERP\'s OLT pages. View only.'**
+  String get oltHelp;
+
+  /// No description provided for @oltOnus.
+  ///
+  /// In en, this message translates to:
+  /// **'ONUs'**
+  String get oltOnus;
+
+  /// No description provided for @oltOnline.
+  ///
+  /// In en, this message translates to:
+  /// **'Online'**
+  String get oltOnline;
+
+  /// No description provided for @oltOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline'**
+  String get oltOffline;
+
+  /// No description provided for @oltWeak.
+  ///
+  /// In en, this message translates to:
+  /// **'Weak Rx'**
+  String get oltWeak;
+
+  /// No description provided for @oltUnreachable.
+  ///
+  /// In en, this message translates to:
+  /// **'Unreachable'**
+  String get oltUnreachable;
+
+  /// No description provided for @oltInactive.
+  ///
+  /// In en, this message translates to:
+  /// **'Off'**
+  String get oltInactive;
+
+  /// No description provided for @oltAlerts.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent alerts'**
+  String get oltAlerts;
+
+  /// No description provided for @oltUnmatched.
+  ///
+  /// In en, this message translates to:
+  /// **'Unmatched ONUs ({count})'**
+  String oltUnmatched(int count);
+
+  /// No description provided for @oltNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No OLTs.'**
+  String get oltNone;
+
+  /// No description provided for @oltPorts.
+  ///
+  /// In en, this message translates to:
+  /// **'PON ports'**
+  String get oltPorts;
+
+  /// No description provided for @oltPortDead.
+  ///
+  /// In en, this message translates to:
+  /// **'Whole port down'**
+  String get oltPortDead;
+
+  /// No description provided for @oltFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All ONUs'**
+  String get oltFilterAll;
+
+  /// No description provided for @oltFilterGood.
+  ///
+  /// In en, this message translates to:
+  /// **'Good'**
+  String get oltFilterGood;
+
+  /// No description provided for @oltFilterWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Warning'**
+  String get oltFilterWarning;
+
+  /// No description provided for @oltFilterCritical.
+  ///
+  /// In en, this message translates to:
+  /// **'Critical'**
+  String get oltFilterCritical;
+
+  /// No description provided for @oltFilterDown.
+  ///
+  /// In en, this message translates to:
+  /// **'Down'**
+  String get oltFilterDown;
+
+  /// No description provided for @oltFilterWeak.
+  ///
+  /// In en, this message translates to:
+  /// **'Weak Rx'**
+  String get oltFilterWeak;
+
+  /// No description provided for @oltSort.
+  ///
+  /// In en, this message translates to:
+  /// **'Sort'**
+  String get oltSort;
+
+  /// No description provided for @oltSortPon.
+  ///
+  /// In en, this message translates to:
+  /// **'Port'**
+  String get oltSortPon;
+
+  /// No description provided for @oltSortRx.
+  ///
+  /// In en, this message translates to:
+  /// **'Rx'**
+  String get oltSortRx;
+
+  /// No description provided for @oltSortDistance.
+  ///
+  /// In en, this message translates to:
+  /// **'Distance'**
+  String get oltSortDistance;
+
+  /// No description provided for @oltSortUptime.
+  ///
+  /// In en, this message translates to:
+  /// **'Uptime'**
+  String get oltSortUptime;
+
+  /// No description provided for @oltSortStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get oltSortStatus;
+
+  /// No description provided for @oltAvgRx.
+  ///
+  /// In en, this message translates to:
+  /// **'Average Rx: {rx} dBm'**
+  String oltAvgRx(String rx);
+
+  /// No description provided for @oltNoOnus.
+  ///
+  /// In en, this message translates to:
+  /// **'No ONUs found.'**
+  String get oltNoOnus;
+
+  /// No description provided for @oltMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Show more'**
+  String get oltMore;
+
+  /// No description provided for @oltSearchOnu.
+  ///
+  /// In en, this message translates to:
+  /// **'Serial, MAC, port or description'**
+  String get oltSearchOnu;
+
+  /// No description provided for @oltLoadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load the OLT data.'**
+  String get oltLoadFailed;
+
+  /// No description provided for @oltNoClient.
+  ///
+  /// In en, this message translates to:
+  /// **'No client'**
+  String get oltNoClient;
 }
 
 class _AppLocalizationsDelegate

@@ -548,5 +548,50 @@
   "clientsSortExpiry": "Expiry",
   "clientsSortStatus": "Status",
   "clientsTotal": "{count} clients",
-  "@clientsTotal": {"placeholders": {"count": {"type": "int"}}}
+  "@clientsTotal": {"placeholders": {"count": {"type": "int"}}},
+  "featureOlt": "OLT",
+  "oltHelp": "The ERP's OLT pages. View only.",
+  "oltOnus": "ONUs",
+  "oltOnline": "Online",
+  "oltOffline": "Offline",
+  "oltWeak": "Weak Rx",
+  "oltUnreachable": "Unreachable",
+  "oltInactive": "Off",
+  "oltAlerts": "Recent alerts",
+  "oltUnmatched": "Unmatched ONUs ({count})",
+  "@oltUnmatched": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "oltNone": "No OLTs.",
+  "oltPorts": "PON ports",
+  "oltPortDead": "Whole port down",
+  "oltFilterAll": "All ONUs",
+  "oltFilterGood": "Good",
+  "oltFilterWarning": "Warning",
+  "oltFilterCritical": "Critical",
+  "oltFilterDown": "Down",
+  "oltFilterWeak": "Weak Rx",
+  "oltSort": "Sort",
+  "oltSortPon": "Port",
+  "oltSortRx": "Rx",
+  "oltSortDistance": "Distance",
+  "oltSortUptime": "Uptime",
+  "oltSortStatus": "Status",
+  "oltAvgRx": "Average Rx: {rx} dBm",
+  "@oltAvgRx": {
+    "placeholders": {
+      "rx": {
+        "type": "String"
+      }
+    }
+  },
+  "oltNoOnus": "No ONUs found.",
+  "oltMore": "Show more",
+  "oltSearchOnu": "Serial, MAC, port or description",
+  "oltLoadFailed": "Could not load the OLT data.",
+  "oltNoClient": "No client"
 }

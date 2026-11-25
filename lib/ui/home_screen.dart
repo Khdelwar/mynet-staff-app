@@ -14,6 +14,7 @@ import 'due_list_screen.dart';
 import 'common.dart';
 import 'duty_screen.dart';
 import 'offers_screen.dart';
+import 'olt_screens.dart';
 import 'theme.dart';
 import 'ticket_detail_screen.dart';
 import 'tickets_screen.dart';
@@ -170,6 +171,16 @@ final features = <Feature>[
     open: _openSales,
     section: ErpSection.inventory,
   ),
+  // OLT, read-only (ERP `olt` screen).
+  Feature(
+    'olt.view',
+    Icons.router_outlined,
+    (l) => l.featureOlt,
+    screen: 'olt',
+    also: const ['olt.manage', 'olt.create_own'],
+    open: _openOlt,
+    section: ErpSection.network,
+  ),
   // STF-08: the ERP gives these two to a reseller by role (role:reseller on
   // the API and in `screens`), with or without clients.recharge.
   Feature(
@@ -207,6 +218,8 @@ Widget _openDashboard(BuildContext context) => const DashboardScreen();
 Widget _openHr(BuildContext context) => const HrScreen();
 
 Widget _openSales(BuildContext context) => const SalesScreen();
+
+Widget _openOlt(BuildContext context) => const OltListScreen();
 
 Widget _openWallet(BuildContext context) => const ResellerWalletScreen();
 
