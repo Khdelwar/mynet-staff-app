@@ -1270,4 +1270,65 @@ class AppLocalizationsBn extends AppLocalizations {
   String clientsTotal(int count) {
     return '$count জন ক্লায়েন্ট';
   }
+
+  @override
+  String get featureStaffMap => 'স্টাফ ম্যাপ';
+
+  @override
+  String get mapIntro =>
+      'স্টাফ অ্যাপে ডিউটি চালু থাকলেই শুধু এখানে দেখা যায়। ডিউটির সময়ের বাইরে কিছু রেকর্ড হয় না। ম্যাপ প্রতি ৩০ সেকেন্ডে নতুন হয়।';
+
+  @override
+  String get mapFree => 'ফ্রি';
+
+  @override
+  String get mapBusy => 'টিকেটে আছে';
+
+  @override
+  String get mapStale => 'সিগন্যাল নেই';
+
+  @override
+  String get mapLegendTicket => 'খোলা টিকেট';
+
+  @override
+  String mapOnDuty(int count) {
+    return 'ডিউটিতে ($count)';
+  }
+
+  @override
+  String get mapNobody => 'এখন কেউ ডিউটিতে নেই।';
+
+  @override
+  String mapSeenAgo(int minutes) {
+    return '$minutes মিনিট আগে';
+  }
+
+  @override
+  String get mapNoPoint => 'এখনো লোকেশন আসেনি';
+
+  @override
+  String get mapDistance => 'এই ডিউটিতে চলেছেন';
+
+  @override
+  String get mapClosedToday => 'আজ শেষ করা টিকেট';
+
+  @override
+  String get mapOnDutySince => 'ডিউটি শুরু';
+
+  @override
+  String get mapBattery => 'ব্যাটারি';
+
+  @override
+  String mapSuspicious(int count) {
+    return 'আজ $countটা লোকেশন ভুয়া বা ভুল মনে হয়েছে (ভুয়া GPS, খারাপ নির্ভুলতা বা অসম্ভব লাফ)। এগুলো হিসাবে ধরা হয় না।';
+  }
+
+  @override
+  String get mapTicket => 'টিকেট';
+
+  @override
+  String get mapLoadFailed => 'ম্যাপ আনা গেল না।';
+
+  @override
+  String get mapShowAll => 'সবাইকে দেখুন';
 }
