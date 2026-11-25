@@ -1270,4 +1270,68 @@ class AppLocalizationsBn extends AppLocalizations {
   String clientsTotal(int count) {
     return '$count জন ক্লায়েন্ট';
   }
+
+  @override
+  String get featureStock => 'স্টক';
+
+  @override
+  String get stockHelp =>
+      'ERP-র স্টকের একই তালিকা। এখানে শুধু দেখা যায়; মাল দেওয়া-নেওয়া টিকেট, স্ক্যান আর বিক্রি থেকে।';
+
+  @override
+  String get stockTabMine => 'আমার কাছে';
+
+  @override
+  String get stockTabAll => 'সব স্টক';
+
+  @override
+  String get stockInHand => 'আমার হাতে';
+
+  @override
+  String get stockNothingInHand => 'আপনার হাতে এখন কোনো মাল নেই।';
+
+  @override
+  String get stockOfficeParts => 'অফিসে আছে (পার্টস)';
+
+  @override
+  String get stockNoOfficeParts => 'অফিসে এখন কোনো পার্টস নেই।';
+
+  @override
+  String stockLowAlerts(int count) {
+    return '$countটা জিনিস কমে গেছে (সীমার নিচে)।';
+  }
+
+  @override
+  String get stockSearch => 'সিরিয়াল, MAC, মডেল বা ক্লায়েন্ট খুঁজুন';
+
+  @override
+  String get stockAllCategories => 'সব ক্যাটাগরি';
+
+  @override
+  String stockItems(int count) {
+    return 'মাল ($count)';
+  }
+
+  @override
+  String stockParts(int count) {
+    return 'পার্টস ($count)';
+  }
+
+  @override
+  String get stockNoItems => 'কিছু পাওয়া যায়নি।';
+
+  @override
+  String get stockMore => 'আরও দেখুন';
+
+  @override
+  String get stockLow => 'কম';
+
+  @override
+  String get stockUseOnly => 'শুধু ব্যবহার';
+
+  @override
+  String get stockLoadFailed => 'স্টক আনা গেল না।';
+
+  @override
+  String get stockAllStatuses => 'সব';
 }

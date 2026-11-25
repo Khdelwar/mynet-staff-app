@@ -1276,4 +1276,68 @@ class AppLocalizationsEn extends AppLocalizations {
   String clientsTotal(int count) {
     return '$count clients';
   }
+
+  @override
+  String get featureStock => 'Stock';
+
+  @override
+  String get stockHelp =>
+      'The ERP\'s stock lists. View only; stock moves from tickets, scan and sale.';
+
+  @override
+  String get stockTabMine => 'With me';
+
+  @override
+  String get stockTabAll => 'All stock';
+
+  @override
+  String get stockInHand => 'In my hand';
+
+  @override
+  String get stockNothingInHand => 'You hold no stock right now.';
+
+  @override
+  String get stockOfficeParts => 'In the office (parts)';
+
+  @override
+  String get stockNoOfficeParts => 'No parts in the office right now.';
+
+  @override
+  String stockLowAlerts(int count) {
+    return '$count things are low (under their limit).';
+  }
+
+  @override
+  String get stockSearch => 'Search serial, MAC, model or client';
+
+  @override
+  String get stockAllCategories => 'All categories';
+
+  @override
+  String stockItems(int count) {
+    return 'Items ($count)';
+  }
+
+  @override
+  String stockParts(int count) {
+    return 'Parts ($count)';
+  }
+
+  @override
+  String get stockNoItems => 'Nothing found.';
+
+  @override
+  String get stockMore => 'Show more';
+
+  @override
+  String get stockLow => 'Low';
+
+  @override
+  String get stockUseOnly => 'Use only';
+
+  @override
+  String get stockLoadFailed => 'Could not load stock.';
+
+  @override
+  String get stockAllStatuses => 'All';
 }

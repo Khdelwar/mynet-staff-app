@@ -548,5 +548,45 @@
   "clientsSortExpiry": "Expiry",
   "clientsSortStatus": "Status",
   "clientsTotal": "{count} clients",
-  "@clientsTotal": {"placeholders": {"count": {"type": "int"}}}
+  "@clientsTotal": {"placeholders": {"count": {"type": "int"}}},
+  "featureStock": "Stock",
+  "stockHelp": "The ERP's stock lists. View only; stock moves from tickets, scan and sale.",
+  "stockTabMine": "With me",
+  "stockTabAll": "All stock",
+  "stockInHand": "In my hand",
+  "stockNothingInHand": "You hold no stock right now.",
+  "stockOfficeParts": "In the office (parts)",
+  "stockNoOfficeParts": "No parts in the office right now.",
+  "stockLowAlerts": "{count} things are low (under their limit).",
+  "@stockLowAlerts": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "stockSearch": "Search serial, MAC, model or client",
+  "stockAllCategories": "All categories",
+  "stockItems": "Items ({count})",
+  "@stockItems": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "stockParts": "Parts ({count})",
+  "@stockParts": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "stockNoItems": "Nothing found.",
+  "stockMore": "Show more",
+  "stockLow": "Low",
+  "stockUseOnly": "Use only",
+  "stockLoadFailed": "Could not load stock.",
+  "stockAllStatuses": "All"
 }

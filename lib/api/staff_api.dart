@@ -11,6 +11,7 @@ import 'duty.dart';
 import 'json.dart';
 import 'models.dart';
 import 'offers.dart';
+import 'stock.dart';
 import 'tickets.dart';
 import 'work.dart';
 
@@ -890,6 +891,28 @@ class StaffApi {
   }
 
   // --- STF-09: dashboard and own HR -------------------------------------
+
+  /// Read-only stock; the ERP decides how much (`can_view_all`).
+  Future<StockView> stock({
+    String? q,
+    String? status,
+    int? category,
+    int page = 1,
+    int partsPage = 1,
+  }) async {
+    final res = await _send(
+      'GET',
+      '/stock',
+      query: {
+        if (q != null && q.trim().isNotEmpty) 'q': q.trim(),
+        'status': ?status,
+        'category': ?category,
+        'page': page,
+        'parts_page': partsPage,
+      },
+    ) as Response<dynamic>;
+    return StockView.fromJson(res.data);
+  }
 
   Future<List<Kpi>> dashboard() async {
     final res = await _send('GET', '/dashboard') as Response<dynamic>;

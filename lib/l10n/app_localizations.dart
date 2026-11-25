@@ -2485,6 +2485,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count} clients'**
   String clientsTotal(int count);
+
+  /// No description provided for @featureStock.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock'**
+  String get featureStock;
+
+  /// No description provided for @stockHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'The ERP\'s stock lists. View only; stock moves from tickets, scan and sale.'**
+  String get stockHelp;
+
+  /// No description provided for @stockTabMine.
+  ///
+  /// In en, this message translates to:
+  /// **'With me'**
+  String get stockTabMine;
+
+  /// No description provided for @stockTabAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All stock'**
+  String get stockTabAll;
+
+  /// No description provided for @stockInHand.
+  ///
+  /// In en, this message translates to:
+  /// **'In my hand'**
+  String get stockInHand;
+
+  /// No description provided for @stockNothingInHand.
+  ///
+  /// In en, this message translates to:
+  /// **'You hold no stock right now.'**
+  String get stockNothingInHand;
+
+  /// No description provided for @stockOfficeParts.
+  ///
+  /// In en, this message translates to:
+  /// **'In the office (parts)'**
+  String get stockOfficeParts;
+
+  /// No description provided for @stockNoOfficeParts.
+  ///
+  /// In en, this message translates to:
+  /// **'No parts in the office right now.'**
+  String get stockNoOfficeParts;
+
+  /// No description provided for @stockLowAlerts.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} things are low (under their limit).'**
+  String stockLowAlerts(int count);
+
+  /// No description provided for @stockSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search serial, MAC, model or client'**
+  String get stockSearch;
+
+  /// No description provided for @stockAllCategories.
+  ///
+  /// In en, this message translates to:
+  /// **'All categories'**
+  String get stockAllCategories;
+
+  /// No description provided for @stockItems.
+  ///
+  /// In en, this message translates to:
+  /// **'Items ({count})'**
+  String stockItems(int count);
+
+  /// No description provided for @stockParts.
+  ///
+  /// In en, this message translates to:
+  /// **'Parts ({count})'**
+  String stockParts(int count);
+
+  /// No description provided for @stockNoItems.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing found.'**
+  String get stockNoItems;
+
+  /// No description provided for @stockMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Show more'**
+  String get stockMore;
+
+  /// No description provided for @stockLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Low'**
+  String get stockLow;
+
+  /// No description provided for @stockUseOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Use only'**
+  String get stockUseOnly;
+
+  /// No description provided for @stockLoadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load stock.'**
+  String get stockLoadFailed;
+
+  /// No description provided for @stockAllStatuses.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get stockAllStatuses;
 }
 
 class _AppLocalizationsDelegate
