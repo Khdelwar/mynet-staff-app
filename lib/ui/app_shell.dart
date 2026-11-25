@@ -7,6 +7,7 @@ import '../nav/targets.dart';
 import '../push/message.dart';
 import '../state/providers.dart';
 import 'account_screen.dart';
+import 'common.dart';
 import 'home_screen.dart';
 import 'push_pages.dart';
 
@@ -109,21 +110,41 @@ class _AppShellState extends ConsumerState<AppShell>
 
     final company = ref.watch(authProvider.select((a) => a.user?.companyName));
     return Scaffold(
-      appBar: AppBar(title: Text(company ?? l.appTitle)),
+      appBar: AppBar(
+        title: Row(
+          children: [
+            const BrandMark(),
+            const SizedBox(width: 10),
+            Flexible(
+              child: Text(
+                company ?? l.appTitle,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ],
+        ),
+      ),
       body: SafeArea(
         child: Column(
           children: [
             if (offline)
               Material(
-                color: Theme.of(context).colorScheme.errorContainer,
+                color: const Color(0xFFFFF1F2),
                 child: Padding(
                   padding: const EdgeInsets.all(8),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(Icons.wifi_off, size: 18),
+                      const Icon(
+                        Icons.wifi_off,
+                        size: 18,
+                        color: Color(0xFF881337),
+                      ),
                       const SizedBox(width: 8),
-                      Text(l.offlineBanner),
+                      Text(
+                        l.offlineBanner,
+                        style: const TextStyle(color: Color(0xFF881337)),
+                      ),
                     ],
                   ),
                 ),
@@ -137,19 +158,26 @@ class _AppShellState extends ConsumerState<AppShell>
           ],
         ),
       ),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _tab,
-        onDestinationSelected: (i) => setState(() => _tab = i),
-        destinations: [
-          NavigationDestination(
-            icon: const Icon(Icons.home_outlined),
-            label: l.tabHome,
+      bottomNavigationBar: DecoratedBox(
+        decoration: BoxDecoration(
+          border: Border(
+            top: BorderSide(color: Theme.of(context).dividerColor),
           ),
-          NavigationDestination(
-            icon: const Icon(Icons.person_outline),
-            label: l.tabAccount,
-          ),
-        ],
+        ),
+        child: NavigationBar(
+          selectedIndex: _tab,
+          onDestinationSelected: (i) => setState(() => _tab = i),
+          destinations: [
+            NavigationDestination(
+              icon: const Icon(Icons.home_outlined),
+              label: l.tabHome,
+            ),
+            NavigationDestination(
+              icon: const Icon(Icons.person_outline),
+              label: l.tabAccount,
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -403,7 +403,15 @@ class RechargeQuote {
 // --- STF-09: dashboard and own HR ----------------------------------------
 
 class Kpi {
-  const Kpi({required this.label, this.value, this.money = false});
+  const Kpi({
+    required this.label,
+    this.key = '',
+    this.value,
+    this.money = false,
+  });
+
+  /// ERP box key (`kpi_due`, ...): picks the card's icon and colour.
+  final String key;
   final String label;
   final num? value;
   final bool money;
@@ -411,6 +419,7 @@ class Kpi {
   factory Kpi.fromJson(Object? raw) {
     final m = asMap(raw);
     return Kpi(
+      key: pickString(m, const ['key']) ?? '',
       label: pickString(m, const ['label', 'key']) ?? '',
       value: toNum(m['value']),
       money: m['money'] == true,

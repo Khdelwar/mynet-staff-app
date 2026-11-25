@@ -372,6 +372,7 @@
   "workMethod": "মাধ্যম",
   "workMonths": "মাস",
   "workNewExpiry": "নতুন মেয়াদ",
+  "dashboardHelp": "ERP-র ড্যাশবোর্ডের একই সংখ্যা। নিচে টেনে নতুন করুন।",
   "workNoDashboard": "আপনার লগইনে ড্যাশবোর্ডের কোনো বক্স নেই।",
   "workNoExpiring": "কারো মেয়াদ শেষ হচ্ছে না।",
   "workNoMaterials": "এই টিকেটে এখনো কোনো মাল ব্যবহার হয়নি।",

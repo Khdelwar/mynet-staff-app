@@ -10,6 +10,7 @@ import '../state/providers.dart';
 import 'client_detail_screen.dart';
 import 'common.dart';
 import 'support_screens.dart';
+import 'theme.dart';
 
 /// What the ERP sent. Display only — the app does not add due and advance.
 String erpAmount(num? value) {
@@ -296,7 +297,9 @@ class _ClientListScreenState extends ConsumerState<ClientListScreen> {
                                     ? Icons.circle
                                     : Icons.circle_outlined,
                                 size: 12,
-                                color: client.seenOnline! ? Colors.green : null,
+                                color: client.seenOnline!
+                                    ? ErpColors.accent600
+                                    : null,
                               ),
                         onTap: () => _open(client.id),
                       ),

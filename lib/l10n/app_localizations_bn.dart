@@ -866,6 +866,10 @@ class AppLocalizationsBn extends AppLocalizations {
   String get workNewExpiry => 'নতুন মেয়াদ';
 
   @override
+  String get dashboardHelp =>
+      'ERP-র ড্যাশবোর্ডের একই সংখ্যা। নিচে টেনে নতুন করুন।';
+
+  @override
   String get workNoDashboard => 'আপনার লগইনে ড্যাশবোর্ডের কোনো বক্স নেই।';
 
   @override

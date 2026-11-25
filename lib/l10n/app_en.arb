@@ -396,6 +396,7 @@
   "workMethod": "Method",
   "workMonths": "Months",
   "workNewExpiry": "New expiry",
+  "dashboardHelp": "The same numbers as the ERP dashboard. Pull down to refresh.",
   "workNoDashboard": "No dashboard boxes for your login.",
   "workNoExpiring": "No clients expiring.",
   "workNoMaterials": "Nothing used on this ticket yet.",

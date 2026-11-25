@@ -151,6 +151,9 @@ void main() {
       400,
       scrollable: find.byType(Scrollable).last,
     );
+    // Fully on screen, not just its top edge.
+    await tester.ensureVisible(find.byKey(const ValueKey('client-connection')));
+    await tester.pumpAndSettle();
     await tester.tap(find.byKey(const ValueKey('client-connection')));
     await tester.pumpAndSettle();
     expect(find.text('The line is online.'), findsOneWidget);

@@ -8,6 +8,7 @@ import '../state/providers.dart';
 import 'common.dart';
 import 'devices_screen.dart';
 import 'lock_gate.dart';
+import 'theme.dart';
 
 class AccountScreen extends ConsumerWidget {
   const AccountScreen({super.key});
@@ -66,8 +67,13 @@ class AccountScreen extends ConsumerWidget {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        Text(l.accountTitle, style: Theme.of(context).textTheme.headlineSmall),
-        const SizedBox(height: 12),
+        PageHero(
+          title: l.accountTitle,
+          eyebrow: user?.staff?.name ?? user?.name,
+          help: user?.email,
+          icon: Icons.person_outline,
+          section: ErpSection.system,
+        ),
         SectionCard(
           children: [
             InfoRow(l.email, user?.email),

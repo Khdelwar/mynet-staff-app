@@ -8,6 +8,7 @@ import 'state/providers.dart';
 import 'ui/app_shell.dart';
 import 'ui/lock_gate.dart';
 import 'ui/login_screen.dart';
+import 'ui/theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,32 +27,9 @@ Future<void> main() async {
 class StaffApp extends ConsumerWidget {
   const StaffApp({super.key});
 
-  // MyNet blue (same as the customer app).
-  static const _brand = Color(0xFF0A7AC1);
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final auth = ref.watch(authProvider);
-
-    ThemeData themed(Brightness brightness) {
-      final scheme = ColorScheme.fromSeed(
-        seedColor: _brand,
-        brightness: brightness,
-      );
-      return ThemeData(
-        colorScheme: scheme,
-        scaffoldBackgroundColor: scheme.surfaceContainerLowest,
-        inputDecorationTheme: const InputDecorationTheme(
-          border: OutlineInputBorder(),
-        ),
-        filledButtonTheme: FilledButtonThemeData(
-          style: FilledButton.styleFrom(minimumSize: const Size(0, 48)),
-        ),
-        outlinedButtonTheme: OutlinedButtonThemeData(
-          style: OutlinedButton.styleFrom(minimumSize: const Size(0, 48)),
-        ),
-      );
-    }
 
     return MaterialApp(
       onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
@@ -59,8 +37,8 @@ class StaffApp extends ConsumerWidget {
       locale: ref.watch(localeProvider),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      theme: themed(Brightness.light),
-      darkTheme: themed(Brightness.dark),
+      theme: erpTheme(Brightness.light),
+      darkTheme: erpTheme(Brightness.dark),
       home: !auth.ready
           ? const Scaffold(body: Center(child: CircularProgressIndicator()))
           : !auth.signedIn
