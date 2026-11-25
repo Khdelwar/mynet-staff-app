@@ -9,6 +9,8 @@ import 'package:mynet_staff/state/field.dart';
 import 'package:mynet_staff/state/providers.dart';
 import 'package:mynet_staff/state/stores.dart';
 import 'package:mynet_staff/ui/collection_screen.dart';
+import 'package:mynet_staff/ui/kpi_card.dart';
+import 'package:mynet_staff/api/work.dart';
 import 'package:mynet_staff/ui/work_screens.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -68,6 +70,59 @@ Future<void> _answer(WidgetTester tester, String text) async {
 }
 
 void main() {
+  testWidgets('dashboard shows the ERP boxes as the web cards', (tester) async {
+    final erp = FakeErp({
+      'GET /me': (_) => (200, _me(['dashboard.view'])),
+      'GET /dashboard': (_) => (
+        200,
+        {
+          'kpis': [
+            {
+              'key': 'kpi_total',
+              'label': 'Total clients',
+              'value': 1520,
+              'money': false,
+            },
+            {
+              'key': 'kpi_due',
+              'label': 'Due amount',
+              'value': 125430.5,
+              'money': true,
+            },
+            {
+              'key': 'kpi_expired_online',
+              'label': 'Expired but online',
+              'value': 0,
+              'money': false,
+            },
+          ],
+        },
+      ),
+    });
+    await _pump(tester, erp, const DashboardScreen());
+
+    expect(find.byKey(const ValueKey('kpi-kpi_total')), findsOneWidget);
+    expect(find.text('Total clients'), findsOneWidget);
+    expect(find.text('1,520'), findsOneWidget);
+    // Money in whole taka with the sign, as the web dashboard card.
+    expect(find.text('৳ 125,431'), findsOneWidget);
+    expect(find.text('0'), findsOneWidget);
+  });
+
+  test('card colours follow the web dashboard', () {
+    Kpi k(String key, num v) => Kpi(key: key, label: key, value: v);
+    expect(kpiStyle(k('kpi_due', 5)).$2, KpiTone.amber);
+    expect(kpiStyle(k('kpi_expired', 5)).$2, KpiTone.red);
+    expect(kpiStyle(k('kpi_expired_online', 0)).$2, KpiTone.navy);
+    expect(kpiStyle(k('kpi_expired_online', 3)).$2, KpiTone.red);
+    expect(kpiStyle(k('kpi_active_offline', 2)).$2, KpiTone.amber);
+    expect(kpiStyle(k('something_new', 1)).$2, KpiTone.brand);
+    expect(
+      kpiValue(const Kpi(label: 'x', value: 999.6, money: true)),
+      '৳ 1,000',
+    );
+  });
+
   testWidgets('parts used on a ticket: one request key, kept on retry', (
     tester,
   ) async {

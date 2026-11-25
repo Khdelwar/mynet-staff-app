@@ -870,6 +870,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get workNewExpiry => 'New expiry';
 
   @override
+  String get dashboardHelp =>
+      'The same numbers as the ERP dashboard. Pull down to refresh.';
+
+  @override
   String get workNoDashboard => 'No dashboard boxes for your login.';
 
   @override

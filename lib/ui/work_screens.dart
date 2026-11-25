@@ -9,6 +9,7 @@ import '../state/field.dart';
 import '../state/providers.dart';
 import 'clients_screen.dart' show erpAmount;
 import 'common.dart';
+import 'kpi_card.dart';
 
 /// Screens for STF-03b (materials, install), STF-06b (sales), STF-08
 /// (reseller wallet, expiring, recharge) and STF-09 (dashboard, own HR).
@@ -1218,22 +1219,41 @@ class DashboardScreen extends StatelessWidget {
       appBar: AppBar(title: Text(l.featureDashboard)),
       body: _Loaded<List<Kpi>>(
         load: (api) => api.dashboard(),
-        builder: (context, kpis, reload) => ListView(
-          key: const ValueKey('dashboard'),
-          padding: const EdgeInsets.all(16),
-          children: [
-            if (kpis.isEmpty) MessageBanner(l.workNoDashboard),
-            for (final k in kpis)
-              Card(
-                child: ListTile(
-                  title: Text(k.label),
-                  trailing: Text(
-                    k.money ? '৳ ${erpAmount(k.value)}' : erpAmount(k.value),
-                    style: Theme.of(context).textTheme.titleMedium,
+        builder: (context, kpis, reload) => RefreshIndicator(
+          onRefresh: reload,
+          child: LayoutBuilder(
+            builder: (context, box) {
+              // Two cards per row on a phone, three on a wide screen.
+              final perRow = box.maxWidth >= 560 ? 3 : 2;
+              const gap = 10.0;
+              final width = (box.maxWidth - 32 - gap * (perRow - 1)) / perRow;
+              return ListView(
+                key: const ValueKey('dashboard'),
+                padding: const EdgeInsets.all(16),
+                children: [
+                  PageHero(
+                    title: l.featureDashboard,
+                    help: l.dashboardHelp,
+                    icon: Icons.dashboard_outlined,
                   ),
-                ),
-              ),
-          ],
+                  if (kpis.isEmpty)
+                    MessageBanner(l.workNoDashboard)
+                  else
+                    Wrap(
+                      spacing: gap,
+                      runSpacing: gap,
+                      children: [
+                        for (final k in kpis)
+                          SizedBox(
+                            width: width,
+                            child: KpiCard(kpi: k),
+                          ),
+                      ],
+                    ),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );

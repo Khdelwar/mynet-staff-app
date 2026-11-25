@@ -1700,6 +1700,12 @@ abstract class AppLocalizations {
   /// **'New expiry'**
   String get workNewExpiry;
 
+  /// No description provided for @dashboardHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'The same numbers as the ERP dashboard. Pull down to refresh.'**
+  String get dashboardHelp;
+
   /// No description provided for @workNoDashboard.
   ///
   /// In en, this message translates to:
