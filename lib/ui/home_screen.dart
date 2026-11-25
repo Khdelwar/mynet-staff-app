@@ -15,6 +15,7 @@ import 'common.dart';
 import 'duty_screen.dart';
 import 'offers_screen.dart';
 import 'stock_screen.dart';
+import 'staff_map_screen.dart';
 import 'theme.dart';
 import 'ticket_detail_screen.dart';
 import 'tickets_screen.dart';
@@ -201,6 +202,15 @@ final features = <Feature>[
     open: _openExpiring,
     section: ErpSection.resellers,
   ),
+  // Web Staff map (staff.location.view; owner: super admin + manager).
+  Feature(
+    'staff.location.view',
+    Icons.map_outlined,
+    (l) => l.featureStaffMap,
+    screen: 'staff_map',
+    open: _openStaffMap,
+    section: ErpSection.hr,
+  ),
   Feature(
     'tickets.assign',
     Icons.person_pin_outlined,
@@ -212,6 +222,8 @@ final features = <Feature>[
 ];
 
 Widget _openDuty(BuildContext context) => const DutyScreen();
+
+Widget _openStaffMap(BuildContext context) => const StaffMapScreen();
 
 Widget _openDashboard(BuildContext context) => const DashboardScreen();
 

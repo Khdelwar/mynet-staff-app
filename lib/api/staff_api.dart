@@ -12,6 +12,7 @@ import 'json.dart';
 import 'models.dart';
 import 'offers.dart';
 import 'stock.dart';
+import 'staff_map.dart';
 import 'tickets.dart';
 import 'work.dart';
 
@@ -912,6 +913,16 @@ class StaffApi {
       },
     ) as Response<dynamic>;
     return StockView.fromJson(res.data);
+  }
+
+  /// Web Staff map's payload; [user] adds that person's route today.
+  Future<StaffMapData> staffMap({int? user}) async {
+    final res = await _send(
+      'GET',
+      '/staff-map',
+      query: {'user': ?user},
+    ) as Response<dynamic>;
+    return StaffMapData.fromJson(res.data);
   }
 
   Future<List<Kpi>> dashboard() async {
