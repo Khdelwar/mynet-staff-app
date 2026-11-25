@@ -11,6 +11,7 @@ import 'duty.dart';
 import 'json.dart';
 import 'models.dart';
 import 'offers.dart';
+import 'staff_map.dart';
 import 'tickets.dart';
 import 'work.dart';
 
@@ -890,6 +891,16 @@ class StaffApi {
   }
 
   // --- STF-09: dashboard and own HR -------------------------------------
+
+  /// Web Staff map's payload; [user] adds that person's route today.
+  Future<StaffMapData> staffMap({int? user}) async {
+    final res = await _send(
+      'GET',
+      '/staff-map',
+      query: {'user': ?user},
+    ) as Response<dynamic>;
+    return StaffMapData.fromJson(res.data);
+  }
 
   Future<List<Kpi>> dashboard() async {
     final res = await _send('GET', '/dashboard') as Response<dynamic>;

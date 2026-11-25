@@ -548,5 +548,44 @@
   "clientsSortExpiry": "Expiry",
   "clientsSortStatus": "Status",
   "clientsTotal": "{count} clients",
-  "@clientsTotal": {"placeholders": {"count": {"type": "int"}}}
+  "@clientsTotal": {"placeholders": {"count": {"type": "int"}}},
+  "featureStaffMap": "Staff map",
+  "mapIntro": "Staff appear here only while on duty in the staff app. Outside duty hours nothing is recorded. The map refreshes every 30 seconds.",
+  "mapFree": "Free",
+  "mapBusy": "On a ticket",
+  "mapStale": "No signal",
+  "mapLegendTicket": "Open ticket",
+  "mapOnDuty": "On duty ({count})",
+  "@mapOnDuty": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mapNobody": "Nobody is on duty right now.",
+  "mapSeenAgo": "{minutes} min ago",
+  "@mapSeenAgo": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "mapNoPoint": "no location yet",
+  "mapDistance": "Travelled this duty",
+  "mapClosedToday": "Tickets finished today",
+  "mapOnDutySince": "On duty since",
+  "mapBattery": "Battery",
+  "mapSuspicious": "{count} location points today looked fake or wrong (mock GPS, poor accuracy or an impossible jump). They are not used.",
+  "@mapSuspicious": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mapTicket": "Ticket",
+  "mapLoadFailed": "Could not load the map.",
+  "mapShowAll": "Show everyone"
 }
