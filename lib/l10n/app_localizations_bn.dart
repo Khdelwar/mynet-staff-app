@@ -1272,6 +1272,131 @@ class AppLocalizationsBn extends AppLocalizations {
   }
 
   @override
+  String get featureStaffMap => 'স্টাফ ম্যাপ';
+
+  @override
+  String get mapIntro =>
+      'স্টাফ অ্যাপে ডিউটি চালু থাকলেই শুধু এখানে দেখা যায়। ডিউটির সময়ের বাইরে কিছু রেকর্ড হয় না। ম্যাপ প্রতি ৩০ সেকেন্ডে নতুন হয়।';
+
+  @override
+  String get mapFree => 'ফ্রি';
+
+  @override
+  String get mapBusy => 'টিকেটে আছে';
+
+  @override
+  String get mapStale => 'সিগন্যাল নেই';
+
+  @override
+  String get mapLegendTicket => 'খোলা টিকেট';
+
+  @override
+  String mapOnDuty(int count) {
+    return 'ডিউটিতে ($count)';
+  }
+
+  @override
+  String get mapNobody => 'এখন কেউ ডিউটিতে নেই।';
+
+  @override
+  String mapSeenAgo(int minutes) {
+    return '$minutes মিনিট আগে';
+  }
+
+  @override
+  String get mapNoPoint => 'এখনো লোকেশন আসেনি';
+
+  @override
+  String get mapDistance => 'এই ডিউটিতে চলেছেন';
+
+  @override
+  String get mapClosedToday => 'আজ শেষ করা টিকেট';
+
+  @override
+  String get mapOnDutySince => 'ডিউটি শুরু';
+
+  @override
+  String get mapBattery => 'ব্যাটারি';
+
+  @override
+  String mapSuspicious(int count) {
+    return 'আজ $countটা লোকেশন ভুয়া বা ভুল মনে হয়েছে (ভুয়া GPS, খারাপ নির্ভুলতা বা অসম্ভব লাফ)। এগুলো হিসাবে ধরা হয় না।';
+  }
+
+  @override
+  String get mapTicket => 'টিকেট';
+
+  @override
+  String get mapLoadFailed => 'ম্যাপ আনা গেল না।';
+
+  @override
+  String get mapShowAll => 'সবাইকে দেখুন';
+
+  @override
+  String get featureStock => 'স্টক';
+
+  @override
+  String get stockHelp =>
+      'ERP-র স্টকের একই তালিকা। এখানে শুধু দেখা যায়; মাল দেওয়া-নেওয়া টিকেট, স্ক্যান আর বিক্রি থেকে।';
+
+  @override
+  String get stockTabMine => 'আমার কাছে';
+
+  @override
+  String get stockTabAll => 'সব স্টক';
+
+  @override
+  String get stockInHand => 'আমার হাতে';
+
+  @override
+  String get stockNothingInHand => 'আপনার হাতে এখন কোনো মাল নেই।';
+
+  @override
+  String get stockOfficeParts => 'অফিসে আছে (পার্টস)';
+
+  @override
+  String get stockNoOfficeParts => 'অফিসে এখন কোনো পার্টস নেই।';
+
+  @override
+  String stockLowAlerts(int count) {
+    return '$countটা জিনিস কমে গেছে (সীমার নিচে)।';
+  }
+
+  @override
+  String get stockSearch => 'সিরিয়াল, MAC, মডেল বা ক্লায়েন্ট খুঁজুন';
+
+  @override
+  String get stockAllCategories => 'সব ক্যাটাগরি';
+
+  @override
+  String stockItems(int count) {
+    return 'মাল ($count)';
+  }
+
+  @override
+  String stockParts(int count) {
+    return 'পার্টস ($count)';
+  }
+
+  @override
+  String get stockNoItems => 'কিছু পাওয়া যায়নি।';
+
+  @override
+  String get stockMore => 'আরও দেখুন';
+
+  @override
+  String get stockLow => 'কম';
+
+  @override
+  String get stockUseOnly => 'শুধু ব্যবহার';
+
+  @override
+  String get stockLoadFailed => 'স্টক আনা গেল না।';
+
+  @override
+  String get stockAllStatuses => 'সব';
+
+  @override
   String get featureOlt => 'OLT';
 
   @override

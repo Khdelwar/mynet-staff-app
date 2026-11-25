@@ -1278,6 +1278,131 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get featureStaffMap => 'Staff map';
+
+  @override
+  String get mapIntro =>
+      'Staff appear here only while on duty in the staff app. Outside duty hours nothing is recorded. The map refreshes every 30 seconds.';
+
+  @override
+  String get mapFree => 'Free';
+
+  @override
+  String get mapBusy => 'On a ticket';
+
+  @override
+  String get mapStale => 'No signal';
+
+  @override
+  String get mapLegendTicket => 'Open ticket';
+
+  @override
+  String mapOnDuty(int count) {
+    return 'On duty ($count)';
+  }
+
+  @override
+  String get mapNobody => 'Nobody is on duty right now.';
+
+  @override
+  String mapSeenAgo(int minutes) {
+    return '$minutes min ago';
+  }
+
+  @override
+  String get mapNoPoint => 'no location yet';
+
+  @override
+  String get mapDistance => 'Travelled this duty';
+
+  @override
+  String get mapClosedToday => 'Tickets finished today';
+
+  @override
+  String get mapOnDutySince => 'On duty since';
+
+  @override
+  String get mapBattery => 'Battery';
+
+  @override
+  String mapSuspicious(int count) {
+    return '$count location points today looked fake or wrong (mock GPS, poor accuracy or an impossible jump). They are not used.';
+  }
+
+  @override
+  String get mapTicket => 'Ticket';
+
+  @override
+  String get mapLoadFailed => 'Could not load the map.';
+
+  @override
+  String get mapShowAll => 'Show everyone';
+
+  @override
+  String get featureStock => 'Stock';
+
+  @override
+  String get stockHelp =>
+      'The ERP\'s stock lists. View only; stock moves from tickets, scan and sale.';
+
+  @override
+  String get stockTabMine => 'With me';
+
+  @override
+  String get stockTabAll => 'All stock';
+
+  @override
+  String get stockInHand => 'In my hand';
+
+  @override
+  String get stockNothingInHand => 'You hold no stock right now.';
+
+  @override
+  String get stockOfficeParts => 'In the office (parts)';
+
+  @override
+  String get stockNoOfficeParts => 'No parts in the office right now.';
+
+  @override
+  String stockLowAlerts(int count) {
+    return '$count things are low (under their limit).';
+  }
+
+  @override
+  String get stockSearch => 'Search serial, MAC, model or client';
+
+  @override
+  String get stockAllCategories => 'All categories';
+
+  @override
+  String stockItems(int count) {
+    return 'Items ($count)';
+  }
+
+  @override
+  String stockParts(int count) {
+    return 'Parts ($count)';
+  }
+
+  @override
+  String get stockNoItems => 'Nothing found.';
+
+  @override
+  String get stockMore => 'Show more';
+
+  @override
+  String get stockLow => 'Low';
+
+  @override
+  String get stockUseOnly => 'Use only';
+
+  @override
+  String get stockLoadFailed => 'Could not load stock.';
+
+  @override
+  String get stockAllStatuses => 'All';
+
+  @override
   String get featureOlt => 'OLT';
 
   @override

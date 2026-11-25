@@ -15,6 +15,8 @@ import 'common.dart';
 import 'duty_screen.dart';
 import 'offers_screen.dart';
 import 'olt_screens.dart';
+import 'stock_screen.dart';
+import 'staff_map_screen.dart';
 import 'theme.dart';
 import 'ticket_detail_screen.dart';
 import 'tickets_screen.dart';
@@ -181,6 +183,16 @@ final features = <Feature>[
     open: _openOlt,
     section: ErpSection.network,
   ),
+  // Stock, read-only (ERP `inventory` screen).
+  Feature(
+    'inventory.use',
+    Icons.inventory_2_outlined,
+    (l) => l.featureStock,
+    screen: 'inventory',
+    also: const ['inventory.view', 'inventory.manage'],
+    open: _openStock,
+    section: ErpSection.inventory,
+  ),
   // STF-08: the ERP gives these two to a reseller by role (role:reseller on
   // the API and in `screens`), with or without clients.recharge.
   Feature(
@@ -201,6 +213,15 @@ final features = <Feature>[
     open: _openExpiring,
     section: ErpSection.resellers,
   ),
+  // Web Staff map (staff.location.view; owner: super admin + manager).
+  Feature(
+    'staff.location.view',
+    Icons.map_outlined,
+    (l) => l.featureStaffMap,
+    screen: 'staff_map',
+    open: _openStaffMap,
+    section: ErpSection.hr,
+  ),
   Feature(
     'tickets.assign',
     Icons.person_pin_outlined,
@@ -213,6 +234,8 @@ final features = <Feature>[
 
 Widget _openDuty(BuildContext context) => const DutyScreen();
 
+Widget _openStaffMap(BuildContext context) => const StaffMapScreen();
+
 Widget _openDashboard(BuildContext context) => const DashboardScreen();
 
 Widget _openHr(BuildContext context) => const HrScreen();
@@ -220,6 +243,7 @@ Widget _openHr(BuildContext context) => const HrScreen();
 Widget _openSales(BuildContext context) => const SalesScreen();
 
 Widget _openOlt(BuildContext context) => const OltListScreen();
+Widget _openStock(BuildContext context) => const StockScreen();
 
 Widget _openWallet(BuildContext context) => const ResellerWalletScreen();
 

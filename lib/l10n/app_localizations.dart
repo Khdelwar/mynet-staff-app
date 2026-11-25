@@ -2486,6 +2486,228 @@ abstract class AppLocalizations {
   /// **'{count} clients'**
   String clientsTotal(int count);
 
+  /// No description provided for @featureStaffMap.
+  ///
+  /// In en, this message translates to:
+  /// **'Staff map'**
+  String get featureStaffMap;
+
+  /// No description provided for @mapIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Staff appear here only while on duty in the staff app. Outside duty hours nothing is recorded. The map refreshes every 30 seconds.'**
+  String get mapIntro;
+
+  /// No description provided for @mapFree.
+  ///
+  /// In en, this message translates to:
+  /// **'Free'**
+  String get mapFree;
+
+  /// No description provided for @mapBusy.
+  ///
+  /// In en, this message translates to:
+  /// **'On a ticket'**
+  String get mapBusy;
+
+  /// No description provided for @mapStale.
+  ///
+  /// In en, this message translates to:
+  /// **'No signal'**
+  String get mapStale;
+
+  /// No description provided for @mapLegendTicket.
+  ///
+  /// In en, this message translates to:
+  /// **'Open ticket'**
+  String get mapLegendTicket;
+
+  /// No description provided for @mapOnDuty.
+  ///
+  /// In en, this message translates to:
+  /// **'On duty ({count})'**
+  String mapOnDuty(int count);
+
+  /// No description provided for @mapNobody.
+  ///
+  /// In en, this message translates to:
+  /// **'Nobody is on duty right now.'**
+  String get mapNobody;
+
+  /// No description provided for @mapSeenAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes} min ago'**
+  String mapSeenAgo(int minutes);
+
+  /// No description provided for @mapNoPoint.
+  ///
+  /// In en, this message translates to:
+  /// **'no location yet'**
+  String get mapNoPoint;
+
+  /// No description provided for @mapDistance.
+  ///
+  /// In en, this message translates to:
+  /// **'Travelled this duty'**
+  String get mapDistance;
+
+  /// No description provided for @mapClosedToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Tickets finished today'**
+  String get mapClosedToday;
+
+  /// No description provided for @mapOnDutySince.
+  ///
+  /// In en, this message translates to:
+  /// **'On duty since'**
+  String get mapOnDutySince;
+
+  /// No description provided for @mapBattery.
+  ///
+  /// In en, this message translates to:
+  /// **'Battery'**
+  String get mapBattery;
+
+  /// No description provided for @mapSuspicious.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} location points today looked fake or wrong (mock GPS, poor accuracy or an impossible jump). They are not used.'**
+  String mapSuspicious(int count);
+
+  /// No description provided for @mapTicket.
+  ///
+  /// In en, this message translates to:
+  /// **'Ticket'**
+  String get mapTicket;
+
+  /// No description provided for @mapLoadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load the map.'**
+  String get mapLoadFailed;
+
+  /// No description provided for @mapShowAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Show everyone'**
+  String get mapShowAll;
+
+  /// No description provided for @featureStock.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock'**
+  String get featureStock;
+
+  /// No description provided for @stockHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'The ERP\'s stock lists. View only; stock moves from tickets, scan and sale.'**
+  String get stockHelp;
+
+  /// No description provided for @stockTabMine.
+  ///
+  /// In en, this message translates to:
+  /// **'With me'**
+  String get stockTabMine;
+
+  /// No description provided for @stockTabAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All stock'**
+  String get stockTabAll;
+
+  /// No description provided for @stockInHand.
+  ///
+  /// In en, this message translates to:
+  /// **'In my hand'**
+  String get stockInHand;
+
+  /// No description provided for @stockNothingInHand.
+  ///
+  /// In en, this message translates to:
+  /// **'You hold no stock right now.'**
+  String get stockNothingInHand;
+
+  /// No description provided for @stockOfficeParts.
+  ///
+  /// In en, this message translates to:
+  /// **'In the office (parts)'**
+  String get stockOfficeParts;
+
+  /// No description provided for @stockNoOfficeParts.
+  ///
+  /// In en, this message translates to:
+  /// **'No parts in the office right now.'**
+  String get stockNoOfficeParts;
+
+  /// No description provided for @stockLowAlerts.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} things are low (under their limit).'**
+  String stockLowAlerts(int count);
+
+  /// No description provided for @stockSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search serial, MAC, model or client'**
+  String get stockSearch;
+
+  /// No description provided for @stockAllCategories.
+  ///
+  /// In en, this message translates to:
+  /// **'All categories'**
+  String get stockAllCategories;
+
+  /// No description provided for @stockItems.
+  ///
+  /// In en, this message translates to:
+  /// **'Items ({count})'**
+  String stockItems(int count);
+
+  /// No description provided for @stockParts.
+  ///
+  /// In en, this message translates to:
+  /// **'Parts ({count})'**
+  String stockParts(int count);
+
+  /// No description provided for @stockNoItems.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing found.'**
+  String get stockNoItems;
+
+  /// No description provided for @stockMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Show more'**
+  String get stockMore;
+
+  /// No description provided for @stockLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Low'**
+  String get stockLow;
+
+  /// No description provided for @stockUseOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Use only'**
+  String get stockUseOnly;
+
+  /// No description provided for @stockLoadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load stock.'**
+  String get stockLoadFailed;
+
+  /// No description provided for @stockAllStatuses.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get stockAllStatuses;
+
   /// No description provided for @featureOlt.
   ///
   /// In en, this message translates to:

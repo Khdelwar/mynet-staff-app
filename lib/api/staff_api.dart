@@ -12,6 +12,8 @@ import 'json.dart';
 import 'models.dart';
 import 'offers.dart';
 import 'olt.dart';
+import 'stock.dart';
+import 'staff_map.dart';
 import 'tickets.dart';
 import 'work.dart';
 
@@ -934,6 +936,38 @@ class StaffApi {
       },
     ) as Response<dynamic>;
     return OnuPage.fromJson(res.data);
+  }
+
+  /// Read-only stock; the ERP decides how much (`can_view_all`).
+  Future<StockView> stock({
+    String? q,
+    String? status,
+    int? category,
+    int page = 1,
+    int partsPage = 1,
+  }) async {
+    final res = await _send(
+      'GET',
+      '/stock',
+      query: {
+        if (q != null && q.trim().isNotEmpty) 'q': q.trim(),
+        'status': ?status,
+        'category': ?category,
+        'page': page,
+        'parts_page': partsPage,
+      },
+    ) as Response<dynamic>;
+    return StockView.fromJson(res.data);
+  }
+
+  /// Web Staff map's payload; [user] adds that person's route today.
+  Future<StaffMapData> staffMap({int? user}) async {
+    final res = await _send(
+      'GET',
+      '/staff-map',
+      query: {'user': ?user},
+    ) as Response<dynamic>;
+    return StaffMapData.fromJson(res.data);
   }
 
   Future<List<Kpi>> dashboard() async {
