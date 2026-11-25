@@ -14,6 +14,7 @@ import 'due_list_screen.dart';
 import 'common.dart';
 import 'duty_screen.dart';
 import 'offers_screen.dart';
+import 'theme.dart';
 import 'ticket_detail_screen.dart';
 import 'tickets_screen.dart';
 import 'work_screens.dart';
@@ -27,6 +28,7 @@ class Feature {
     this.screen,
     this.also = const [],
     this.open,
+    this.section = ErpSection.overview,
   });
 
   final String permission;
@@ -35,6 +37,9 @@ class Feature {
   final IconData icon;
   final String Function(AppLocalizations) label;
   final WidgetBuilder? open;
+
+  /// The ERP menu section this lives under; its tile takes that colour.
+  final ErpSection section;
 
   /// Drawn when `/me` grants the permission. When the ERP also sent a
   /// `screens` list, the feature's screen has to be on it. The permission
@@ -58,6 +63,7 @@ final features = <Feature>[
     (l) => l.featureDashboard,
     screen: 'dashboard',
     open: _openDashboard,
+    section: ErpSection.overview,
   ),
   Feature(
     'collection.collect',
@@ -76,6 +82,7 @@ final features = <Feature>[
       'collection.approve',
     ],
     open: _openCollection,
+    section: ErpSection.billing,
   ),
   // Approval-only people (cash / collections / ledger) cannot open the
   // Collection screen, so approvals have their own button.
@@ -86,6 +93,7 @@ final features = <Feature>[
     screen: 'approvals',
     also: const ['approvals.cash', 'approvals.collections', 'ledger.approve'],
     open: _openApprovals,
+    section: ErpSection.approvals,
   ),
   Feature(
     'tickets.view',
@@ -94,6 +102,7 @@ final features = <Feature>[
     screen: 'tickets',
     also: const ['tickets.manage'],
     open: _openTickets,
+    section: ErpSection.tickets,
   ),
   Feature(
     'clients.view',
@@ -101,6 +110,7 @@ final features = <Feature>[
     (l) => l.featureClients,
     screen: 'clients',
     open: _openClients,
+    section: ErpSection.customers,
   ),
   Feature(
     'support_chat.manage',
@@ -108,6 +118,7 @@ final features = <Feature>[
     (l) => l.featureChat,
     screen: 'support_chat',
     open: _openChat,
+    section: ErpSection.sms,
   ),
   Feature(
     'hr.self',
@@ -115,6 +126,7 @@ final features = <Feature>[
     (l) => l.featureHr,
     screen: 'hr',
     open: _openHr,
+    section: ErpSection.hr,
   ),
   Feature(
     'staff_app.use',
@@ -122,6 +134,7 @@ final features = <Feature>[
     (l) => l.featureDuty,
     screen: 'duty',
     open: _openDuty,
+    section: ErpSection.accounts,
   ),
   Feature(
     'tickets.update',
@@ -130,6 +143,7 @@ final features = <Feature>[
     screen: 'offers',
     also: const ['tickets.manage'],
     open: _openOffers,
+    section: ErpSection.tickets,
   ),
   Feature(
     'billing.due_list',
@@ -138,6 +152,7 @@ final features = <Feature>[
     screen: 'due_list',
     also: const ['billing.view', 'billing.collect'],
     open: _openDueList,
+    section: ErpSection.billing,
   ),
   Feature(
     'inventory.sell',
@@ -146,6 +161,7 @@ final features = <Feature>[
     screen: 'sales',
     also: const ['inventory.manage'],
     open: _openSales,
+    section: ErpSection.inventory,
   ),
   // STF-08: the ERP lists these two only for a reseller (role:reseller).
   Feature(
@@ -154,6 +170,7 @@ final features = <Feature>[
     (l) => l.featureWallet,
     screen: 'reseller_wallet',
     open: _openWallet,
+    section: ErpSection.resellers,
   ),
   Feature(
     'clients.recharge',
@@ -161,6 +178,7 @@ final features = <Feature>[
     (l) => l.featureExpiring,
     screen: 'expiring',
     open: _openExpiring,
+    section: ErpSection.resellers,
   ),
   Feature(
     'tickets.assign',
@@ -168,6 +186,7 @@ final features = <Feature>[
     (l) => l.featureAssign,
     also: const ['tickets.manage'],
     open: _openAssign,
+    section: ErpSection.tickets,
   ),
 ];
 
@@ -210,7 +229,6 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l = AppLocalizations.of(context);
-    final theme = Theme.of(context);
     final user = ref.watch(authProvider.select((a) => a.user));
     final canTickets =
         user != null &&
@@ -247,44 +265,125 @@ class HomeScreen extends ConsumerWidget {
               child: Text(l.retry),
             ),
           ] else ...[
-            Text(
-              l.hello(user.staff?.name ?? user.name),
-              style: theme.textTheme.headlineSmall,
-            ),
-            const SizedBox(height: 12),
-            SectionCard(
-              children: [
-                if (user.staff != null) ...[
-                  InfoRow(l.staffCode, user.staff!.code),
-                  InfoRow(l.designation, user.staff!.designation),
-                ],
-                InfoRow(l.roles, user.roles.join(', ')),
-              ],
+            PageHero(
+              title: l.hello(user.staff?.name ?? user.name),
+              eyebrow: user.roles.join(' · '),
+              help: [
+                ?user.staff?.designation,
+                ?user.staff?.code,
+              ].where((v) => v.isNotEmpty).join(' · '),
+              icon: Icons.badge_outlined,
             ),
             if (user.staff == null)
               MessageBanner(l.noStaffProfile, tone: BannerTone.info),
-            const SizedBox(height: 4),
-            Text(l.yourWork, style: theme.textTheme.titleMedium),
-            const SizedBox(height: 8),
+            SectionLabel(l.yourWork),
             if (featuresFor(user).isEmpty)
               MessageBanner(l.noFeatures)
             else
-              for (final f in featuresFor(user))
-                Card(
-                  margin: const EdgeInsets.only(bottom: 8),
-                  child: ListTile(
-                    leading: Icon(f.icon, color: theme.colorScheme.primary),
-                    title: Text(f.label(l)),
-                    subtitle: f.open == null ? Text(l.comingSoon) : null,
-                    enabled: f.open != null,
-                    onTap: f.open == null
-                        ? null
-                        : () => Navigator.of(context)
-                              .push(MaterialPageRoute<void>(builder: f.open!)),
-                  ),
-                ),
+              _FeatureGrid(features: featuresFor(user)),
           ],
         ],
+      ),
+    );
+  }
+}
+
+/// Two tiles per row (three on wide screens), like the ERP dashboard cards.
+class _FeatureGrid extends StatelessWidget {
+  const _FeatureGrid({required this.features});
+  final List<Feature> features;
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, box) {
+        final perRow = box.maxWidth >= 560 ? 3 : 2;
+        const gap = 10.0;
+        final width = (box.maxWidth - gap * (perRow - 1)) / perRow;
+        return Wrap(
+          spacing: gap,
+          runSpacing: gap,
+          children: [
+            for (final f in features)
+              SizedBox(
+                width: width,
+                child: _FeatureTile(feature: f),
+              ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class _FeatureTile extends StatelessWidget {
+  const _FeatureTile({required this.feature});
+  final Feature feature;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+    final tone = feature.section.of(context);
+    final open = feature.open;
+    return Card(
+      margin: EdgeInsets.zero,
+      child: InkWell(
+        onTap: open == null
+            ? null
+            : () =>
+                  Navigator.of(context)
+                      .push(MaterialPageRoute<void>(builder: open)),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(14, 14, 12, 14),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [tone.bg, tone.bgEnd],
+                      ),
+                      border: Border.all(color: tone.border),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Icon(feature.icon, color: tone.fg, size: 21),
+                  ),
+                  const Spacer(),
+                  Icon(
+                    Icons.chevron_right,
+                    size: 18,
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              SizedBox(
+                // Room for two lines, so every tile in a row is the same height.
+                height: 40,
+                child: Text(
+                  feature.label(l),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    color: theme.brightness == Brightness.dark
+                        ? Colors.white
+                        : ErpColors.slate900,
+                    height: 1.3,
+                  ),
+                ),
+              ),
+              if (open == null)
+                Text(l.comingSoon, style: theme.textTheme.bodySmall),
+            ],
+          ),
+        ),
       ),
     );
   }

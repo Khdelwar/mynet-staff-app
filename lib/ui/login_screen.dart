@@ -120,84 +120,92 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             padding: const EdgeInsets.all(24),
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 420),
-              child: Form(
-                key: _form,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Row(
+              // ERP sign-in page: the form sits in one white card.
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+                  child: Form(
+                    key: _form,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        if (step != null)
-                          TextButton.icon(
-                            onPressed: _busy
-                                ? null
-                                : () => setState(() {
-                                    _twoFactor = null;
-                                    _error = null;
-                                  }),
-                            icon: const Icon(Icons.arrow_back),
-                            label: Text(l.back),
-                          ),
-                        const Spacer(),
-                        TextButton.icon(
-                          onPressed: ref.read(localeProvider.notifier).toggle,
-                          icon: const Icon(Icons.language),
-                          label: Text(l.languageToggle),
+                        Row(
+                          children: [
+                            if (step != null)
+                              TextButton.icon(
+                                onPressed: _busy
+                                    ? null
+                                    : () => setState(() {
+                                        _twoFactor = null;
+                                        _error = null;
+                                      }),
+                                icon: const Icon(Icons.arrow_back),
+                                label: Text(l.back),
+                              ),
+                            const Spacer(),
+                            TextButton.icon(
+                              onPressed: ref
+                                  .read(localeProvider.notifier)
+                                  .toggle,
+                              icon: const Icon(Icons.language),
+                              label: Text(l.languageToggle),
+                            ),
+                          ],
                         ),
+                        const SizedBox(height: 8),
+                        const Center(child: BrandMark(size: 56)),
+                        const SizedBox(height: 14),
+                        Text(
+                          l.appTitle,
+                          textAlign: TextAlign.center,
+                          style: theme.textTheme.headlineSmall,
+                        ),
+                        Text(
+                          step == null ? l.loginTitle : l.twoFactorTitle,
+                          textAlign: TextAlign.center,
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            color: theme.colorScheme.onSurfaceVariant,
+                          ),
+                        ),
+                        const SizedBox(height: 28),
+                        if (ended && step == null && _error == null)
+                          MessageBanner(
+                            endMessage ?? l.sessionEnded,
+                            tone: BannerTone.warning,
+                          ),
+                        if (step == null) ..._credentials(l, showServer, saved),
+                        if (step != null) ..._codeStep(l, step),
+                        if (_error != null)
+                          MessageBanner(_error!, tone: BannerTone.error),
+                        FilledButton(
+                          key: const ValueKey('submit'),
+                          onPressed: _busy
+                              ? null
+                              : (step == null ? _signIn : _verify),
+                          child: _busy
+                              ? const SizedBox.square(
+                                  dimension: 20,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                  ),
+                                )
+                              : Text(
+                                  step == null
+                                      ? l.loginButton
+                                      : l.twoFactorButton,
+                                ),
+                        ),
+                        if (step == null) ...[
+                          const SizedBox(height: 20),
+                          Text(
+                            l.loginHelp,
+                            textAlign: TextAlign.center,
+                            style: theme.textTheme.bodySmall,
+                          ),
+                        ],
                       ],
                     ),
-                    const SizedBox(height: 8),
-                    Icon(
-                      Icons.badge_outlined,
-                      size: 56,
-                      color: theme.colorScheme.primary,
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      l.appTitle,
-                      textAlign: TextAlign.center,
-                      style: theme.textTheme.headlineMedium?.copyWith(
-                        color: theme.colorScheme.primary,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    Text(
-                      step == null ? l.loginTitle : l.twoFactorTitle,
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 28),
-                    if (ended && step == null && _error == null)
-                      MessageBanner(
-                        endMessage ?? l.sessionEnded,
-                        tone: BannerTone.warning,
-                      ),
-                    if (step == null) ..._credentials(l, showServer, saved),
-                    if (step != null) ..._codeStep(l, step),
-                    if (_error != null)
-                      MessageBanner(_error!, tone: BannerTone.error),
-                    FilledButton(
-                      key: const ValueKey('submit'),
-                      onPressed: _busy
-                          ? null
-                          : (step == null ? _signIn : _verify),
-                      child: _busy
-                          ? const SizedBox.square(
-                              dimension: 20,
-                              child: CircularProgressIndicator(strokeWidth: 2),
-                            )
-                          : Text(
-                              step == null ? l.loginButton : l.twoFactorButton,
-                            ),
-                    ),
-                    if (step == null) ...[
-                      const SizedBox(height: 20),
-                      Text(
-                        l.loginHelp,
-                        textAlign: TextAlign.center,
-                        style: theme.textTheme.bodySmall,
-                      ),
-                    ],
-                  ],
+                  ),
                 ),
               ),
             ),
