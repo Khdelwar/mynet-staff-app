@@ -33,6 +33,7 @@ const fiberColors = {
 
 class _FiberMapScreenState extends ConsumerState<FiberMapScreen> {
   final _map = MapController();
+  final LayerHitNotifier<FiberFeature> _routeHits = ValueNotifier(null);
   FiberMap? _data;
   Object? _error;
   bool _loading = true;
@@ -42,6 +43,12 @@ class _FiberMapScreenState extends ConsumerState<FiberMapScreen> {
   void initState() {
     super.initState();
     _load();
+  }
+
+  @override
+  void dispose() {
+    _routeHits.dispose();
+    super.dispose();
   }
 
   Future<void> _load() async {
@@ -179,16 +186,27 @@ class _FiberMapScreenState extends ConsumerState<FiberMapScreen> {
               urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
               userAgentPackageName: 'net.mynet.staff',
             ),
-            PolylineLayer(
-              polylines: [
-                for (final r in shown)
-                  if (r.type == 'route' && r.path.length > 1)
-                    Polyline(
-                      points: [for (final (a, b) in r.path) LatLng(a, b)],
-                      color: fiberColors['route']!.withValues(alpha: 0.85),
-                      strokeWidth: 4,
-                    ),
-              ],
+            // Tap a route line for its details, as a point (web: route popup).
+            GestureDetector(
+              key: const ValueKey('fiber-routes'),
+              onTap: () {
+                final hit = _routeHits.value?.hitValues;
+                if (hit != null && hit.isNotEmpty) _details(hit.first);
+              },
+              child: PolylineLayer<FiberFeature>(
+                hitNotifier: _routeHits,
+                minimumHitbox: 16,
+                polylines: [
+                  for (final r in shown)
+                    if (r.type == 'route' && r.path.length > 1)
+                      Polyline<FiberFeature>(
+                        points: [for (final (a, b) in r.path) LatLng(a, b)],
+                        color: fiberColors['route']!.withValues(alpha: 0.85),
+                        strokeWidth: 4,
+                        hitValue: r,
+                      ),
+                ],
+              ),
             ),
             MarkerLayer(
               markers: [

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mynet_staff/api/fiber.dart';
@@ -43,6 +44,9 @@ final _payload = {
       'id': 4,
       'code': 'FR-1',
       'status': 'active',
+      'from': 'OLT-A',
+      'to': 'SPL-1',
+      'length_m': 120,
       'coordinates': [
         [23.04, 88.89],
         [23.05, 88.90],
@@ -158,5 +162,22 @@ void main() {
     expect(find.text('1:8'), findsOneWidget);
     expect(find.text('OLT-A'), findsOneWidget);
     expect(find.text('2/8'), findsOneWidget);
+    Navigator.of(tester.element(find.byKey(const ValueKey('fiber-details'))))
+        .pop();
+    for (var i = 0; i < 5; i++) {
+      await tester.pump(const Duration(milliseconds: 100));
+    }
+
+    // Tap on the route line between P-01 and the cut (zoom 13 Mercator:
+    // 0.0025° east ≈ 14.6 px, 0.0025° north ≈ 15.8 px up from the centre).
+    final centre = tester.getCenter(find.byType(FlutterMap));
+    await tester.tapAt(centre + const Offset(14.6, -15.8));
+    for (var i = 0; i < 5; i++) {
+      await tester.pump(const Duration(milliseconds: 100));
+    }
+    expect(find.byKey(const ValueKey('fiber-details')), findsOneWidget);
+    expect(find.text('FR-1'), findsWidgets);
+    expect(find.text('120 m'), findsOneWidget);
+    expect(find.text('SPL-1'), findsOneWidget);
   });
 }
