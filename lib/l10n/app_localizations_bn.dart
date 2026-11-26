@@ -1331,4 +1331,165 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get mapShowAll => 'সবাইকে দেখুন';
+
+  @override
+  String get featureStock => 'স্টক';
+
+  @override
+  String get stockHelp =>
+      'ERP-র স্টকের একই তালিকা। এখানে শুধু দেখা যায়; মাল দেওয়া-নেওয়া টিকেট, স্ক্যান আর বিক্রি থেকে।';
+
+  @override
+  String get stockTabMine => 'আমার কাছে';
+
+  @override
+  String get stockTabAll => 'সব স্টক';
+
+  @override
+  String get stockInHand => 'আমার হাতে';
+
+  @override
+  String get stockNothingInHand => 'আপনার হাতে এখন কোনো মাল নেই।';
+
+  @override
+  String get stockOfficeParts => 'অফিসে আছে (পার্টস)';
+
+  @override
+  String get stockNoOfficeParts => 'অফিসে এখন কোনো পার্টস নেই।';
+
+  @override
+  String stockLowAlerts(int count) {
+    return '$countটা জিনিস কমে গেছে (সীমার নিচে)।';
+  }
+
+  @override
+  String get stockSearch => 'সিরিয়াল, MAC, মডেল বা ক্লায়েন্ট খুঁজুন';
+
+  @override
+  String get stockAllCategories => 'সব ক্যাটাগরি';
+
+  @override
+  String stockItems(int count) {
+    return 'মাল ($count)';
+  }
+
+  @override
+  String stockParts(int count) {
+    return 'পার্টস ($count)';
+  }
+
+  @override
+  String get stockNoItems => 'কিছু পাওয়া যায়নি।';
+
+  @override
+  String get stockMore => 'আরও দেখুন';
+
+  @override
+  String get stockLow => 'কম';
+
+  @override
+  String get stockUseOnly => 'শুধু ব্যবহার';
+
+  @override
+  String get stockLoadFailed => 'স্টক আনা গেল না।';
+
+  @override
+  String get stockAllStatuses => 'সব';
+
+  @override
+  String get featureOlt => 'OLT';
+
+  @override
+  String get oltHelp => 'ERP-র OLT পেজের একই তথ্য। এখান থেকে শুধু দেখা যায়।';
+
+  @override
+  String get oltOnus => 'ONU';
+
+  @override
+  String get oltOnline => 'অনলাইন';
+
+  @override
+  String get oltOffline => 'অফলাইন';
+
+  @override
+  String get oltWeak => 'দুর্বল Rx';
+
+  @override
+  String get oltUnreachable => 'পৌঁছানো যাচ্ছে না';
+
+  @override
+  String get oltInactive => 'বন্ধ';
+
+  @override
+  String get oltAlerts => 'সাম্প্রতিক সতর্কতা';
+
+  @override
+  String oltUnmatched(int count) {
+    return 'মিল নেই এমন ONU ($count)';
+  }
+
+  @override
+  String get oltNone => 'কোনো OLT নেই।';
+
+  @override
+  String get oltPorts => 'PON পোর্ট';
+
+  @override
+  String get oltPortDead => 'পুরো পোর্ট বন্ধ';
+
+  @override
+  String get oltFilterAll => 'সব ONU';
+
+  @override
+  String get oltFilterGood => 'ভালো';
+
+  @override
+  String get oltFilterWarning => 'সতর্কতা';
+
+  @override
+  String get oltFilterCritical => 'খারাপ';
+
+  @override
+  String get oltFilterDown => 'বন্ধ';
+
+  @override
+  String get oltFilterWeak => 'দুর্বল Rx';
+
+  @override
+  String get oltSort => 'সাজানো';
+
+  @override
+  String get oltSortPon => 'পোর্ট';
+
+  @override
+  String get oltSortRx => 'Rx';
+
+  @override
+  String get oltSortDistance => 'দূরত্ব';
+
+  @override
+  String get oltSortUptime => 'চালু সময়';
+
+  @override
+  String get oltSortStatus => 'অবস্থা';
+
+  @override
+  String oltAvgRx(String rx) {
+    return 'গড় Rx: $rx dBm';
+  }
+
+  @override
+  String get oltNoOnus => 'কোনো ONU পাওয়া যায়নি।';
+
+  @override
+  String get oltMore => 'আরও দেখুন';
+
+  @override
+  String get oltSearchOnu => 'সিরিয়াল, MAC, পোর্ট বা বিবরণ';
+
+  @override
+  String get oltLoadFailed => 'OLT-এর তথ্য আনা গেল না।';
+
+  @override
+  String get oltNoClient => 'ক্লায়েন্ট নেই';
 }
