@@ -1498,4 +1498,93 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get oltNoClient => 'No client';
+
+  @override
+  String get featureFiber => 'Fiber map';
+
+  @override
+  String get fiberHelp =>
+      'The ERP\'s Fiber & GIS map. View only; adding or editing is on the web.';
+
+  @override
+  String get fiberPole => 'Pole';
+
+  @override
+  String get fiberJoint => 'Joint';
+
+  @override
+  String get fiberSplitter => 'Splitter';
+
+  @override
+  String get fiberClient => 'Client';
+
+  @override
+  String get fiberCut => 'Cut';
+
+  @override
+  String get fiberRoute => 'Route';
+
+  @override
+  String fiberOpenCuts(int count) {
+    return 'Open cuts ($count)';
+  }
+
+  @override
+  String get fiberNoCuts => 'No open cuts right now.';
+
+  @override
+  String fiberClientsLimit(int shown, int total) {
+    return 'Showing $shown of $total clients on the map.';
+  }
+
+  @override
+  String get fiberLoadFailed => 'Could not load the fiber map.';
+
+  @override
+  String get fiberOpenTicket => 'Open ticket';
+
+  @override
+  String get fiberShowOnMap => 'Show on map';
+
+  @override
+  String get fiberName => 'Name';
+
+  @override
+  String get fiberStatus => 'Status';
+
+  @override
+  String get fiberRatio => 'Ratio';
+
+  @override
+  String get fiberOlt => 'OLT';
+
+  @override
+  String get fiberPon => 'PON';
+
+  @override
+  String get fiberPorts => 'Ports (used/total)';
+
+  @override
+  String get fiberFrom => 'From';
+
+  @override
+  String get fiberTo => 'To';
+
+  @override
+  String get fiberLength => 'Length';
+
+  @override
+  String get fiberReported => 'Reported';
+
+  @override
+  String get fiberPppoe => 'PPPoE';
+
+  @override
+  String get fiberActive => 'Active';
+
+  @override
+  String get fiberInactive => 'Inactive';
+
+  @override
+  String get fiberPlanned => 'Planned';
 }

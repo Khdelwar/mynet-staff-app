@@ -678,5 +678,50 @@
   "oltMore": "Show more",
   "oltSearchOnu": "Serial, MAC, port or description",
   "oltLoadFailed": "Could not load the OLT data.",
-  "oltNoClient": "No client"
+  "oltNoClient": "No client",
+  "featureFiber": "Fiber map",
+  "fiberHelp": "The ERP's Fiber & GIS map. View only; adding or editing is on the web.",
+  "fiberPole": "Pole",
+  "fiberJoint": "Joint",
+  "fiberSplitter": "Splitter",
+  "fiberClient": "Client",
+  "fiberCut": "Cut",
+  "fiberRoute": "Route",
+  "fiberOpenCuts": "Open cuts ({count})",
+  "@fiberOpenCuts": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "fiberNoCuts": "No open cuts right now.",
+  "fiberClientsLimit": "Showing {shown} of {total} clients on the map.",
+  "@fiberClientsLimit": {
+    "placeholders": {
+      "shown": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "fiberLoadFailed": "Could not load the fiber map.",
+  "fiberOpenTicket": "Open ticket",
+  "fiberShowOnMap": "Show on map",
+  "fiberName": "Name",
+  "fiberStatus": "Status",
+  "fiberRatio": "Ratio",
+  "fiberOlt": "OLT",
+  "fiberPon": "PON",
+  "fiberPorts": "Ports (used/total)",
+  "fiberFrom": "From",
+  "fiberTo": "To",
+  "fiberLength": "Length",
+  "fiberReported": "Reported",
+  "fiberPppoe": "PPPoE",
+  "fiberActive": "Active",
+  "fiberInactive": "Inactive",
+  "fiberPlanned": "Planned"
 }

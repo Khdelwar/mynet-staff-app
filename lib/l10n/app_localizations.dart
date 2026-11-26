@@ -2893,6 +2893,174 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No client'**
   String get oltNoClient;
+
+  /// No description provided for @featureFiber.
+  ///
+  /// In en, this message translates to:
+  /// **'Fiber map'**
+  String get featureFiber;
+
+  /// No description provided for @fiberHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'The ERP\'s Fiber & GIS map. View only; adding or editing is on the web.'**
+  String get fiberHelp;
+
+  /// No description provided for @fiberPole.
+  ///
+  /// In en, this message translates to:
+  /// **'Pole'**
+  String get fiberPole;
+
+  /// No description provided for @fiberJoint.
+  ///
+  /// In en, this message translates to:
+  /// **'Joint'**
+  String get fiberJoint;
+
+  /// No description provided for @fiberSplitter.
+  ///
+  /// In en, this message translates to:
+  /// **'Splitter'**
+  String get fiberSplitter;
+
+  /// No description provided for @fiberClient.
+  ///
+  /// In en, this message translates to:
+  /// **'Client'**
+  String get fiberClient;
+
+  /// No description provided for @fiberCut.
+  ///
+  /// In en, this message translates to:
+  /// **'Cut'**
+  String get fiberCut;
+
+  /// No description provided for @fiberRoute.
+  ///
+  /// In en, this message translates to:
+  /// **'Route'**
+  String get fiberRoute;
+
+  /// No description provided for @fiberOpenCuts.
+  ///
+  /// In en, this message translates to:
+  /// **'Open cuts ({count})'**
+  String fiberOpenCuts(int count);
+
+  /// No description provided for @fiberNoCuts.
+  ///
+  /// In en, this message translates to:
+  /// **'No open cuts right now.'**
+  String get fiberNoCuts;
+
+  /// No description provided for @fiberClientsLimit.
+  ///
+  /// In en, this message translates to:
+  /// **'Showing {shown} of {total} clients on the map.'**
+  String fiberClientsLimit(int shown, int total);
+
+  /// No description provided for @fiberLoadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load the fiber map.'**
+  String get fiberLoadFailed;
+
+  /// No description provided for @fiberOpenTicket.
+  ///
+  /// In en, this message translates to:
+  /// **'Open ticket'**
+  String get fiberOpenTicket;
+
+  /// No description provided for @fiberShowOnMap.
+  ///
+  /// In en, this message translates to:
+  /// **'Show on map'**
+  String get fiberShowOnMap;
+
+  /// No description provided for @fiberName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get fiberName;
+
+  /// No description provided for @fiberStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get fiberStatus;
+
+  /// No description provided for @fiberRatio.
+  ///
+  /// In en, this message translates to:
+  /// **'Ratio'**
+  String get fiberRatio;
+
+  /// No description provided for @fiberOlt.
+  ///
+  /// In en, this message translates to:
+  /// **'OLT'**
+  String get fiberOlt;
+
+  /// No description provided for @fiberPon.
+  ///
+  /// In en, this message translates to:
+  /// **'PON'**
+  String get fiberPon;
+
+  /// No description provided for @fiberPorts.
+  ///
+  /// In en, this message translates to:
+  /// **'Ports (used/total)'**
+  String get fiberPorts;
+
+  /// No description provided for @fiberFrom.
+  ///
+  /// In en, this message translates to:
+  /// **'From'**
+  String get fiberFrom;
+
+  /// No description provided for @fiberTo.
+  ///
+  /// In en, this message translates to:
+  /// **'To'**
+  String get fiberTo;
+
+  /// No description provided for @fiberLength.
+  ///
+  /// In en, this message translates to:
+  /// **'Length'**
+  String get fiberLength;
+
+  /// No description provided for @fiberReported.
+  ///
+  /// In en, this message translates to:
+  /// **'Reported'**
+  String get fiberReported;
+
+  /// No description provided for @fiberPppoe.
+  ///
+  /// In en, this message translates to:
+  /// **'PPPoE'**
+  String get fiberPppoe;
+
+  /// No description provided for @fiberActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get fiberActive;
+
+  /// No description provided for @fiberInactive.
+  ///
+  /// In en, this message translates to:
+  /// **'Inactive'**
+  String get fiberInactive;
+
+  /// No description provided for @fiberPlanned.
+  ///
+  /// In en, this message translates to:
+  /// **'Planned'**
+  String get fiberPlanned;
 }
 
 class _AppLocalizationsDelegate

@@ -1492,4 +1492,93 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get oltNoClient => 'ক্লায়েন্ট নেই';
+
+  @override
+  String get featureFiber => 'ফাইবার ম্যাপ';
+
+  @override
+  String get fiberHelp =>
+      'ERP-র Fiber & GIS ম্যাপের একই তথ্য। এখান থেকে শুধু দেখা যায়; যোগ বা বদল ওয়েবে।';
+
+  @override
+  String get fiberPole => 'পোল';
+
+  @override
+  String get fiberJoint => 'জয়েন্ট';
+
+  @override
+  String get fiberSplitter => 'স্প্লিটার';
+
+  @override
+  String get fiberClient => 'ক্লায়েন্ট';
+
+  @override
+  String get fiberCut => 'কাট';
+
+  @override
+  String get fiberRoute => 'রুট';
+
+  @override
+  String fiberOpenCuts(int count) {
+    return 'খোলা কাট ($count)';
+  }
+
+  @override
+  String get fiberNoCuts => 'এখন কোনো খোলা কাট নেই।';
+
+  @override
+  String fiberClientsLimit(int shown, int total) {
+    return 'ম্যাপে $shown জন ক্লায়েন্ট দেখানো হচ্ছে, মোট $total জন।';
+  }
+
+  @override
+  String get fiberLoadFailed => 'ফাইবার ম্যাপ আনা গেল না।';
+
+  @override
+  String get fiberOpenTicket => 'টিকেট খুলুন';
+
+  @override
+  String get fiberShowOnMap => 'ম্যাপে দেখুন';
+
+  @override
+  String get fiberName => 'নাম';
+
+  @override
+  String get fiberStatus => 'অবস্থা';
+
+  @override
+  String get fiberRatio => 'রেশিও';
+
+  @override
+  String get fiberOlt => 'OLT';
+
+  @override
+  String get fiberPon => 'PON';
+
+  @override
+  String get fiberPorts => 'পোর্ট (ব্যবহৃত/মোট)';
+
+  @override
+  String get fiberFrom => 'যেখান থেকে';
+
+  @override
+  String get fiberTo => 'যেখানে';
+
+  @override
+  String get fiberLength => 'দৈর্ঘ্য';
+
+  @override
+  String get fiberReported => 'জানানো হয়েছে';
+
+  @override
+  String get fiberPppoe => 'PPPoE';
+
+  @override
+  String get fiberActive => 'চালু';
+
+  @override
+  String get fiberInactive => 'বন্ধ';
+
+  @override
+  String get fiberPlanned => 'পরিকল্পনায়';
 }
