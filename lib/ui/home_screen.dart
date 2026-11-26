@@ -13,6 +13,7 @@ import 'collection_screen.dart';
 import 'due_list_screen.dart';
 import 'common.dart';
 import 'duty_screen.dart';
+import 'fiber_map_screen.dart';
 import 'offers_screen.dart';
 import 'olt_screens.dart';
 import 'stock_screen.dart';
@@ -183,6 +184,16 @@ final features = <Feature>[
     open: _openOlt,
     section: ErpSection.network,
   ),
+  // Fiber & GIS map, read-only (ERP `fiber` screen).
+  Feature(
+    'fiber.view',
+    Icons.cable_outlined,
+    (l) => l.featureFiber,
+    screen: 'fiber',
+    also: const ['fiber.manage'],
+    open: _openFiber,
+    section: ErpSection.network,
+  ),
   // Stock, read-only (ERP `inventory` screen).
   Feature(
     'inventory.use',
@@ -243,6 +254,8 @@ Widget _openHr(BuildContext context) => const HrScreen();
 Widget _openSales(BuildContext context) => const SalesScreen();
 
 Widget _openOlt(BuildContext context) => const OltListScreen();
+
+Widget _openFiber(BuildContext context) => const FiberMapScreen();
 Widget _openStock(BuildContext context) => const StockScreen();
 
 Widget _openWallet(BuildContext context) => const ResellerWalletScreen();

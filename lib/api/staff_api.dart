@@ -7,6 +7,7 @@ import 'chats.dart';
 import 'clients.dart';
 import 'collection.dart';
 import 'devices.dart';
+import 'fiber.dart';
 import 'duty.dart';
 import 'json.dart';
 import 'models.dart';
@@ -968,6 +969,12 @@ class StaffApi {
       query: {'user': ?user},
     ) as Response<dynamic>;
     return StaffMapData.fromJson(res.data);
+  }
+
+  /// Web Fiber & GIS map's payload, plus the open cuts.
+  Future<FiberMap> fiberMap() async {
+    final res = await _send('GET', '/fiber-map') as Response<dynamic>;
+    return FiberMap.fromJson(res.data);
   }
 
   Future<List<Kpi>> dashboard() async {
